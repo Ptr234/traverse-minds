@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import Link from "next/link";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -47,11 +48,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     if (href) {
+      const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+      if (isExternal) {
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant, size, className }))}>
+            {(variant === "primary" || variant === "secondary") && shimmer}
+            {children}
+          </a>
+        );
+      }
       return (
-        <a href={href} className={cn(buttonVariants({ variant, size, className }))}>
+        <Link href={href} className={cn(buttonVariants({ variant, size, className }))}>
           {(variant === "primary" || variant === "secondary") && shimmer}
           {children}
-        </a>
+        </Link>
       );
     }
     return (
