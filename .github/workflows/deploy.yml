@@ -17,15 +17,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: traverseminds-web
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+          run_install: false
 
       - uses: actions/setup-node@v4
         with:
@@ -33,9 +31,13 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: traverseminds-web/pnpm-lock.yaml
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        working-directory: traverseminds-web
+        run: pnpm install --no-frozen-lockfile
 
-      - run: pnpm build
+      - name: Build
+        working-directory: traverseminds-web
+        run: pnpm build
         env:
           GITHUB_PAGES: "true"
 
