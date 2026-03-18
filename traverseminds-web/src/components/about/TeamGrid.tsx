@@ -2,14 +2,15 @@
 
 import { motion } from "framer-motion";
 import { TeamCard } from "./TeamCard";
-import christinePhoto from "../../../public/Christine.jpg";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const teamMembers = [
   {
     name: "Christine Masika",
     title: "Founder & CEO",
     division: "Leadership",
-    photo: christinePhoto.src,
+    photo: `${basePath}/christine-masika.jpg`,
     linkedIn: "https://linkedin.com/in/christinemasika",
   },
 ];

@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
-import christinePhoto from "../../../../public/Christine.jpg";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 // TODO: Replace with Sanity CMS dynamic data
 const mockPost = {
@@ -15,7 +16,7 @@ const mockPost = {
   author: {
     name: "Christine Masika",
     role: "Founder & CEO",
-    photo: christinePhoto.src,
+    photo: `${basePath}/christine-masika.jpg`,
   },
   content: `
     <p>Uganda's banking sector is undergoing rapid digital transformation. Mobile banking, internet banking, and agent banking have expanded financial access across the country — but they've also expanded the attack surface for cybercriminals.</p>
