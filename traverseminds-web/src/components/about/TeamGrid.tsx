@@ -8,29 +8,8 @@ const teamMembers = [
     name: "Christine Masika",
     title: "Founder & CEO",
     division: "Leadership",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-    linkedIn: "https://linkedin.com/in/",
-  },
-  {
-    name: "Team Member",
-    title: "Head of Security",
-    division: "Traverse Security",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-    linkedIn: "https://linkedin.com/in/",
-  },
-  {
-    name: "Team Member",
-    title: "Lead Researcher",
-    division: "Think Tank",
-    photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80",
-    linkedIn: "https://linkedin.com/in/",
-  },
-  {
-    name: "Team Member",
-    title: "Events & Community Lead",
-    division: "Traverse Events",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-    linkedIn: "https://linkedin.com/in/",
+    photo: "/Christine.jpg",
+    linkedIn: "https://linkedin.com/in/christinemasika",
   },
 ];
 
@@ -68,12 +47,12 @@ export function TeamGrid() {
             transition={{ delay: 0.1 }}
             className="mt-3 text-brand-medium/60 max-w-md mx-auto"
           >
-            Local experts building for East Africa.
+            Local experts building for East Africa. Team profiles updated as we grow.
           </motion.p>
         </div>
 
         <motion.div
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}

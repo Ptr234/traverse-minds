@@ -31,14 +31,15 @@ export function SecurityHero() {
           </div>
 
           <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.92] font-bold text-white tracking-tight mx-auto max-w-5xl">
-            Defending the{" "}
-            <span className="text-gradient-accent">digital sovereignty</span>{" "}
-            of East Africa.
+            Cybersecurity for{" "}
+            <span className="text-gradient-accent">banks &amp; government</span>{" "}
+            in East Africa.
           </h1>
 
           <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-white/50 leading-relaxed">
-            Uganda&apos;s most trusted cybersecurity partner for banks and government.
-            From penetration testing to ISO 27001 compliance, we build the walls that matter.
+            Penetration testing, ISO 27001 compliance, Bank of Uganda audits,
+            threat modelling, incident response, and regulatory advisory —
+            delivered by a team based in Kampala.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

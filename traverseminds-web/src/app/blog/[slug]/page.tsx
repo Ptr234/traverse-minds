@@ -14,7 +14,7 @@ const mockPost = {
   author: {
     name: "Christine Masika",
     role: "Founder & CEO",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80",
+    photo: "/Christine.jpg",
   },
   content: `
     <p>Uganda's banking sector is undergoing rapid digital transformation. Mobile banking, internet banking, and agent banking have expanded financial access across the country — but they've also expanded the attack surface for cybercriminals.</p>
@@ -36,11 +36,8 @@ const mockPost = {
 };
 
 export function generateStaticParams() {
-  return [
-    { slug: "top-5-cyber-threats-ugandan-banks-2026" },
-    { slug: "first-cyber-luncheon-kampala" },
-    { slug: "plain-english-guide-uganda-pdpa-2019" },
-  ];
+  // Placeholder — will be populated from Sanity CMS when posts are published
+  return [{ slug: "placeholder" }];
 }
 
 export const metadata: Metadata = {

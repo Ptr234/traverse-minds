@@ -44,7 +44,7 @@ export function Hero() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald" />
             </span>
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
-              Built for African Realities
+              Built for Africa &middot; Driven by Evidence
             </span>
           </div>
 
@@ -55,9 +55,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-8 max-w-xl text-lg md:text-xl text-white/50 leading-relaxed mx-auto lg:mx-0">
-            Traverse Minds protects critical institutions through cybersecurity,
-            civic transparency, and strategic research — building digital
-            sovereignty for the region.
+            Uganda&apos;s integrated civic-tech company. Six divisions working together
+            across cybersecurity, public records, events, digital literacy,
+            media, and policy research.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
@@ -74,7 +74,7 @@ export function Hero() {
             {[
               { num: "6", label: "Divisions" },
               { num: "5", label: "EAC Countries" },
-              { num: "24/7", label: "Monitoring" },
+              { num: "1", label: "Mission" },
             ].map((stat) => (
               <div key={stat.label} className="text-center lg:text-left">
                 <p className="font-display text-2xl font-bold text-white">{stat.num}</p>

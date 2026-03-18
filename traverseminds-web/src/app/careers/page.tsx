@@ -21,11 +21,7 @@ const benefits = [
   { icon: Zap, title: "Continuous Growth", desc: "Access to international certifications and specialized training programs." },
 ];
 
-const jobs = [
-  { title: "Senior Penetration Tester", team: "Security", location: "Kampala, Uganda", type: "Full-time" },
-  { title: "Data Journalist", team: "Media", location: "Remote / Kampala", type: "Full-time" },
-  { title: "Policy Researcher", team: "Think Tank", location: "Kampala, Uganda", type: "Contract" },
-];
+const jobs: { title: string; team: string; location: string; type: string }[] = [];
 
 export default function CareersPage() {
   return (
@@ -95,39 +91,50 @@ export default function CareersPage() {
               Current Openings
             </h2>
             <p className="mt-3 text-brand-medium/60">
-              Don&apos;t see a fit? Send us a speculative application at careers@traverseminds.ug
+              We&apos;re growing. Send a speculative application to careers@traverseminds.ug
             </p>
           </div>
 
-          <div className="space-y-4">
-            {jobs.map((job) => (
-              <div
-                key={job.title}
-                className="group relative overflow-hidden rounded-2xl border border-border-light bg-white p-6 transition-all duration-500 hover:shadow-elevated hover:border-accent/15 hover:-translate-y-0.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-              >
-                <div className="absolute inset-0 bg-linear-to-r from-accent/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10">
-                  <h3 className="font-display text-lg font-bold text-primary group-hover:text-accent transition-colors">
-                    {job.title}
-                  </h3>
-                  <div className="mt-2 flex flex-wrap gap-4 text-sm text-brand-medium/50">
-                    <span className="flex items-center gap-1.5">
-                      <Briefcase className="h-3.5 w-3.5 text-accent" /> {job.team}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Globe className="h-3.5 w-3.5 text-accent" /> {job.location}
-                    </span>
-                    <span className="rounded-full bg-primary/5 px-3 py-0.5 text-xs font-semibold text-primary/60">
-                      {job.type}
-                    </span>
+          {jobs.length > 0 ? (
+            <div className="space-y-4">
+              {jobs.map((job) => (
+                <div
+                  key={job.title}
+                  className="group relative overflow-hidden rounded-2xl border border-border-light bg-white p-6 transition-all duration-500 hover:shadow-elevated hover:border-accent/15 hover:-translate-y-0.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="absolute inset-0 bg-linear-to-r from-accent/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10">
+                    <h3 className="font-display text-lg font-bold text-primary group-hover:text-accent transition-colors">
+                      {job.title}
+                    </h3>
+                    <div className="mt-2 flex flex-wrap gap-4 text-sm text-brand-medium/50">
+                      <span className="flex items-center gap-1.5">
+                        <Briefcase className="h-3.5 w-3.5 text-accent" /> {job.team}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Globe className="h-3.5 w-3.5 text-accent" /> {job.location}
+                      </span>
+                      <span className="rounded-full bg-primary/5 px-3 py-0.5 text-xs font-semibold text-primary/60">
+                        {job.type}
+                      </span>
+                    </div>
                   </div>
+                  <Button variant="outline" size="sm" className="relative z-10 shrink-0">
+                    Apply Now <ArrowRight className="h-3 w-3" />
+                  </Button>
                 </div>
-                <Button variant="outline" size="sm" className="relative z-10 shrink-0">
-                  Apply Now <ArrowRight className="h-3 w-3" />
-                </Button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-3xl border-2 border-dashed border-border-light py-16 text-center">
+              <Briefcase className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+              <h3 className="font-display text-lg font-bold text-primary">No current openings</h3>
+              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+                We don&apos;t have any open roles right now, but we&apos;re always interested in hearing from talented people.
+                Send your CV to <a href="mailto:careers@traverseminds.ug" className="text-accent underline underline-offset-2 hover:text-accent-hover">careers@traverseminds.ug</a>.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </main>

@@ -50,15 +50,15 @@ export function WhatWeDo() {
             </div>
 
             <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-primary leading-[1.05] tracking-tight">
-              Protecting the{" "}
-              <span className="text-gradient-emerald">core infrastructure</span>{" "}
-              of East Africa.
+              Cybersecurity meets{" "}
+              <span className="text-gradient-emerald">civic technology</span>
             </h2>
 
             <p className="mt-6 text-lg text-brand-medium/70 leading-relaxed max-w-xl">
-              Traverse Minds operates at the intersection of high-end security and
-              public-interest research. We don&apos;t just fix vulnerabilities;
-              we build resilient systems that empower a sovereign digital future.
+              Traverse Minds operates at the intersection of institutional security
+              and public-interest research. Our six divisions work together to
+              protect organisations, inform policy, and build digital capacity
+              across East Africa.
             </p>
 
             <div className="mt-10 space-y-5">
@@ -109,37 +109,28 @@ export function WhatWeDo() {
               />
               <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/10 to-transparent" />
 
-              {/* Bottom quote card */}
+              {/* Bottom info card */}
               <div className="absolute bottom-6 left-6 right-6 glass-panel rounded-2xl p-6 border-white/20 backdrop-blur-xl">
-                <blockquote className="text-primary text-lg font-display font-bold leading-snug">
-                  &quot;Security is not a product, it is a continuous process of traversal.&quot;
-                </blockquote>
-                <cite className="mt-3 block text-primary/40 text-xs uppercase tracking-widest font-semibold not-italic">
-                  — The Traverse Doctrine
-                </cite>
+                <p className="text-primary text-lg font-display font-bold leading-snug">
+                  Six divisions. One integrated mission.
+                </p>
+                <p className="mt-2 text-primary/40 text-xs uppercase tracking-widest font-semibold">
+                  Built for Africa &middot; Driven by Evidence
+                </p>
               </div>
             </div>
 
-            {/* Floating live defense indicator */}
+            {/* Floating division count badge */}
             <motion.div
-              animate={{ y: [0, -16, 0] }}
+              animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-6 -right-4 hidden md:block"
             >
               <div className="glass-panel p-5 rounded-2xl shadow-elevated">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="h-2 w-2 rounded-full bg-emerald animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40">
-                    Live Defense
-                  </span>
-                </div>
-                <div className="h-1.5 w-28 bg-primary/5 rounded-full overflow-hidden">
-                  <motion.div
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-                    className="h-full w-full bg-accent rounded-full"
-                  />
-                </div>
+                <p className="font-display text-3xl font-bold text-accent">6</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-primary/40 mt-1">
+                  Divisions
+                </p>
               </div>
             </motion.div>
           </motion.div>

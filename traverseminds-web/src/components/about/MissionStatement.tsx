@@ -41,8 +41,8 @@ export function MissionStatement() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
           >
-            Technology serving the public interest — built for African realities,
-            anchored in local laws, driven by evidence.
+            Built for Africa &middot; Driven by Evidence. Technology serving the
+            public interest — anchored in local laws, shaped by independent research.
           </motion.p>
         </div>
       </div>

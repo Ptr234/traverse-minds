@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { Newspaper, MessageSquare, Download, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Traverse Media | Informing and Empowering East African Citizens",
-  description: "Uganda's leading civic-tech media platform. Independent reporting driven by evidence.",
+  title: "Traverse Media & Facts & Figures Podcast | Traverse Minds",
+  description: "Facts & Figures — East Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
 };
 
 export default function MediaPage() {
@@ -38,20 +38,19 @@ export default function MediaPage() {
               </div>
 
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary tracking-tight leading-[1.1]">
-                Independent reporting{" "}
-                <span className="text-gradient-accent">driven by evidence</span>.
+                The <span className="text-gradient-accent">Facts &amp; Figures</span> Podcast
               </h2>
 
               <p className="mt-6 text-base text-brand-medium/60 leading-relaxed">
-                Traverse Media isn&apos;t just a newsroom; it&apos;s a bridge. We take the complex findings
-                from our Think Tank and the critical data from Public Record EA and translate
-                them into stories that empower the everyday citizen.
+                Traverse Media bridges the gap between complex research and everyday understanding.
+                Our flagship podcast, Facts &amp; Figures, translates Think Tank findings and
+                Public Record EA data into accessible stories for East African citizens.
               </p>
 
               <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {[
-                  { icon: Newspaper, title: "Data Journalism", desc: "Turning public record datasets into impactful investigative stories." },
-                  { icon: MessageSquare, title: "Public Interest", desc: "Focusing on policy, governance, and citizen rights in the digital age." },
+                  { icon: Newspaper, title: "Data Journalism", desc: "Turning public record datasets into impactful investigative stories and policy explainers." },
+                  { icon: MessageSquare, title: "Podcast & Video", desc: "Long-form conversations with East Africa's cybersecurity leaders, policy-makers, and civic-tech practitioners." },
                 ].map((item) => (
                   <div key={item.title} className="group flex flex-col gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 text-primary transition-all duration-300 group-hover:bg-accent group-hover:text-white">
@@ -86,8 +85,8 @@ export default function MediaPage() {
                 Media <span className="text-gradient-accent">kit & resources</span>
               </h2>
               <p className="mt-5 text-base text-white/35 leading-relaxed">
-                Are you a journalist or researcher looking for official assets,
-                leadership bios, or high-resolution photography? Access our institutional media kit.
+                Access official logos, leadership bios, and division overviews
+                for press coverage and partnership enquiries.
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Button variant="primary" size="lg">
@@ -100,16 +99,17 @@ export default function MediaPage() {
             </div>
 
             <div className="w-full max-w-sm rounded-2xl border border-white/6 bg-surface-dark-elevated p-7">
-              <h3 className="font-display text-lg font-bold text-white mb-5">In the Press</h3>
+              <h3 className="font-display text-lg font-bold text-white mb-5">Press Kit Includes</h3>
               <div className="space-y-5">
                 {[
-                  { date: "Oct 2025", source: "Daily Monitor", title: "Cybersecurity in Uganda: Traverse Minds sets new standards" },
-                  { date: "Aug 2025", source: "BBC Africa", title: "Digital Literacy: The future of East African education" },
-                  { date: "Jun 2025", source: "NTV Uganda", title: "Data privacy laws and the citizen: An expert analysis" },
+                  "Official company logo suite (SVG, PNG)",
+                  "Leadership bios and headshots",
+                  "Division overview one-pagers",
+                  "Brand guidelines and colour palette",
                 ].map((item, i) => (
-                  <div key={i} className="group border-b border-white/6 pb-4 last:border-0 last:pb-0">
-                    <p className="text-[10px] font-mono text-accent uppercase tracking-widest">{item.date} &bull; {item.source}</p>
-                    <h4 className="mt-1 text-sm text-white/50 group-hover:text-white transition-colors">{item.title}</h4>
+                  <div key={i} className="flex items-center gap-3 border-b border-white/6 pb-4 last:border-0 last:pb-0">
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                    <p className="text-sm text-white/50">{item}</p>
                   </div>
                 ))}
               </div>

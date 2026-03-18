@@ -28,9 +28,9 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Twitter, label: "Twitter", href: "#" },
-  { icon: MessageSquare, label: "WhatsApp", href: "#" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/traverseminds" },
+  { icon: Twitter, label: "X / Twitter", href: "https://x.com/traverseminds" },
+  { icon: MessageSquare, label: "WhatsApp", href: "https://wa.me/256700000000" },
 ];
 
 export function Footer() {
@@ -92,8 +92,9 @@ export function Footer() {
                 </span>
               </Link>
               <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/35">
-                Securing East Africa&apos;s digital frontier through cybersecurity,
-                civic transparency, and evidence-based policy research.
+                Uganda&apos;s integrated civic-tech company. Cybersecurity,
+                public records, events, digital literacy, media, and policy
+                research for East Africa.
               </p>
               <div className="mt-8 flex gap-3">
                 {socials.map((s) => (

@@ -9,9 +9,9 @@ const stats = [
   {
     icon: Shield,
     value: 6,
-    suffix: "+",
+    suffix: "",
     label: "Security Services",
-    description: "End-to-end protection for critical systems",
+    description: "Pen testing, ISO 27001, BoU audit, and more",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=70",
   },
   {
@@ -19,7 +19,7 @@ const stats = [
     value: 5,
     suffix: "",
     label: "EAC Countries",
-    description: "Active regional presence in East Africa",
+    description: "Uganda, Kenya, Tanzania, Rwanda, Burundi",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70",
   },
   {
@@ -27,15 +27,15 @@ const stats = [
     value: 6,
     suffix: "",
     label: "Integrated Divisions",
-    description: "One company, six specialized teams",
+    description: "One company, six interconnected teams",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=70",
   },
   {
     icon: Layers,
-    value: 11,
-    suffix: "+",
-    label: "Strategic Pages",
-    description: "Deep content across our digital ecosystem",
+    value: 4,
+    suffix: "",
+    label: "Audiences Served",
+    description: "Institutions, researchers, policy-makers, citizens",
     image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=600&q=70",
   },
 ];

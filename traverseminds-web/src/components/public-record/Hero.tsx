@@ -30,13 +30,14 @@ export function Hero() {
           </div>
 
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
-            East Africa&apos;s AI-powered{" "}
-            <span className="text-gradient-accent">public document platform</span>
+            East Africa&apos;s government records —{" "}
+            <span className="text-gradient-accent">intelligently searchable</span>
           </h1>
 
           <p className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl">
-            Instantly search, summarise, and monitor thousands of public documents,
-            court records, and regulatory updates across five East African nations.
+            Search, summarise, and monitor public documents, court records,
+            and regulatory updates across Uganda, Kenya, Tanzania, Rwanda,
+            and Burundi.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">

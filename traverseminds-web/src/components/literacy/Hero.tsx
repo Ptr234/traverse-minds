@@ -12,11 +12,11 @@ const heroImages = [
   "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1800&q=80",
 ];
 
-const stats = [
-  { label: "Students Trained", value: "2,500+" },
-  { label: "SMEs Empowered", value: "450+" },
-  { label: "Workshops", value: "120+" },
-  { label: "Safety Alerts", value: "15k+" },
+const audiences = [
+  { label: "Schools", value: "Students & Teachers" },
+  { label: "SMEs", value: "Small Business Teams" },
+  { label: "Government", value: "Agency Staff" },
+  { label: "NGOs", value: "Field Workers" },
 ];
 
 export function Hero() {
@@ -39,13 +39,14 @@ export function Hero() {
             </div>
 
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
-              Building a{" "}
-              <span className="text-gradient-accent">cyber-safe generation</span>
+              Digital safety for every{" "}
+              <span className="text-gradient-accent">Ugandan</span>
             </h1>
 
             <p className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl">
-              We provide practical, language-accessible digital safety training
-              for schools, small businesses, and government agencies across Uganda.
+              Practical, language-accessible digital safety training
+              for schools, small businesses, government agencies, and NGOs
+              across Uganda.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -65,13 +66,13 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
             className="grid grid-cols-2 gap-4"
           >
-            {stats.map((stat) => (
+            {audiences.map((item) => (
               <div
-                key={stat.label}
+                key={item.label}
                 className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
-                <div className="font-display text-2xl font-bold text-white md:text-3xl">{stat.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-white/35">{stat.label}</div>
+                <div className="font-display text-lg font-bold text-white md:text-xl">{item.value}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-white/35">{item.label}</div>
               </div>
             ))}
           </motion.div>

@@ -68,10 +68,10 @@ export default function AboutPage() {
               </h2>
 
               <p className="mt-4 text-base leading-relaxed text-white/40">
-                Traverse Minds is not six separate companies — it is one integrated
-                organisation where every division strengthens the others. Security
-                audits are informed by Think Tank research. Events generate leads
-                for consulting services. The podcast amplifies published reports.
+                Traverse Minds is one integrated organisation where every division
+                strengthens the others. Security audits are informed by Think Tank
+                research. Events build community for all divisions. Media amplifies
+                research findings to a wider audience.
               </p>
 
               <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">

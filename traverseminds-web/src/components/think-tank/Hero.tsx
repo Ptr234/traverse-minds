@@ -32,14 +32,14 @@ export function Hero() {
           </div>
 
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] font-bold text-white tracking-tight">
-            Evidence-driven{" "}
-            <span className="text-gradient-accent">digital policy</span>{" "}
-            research.
+            Independent policy intelligence for{" "}
+            <span className="text-gradient-accent">East Africa&apos;s digital future</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-white/50 leading-relaxed">
-            Bridging the gap between technology and policy in East Africa.
-            We shape a digital future that serves the public interest through data analysis and stakeholder engagement.
+            Bridging the gap between technology and policy. We provide
+            independent research on data protection, AI governance,
+            cybersecurity policy, and digital rights across the EAC.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">

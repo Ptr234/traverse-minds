@@ -7,10 +7,10 @@ import { Shield, Brain, Fingerprint, Globe, Users, FileText } from "lucide-react
 const areas = [
   { icon: Shield, title: "Data Protection", description: "Analysing the impact and implementation of the Uganda PDPA 2019 and regional data protection frameworks.", image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=70" },
   { icon: Brain, title: "AI Governance", description: "Researching ethics, bias, and regulatory approaches to Artificial Intelligence in the African context.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=70" },
-  { icon: Fingerprint, title: "Digital Identity", description: "Studying the evolution of national ID systems and their impact on inclusion and human rights.", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=70" },
-  { icon: Globe, title: "Open Government", description: "Advocating for data transparency and the digitisation of public records to improve accountability.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=70" },
-  { icon: Users, title: "Digital Inclusion", description: "Identifying barriers to digital access and developing policy recommendations for the digital divide.", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=70" },
-  { icon: FileText, title: "Civic Tech Impact", description: "Measuring the effectiveness of technology interventions in improving public service delivery.", image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=600&q=70" },
+  { icon: Shield, title: "Cybersecurity Policy", description: "Evaluating national cybersecurity strategies, incident reporting frameworks, and sector-specific regulations across the EAC.", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=70" },
+  { icon: Globe, title: "Open Government", description: "Advocating for data transparency, digitisation of public records, and OGP commitments to improve accountability.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=70" },
+  { icon: Users, title: "Digital Rights", description: "Investigating online freedoms, surveillance oversight, and the balance between security and civil liberties.", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=70" },
+  { icon: FileText, title: "Public Procurement", description: "Analysing transparency in government procurement processes and the role of technology in reducing corruption.", image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=600&q=70" },
 ];
 
 export function ResearchAreas() {

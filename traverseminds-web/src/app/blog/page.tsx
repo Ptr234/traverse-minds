@@ -14,32 +14,11 @@ const blogHeroImages = [
   "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1800&q=80",
 ];
 
-const mockPosts = [
-  {
-    title: "The Top 5 Cyber Threats Facing Ugandan Banks in 2026",
-    slug: "top-5-cyber-threats-ugandan-banks-2026",
-    excerpt: "From ransomware to insider threats, we break down the most pressing cybersecurity risks facing Uganda's financial sector — and what institutions can do about them.",
-    division: "security", date: "12 Mar 2026", readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=70",
-    author: { name: "Christine Masika", photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=70" },
-  },
-  {
-    title: "What We Learned at the First Cyber Luncheon Kampala",
-    slug: "first-cyber-luncheon-kampala",
-    excerpt: "Thirty of East Africa's top cybersecurity professionals gathered for our inaugural Cyber Luncheon. Here's what they discussed.",
-    division: "events", date: "8 Mar 2026", readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=70",
-    author: { name: "Christine Masika", photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=70" },
-  },
-  {
-    title: "A Plain-English Guide to Uganda's PDPA 2019",
-    slug: "plain-english-guide-uganda-pdpa-2019",
-    excerpt: "Uganda's Personal Data Protection Act is now in force, but most organisations still don't understand their obligations.",
-    division: "security", date: "1 Mar 2026", readTime: "8 min",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70",
-    author: { name: "Christine Masika", photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=70" },
-  },
-];
+const mockPosts: {
+  title: string; slug: string; excerpt: string; division: string;
+  date: string; readTime: string; image: string;
+  author: { name: string; photo: string };
+}[] = [];
 
 export default function BlogPage() {
   const [filter, setFilter] = useState("all");
@@ -106,8 +85,11 @@ export default function BlogPage() {
             ))}
           </motion.div>
           {filtered.length === 0 && (
-            <div className="py-20 text-center">
-              <p className="text-base text-brand-muted">No posts in this category yet.</p>
+            <div className="col-span-full rounded-3xl border-2 border-dashed border-border-light py-20 text-center">
+              <p className="text-lg font-semibold text-primary">Coming soon</p>
+              <p className="mt-2 text-base text-brand-muted max-w-md mx-auto">
+                Our first articles are being written. Subscribe to our newsletter to be notified when we publish.
+              </p>
             </div>
           )}
         </div>

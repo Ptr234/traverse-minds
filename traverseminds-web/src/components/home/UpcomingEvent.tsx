@@ -45,7 +45,7 @@ export function UpcomingEvent() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   {[
                     { icon: Calendar, label: "Date", value: "15 May 2026" },
-                    { icon: MapPin, label: "Venue", value: "Kampala Serena" },
+                    { icon: MapPin, label: "Venue", value: "Kampala, Uganda" },
                   ].map((info) => (
                     <div
                       key={info.label}

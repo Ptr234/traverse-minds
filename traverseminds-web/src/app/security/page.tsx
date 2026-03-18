@@ -12,7 +12,7 @@ import { Check, ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Traverse Security — Cybersecurity for Banks & Government",
   description:
-    "Uganda's most trusted cybersecurity partner. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
+    "Cybersecurity services for East African institutions. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
 };
 
 export default function SecurityPage() {
@@ -37,14 +37,14 @@ export default function SecurityPage() {
               </div>
 
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-                Defending East African institutions with expertise and innovation
+                Why choose a local cybersecurity partner
               </h2>
 
               <p className="mt-5 text-base leading-relaxed text-white/35">
-                We provide comprehensive cybersecurity solutions tailored for
-                organisations of all sizes. From proactive threat monitoring to
-                advanced incident response, our dedicated team keeps your digital
-                assets safe and resilient.
+                East African institutions face unique regulatory requirements
+                and threat landscapes. We combine deep local knowledge of
+                Bank of Uganda mandates and Uganda PDPA with international
+                security standards.
               </p>
 
               <ul className="mt-8 space-y-4">

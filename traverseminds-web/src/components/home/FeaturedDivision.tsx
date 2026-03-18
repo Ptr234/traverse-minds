@@ -70,8 +70,8 @@ export function FeaturedDivision() {
               transition={{ delay: 0.1 }}
               className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
             >
-              A unified ecosystem for{" "}
-              <span className="text-gradient-accent">digital sovereignty</span>.
+              Six divisions,{" "}
+              <span className="text-gradient-accent">one integrated mission</span>.
             </motion.h2>
           </div>
 
@@ -82,7 +82,7 @@ export function FeaturedDivision() {
             transition={{ delay: 0.2 }}
             className="text-white/35 max-w-sm text-base leading-relaxed"
           >
-            Six specialized divisions creating a synergistic response to regional digital challenges.
+            Every division strengthens the others — security informs research, events build community, media amplifies findings.
           </motion.p>
         </div>
 
