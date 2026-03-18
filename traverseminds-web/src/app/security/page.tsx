@@ -31,7 +31,7 @@ export default function SecurityPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
                 <div className="h-1 w-1 rounded-full bg-accent" />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">
+                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">
                   Why Traverse
                 </span>
               </div>
@@ -40,7 +40,7 @@ export default function SecurityPage() {
                 Why choose a local cybersecurity partner
               </h2>
 
-              <p className="mt-5 text-base leading-relaxed text-white/35">
+              <p className="mt-5 text-base leading-relaxed text-white/50">
                 East African institutions face unique regulatory requirements
                 and threat landscapes. We combine deep local knowledge of
                 Bank of Uganda mandates and Uganda PDPA with international
@@ -56,7 +56,7 @@ export default function SecurityPage() {
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald" />
-                    <span className="text-sm text-white/40">{point}</span>
+                    <span className="text-sm text-white/55">{point}</span>
                   </li>
                 ))}
               </ul>

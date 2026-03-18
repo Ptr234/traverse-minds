@@ -47,7 +47,7 @@ export function ComplianceFrameworks() {
                 <div className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-accent/50 group-hover:bg-accent transition-colors" />
                 <div>
                   <h3 className="font-display font-bold text-white">{fw.name}</h3>
-                  <p className="mt-1 text-sm text-white/40 leading-relaxed">{fw.description}</p>
+                  <p className="mt-1 text-sm text-white/55 leading-relaxed">{fw.description}</p>
                 </div>
               </div>
             </motion.div>

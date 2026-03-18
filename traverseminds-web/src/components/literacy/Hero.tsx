@@ -72,7 +72,7 @@ export function Hero() {
                 className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
                 <div className="font-display text-lg font-bold text-white md:text-xl">{item.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-white/35">{item.label}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-white/50">{item.label}</div>
               </div>
             ))}
           </motion.div>

@@ -58,7 +58,7 @@ export default function AboutPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
                 <div className="h-1 w-1 rounded-full bg-accent" />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">
+                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">
                   Our Model
                 </span>
               </div>
@@ -67,7 +67,7 @@ export default function AboutPage() {
                 One Company, Six Divisions
               </h2>
 
-              <p className="mt-4 text-base leading-relaxed text-white/40">
+              <p className="mt-4 text-base leading-relaxed text-white/55">
                 Traverse Minds is one integrated organisation where every division
                 strengthens the others. Security audits are informed by Think Tank
                 research. Events build community for all divisions. Media amplifies
@@ -83,7 +83,7 @@ export default function AboutPage() {
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                     <div>
                       <p className="text-sm font-semibold text-white">{d.name}</p>
-                      <p className="text-xs text-white/30">{d.desc}</p>
+                      <p className="text-xs text-white/50">{d.desc}</p>
                     </div>
                   </div>
                 ))}

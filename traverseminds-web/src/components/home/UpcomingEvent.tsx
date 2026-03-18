@@ -37,7 +37,7 @@ export function UpcomingEvent() {
                   <span className="text-gradient-accent">Kampala</span>
                 </h2>
 
-                <p className="mt-5 text-base text-white/35 leading-relaxed max-w-md">
+                <p className="mt-5 text-base text-white/50 leading-relaxed max-w-md">
                   An intimate, Chatham House Rule executive lunch for East
                   Africa&apos;s CISO and policy leaders. 30 seats only.
                 </p>

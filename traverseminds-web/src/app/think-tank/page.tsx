@@ -28,7 +28,7 @@ export default function ThinkTankPage() {
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
                 Get the <span className="text-gradient-accent">State of Digital Rights</span> Report
               </h2>
-              <p className="mt-5 text-base text-white/35 leading-relaxed">
+              <p className="mt-5 text-base text-white/50 leading-relaxed">
                 Our annual comprehensive analysis of the digital policy landscape
                 across Uganda, Kenya, and Tanzania. Free for registered organisations.
               </p>

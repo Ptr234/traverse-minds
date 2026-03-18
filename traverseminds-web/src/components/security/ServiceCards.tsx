@@ -54,7 +54,7 @@ export function ServiceCards() {
                 </h3>
                 <p className="mt-2 text-sm text-white/45 leading-relaxed flex-1">{svc.description}</p>
 
-                <div className="mt-5 flex items-center gap-2 text-xs font-semibold text-white/30 transition-all duration-300 group-hover:text-accent group-hover:gap-3">
+                <div className="mt-5 flex items-center gap-2 text-xs font-semibold text-white/50 transition-all duration-300 group-hover:text-accent group-hover:gap-3">
                   <span>Learn more</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </div>

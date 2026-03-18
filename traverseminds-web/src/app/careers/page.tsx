@@ -33,7 +33,7 @@ export default function CareersPage() {
         <div className="container-max relative z-10 px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8">
             <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">Careers</span>
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Careers</span>
           </div>
 
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
@@ -41,7 +41,7 @@ export default function CareersPage() {
             <span className="text-gradient-accent">civic-tech</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/35 leading-relaxed">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/50 leading-relaxed">
             We are looking for brilliant minds who want to solve the hardest technical
             and social challenges in Africa&apos;s digital landscape.
           </p>

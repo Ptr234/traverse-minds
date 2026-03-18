@@ -40,12 +40,12 @@ export default function EventsPage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8">
               <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">Traverse Events</span>
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Traverse Events</span>
             </div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]">
               Where leaders <span className="text-gradient-accent">connect</span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/35 leading-relaxed">
+            <p className="mt-6 max-w-lg text-lg text-white/50 leading-relaxed">
               Luncheons, conferences, hackathons, and workshops — curated for East Africa&apos;s cybersecurity decision-makers.
             </p>
           </div>

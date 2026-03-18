@@ -72,19 +72,19 @@ export function ProgrammeListing() {
                     <span className="rounded-full bg-accent/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent">
                       {p.audience}
                     </span>
-                    <div className="flex items-center gap-1.5 text-xs text-white/40">
+                    <div className="flex items-center gap-1.5 text-xs text-white/55">
                       <Clock className="h-3 w-3" /> {p.duration}
                     </div>
                   </div>
 
                   <h3 className="mt-4 font-display text-xl font-bold text-white group-hover:text-accent transition-colors">{p.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/40">{p.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{p.description}</p>
 
                   <div className="mt-5">
                     <h4 className="text-[10px] font-semibold uppercase tracking-wider text-white/25">What you&apos;ll cover:</h4>
                     <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                       {p.topics.map((t) => (
-                        <li key={t} className="flex items-center gap-2 text-sm text-white/35">
+                        <li key={t} className="flex items-center gap-2 text-sm text-white/50">
                           <div className="h-1 w-1 rounded-full bg-accent" /> {t}
                         </li>
                       ))}
@@ -92,7 +92,7 @@ export function ProgrammeListing() {
                   </div>
 
                   <div className="mt-6 pt-5 flex items-center justify-between border-t border-white/8">
-                    <div className="flex items-center gap-2 text-xs text-white/30">
+                    <div className="flex items-center gap-2 text-xs text-white/50">
                       <BookOpen className="h-3.5 w-3.5" /> {p.format}
                     </div>
                     <Button variant="outline-dark" size="sm">

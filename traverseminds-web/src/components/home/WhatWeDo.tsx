@@ -78,7 +78,7 @@ export function WhatWeDo() {
                   </div>
                   <div className="relative z-10">
                     <h4 className="font-display text-base font-bold text-white">{item.title}</h4>
-                    <p className="mt-1 text-sm text-white/40 leading-relaxed">{item.desc}</p>
+                    <p className="mt-1 text-sm text-white/55 leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

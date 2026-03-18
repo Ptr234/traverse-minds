@@ -80,7 +80,7 @@ export function FeaturedDivision() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/35 max-w-sm text-base leading-relaxed"
+            className="text-white/50 max-w-sm text-base leading-relaxed"
           >
             Every division strengthens the others — security informs research, events build community, media amplifies findings.
           </motion.p>
@@ -111,7 +111,7 @@ export function FeaturedDivision() {
                   </div>
 
                   <h3 className="mt-5 font-display text-xl font-bold text-white">{div.name}</h3>
-                  <p className="mt-2 text-sm text-white/40 leading-relaxed max-w-75">{div.desc}</p>
+                  <p className="mt-2 text-sm text-white/55 leading-relaxed max-w-75">{div.desc}</p>
                 </div>
 
                 <div className="relative z-10 p-7 pt-0 flex items-center justify-between">

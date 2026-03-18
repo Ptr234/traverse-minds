@@ -48,7 +48,7 @@ export function EngagementProcess() {
                 <div>
                   <span className="font-display text-2xl font-bold text-accent/40 group-hover:text-accent transition-colors">{item.step}</span>
                   <h3 className="mt-1 font-display text-lg font-bold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/40">{item.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/55">{item.description}</p>
                 </div>
               </div>
             </motion.div>

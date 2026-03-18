@@ -93,7 +93,7 @@ export function StatsCounter() {
                 </div>
 
                 <h3 className="mt-2 text-sm font-semibold text-white/80">{stat.label}</h3>
-                <p className="mt-1.5 text-xs text-white/40 leading-relaxed">{stat.description}</p>
+                <p className="mt-1.5 text-xs text-white/55 leading-relaxed">{stat.description}</p>
               </div>
             </motion.div>
           ))}

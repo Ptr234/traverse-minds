@@ -65,7 +65,7 @@ export function Coverage() {
             <div className="relative z-10 flex h-full flex-col justify-center text-center text-white p-8">
               <span className="font-display text-6xl font-bold text-gradient-accent">60k+</span>
               <span className="mt-3 text-lg font-bold uppercase tracking-widest text-white/70">Total Indexed Records</span>
-              <p className="mt-3 text-sm text-white/30">Updated every 24 hours</p>
+              <p className="mt-3 text-sm text-white/50">Updated every 24 hours</p>
             </div>
           </motion.div>
         </div>

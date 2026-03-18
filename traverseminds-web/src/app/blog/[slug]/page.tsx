@@ -74,7 +74,7 @@ export default function BlogPostPage() {
                 <p className="text-xs text-white/50">{mockPost.author.role}</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-sm text-white/40">
+            <div className="flex items-center gap-4 text-sm text-white/55">
               <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" />{mockPost.date}</span>
               <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />{mockPost.readTime}</span>
             </div>

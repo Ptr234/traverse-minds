@@ -84,7 +84,7 @@ export default function MediaPage() {
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
                 Media <span className="text-gradient-accent">kit & resources</span>
               </h2>
-              <p className="mt-5 text-base text-white/35 leading-relaxed">
+              <p className="mt-5 text-base text-white/50 leading-relaxed">
                 Access official logos, leadership bios, and division overviews
                 for press coverage and partnership enquiries.
               </p>

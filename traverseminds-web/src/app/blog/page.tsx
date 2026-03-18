@@ -38,7 +38,7 @@ export default function BlogPage() {
               className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8"
             >
               <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">Latest Insights</span>
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Latest Insights</span>
             </motion.div>
 
             <motion.h1
@@ -54,7 +54,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 max-w-lg text-lg text-white/35 leading-relaxed"
+              className="mt-6 max-w-lg text-lg text-white/50 leading-relaxed"
             >
               Cybersecurity analysis, event recaps, policy explainers, and data-driven research from across our six divisions.
             </motion.p>

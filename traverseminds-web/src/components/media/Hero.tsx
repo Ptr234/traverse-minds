@@ -47,7 +47,7 @@ export function Hero() {
             </Button>
             <div className="flex items-center gap-5 px-2">
               {["Spotify", "Apple", "Google"].map((p) => (
-                <span key={p} className="text-xs font-semibold text-white/30 hover:text-white cursor-pointer transition-colors uppercase tracking-wider">
+                <span key={p} className="text-xs font-semibold text-white/50 hover:text-white cursor-pointer transition-colors uppercase tracking-wider">
                   {p}
                 </span>
               ))}

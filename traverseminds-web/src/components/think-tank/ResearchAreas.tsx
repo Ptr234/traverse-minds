@@ -48,7 +48,7 @@ export function ResearchAreas() {
                   <area.icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 font-display text-lg font-bold text-white">{area.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/40">{area.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/55">{area.description}</p>
               </div>
             </motion.div>
           ))}

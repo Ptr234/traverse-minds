@@ -59,7 +59,7 @@ export function CapabilityDownload() {
               <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight">
                 Capability Statement
               </h2>
-              <p className="mt-3 max-w-lg text-white/35 leading-relaxed">
+              <p className="mt-3 max-w-lg text-white/50 leading-relaxed">
                 Download our detailed capability statement covering team credentials, service methodology, and compliance certifications.
               </p>
               <ul className="mt-5 space-y-2.5">
@@ -69,7 +69,7 @@ export function CapabilityDownload() {
                   "Compliance framework coverage",
                   "Engagement models and pricing",
                 ].map((t) => (
-                  <li key={t} className="flex items-center gap-2.5 text-sm text-white/40">
+                  <li key={t} className="flex items-center gap-2.5 text-sm text-white/55">
                     <CheckCircle2 className="h-4 w-4 text-emerald shrink-0" />
                     {t}
                   </li>

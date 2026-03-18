@@ -56,7 +56,7 @@ export function Footer() {
                   Stay ahead of the
                   <span className="text-gradient-accent"> threat landscape</span>.
                 </motion.h2>
-                <p className="mt-3 text-white/40 text-base leading-relaxed">
+                <p className="mt-3 text-white/55 text-base leading-relaxed">
                   Weekly intelligence on East African cybersecurity, policy trends, and exclusive event invitations.
                 </p>
               </div>
@@ -91,7 +91,7 @@ export function Footer() {
                   Traverse<span className="text-accent">Minds</span>
                 </span>
               </Link>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/35">
+              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/50">
                 Uganda&apos;s integrated civic-tech company. Cybersecurity,
                 public records, events, digital literacy, media, and policy
                 research for East Africa.
@@ -101,7 +101,7 @@ export function Footer() {
                   <a
                     key={s.label}
                     href={s.href}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/6 bg-white/3 text-white/30 transition-all duration-300 hover:border-accent/30 hover:bg-accent/10 hover:text-accent hover:scale-105"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/6 bg-white/3 text-white/50 transition-all duration-300 hover:border-accent/30 hover:bg-accent/10 hover:text-accent hover:scale-105"
                   >
                     <span className="sr-only">{s.label}</span>
                     <s.icon className="h-4.5 w-4.5" />
@@ -125,7 +125,7 @@ export function Footer() {
                       <li key={l.href}>
                         <Link
                           href={l.href}
-                          className="group/link inline-flex items-center gap-1.5 text-[14px] text-white/30 transition-colors duration-300 hover:text-white"
+                          className="group/link inline-flex items-center gap-1.5 text-[14px] text-white/50 transition-colors duration-300 hover:text-white"
                         >
                           {l.label}
                           <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-y-0" />
@@ -147,7 +147,7 @@ export function Footer() {
                       <MapPin className="h-3.5 w-3.5" />
                     </div>
                     <div>
-                      <span className="text-sm text-white/30 leading-snug">
+                      <span className="text-sm text-white/50 leading-snug">
                         Kampala,<br />Uganda
                       </span>
                     </div>
@@ -158,7 +158,7 @@ export function Footer() {
                     </div>
                     <a
                       href="mailto:hello@traverseminds.ug"
-                      className="text-sm text-white/30 hover:text-white transition-colors mt-1.5"
+                      className="text-sm text-white/50 hover:text-white transition-colors mt-1.5"
                     >
                       hello@traverseminds.ug
                     </a>
