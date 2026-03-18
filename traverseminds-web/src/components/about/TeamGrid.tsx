@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion";
 import { TeamCard } from "./TeamCard";
+import christinePhoto from "../../../public/Christine.jpg";
 
 const teamMembers = [
   {
     name: "Christine Masika",
     title: "Founder & CEO",
     division: "Leadership",
-    photo: "/Christine.jpg",
+    photo: christinePhoto.src,
     linkedIn: "https://linkedin.com/in/christinemasika",
   },
 ];
