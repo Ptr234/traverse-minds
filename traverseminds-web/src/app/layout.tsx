@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { spaceGrotesk, inter, ibmPlexMono } from "@/lib/fonts";
 import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
-import { BottomNav } from "@/components/ui/BottomNav";
+
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { StructuredData } from "@/components/seo/StructuredData";
 import "./globals.css";
@@ -39,11 +39,11 @@ export default function RootLayout({
       <head>
         <StructuredData type="organization" />
       </head>
-      <body className="min-h-screen pb-16 font-body antialiased md:pb-0">
+      <body className="min-h-screen font-body antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <BottomNav />
+
         <CookieBanner />
       </body>
     </html>
