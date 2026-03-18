@@ -7,7 +7,7 @@ import { ComplianceFrameworks } from "@/components/security/ComplianceFrameworks
 import { EnquiryForm } from "@/components/security/EnquiryForm";
 import { CapabilityDownload } from "@/components/security/CapabilityDownload";
 import { Button } from "@/components/ui/Button";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Traverse Security — Cybersecurity for Banks & Government",
@@ -22,23 +22,32 @@ export default function SecurityPage() {
       <ServiceCards />
 
       {/* Why Choose Us */}
-      <section className="bg-light-surface px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <section className="relative bg-primary section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+        <div className="absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-emerald/5 blur-[120px]" />
+
+        <div className="container-max relative z-10">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div>
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">
-                Cyber Security Experts
-              </span>
-              <h2 className="mt-3 font-display text-2xl text-brand-green md:text-3xl">
-                Defending East African Institutions With Expertise And Innovation
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
+                <div className="h-1 w-1 rounded-full bg-accent" />
+                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">
+                  Why Traverse
+                </span>
+              </div>
+
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
+                Defending East African institutions with expertise and innovation
               </h2>
-              <p className="mt-4 leading-relaxed text-brand-medium">
+
+              <p className="mt-5 text-base leading-relaxed text-white/35">
                 We provide comprehensive cybersecurity solutions tailored for
                 organisations of all sizes. From proactive threat monitoring to
                 advanced incident response, our dedicated team keeps your digital
                 assets safe and resilient.
               </p>
-              <ul className="mt-6 space-y-3">
+
+              <ul className="mt-8 space-y-4">
                 {[
                   "Local expertise — we understand Bank of Uganda requirements and Uganda PDPA firsthand",
                   "On-the-ground response — our team is based in Kampala, not flying in from overseas",
@@ -46,18 +55,21 @@ export default function SecurityPage() {
                   "Confidentiality-first — strict NDAs and international ethical standards",
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                    <span className="text-brand-medium">{point}</span>
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald" />
+                    <span className="text-sm text-white/40">{point}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-8">
+
+              <div className="mt-10">
                 <Button variant="primary" size="lg" href="#enquiry">
                   Request Consultation
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+
+            <div className="relative aspect-4/3 min-h-80 overflow-hidden rounded-3xl">
               <Image
                 src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
                 alt="Cybersecurity professional"
@@ -65,6 +77,7 @@ export default function SecurityPage() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-linear-to-t from-primary/40 to-transparent" />
             </div>
           </div>
         </div>

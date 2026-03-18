@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { dmSerifDisplay, ibmPlexSans, ibmPlexMono } from "@/lib/fonts";
+import { spaceGrotesk, inter, ibmPlexMono } from "@/lib/fonts";
 import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
@@ -32,11 +32,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSerifDisplay.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <body className="min-h-screen font-body antialiased">
         <Navbar />
-        <main className="pt-16 md:pt-20">{children}</main>
+        <main>{children}</main>
         <Footer />
         <CookieBanner />
       </body>

@@ -3,62 +3,145 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { Check } from "lucide-react";
+import { ShieldCheck, Zap, Globe, ArrowRight } from "lucide-react";
 
-const points = [
-  "End-to-end security assessments for banks and government",
-  "Compliance with Uganda PDPA, ISO 27001, and NIST frameworks",
-  "Local expertise — Kampala-based, not flying in from overseas",
-  "Integrated intelligence from our Think Tank research",
+const features = [
+  {
+    icon: ShieldCheck,
+    title: "Institutional Security",
+    desc: "End-to-end assessments for banks and government agencies using global frameworks.",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=400&q=60",
+  },
+  {
+    icon: Globe,
+    title: "Local Excellence",
+    desc: "Deep roots in Kampala, providing on-the-ground expertise tailored for African realities.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=60",
+  },
+  {
+    icon: Zap,
+    title: "Think Tank Driven",
+    desc: "Direct intelligence pipeline from our research division to your security strategy.",
+    image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=400&q=60",
+  },
 ];
 
 export function WhatWeDo() {
   return (
-    <section className="bg-light-bg px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
-        <div className="text-center">
-          <motion.span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            Why Traverse Minds
-          </motion.span>
-          <motion.h2 className="mx-auto mt-3 max-w-3xl font-display text-2xl text-brand-green md:text-4xl"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
-            Protecting East Africa&apos;s Critical Institutions
-          </motion.h2>
-        </div>
+    <section className="relative section-padding overflow-hidden bg-white">
+      {/* Background accents */}
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 h-150 w-150 rounded-full bg-accent/3 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 h-125 w-125 rounded-full bg-emerald/3 blur-[120px] pointer-events-none" />
 
-        <div className="mt-16 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <motion.div className="relative"
-            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-              <Image src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Digital security and data visualization"
-                fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+      <div className="container-max">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left: Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-8">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
+                The Traverse Standard
+              </span>
+            </div>
+
+            <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-primary leading-[1.05] tracking-tight">
+              Protecting the{" "}
+              <span className="text-gradient-emerald">core infrastructure</span>{" "}
+              of East Africa.
+            </h2>
+
+            <p className="mt-6 text-lg text-brand-medium/70 leading-relaxed max-w-xl">
+              Traverse Minds operates at the intersection of high-end security and
+              public-interest research. We don&apos;t just fix vulnerabilities;
+              we build resilient systems that empower a sovereign digital future.
+            </p>
+
+            <div className="mt-10 space-y-5">
+              {features.map((item, idx) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 + idx * 0.1 }}
+                  className="group relative overflow-hidden flex gap-4 p-5 rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card"
+                >
+                  <Image src={item.image} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="50vw" />
+                  <div className="absolute inset-0 bg-primary/85 group-hover:bg-primary/75 transition-colors duration-500" />
+                  <div className="relative z-10 shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent transition-all duration-300 group-hover:scale-105">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div className="relative z-10">
+                    <h4 className="font-display text-base font-bold text-white">{item.title}</h4>
+                    <p className="mt-1 text-sm text-white/40 leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <Button variant="secondary" size="lg" href="/security">
+                Our Methodology
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }}>
-            <p className="text-brand-medium leading-relaxed">
-              Traverse Minds operates six interconnected divisions that protect,
-              inform, and empower East African institutions and citizens. We secure
-              critical systems for banks and government. We build intelligence tools,
-              train organisations in digital safety, publish independent policy
-              research, and host the region&apos;s most focused cybersecurity events.
-            </p>
+          {/* Right: Image with overlays */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
+          >
+            <div className="relative aspect-4/5 rounded-3xl overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80"
+                alt="Digital Security"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/10 to-transparent" />
 
-            <ul className="mt-6 space-y-3">
-              {points.map((point) => (
-                <li key={point} className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                  <span className="text-brand-medium">{point}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8">
-              <Button variant="primary" size="lg" href="/security#enquiry">
-                Request a Security Assessment
-              </Button>
+              {/* Bottom quote card */}
+              <div className="absolute bottom-6 left-6 right-6 glass-panel rounded-2xl p-6 border-white/20 backdrop-blur-xl">
+                <blockquote className="text-primary text-lg font-display font-bold leading-snug">
+                  &quot;Security is not a product, it is a continuous process of traversal.&quot;
+                </blockquote>
+                <cite className="mt-3 block text-primary/40 text-xs uppercase tracking-widest font-semibold not-italic">
+                  — The Traverse Doctrine
+                </cite>
+              </div>
             </div>
+
+            {/* Floating live defense indicator */}
+            <motion.div
+              animate={{ y: [0, -16, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-6 -right-4 hidden md:block"
+            >
+              <div className="glass-panel p-5 rounded-2xl shadow-elevated">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-2 w-2 rounded-full bg-emerald animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40">
+                    Live Defense
+                  </span>
+                </div>
+                <div className="h-1.5 w-28 bg-primary/5 rounded-full overflow-hidden">
+                  <motion.div
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                    className="h-full w-full bg-accent rounded-full"
+                  />
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

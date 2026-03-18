@@ -1,12 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { PostCard } from "@/components/blog/PostCard";
 import { DivisionFilter } from "@/components/blog/DivisionFilter";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
-import { Particles } from "@/components/ui/Particles";
+import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+
+const blogHeroImages = [
+  "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1800&q=80",
+  "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1800&q=80",
+  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1800&q=80",
+  "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1800&q=80",
+];
 
 const mockPosts = [
   {
@@ -41,40 +47,69 @@ export default function BlogPage() {
 
   return (
     <>
-      {/* Hero with bg image */}
-      <section className="relative min-h-[65vh] overflow-hidden">
-        <div className="absolute inset-0">
-          <Image src="https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1600&q=80" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-light-surface/60 via-transparent to-light-surface/80" />
-        </div>
-        <Particles />
-        <div className="relative mx-auto flex min-h-[65vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl py-20 lg:py-28">
-            <div className="hero-bar" />
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Latest Insights</p>
-            <h1 className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-brand-charcoal md:text-5xl lg:text-6xl">
-              News &<br /><span className="text-brand-amber">insights</span>
-            </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-brand-medium">
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36">
+        <ImageSlideshow images={blogHeroImages} overlay="bg-primary/70" />
+
+        <div className="container-max relative z-10 px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8"
+            >
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/40">Latest Insights</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
+            >
+              News & <span className="text-gradient-accent">insights</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 max-w-lg text-lg text-white/35 leading-relaxed"
+            >
               Cybersecurity analysis, event recaps, policy explainers, and data-driven research from across our six divisions.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
 
       {/* Filter + Grid */}
-      <section className="bg-light-bg px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10"><DivisionFilter active={filter} onChange={setFilter} /></div>
+      <section className="relative bg-surface-elevated section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10">
+          <div className="mb-10">
+            <DivisionFilter active={filter} onChange={setFilter} />
+          </div>
           <motion.div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" layout>
             {filtered.map((post) => (
-              <motion.div key={post.slug} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4 }}>
+              <motion.div
+                key={post.slug}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+              >
                 <PostCard {...post} />
               </motion.div>
             ))}
           </motion.div>
-          {filtered.length === 0 && <div className="py-20 text-center"><p className="text-lg text-brand-muted">No posts in this category yet.</p></div>}
+          {filtered.length === 0 && (
+            <div className="py-20 text-center">
+              <p className="text-base text-brand-muted">No posts in this category yet.</p>
+            </div>
+          )}
         </div>
       </section>
 

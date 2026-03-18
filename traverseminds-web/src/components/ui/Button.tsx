@@ -5,24 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer tracking-wide",
+  "group relative inline-flex items-center justify-center font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] cursor-pointer overflow-hidden",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-r from-brand-green to-brand-teal text-white shadow-md hover:shadow-xl hover:translate-y-[-1px] hover:brightness-110 border border-transparent",
+          "bg-accent text-white rounded-full shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 hover:brightness-110",
         secondary:
-          "bg-gradient-to-r from-brand-amber to-brand-amber-light text-white shadow-md hover:shadow-xl hover:translate-y-[-1px] hover:brightness-105 border border-transparent",
+          "bg-primary text-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:bg-primary-light",
         outline:
-          "border-2 border-brand-green text-brand-green bg-transparent hover:bg-brand-green hover:text-white hover:shadow-md",
+          "border border-border-light bg-transparent text-primary rounded-full hover:border-accent hover:text-accent hover:bg-accent-muted",
         ghost:
-          "text-brand-medium bg-transparent hover:text-brand-charcoal hover:bg-brand-offwhite",
+          "text-brand-medium bg-transparent rounded-full hover:text-primary hover:bg-surface-elevated",
+        "outline-dark":
+          "border border-white/10 bg-white/5 text-white rounded-full backdrop-blur-sm hover:border-accent hover:bg-accent/10 hover:text-accent",
       },
       size: {
-        sm: "h-9 px-4 text-xs rounded-lg uppercase tracking-wider",
-        md: "h-11 px-6 text-sm rounded-lg",
-        lg: "h-13 px-8 text-base rounded-xl min-h-[52px]",
-        pill: "h-11 px-8 text-sm rounded-full",
+        sm: "h-9 px-5 text-xs tracking-wider uppercase font-bold gap-2",
+        md: "h-11 px-7 text-sm gap-2",
+        lg: "h-14 px-10 text-base gap-3",
+        xl: "h-16 px-12 text-lg gap-3",
       },
     },
     defaultVariants: {
@@ -40,15 +42,21 @@ interface ButtonProps
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, href, children, ...props }, ref) => {
+    const shimmer = (
+      <span className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_2s_infinite] bg-linear-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+    );
+
     if (href) {
       return (
         <a href={href} className={cn(buttonVariants({ variant, size, className }))}>
+          {(variant === "primary" || variant === "secondary") && shimmer}
           {children}
         </a>
       );
     }
     return (
       <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+        {(variant === "primary" || variant === "secondary") && shimmer}
         {children}
       </button>
     );

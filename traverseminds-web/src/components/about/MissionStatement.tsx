@@ -1,30 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Particles } from "@/components/ui/Particles";
+import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+
+const heroImages = [
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1800&q=80",
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1800&q=80",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=80",
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80",
+];
 
 export function MissionStatement() {
   return (
-    <section className="relative min-h-[70vh] overflow-hidden">
-      <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" alt="" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-light-surface/60 via-transparent to-light-surface/80" />
-      </div>
-      <Particles />
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+      <ImageSlideshow images={heroImages} overlay="bg-primary/70" />
 
-      <div className="relative mx-auto flex min-h-[70vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl py-20 lg:py-28">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <div className="hero-bar" />
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Our Mission</p>
-            <h1 className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-brand-charcoal md:text-4xl lg:text-5xl">
-              A digitally secure<br /><span className="text-brand-amber">East Africa</span>
+      <div className="relative z-10 container-max px-6 lg:px-8 py-32 lg:py-40">
+        <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/60">
+                Our Mission
+              </span>
+            </div>
+
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]">
+              A digitally secure{" "}
+              <span className="text-gradient-accent">East Africa</span>
             </h1>
           </motion.div>
-          <motion.p className="mt-6 max-w-lg text-lg leading-relaxed text-brand-medium" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-            Technology serving the public interest — built for African realities, anchored in local laws, driven by evidence.
+
+          <motion.p
+            className="mt-6 max-w-xl text-lg text-white/50 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+          >
+            Technology serving the public interest — built for African realities,
+            anchored in local laws, driven by evidence.
           </motion.p>
         </div>
       </div>

@@ -3,42 +3,105 @@
 import { motion } from "framer-motion";
 
 const milestones = [
-  { year: "2024", title: "The idea takes shape", description: "Founded in Kampala with a clear conviction: East Africa needs homegrown cybersecurity and civic-tech capacity." },
-  { year: "2025", title: "Traverse Security launches", description: "First cybersecurity engagements with Ugandan financial institutions. Built a team of certified security professionals." },
-  { year: "2025", title: "Think Tank established", description: "Published first independent policy brief on Uganda's PDPA 2019 implementation gaps." },
-  { year: "2026", title: "Six divisions, one mission", description: "Expanded to six interconnected divisions: Security, Events, Public Record EA, Digital Literacy, Media, and Think Tank." },
+  {
+    year: "2024",
+    title: "The idea takes shape",
+    description:
+      "Founded in Kampala with a clear conviction: East Africa needs homegrown cybersecurity and civic-tech capacity.",
+  },
+  {
+    year: "2025",
+    title: "Traverse Security launches",
+    description:
+      "First cybersecurity engagements with Ugandan financial institutions. Built a team of certified security professionals.",
+  },
+  {
+    year: "2025",
+    title: "Think Tank established",
+    description:
+      "Published first independent policy brief on Uganda's PDPA 2019 implementation gaps.",
+  },
+  {
+    year: "2026",
+    title: "Six divisions, one mission",
+    description:
+      "Expanded to six interconnected divisions: Security, Events, Public Record EA, Digital Literacy, Media, and Think Tank.",
+  },
 ];
 
 export function Timeline() {
   return (
-    <section className="bg-light-bg px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-      <div className="mx-auto max-w-3xl">
-        <div className="text-center">
-          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Our Journey</span>
-          <h2 className="mt-3 font-display text-2xl text-brand-green md:text-3xl">Our Story</h2>
-        </div>
+    <section className="relative bg-surface-elevated section-padding overflow-hidden">
+      <div className="absolute inset-0 dot-grid-light opacity-50 pointer-events-none" />
 
-        <div className="relative mt-12">
-          <div className="absolute left-4 top-0 h-full w-px bg-light-border md:left-1/2 md:-translate-x-px" />
+      <div className="container-max relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5"
+            >
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
+                Our Journey
+              </span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+            >
+              Our Story
+            </motion.h2>
+          </div>
 
-          <div className="space-y-12">
-            {milestones.map((m, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="relative pl-12 md:pl-0"
-              >
-                <div className="absolute left-2.5 top-1 h-3 w-3 rounded-full border-2 border-brand-amber bg-light-bg md:left-1/2 md:-translate-x-1.5" />
-                <div className={`md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:mr-auto md:pr-8 md:text-right" : "md:ml-auto md:pl-8"}`}>
-                  <span className="text-sm font-bold text-brand-amber">{m.year}</span>
-                  <h3 className="mt-1 font-display text-lg text-brand-green">{m.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-medium">{m.description}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-5 top-0 h-full w-px bg-border-light md:left-1/2 md:-translate-x-px" />
+
+            <div className="space-y-12">
+              {milestones.map((m, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: i * 0.08,
+                    ease: [0.16, 1, 0.3, 1] as const,
+                  }}
+                  className="relative pl-14 md:pl-0"
+                >
+                  {/* Dot */}
+                  <div className="absolute left-3.5 top-1 h-3.5 w-3.5 rounded-full border-2 border-accent bg-surface-elevated md:left-1/2 md:-translate-x-1.75" />
+
+                  <div
+                    className={`md:w-[calc(50%-2.5rem)] ${
+                      i % 2 === 0
+                        ? "md:mr-auto md:pr-8 md:text-right"
+                        : "md:ml-auto md:pl-8"
+                    }`}
+                  >
+                    <div className="rounded-2xl border border-border-light bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-card hover:-translate-y-0.5">
+                      <span className="inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                        {m.year}
+                      </span>
+                      <h3 className="mt-3 font-display text-lg font-bold text-primary">
+                        {m.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-medium/60">
+                        {m.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
