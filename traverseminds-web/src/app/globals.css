@@ -138,10 +138,17 @@ body {
   background-color: var(--color-bg-light);
   color: var(--color-brand-charcoal);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+}
+
+/* Prevent iOS auto-zoom on input focus (requires >= 16px) */
+input, select, textarea {
+  font-size: 16px;
 }
 
 /* Subtle film grain overlay */

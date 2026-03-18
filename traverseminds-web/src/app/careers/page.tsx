@@ -302,7 +302,7 @@ export default function CareersPage() {
                   type="file"
                   required
                   accept=".pdf,.doc,.docx"
-                  className="w-full rounded-xl border border-border-light bg-white px-4 py-3 text-sm text-primary file:mr-4 file:rounded-lg file:border-0 file:bg-accent/10 file:px-4 file:py-1.5 file:text-xs file:font-semibold file:text-accent hover:file:bg-accent/20 cursor-pointer"
+                  className="w-full min-h-11 rounded-xl border border-border-light bg-white px-4 py-3 text-sm text-primary file:mr-4 file:rounded-lg file:border-0 file:bg-accent/10 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-accent hover:file:bg-accent/20 cursor-pointer"
                 />
                 <p className="text-xs text-brand-muted/50">Accepted formats: PDF, DOC, DOCX (max 5MB)</p>
               </div>

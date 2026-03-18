@@ -25,7 +25,7 @@ const serviceOptions = [
 
 const inputClasses = (hasError: boolean) =>
   cn(
-    "h-13 w-full rounded-xl border bg-white px-5 text-base text-primary outline-none transition-all duration-300 placeholder:text-brand-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/15",
+    "h-12 w-full rounded-xl border bg-white px-5 text-base text-primary outline-none transition-all duration-300 placeholder:text-brand-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/15",
     hasError ? "border-red-400" : "border-border-light"
   );
 

@@ -66,12 +66,13 @@ export function Footer() {
               <form className="relative w-full max-w-md">
                 <input
                   type="email"
+                  autoComplete="email"
                   placeholder="Enter your professional email"
-                  className="w-full rounded-2xl border border-white/8 bg-white/4 py-4 pl-6 pr-14 text-sm text-white placeholder:text-white/25 outline-none transition-all duration-300 focus:border-accent/40 focus:bg-white/6 focus:ring-1 focus:ring-accent/20"
+                  className="h-12 w-full rounded-2xl border border-white/8 bg-white/4 pl-6 pr-14 text-base text-white placeholder:text-white/25 outline-none transition-all duration-300 focus:border-accent/40 focus:bg-white/6 focus:ring-1 focus:ring-accent/20"
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/25 active:scale-95"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/25 active:scale-95"
                 >
                   <Send className="h-4 w-4" />
                 </button>
@@ -122,12 +123,12 @@ export function Footer() {
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent/80 mb-6">
                     {group.title}
                   </h3>
-                  <ul className="space-y-3.5">
+                  <ul className="space-y-1">
                     {group.links.map((l) => (
                       <li key={l.href}>
                         <Link
                           href={l.href}
-                          className="group/link inline-flex items-center gap-1.5 text-[14px] text-white/50 transition-colors duration-300 hover:text-white"
+                          className="group/link inline-flex min-h-11 items-center gap-1.5 py-2 text-[14px] text-white/50 transition-colors duration-300 hover:text-white"
                         >
                           {l.label}
                           <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-y-0" />
@@ -177,12 +178,12 @@ export function Footer() {
             <p className="text-xs text-white/20">
               &copy; {new Date().getFullYear()} Traverse Minds UG. All rights reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4">
               {footerLinks.legal.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="text-xs text-white/20 hover:text-accent transition-colors"
+                  className="inline-flex min-h-11 items-center px-1 text-xs text-white/20 hover:text-accent transition-colors"
                 >
                   {l.label}
                 </Link>

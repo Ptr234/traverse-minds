@@ -19,13 +19,13 @@ interface DivisionFilterProps {
 
 export function DivisionFilter({ active, onChange }: DivisionFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2.5">
       {filters.map((f) => (
         <button
           key={f.value}
           onClick={() => onChange(f.value)}
           className={cn(
-            "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+            "min-h-11 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300",
             active === f.value
               ? "bg-brand-green text-white"
               : "border border-light-border bg-white text-brand-medium hover:border-brand-green hover:text-brand-charcoal"

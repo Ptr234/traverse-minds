@@ -87,6 +87,7 @@ export function NewsletterSignup() {
                 <div className="relative flex flex-col gap-3 sm:flex-row">
                   <input
                     type="email"
+                    autoComplete="email"
                     placeholder="Enter your professional email"
                     className={cn(
                       "h-14 w-full rounded-2xl border bg-white px-6 text-base text-primary placeholder:text-brand-muted/50 outline-none transition-all duration-300 focus:ring-2 focus:ring-accent/20 shadow-sm",

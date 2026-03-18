@@ -39,7 +39,7 @@ export default function RootLayout({
       <head>
         <StructuredData type="organization" />
       </head>
-      <body className="min-h-screen font-body antialiased">
+      <body className="min-h-screen pb-16 font-body antialiased md:pb-0">
         <Navbar />
         <main>{children}</main>
         <Footer />

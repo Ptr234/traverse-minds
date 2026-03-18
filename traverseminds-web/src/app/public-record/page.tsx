@@ -143,7 +143,7 @@ export default function PublicRecordPage() {
             <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-border-light bg-surface-elevated p-1">
               <button
                 onClick={() => setBilling("monthly")}
-                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   billing === "monthly"
                     ? "bg-accent text-white shadow-sm"
                     : "text-brand-medium/60 hover:text-primary"
@@ -153,7 +153,7 @@ export default function PublicRecordPage() {
               </button>
               <button
                 onClick={() => setBilling("annual")}
-                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   billing === "annual"
                     ? "bg-accent text-white shadow-sm"
                     : "text-brand-medium/60 hover:text-primary"

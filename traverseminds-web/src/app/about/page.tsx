@@ -120,7 +120,7 @@ export default function AboutPage() {
             Our work spans all five EAC member states, building a safer digital future across the region.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-14">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-14">
             {eacCountries.map((country) => (
               <div key={country.code} className="flex flex-col items-center gap-3 group">
                 <div className="h-14 w-20 overflow-hidden rounded-lg border border-border-light shadow-sm transition-all duration-300 group-hover:shadow-card group-hover:-translate-y-1">

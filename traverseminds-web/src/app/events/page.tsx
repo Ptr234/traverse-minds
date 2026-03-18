@@ -55,13 +55,13 @@ export default function EventsPage() {
 
       {/* Event Type Filter Tabs */}
       <section className="relative bg-surface-elevated overflow-hidden border-b border-border-light">
-        <div className="container-max relative z-10 py-6">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="container-max relative z-10 px-6 lg:px-8 py-6">
+          <div className="flex overflow-x-auto gap-2 pb-2 -mx-2 px-2">
             {eventTypes.map((type) => (
               <button
                 key={type}
                 onClick={() => setActiveType(type)}
-                className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`shrink-0 rounded-full px-5 py-2 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeType === type
                     ? "bg-accent text-white shadow-sm"
                     : "bg-white border border-border-light text-brand-medium/60 hover:text-primary hover:border-primary/20"

@@ -99,12 +99,12 @@ export default function MediaPage() {
               Never miss an episode of Facts &amp; Figures. Subscribe on your preferred platform.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 max-w-md sm:max-w-lg mx-auto">
               {podcastPlatforms.map((platform) => (
                 <a
                   key={platform.name}
                   href={platform.href}
-                  className={`inline-flex items-center gap-2.5 rounded-2xl px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.98] ${platform.color}`}
+                  className={`inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-3.5 min-h-11 text-sm font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.98] ${platform.color}`}
                 >
                   {platform.name === "RSS Feed" ? (
                     <Rss className="h-4 w-4" />

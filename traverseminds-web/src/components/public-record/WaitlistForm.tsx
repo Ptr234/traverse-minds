@@ -113,18 +113,22 @@ export function WaitlistForm() {
               <div className="space-y-2">
                 <label className="text-sm font-bold text-brand-green">Full Name *</label>
                 <input
+                  type="text"
+                  autoComplete="name"
                   {...register("name")}
-                  className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-sm focus:border-brand-teal focus:outline-none"
+                  className="h-12 w-full rounded-lg border border-light-border bg-white px-4 text-base focus:border-brand-teal focus:outline-none"
                   placeholder="John Doe"
                 />
                 {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-bold text-brand-green">Email Address *</label>
                 <input
+                  type="email"
+                  autoComplete="email"
                   {...register("email")}
-                  className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-sm focus:border-brand-teal focus:outline-none"
+                  className="h-12 w-full rounded-lg border border-light-border bg-white px-4 text-base focus:border-brand-teal focus:outline-none"
                   placeholder="john@example.com"
                 />
                 {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
@@ -135,17 +139,19 @@ export function WaitlistForm() {
               <div className="space-y-2">
                 <label className="text-sm font-bold text-brand-green">Organisation (Optional)</label>
                 <input
+                  type="text"
+                  autoComplete="organization"
                   {...register("organisation")}
-                  className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-sm focus:border-brand-teal focus:outline-none"
+                  className="h-12 w-full rounded-lg border border-light-border bg-white px-4 text-base focus:border-brand-teal focus:outline-none"
                   placeholder="e.g. Acme Law"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-bold text-brand-green">Your Primary Role *</label>
                 <select
                   {...register("persona")}
-                  className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-sm focus:border-brand-teal focus:outline-none"
+                  className="h-12 w-full rounded-lg border border-light-border bg-white px-4 text-base focus:border-brand-teal focus:outline-none"
                 >
                   <option value="">Select a role</option>
                   {personas.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
@@ -158,14 +164,14 @@ export function WaitlistForm() {
               <label className="text-sm font-bold text-brand-green">Country Interest (Select all that apply) *</label>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {countries.map(c => (
-                  <label key={c.value} className="flex items-center gap-2 rounded-lg border border-light-border bg-white p-3 cursor-pointer hover:bg-brand-offwhite transition-colors">
+                  <label key={c.value} className="flex min-h-11 items-center gap-2 rounded-lg border border-light-border bg-white p-3 cursor-pointer hover:bg-brand-offwhite transition-colors">
                     <input
                       type="checkbox"
                       value={c.value}
                       {...register("countryInterest")}
-                      className="h-4 w-4 rounded border-light-border text-brand-teal focus:ring-brand-teal"
+                      className="h-5 w-5 rounded border-light-border text-brand-teal focus:ring-brand-teal"
                     />
-                    <span className="text-sm text-brand-medium">{c.label}</span>
+                    <span className="text-base text-brand-medium">{c.label}</span>
                   </label>
                 ))}
               </div>
@@ -177,7 +183,7 @@ export function WaitlistForm() {
               <textarea
                 {...register("message")}
                 rows={4}
-                className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-sm focus:border-brand-teal focus:outline-none"
+                className="w-full rounded-lg border border-light-border bg-white px-4 py-3 text-base focus:border-brand-teal focus:outline-none"
                 placeholder="What specific types of records are you interested in?"
               />
             </div>

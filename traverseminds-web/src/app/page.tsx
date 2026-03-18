@@ -20,7 +20,9 @@ export default function HomePage() {
       <ThinkTankPreview />
       <UpcomingEvent />
       <PodcastPreview />
-      <TrustLogoStrip variant="light" />
+      <section className="section-padding-sm overflow-hidden">
+        <TrustLogoStrip variant="light" />
+      </section>
       <NewsletterSignup />
     </>
   );
