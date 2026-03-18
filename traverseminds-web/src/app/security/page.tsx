@@ -71,8 +71,8 @@ export default function SecurityPage() {
 
             <div className="relative aspect-4/3 min-h-80 overflow-hidden rounded-3xl">
               <Image
-                src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80"
-                alt="Cybersecurity professional"
+                src="https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=800&q=80"
+                alt="Team working on cybersecurity in an office"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
