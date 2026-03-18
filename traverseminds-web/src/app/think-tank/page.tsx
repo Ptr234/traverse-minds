@@ -3,7 +3,7 @@ import { Hero } from "@/components/think-tank/Hero";
 import { ResearchAreas } from "@/components/think-tank/ResearchAreas";
 import { Publications } from "@/components/think-tank/Publications";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileText, Filter } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Think Tank | Evidence-Driven Digital Policy Research in East Africa",
@@ -16,6 +16,30 @@ export default function ThinkTankPage() {
       <Hero />
       <ResearchAreas />
       <Publications />
+
+      {/* Evidence Briefs */}
+      <section className="relative bg-surface-elevated section-padding overflow-hidden border-t border-border-light">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+            <div className="h-1 w-1 rounded-full bg-accent" />
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Evidence Briefs</span>
+          </div>
+
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            Evidence Briefs
+          </h2>
+
+          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+            <FileText className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+            <p className="text-lg font-semibold text-primary">Coming Soon</p>
+            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+              Short-form rapid summaries of our key research findings. Coming soon.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Gated Content */}
       <section className="relative bg-primary section-padding overflow-hidden">
@@ -74,6 +98,30 @@ export default function ThinkTankPage() {
               Enquire About Research Services
               <ArrowRight className="h-4 w-4" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Research Filter Placeholder */}
+      <section className="relative bg-surface-elevated section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+            <div className="h-1 w-1 rounded-full bg-accent" />
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Archive</span>
+          </div>
+
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            Research Archive
+          </h2>
+
+          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+            <Filter className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+            <p className="text-lg font-semibold text-primary">Coming Soon</p>
+            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+              Full research archive with topic, country, and year filtering — coming with our first publications.
+            </p>
           </div>
         </div>
       </section>

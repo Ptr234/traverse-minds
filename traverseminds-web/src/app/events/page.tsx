@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { Calendar, MapPin, ArrowRight, Users, Mic } from "lucide-react";
+import { Calendar, MapPin, ArrowRight, Users, Mic, Clock } from "lucide-react";
 
 const eventsHeroImages = [
   "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1800&q=80",
@@ -12,10 +14,7 @@ const eventsHeroImages = [
   "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1800&q=80",
 ];
 
-export const metadata: Metadata = {
-  title: "Events — Traverse Minds",
-  description: "Cybersecurity events, luncheons, hackathons, and workshops in Kampala and across East Africa.",
-};
+const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
 
 const upcomingEvents = [
   {
@@ -30,6 +29,8 @@ const upcomingEvents = [
 ];
 
 export default function EventsPage() {
+  const [activeType, setActiveType] = useState<string>("All");
+
   return (
     <>
       {/* Hero */}
@@ -48,6 +49,27 @@ export default function EventsPage() {
             <p className="mt-6 max-w-lg text-lg text-white/50 leading-relaxed">
               Luncheons, conferences, hackathons, and workshops — curated for East Africa&apos;s cybersecurity decision-makers.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Type Filter Tabs */}
+      <section className="relative bg-surface-elevated overflow-hidden border-b border-border-light">
+        <div className="container-max relative z-10 py-6">
+          <div className="flex flex-wrap items-center gap-2">
+            {eventTypes.map((type) => (
+              <button
+                key={type}
+                onClick={() => setActiveType(type)}
+                className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                  activeType === type
+                    ? "bg-accent text-white shadow-sm"
+                    : "bg-white border border-border-light text-brand-medium/60 hover:text-primary hover:border-primary/20"
+                }`}
+              >
+                {type}
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -137,6 +159,30 @@ export default function EventsPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Past Events */}
+      <section className="relative bg-surface-elevated section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+            <div className="h-1 w-1 rounded-full bg-accent" />
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Past Events</span>
+          </div>
+
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            Past Events
+          </h2>
+
+          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+            <Clock className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+            <p className="text-lg font-semibold text-primary">No past events yet</p>
+            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+              Our first Cyber Luncheon is coming May 2026. Stay tuned for recaps and highlights after each event.
+            </p>
+          </div>
         </div>
       </section>
     </>

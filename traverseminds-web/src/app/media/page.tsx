@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+
 import { Hero as MediaHero } from "@/components/media/Hero";
 import { Button } from "@/components/ui/Button";
-import { Newspaper, MessageSquare, Download, ArrowRight } from "lucide-react";
+import { Newspaper, MessageSquare, Download, ArrowRight, Mic, Rss } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Traverse Media & Facts & Figures Podcast | Traverse Minds",
   description: "Facts & Figures — East Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
 };
+
+const podcastPlatforms = [
+  { name: "Spotify", href: "#", color: "bg-[#1DB954] hover:bg-[#1aa34a]" },
+  { name: "Apple Podcasts", href: "#", color: "bg-[#9933CC] hover:bg-[#8829b3]" },
+  { name: "Google Podcasts", href: "#", color: "bg-[#4285F4] hover:bg-[#3578e5]" },
+  { name: "RSS Feed", href: "#", color: "bg-[#EE802F] hover:bg-[#d97228]" },
+];
 
 export default function MediaPage() {
   return (
@@ -68,6 +76,73 @@ export default function MediaPage() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Subscribe to the Podcast */}
+      <section className="relative bg-surface-elevated section-padding overflow-hidden border-t border-border-light">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Subscribe</span>
+            </div>
+
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+              Subscribe to the Podcast
+            </h2>
+            <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+              Never miss an episode of Facts &amp; Figures. Subscribe on your preferred platform.
+            </p>
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              {podcastPlatforms.map((platform) => (
+                <a
+                  key={platform.name}
+                  href={platform.href}
+                  className={`inline-flex items-center gap-2.5 rounded-2xl px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:shadow-md active:scale-[0.98] ${platform.color}`}
+                >
+                  {platform.name === "RSS Feed" ? (
+                    <Rss className="h-4 w-4" />
+                  ) : (
+                    <Mic className="h-4 w-4" />
+                  )}
+                  {platform.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Be a Guest CTA */}
+      <section className="relative bg-white section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
+
+        <div className="container-max relative z-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Be a Guest</span>
+            </div>
+
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+              Appear on Facts & Figures
+            </h2>
+            <p className="mt-4 text-brand-medium/60 max-w-xl mx-auto leading-relaxed">
+              Pitch a topic or apply to be a guest on Facts &amp; Figures. We feature cybersecurity leaders,
+              policy experts, and civic-tech practitioners from across East Africa.
+            </p>
+
+            <div className="mt-10">
+              <Button variant="primary" size="lg" href="/contact">
+                Pitch a Topic
+                <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>

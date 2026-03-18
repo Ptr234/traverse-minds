@@ -46,7 +46,19 @@ const divisions = [
 
 export function FeaturedDivision() {
   return (
-    <section className="relative overflow-hidden bg-primary section-padding">
+    <section className="relative overflow-hidden section-padding">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-primary/90" />
+      </div>
+      <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" />
       <div className="container-max relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">

@@ -4,7 +4,7 @@ import { MissionStatement } from "@/components/about/MissionStatement";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { CalendlyEmbed } from "@/components/about/CalendlyEmbed";
-import { Check } from "lucide-react";
+import { Check, Handshake } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Traverse Minds",
@@ -19,6 +19,14 @@ const divisions = [
   { name: "Digital Literacy", desc: "Cyber safety for schools, SMEs, government" },
   { name: "Traverse Media", desc: "Facts & Figures Podcast, data journalism" },
   { name: "Think Tank", desc: "Data protection, AI governance, OGP research" },
+];
+
+const eacCountries = [
+  { code: "ug", name: "Uganda" },
+  { code: "ke", name: "Kenya" },
+  { code: "tz", name: "Tanzania" },
+  { code: "rw", name: "Rwanda" },
+  { code: "bi", name: "Burundi" },
 ];
 
 export default function AboutPage() {
@@ -93,8 +101,72 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* EAC Country Flags */}
+      <section className="relative bg-white section-padding-sm overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
+
+        <div className="container-max relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+            <div className="h-1 w-1 rounded-full bg-accent" />
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
+              Regional Reach
+            </span>
+          </div>
+
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">
+            Serving the East African Community
+          </h2>
+          <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+            Our work spans all five EAC member states, building a safer digital future across the region.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-14">
+            {eacCountries.map((country) => (
+              <div key={country.code} className="flex flex-col items-center gap-3 group">
+                <div className="h-14 w-20 overflow-hidden rounded-lg border border-border-light shadow-sm transition-all duration-300 group-hover:shadow-card group-hover:-translate-y-1">
+                  <Image
+                    src={`https://flagcdn.com/w80/${country.code}.png`}
+                    alt={`${country.name} flag`}
+                    width={80}
+                    height={56}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <span className="text-sm font-semibold text-primary/70">{country.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Timeline />
       <TeamGrid />
+
+      {/* Partners & Affiliations */}
+      <section className="relative bg-surface-elevated section-padding overflow-hidden">
+        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
+
+        <div className="container-max relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+            <div className="h-1 w-1 rounded-full bg-accent" />
+            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
+              Partners
+            </span>
+          </div>
+
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            Partners & Affiliations
+          </h2>
+
+          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+            <Handshake className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+            <p className="text-lg font-semibold text-primary">Coming Soon</p>
+            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+              Partner logos will appear here as relationships are established.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Legal / Registration */}
       <section className="relative overflow-hidden bg-white section-padding-sm">

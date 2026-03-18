@@ -5,6 +5,9 @@ import { event } from "./event";
 import { author } from "./author";
 import { waitlistEntry } from "./waitlistEntry";
 import { report } from "./report";
+import { episode } from "./episode";
+import { programme } from "./programme";
+import { jobListing } from "./jobListing";
 
 export const schemaTypes = [
   post,
@@ -14,4 +17,7 @@ export const schemaTypes = [
   author,
   waitlistEntry,
   report,
+  episode,
+  programme,
+  jobListing,
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Mail, ArrowUpRight, ShieldCheck, Linkedin, Twitter, MessageSquare, Send } from "lucide-react";
+import { MapPin, Mail, ArrowUpRight, ShieldCheck, Linkedin, Twitter, MessageSquare, Music, Rss, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
 const footerLinks = {
@@ -31,6 +31,8 @@ const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/traverseminds" },
   { icon: Twitter, label: "X / Twitter", href: "https://x.com/traverseminds" },
   { icon: MessageSquare, label: "WhatsApp", href: "https://wa.me/256700000000" },
+  { icon: Music, label: "Spotify", href: "#" },
+  { icon: Rss, label: "RSS", href: "/blog/rss.xml" },
 ];
 
 export function Footer() {

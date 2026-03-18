@@ -6,6 +6,7 @@ import { PostCard } from "@/components/blog/PostCard";
 import { DivisionFilter } from "@/components/blog/DivisionFilter";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { Search } from "lucide-react";
 
 const blogHeroImages = [
   "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1800&q=80",
@@ -22,6 +23,7 @@ const mockPosts: {
 
 export default function BlogPage() {
   const [filter, setFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const filtered = filter === "all" ? mockPosts : mockPosts.filter((p) => p.division === filter);
 
   return (
@@ -67,6 +69,20 @@ export default function BlogPage() {
         <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
 
         <div className="container-max relative z-10">
+          {/* Search Input */}
+          <div className="mb-6">
+            <div className="relative max-w-md">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-muted/40" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full rounded-2xl border border-border-light bg-white py-3 pl-11 pr-4 text-sm text-primary placeholder:text-brand-muted/40 outline-none focus:border-accent/40 focus:shadow-sm transition-all"
+              />
+            </div>
+          </div>
+
           <div className="mb-10">
             <DivisionFilter active={filter} onChange={setFilter} />
           </div>

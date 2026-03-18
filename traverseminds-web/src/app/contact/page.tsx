@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 
 const contactHeroImages = [
   "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80",
@@ -92,6 +92,40 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Press & Media Enquiries */}
+      <section className="relative bg-white section-padding overflow-hidden border-t border-border-light">
+        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
+
+        <div className="container-max relative z-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Press</span>
+            </div>
+
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+              Press & Media Enquiries
+            </h2>
+
+            <div className="mt-8 flex justify-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5">
+                <Newspaper className="h-7 w-7 text-accent" />
+              </div>
+            </div>
+
+            <p className="mt-6 text-base text-brand-medium/60 leading-relaxed max-w-xl mx-auto">
+              For press enquiries, interview requests, or expert commentary, email{" "}
+              <a
+                href="mailto:press@traverseminds.ug"
+                className="text-accent font-semibold underline underline-offset-2 hover:text-accent-hover transition-colors"
+              >
+                press@traverseminds.ug
+              </a>
+            </p>
           </div>
         </div>
       </section>

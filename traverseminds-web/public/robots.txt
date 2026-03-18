@@ -1,0 +1,10 @@
+# robots.txt — Traverse Minds UG
+# https://traverseminds.ug
+
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /studio/
+
+Sitemap: https://traverseminds.ug/sitemap.xml
