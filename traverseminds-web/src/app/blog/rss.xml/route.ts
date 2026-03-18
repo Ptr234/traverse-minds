@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 export async function GET() {
   // TODO: Replace with Sanity CMS data
   const posts = [

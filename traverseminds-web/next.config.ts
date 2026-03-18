@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath: isGithubPages ? "/traverse-minds" : "",
+  assetPrefix: isGithubPages ? "/traverse-minds/" : "",
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -17,6 +23,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  trailingSlash: true,
 };
 
 export default nextConfig;

@@ -35,6 +35,14 @@ const mockPost = {
   `,
 };
 
+export function generateStaticParams() {
+  return [
+    { slug: "top-5-cyber-threats-ugandan-banks-2026" },
+    { slug: "first-cyber-luncheon-kampala" },
+    { slug: "plain-english-guide-uganda-pdpa-2019" },
+  ];
+}
+
 export const metadata: Metadata = {
   title: mockPost.title,
   description: "Based on our security assessments across Ugandan financial institutions, here are the five most pressing cyber threats we're seeing.",
