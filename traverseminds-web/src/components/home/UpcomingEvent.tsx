@@ -75,7 +75,7 @@ export function UpcomingEvent() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.15 }}
               >
-                <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/25 mb-8">
+                <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/60 mb-8">
                   Registration Closes In
                 </p>
 

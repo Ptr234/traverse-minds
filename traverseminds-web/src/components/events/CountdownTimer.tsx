@@ -28,10 +28,10 @@ function calcTimeLeft(target: string): TimeLeft | null {
 function Segment({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="font-display text-3xl text-brand-green md:text-4xl">
+      <span className="font-display text-4xl font-bold text-white md:text-5xl">
         {String(value).padStart(2, "0")}
       </span>
-      <span className="mt-1 text-xs uppercase tracking-wider text-brand-muted">
+      <span className="mt-1 text-xs uppercase tracking-[0.15em] text-accent">
         {label}
       </span>
     </div>
@@ -69,7 +69,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
   if (!timeLeft) {
     return (
-      <p className="font-display text-xl text-brand-amber">
+      <p className="font-display text-xl font-bold text-accent">
         This event has started!
       </p>
     );
@@ -78,11 +78,11 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   return (
     <div className="flex items-center gap-6">
       <Segment value={timeLeft.days} label="Days" />
-      <span className="text-2xl text-brand-muted">:</span>
+      <span className="text-2xl text-white/30">:</span>
       <Segment value={timeLeft.hours} label="Hours" />
-      <span className="text-2xl text-brand-muted">:</span>
+      <span className="text-2xl text-white/30">:</span>
       <Segment value={timeLeft.minutes} label="Min" />
-      <span className="text-2xl text-brand-muted">:</span>
+      <span className="text-2xl text-white/30">:</span>
       <Segment value={timeLeft.seconds} label="Sec" />
     </div>
   );
