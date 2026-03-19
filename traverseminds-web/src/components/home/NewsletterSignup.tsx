@@ -40,7 +40,7 @@ export function NewsletterSignup() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 ring-1 ring-primary/10">
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 ring-1 ring-primary/10 transition-all duration-500 hover:ring-accent/30 hover:bg-accent/5 hover:scale-105">
               <Mail className="h-6 w-6 text-accent" />
             </div>
 
@@ -84,15 +84,21 @@ export function NewsletterSignup() {
                 className="relative mx-auto max-w-lg"
                 noValidate
               >
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
                 <div className="relative flex flex-col gap-3 sm:flex-row">
                   <input
+                    id="newsletter-email"
                     type="email"
                     autoComplete="email"
                     placeholder="Enter your professional email"
+                    aria-describedby={errors.email ? "newsletter-error" : undefined}
+                    aria-invalid={!!errors.email}
                     className={cn(
-                      "h-14 w-full rounded-2xl border bg-white px-6 text-base text-primary placeholder:text-brand-muted/50 outline-none transition-all duration-300 focus:ring-2 focus:ring-accent/20 shadow-sm",
+                      "h-14 w-full rounded-2xl border bg-white px-6 text-base text-primary placeholder:text-brand-muted/50 outline-none transition-all duration-200 focus:ring-2 focus:ring-accent/15 shadow-sm",
                       errors.email
-                        ? "border-red-400 focus:border-red-400"
+                        ? "border-red-400 focus:border-red-400 focus:ring-red-400/15"
                         : "border-border-light focus:border-accent"
                     )}
                     {...register("email", {
@@ -125,6 +131,8 @@ export function NewsletterSignup() {
                 </div>
                 {errors.email && (
                   <motion.p
+                    id="newsletter-error"
+                    role="alert"
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="absolute left-3 -bottom-7 text-sm text-red-500 font-medium"

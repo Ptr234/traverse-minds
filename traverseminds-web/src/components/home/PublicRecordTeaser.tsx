@@ -63,7 +63,7 @@ export function PublicRecordTeaser() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-6 text-base md:text-lg text-white/45 leading-relaxed max-w-xl mx-auto"
+            className="mt-6 text-base md:text-lg text-white/60 leading-relaxed max-w-xl mx-auto"
           >
             AI-powered access to parliamentary records, gazettes, court filings,
             and regulatory notices across the East African Community.
@@ -84,7 +84,7 @@ export function PublicRecordTeaser() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.35 + idx * 0.08 }}
-                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/5 px-5 py-2.5 backdrop-blur-sm"
+                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/5 px-5 py-2.5 backdrop-blur-sm transition-all duration-500 hover:border-accent/25 hover:bg-accent/10 hover:-translate-y-0.5"
               >
                 <feat.icon className="h-4 w-4 text-accent" />
                 <span className="text-sm font-semibold text-white/70">

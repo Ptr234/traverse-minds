@@ -30,10 +30,13 @@ export function ImageSlideshow({
       <AnimatePresence mode="sync">
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1.04 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{
+            opacity: { duration: 1.5, ease: "easeInOut" },
+            scale: { duration: 8, ease: "linear" },
+          }}
           className="absolute inset-0"
         >
           <Image

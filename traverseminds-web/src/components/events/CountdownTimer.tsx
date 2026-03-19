@@ -27,11 +27,13 @@ function calcTimeLeft(target: string): TimeLeft | null {
 
 function Segment({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center">
-      <span className="font-display text-4xl font-bold text-white md:text-5xl">
-        {String(value).padStart(2, "0")}
-      </span>
-      <span className="mt-1 text-xs uppercase tracking-[0.15em] text-accent">
+    <div className="flex flex-col items-center group/seg">
+      <div className="relative rounded-xl bg-white/5 border border-white/8 px-3 py-2 transition-all duration-500 group-hover/seg:border-accent/25 group-hover/seg:bg-accent/5">
+        <span className="font-display text-4xl font-bold text-white md:text-5xl tabular-nums">
+          {String(value).padStart(2, "0")}
+        </span>
+      </div>
+      <span className="mt-2 text-xs uppercase tracking-[0.15em] text-accent font-semibold">
         {label}
       </span>
     </div>

@@ -40,7 +40,7 @@ export function RsvpForm({ eventTitle }: RsvpFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-      <div className="absolute -left-[9999px] opacity-0" aria-hidden><input tabIndex={-1} autoComplete="off" {...register("honeypot")} /></div>
+      <div className="absolute -left-full overflow-hidden h-0 w-0 opacity-0" aria-hidden><input tabIndex={-1} autoComplete="off" {...register("honeypot")} /></div>
       <div><label className="mb-1.5 block text-sm font-medium text-brand-charcoal">Full Name *</label>
         <input type="text" autoComplete="name" className={inp(!!errors.name)} {...register("name", { required: "Required" })} />
         {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}</div>

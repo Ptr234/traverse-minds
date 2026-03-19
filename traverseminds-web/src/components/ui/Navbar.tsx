@@ -307,7 +307,7 @@ export function Navbar() {
               onMouseLeave={scheduleMegaClose}
             >
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-2">
-                <div className="glass-panel rounded-2xl shadow-xl border border-border-light/40 p-6">
+                <div className="rounded-2xl bg-white shadow-xl border border-border-light p-6">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent/80 mb-4">
                     Our Divisions
                   </p>

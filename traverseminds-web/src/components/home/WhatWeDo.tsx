@@ -69,16 +69,16 @@ export function WhatWeDo() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.15 + idx * 0.1 }}
-                  className="group relative overflow-hidden flex gap-4 p-5 rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card"
+                  className="group relative overflow-hidden flex gap-4 p-5 rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-card border border-transparent hover:border-accent/15"
                 >
                   <Image src={item.image} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="50vw" />
                   <div className="absolute inset-0 bg-primary/85 group-hover:bg-primary/75 transition-colors duration-500" />
-                  <div className="relative z-10 shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent transition-all duration-300 group-hover:scale-105">
-                    <item.icon className="h-5 w-5" />
+                  <div className="relative z-10 shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent icon-hover-float backdrop-blur-sm">
+                    <item.icon className="h-5 w-5 transition-transform duration-500 group-hover:scale-110" />
                   </div>
                   <div className="relative z-10">
-                    <h4 className="font-display text-base font-bold text-white">{item.title}</h4>
-                    <p className="mt-1 text-sm text-white/55 leading-relaxed">{item.desc}</p>
+                    <h4 className="font-display text-base font-bold text-white transition-colors duration-300 group-hover:text-accent">{item.title}</h4>
+                    <p className="mt-1 text-sm text-white/65 leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -110,14 +110,20 @@ export function WhatWeDo() {
               <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/10 to-transparent" />
 
               {/* Bottom info card */}
-              <div className="absolute bottom-6 left-6 right-6 glass-panel rounded-2xl p-6 border-white/20 backdrop-blur-xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute bottom-6 left-6 right-6 glass-panel rounded-2xl p-6 border-white/20 backdrop-blur-xl"
+              >
                 <p className="text-primary text-lg font-display font-bold leading-snug">
                   Six divisions. One integrated mission.
                 </p>
                 <p className="mt-2 text-primary/40 text-xs uppercase tracking-widest font-semibold">
                   Built for Africa &middot; Driven by Evidence
                 </p>
-              </div>
+              </motion.div>
             </div>
 
             {/* Floating division count badge */}

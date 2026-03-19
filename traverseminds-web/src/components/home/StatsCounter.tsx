@@ -74,15 +74,18 @@ export function StatsCounter() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const }}
-              className="group relative overflow-hidden rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated"
+              className="group relative overflow-hidden rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-elevated border border-white/0 hover:border-accent/20"
             >
               {/* Background image */}
               <Image src={stat.image} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 25vw" />
               <div className="absolute inset-0 bg-primary/80 group-hover:bg-primary/70 transition-colors duration-500" />
 
+              {/* Hover glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ boxShadow: "inset 0 1px 0 rgba(249, 115, 22, 0.1)" }} />
+
               <div className="relative z-10">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent">
-                  <stat.icon className="h-5 w-5" />
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent icon-hover-float backdrop-blur-sm">
+                  <stat.icon className="h-5 w-5 transition-transform duration-500 group-hover:rotate-6" />
                 </div>
 
                 <div className="flex items-baseline gap-0.5">
@@ -93,7 +96,7 @@ export function StatsCounter() {
                 </div>
 
                 <h3 className="mt-2 text-sm font-semibold text-white/80">{stat.label}</h3>
-                <p className="mt-1.5 text-xs text-white/55 leading-relaxed">{stat.description}</p>
+                <p className="mt-1.5 text-xs text-white/65 leading-relaxed">{stat.description}</p>
               </div>
             </motion.div>
           ))}

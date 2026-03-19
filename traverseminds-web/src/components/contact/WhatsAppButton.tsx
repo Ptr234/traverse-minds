@@ -14,7 +14,8 @@ export function WhatsAppButton() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-3 rounded-[var(--radius-component)] bg-[#25D366] px-6 py-3 text-base font-semibold text-white transition-all hover:bg-[#1da851] hover:shadow-md active:scale-[0.98]"
+      aria-label="Chat with Traverse Minds on WhatsApp"
+      className="inline-flex items-center gap-3 rounded-xl bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-[#1da851] hover:shadow-md active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#25D366]/50 focus-visible:ring-offset-2"
     >
       <MessageCircle className="h-5 w-5" />
       Chat on WhatsApp
