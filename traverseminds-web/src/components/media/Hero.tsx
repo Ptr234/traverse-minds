@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { Mic, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1800&q=80",
-  "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1800&q=80",
-  "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1800&q=80",
-  "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1800&q=80",
+  "/cyber/cyber_image_16.jpg",
+  "/cyber/cyber_image_30.jpg",
+  "/cyber/cyber_image_12.jpg",
+  "/cyber/cyber_image_11.jpg",
 ];
 
 export function Hero() {
@@ -20,8 +21,8 @@ export function Hero() {
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
         <motion.div
           className="max-w-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8">
@@ -31,10 +32,13 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.05]">
-            Facts & Figures{" "}
-            <span className="text-gradient-accent">The Policy Podcast</span>
-          </h1>
+          <TextReveal
+            as="h1"
+            variant="clip-up"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.05]"
+          >
+            Facts & Figures The Policy Podcast
+          </TextReveal>
 
           <p className="mt-6 text-lg text-white/50 leading-relaxed">
             Unpacking the data, laws, and technology shaping East Africa.

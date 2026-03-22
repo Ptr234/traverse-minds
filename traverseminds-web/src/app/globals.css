@@ -496,6 +496,67 @@ p { text-wrap: pretty; }
 }
 
 /* ═══════════════════════════════════════════════════
+   SECTION DIVIDERS & REVEALS
+═══════════════════════════════════════════════════ */
+
+/* Animated gradient divider between sections */
+.section-divider {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(249, 115, 22, 0.4) 30%,
+    rgba(16, 185, 129, 0.3) 50%,
+    rgba(249, 115, 22, 0.4) 70%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: divider-expand 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-play-state: paused;
+}
+
+.section-divider.is-visible::after {
+  animation-play-state: running;
+}
+
+@keyframes divider-expand {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Scroll-triggered accent line */
+.reveal-line {
+  position: relative;
+}
+
+.reveal-line::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-emerald));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-line.is-visible::before {
+  transform: scaleX(1);
+}
+
+/* ═══════════════════════════════════════════════════
    FOCUS & ACCESSIBILITY
 ═══════════════════════════════════════════════════ */
 

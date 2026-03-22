@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1800&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1800&q=80",
-  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1800&q=80",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1800&q=80",
+  "/cyber/cyber_image_33.jpg",
+  "/cyber/cyber_image_44.jpg",
+  "/cyber/cyber_image_05.jpg",
+  "/cyber/cyber_image_40.jpg",
 ];
 
 const audiences = [
@@ -27,8 +28,8 @@ export function Hero() {
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8">
@@ -38,10 +39,13 @@ export function Hero() {
               </span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
-              Digital safety for every{" "}
-              <span className="text-gradient-accent">Ugandan</span>
-            </h1>
+            <TextReveal
+              as="h1"
+              variant="slide-up"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
+            >
+              Digital safety for every Ugandan
+            </TextReveal>
 
             <p className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl">
               Practical, language-accessible digital safety training
@@ -61,8 +65,8 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
             className="grid grid-cols-2 gap-4"
           >

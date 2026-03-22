@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 import {
   ShieldCheck,
   ShieldAlert,
@@ -95,7 +96,7 @@ export function SelfAssessment() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <SectionReveal variant="clip-inset" className="mx-auto max-w-2xl">
       <AnimatePresence mode="wait">
         {!showResult ? (
           <motion.div
@@ -288,6 +289,6 @@ export function SelfAssessment() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </SectionReveal>
   );
 }

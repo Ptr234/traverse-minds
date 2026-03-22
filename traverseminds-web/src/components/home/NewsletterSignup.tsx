@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { Mail, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 interface NewsletterFormData {
   email: string;
@@ -44,10 +45,15 @@ export function NewsletterSignup() {
               <Mail className="h-6 w-6 text-accent" />
             </div>
 
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
-              Stay ahead of the{" "}
-              <span className="text-gradient-accent">threat landscape</span>.
-            </h2>
+            <TextReveal
+              as="h2"
+              variant="blur-in"
+              staggerSpeed={0.05}
+              delay={0.15}
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary"
+            >
+              Stay ahead of the threat landscape.
+            </TextReveal>
 
             <p className="mt-4 text-base text-brand-medium/60 leading-relaxed max-w-lg mx-auto">
               Get our weekly intelligence briefing on East African cybersecurity

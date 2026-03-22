@@ -6,6 +6,9 @@ import { Features } from "@/components/public-record/Features";
 import { Coverage } from "@/components/public-record/Coverage";
 import { WaitlistForm } from "@/components/public-record/WaitlistForm";
 import { Button } from "@/components/ui/Button";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 import { Scale, Search, BookOpen, Building2, ShieldCheck, ArrowRight } from "lucide-react";
 
 const audiences = [
@@ -50,6 +53,7 @@ export default function PublicRecordPage() {
 
   return (
     <div className="flex flex-col">
+      <PageTransition>
       <Hero />
       <Features />
       <Coverage />
@@ -60,22 +64,27 @@ export default function PublicRecordPage() {
 
         <div className="container-max relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Audience</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            <SectionReveal variant="mask-wipe">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+                <div className="h-1 w-1 rounded-full bg-accent" />
+                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Audience</span>
+              </div>
+            </SectionReveal>
+            <TextReveal variant="blur-in" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
               Who it&apos;s for
-            </h2>
-            <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
-              Public Record EA serves professionals who need fast, reliable access to East African public documents.
-            </p>
+            </TextReveal>
+            <SectionReveal variant="fade-up" delay={0.1}>
+              <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+                Public Record EA serves professionals who need fast, reliable access to East African public documents.
+              </p>
+            </SectionReveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+          <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
             {audiences.map((a) => (
-              <div
+              <RevealItem
                 key={a.title}
+                variant="scale-fade"
                 className="group flex flex-col items-center text-center rounded-2xl border border-border-light bg-white p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:border-accent/15"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 text-primary transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:scale-110">
@@ -83,9 +92,9 @@ export default function PublicRecordPage() {
                 </div>
                 <h3 className="font-display text-lg font-bold text-primary">{a.title}</h3>
                 <p className="mt-3 text-sm text-brand-medium/60 leading-relaxed">{a.desc}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -95,15 +104,15 @@ export default function PublicRecordPage() {
         <div className="absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-accent/5 blur-[120px]" />
 
         <div className="container-max relative z-10">
-          <div className="mx-auto max-w-3xl text-center">
+          <SectionReveal variant="fade-blur" className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-5">
               <div className="h-1 w-1 rounded-full bg-accent" />
               <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Ethics</span>
             </div>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-              Ethics & Data Governance
-            </h2>
+            <TextReveal variant="clip-up" className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
+              Ethics &amp; Data Governance
+            </TextReveal>
 
             <div className="mt-8 flex justify-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
@@ -118,7 +127,7 @@ export default function PublicRecordPage() {
             <p className="mt-4 text-sm text-white/35 max-w-xl mx-auto">
               All data indexed by Public Record EA is sourced from publicly accessible government registries, court systems, and regulatory bodies. We add value through search, summarisation, and monitoring — not through data restriction.
             </p>
-          </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -128,47 +137,54 @@ export default function PublicRecordPage() {
 
         <div className="container-max relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Pricing</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            <SectionReveal variant="clip-right">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+                <div className="h-1 w-1 rounded-full bg-accent" />
+                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Pricing</span>
+              </div>
+            </SectionReveal>
+            <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
               Simple, transparent pricing
-            </h2>
-            <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
-              Choose the plan that fits your research needs.
-            </p>
+            </TextReveal>
+            <SectionReveal variant="fade-up" delay={0.1}>
+              <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+                Choose the plan that fits your research needs.
+              </p>
+            </SectionReveal>
 
             {/* Monthly / Annual Toggle */}
-            <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-border-light bg-surface-elevated p-1">
-              <button
-                onClick={() => setBilling("monthly")}
-                className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                  billing === "monthly"
-                    ? "bg-accent text-white shadow-sm"
-                    : "text-brand-medium/60 hover:text-primary"
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBilling("annual")}
-                className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                  billing === "annual"
-                    ? "bg-accent text-white shadow-sm"
-                    : "text-brand-medium/60 hover:text-primary"
-                }`}
-              >
-                Annual
-                <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wider opacity-70">Save 2 mo</span>
-              </button>
-            </div>
+            <SectionReveal variant="scale-fade" delay={0.15}>
+              <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-border-light bg-surface-elevated p-1">
+                <button
+                  onClick={() => setBilling("monthly")}
+                  className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                    billing === "monthly"
+                      ? "bg-accent text-white shadow-sm"
+                      : "text-brand-medium/60 hover:text-primary"
+                  }`}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => setBilling("annual")}
+                  className={`rounded-full px-6 py-2.5 min-h-11 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                    billing === "annual"
+                      ? "bg-accent text-white shadow-sm"
+                      : "text-brand-medium/60 hover:text-primary"
+                  }`}
+                >
+                  Annual
+                  <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wider opacity-70">Save 2 mo</span>
+                </button>
+              </div>
+            </SectionReveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 max-w-5xl mx-auto">
+          <SectionReveal variant="fade-up" staggerChildren={0.12} className="grid grid-cols-1 gap-5 md:grid-cols-3 max-w-5xl mx-auto">
             {plans.map((plan) => (
-              <div
+              <RevealItem
                 key={plan.name}
+                variant="slide-up"
                 className={`rounded-3xl border p-8 transition-all duration-500 hover:-translate-y-1 ${
                   plan.featured
                     ? "border-accent shadow-elevated ring-1 ring-accent/20 bg-white relative"
@@ -202,13 +218,14 @@ export default function PublicRecordPage() {
                     {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
                   </Button>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </SectionReveal>
         </div>
       </section>
 
       <WaitlistForm />
+      </PageTransition>
     </div>
   );
 }

@@ -6,13 +6,15 @@ import { PostCard } from "@/components/blog/PostCard";
 import { DivisionFilter } from "@/components/blog/DivisionFilter";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 import { Search } from "lucide-react";
 
 const blogHeroImages = [
-  "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1800&q=80",
-  "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1800&q=80",
-  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1800&q=80",
-  "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1800&q=80",
+  "/cyber/cyber_image_11.jpg",
+  "/cyber/cyber_image_07.jpg",
+  "/cyber/cyber_image_39.jpg",
+  "/cyber/cyber_image_43.jpg",
 ];
 
 const mockPosts: {
@@ -27,7 +29,7 @@ export default function BlogPage() {
   const filtered = filter === "all" ? mockPosts : mockPosts.filter((p) => p.division === filter);
 
   return (
-    <>
+    <PageTransition>
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36">
         <ImageSlideshow images={blogHeroImages} overlay="bg-primary/70" />
@@ -35,8 +37,9 @@ export default function BlogPage() {
         <div className="container-max relative z-10 px-6 lg:px-8">
           <div className="max-w-2xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8"
             >
               <div className="h-1 w-1 rounded-full bg-accent" />
@@ -44,18 +47,18 @@ export default function BlogPage() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.1, duration: 0.8 }}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
             >
               News & <span className="text-gradient-accent">insights</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.2, duration: 0.7 }}
               className="mt-6 max-w-lg text-lg text-white/50 leading-relaxed"
             >
               Cybersecurity analysis, event recaps, policy explainers, and data-driven research from across our six divisions.
@@ -70,48 +73,55 @@ export default function BlogPage() {
 
         <div className="container-max relative z-10">
           {/* Search Input */}
-          <div className="mb-6">
-            <div className="relative max-w-md">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-muted/40" />
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-2xl border border-border-light bg-white py-3 pl-11 pr-4 text-sm text-primary placeholder:text-brand-muted/40 outline-none focus:border-accent/40 focus:shadow-sm transition-all"
-              />
+          <SectionReveal variant="fade-blur">
+            <div className="mb-6">
+              <div className="relative max-w-md">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-muted/40" />
+                <input
+                  type="text"
+                  placeholder="Search articles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full rounded-2xl border border-border-light bg-white py-3 pl-11 pr-4 text-sm text-primary placeholder:text-brand-muted/40 outline-none focus:border-accent/40 focus:shadow-sm transition-all"
+                />
+              </div>
             </div>
-          </div>
+          </SectionReveal>
 
-          <div className="mb-10">
-            <DivisionFilter active={filter} onChange={setFilter} />
-          </div>
-          <motion.div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" layout>
-            {filtered.map((post) => (
-              <motion.div
-                key={post.slug}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <PostCard {...post} />
-              </motion.div>
-            ))}
-          </motion.div>
-          {filtered.length === 0 && (
-            <div className="col-span-full rounded-3xl border-2 border-dashed border-border-light py-20 text-center">
-              <p className="text-lg font-semibold text-primary">Coming soon</p>
-              <p className="mt-2 text-base text-brand-muted max-w-md mx-auto">
-                Our first articles are being written. Subscribe to our newsletter to be notified when we publish.
-              </p>
+          <SectionReveal variant="slide-up" delay={0.05}>
+            <div className="mb-10">
+              <DivisionFilter active={filter} onChange={setFilter} />
             </div>
-          )}
+          </SectionReveal>
+
+          <SectionReveal variant="fade-up" delay={0.1}>
+            <motion.div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" layout>
+              {filtered.map((post) => (
+                <motion.div
+                  key={post.slug}
+                  layout
+                  initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <PostCard {...post} />
+                </motion.div>
+              ))}
+            </motion.div>
+            {filtered.length === 0 && (
+              <div className="col-span-full rounded-3xl border-2 border-dashed border-border-light py-20 text-center">
+                <p className="text-lg font-semibold text-primary">Coming soon</p>
+                <p className="mt-2 text-base text-brand-muted max-w-md mx-auto">
+                  Our first articles are being written. Subscribe to our newsletter to be notified when we publish.
+                </p>
+              </div>
+            )}
+          </SectionReveal>
         </div>
       </section>
 
       <NewsletterSignup />
-    </>
+    </PageTransition>
   );
 }

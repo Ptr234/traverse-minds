@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Clock, BookOpen, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const programmes = [
-  { id: 1, title: "CyberSafe Schools", audience: "students", duration: "4 Weeks", format: "In-person Workshops", description: "Equipping students with the skills to identify online grooming, cyberbullying, and misinformation.", topics: ["Password Safety", "Privacy Settings", "Digital Footprint"], image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=70" },
-  { id: 2, title: "SME Security Essentials", audience: "business", duration: "2 Days", format: "Intensive Boot Camp", description: "Practical security training for business owners and employees. From phishing to basic encryption.", topics: ["Phishing Awareness", "Device Security", "Data Backups"], image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=70" },
-  { id: 3, title: "Digital Safety for Educators", audience: "teachers", duration: "1 Week", format: "Hybrid (Online + In-person)", description: "Training teachers to integrate digital citizenship and online safety into their daily curriculum.", topics: ["Classroom Policy", "Online Resources", "Parent Engagement"], image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=70" },
-  { id: 4, title: "Public Sector Cyber Literacy", audience: "government", duration: "3 Days", format: "Closed Workshop", description: "Critical security awareness for government staff handling sensitive citizen data and public services.", topics: ["Information Handling", "Social Engineering", "Compliance"], image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=70" },
+  { id: 1, title: "CyberSafe Schools", audience: "students", duration: "4 Weeks", format: "In-person Workshops", description: "Equipping students with the skills to identify online grooming, cyberbullying, and misinformation.", topics: ["Password Safety", "Privacy Settings", "Digital Footprint"], image: "/cyber/cyber_image_33.jpg" },
+  { id: 2, title: "SME Security Essentials", audience: "business", duration: "2 Days", format: "Intensive Boot Camp", description: "Practical security training for business owners and employees. From phishing to basic encryption.", topics: ["Phishing Awareness", "Device Security", "Data Backups"], image: "/cyber/cyber_image_35.jpg" },
+  { id: 3, title: "Digital Safety for Educators", audience: "teachers", duration: "1 Week", format: "Hybrid (Online + In-person)", description: "Training teachers to integrate digital citizenship and online safety into their daily curriculum.", topics: ["Classroom Policy", "Online Resources", "Parent Engagement"], image: "/cyber/cyber_image_05.jpg" },
+  { id: 4, title: "Public Sector Cyber Literacy", audience: "government", duration: "3 Days", format: "Closed Workshop", description: "Critical security awareness for government staff handling sensitive citizen data and public services.", topics: ["Information Handling", "Social Engineering", "Compliance"], image: "/cyber/cyber_image_40.jpg" },
 ];
 
 const filters = [
@@ -33,7 +35,13 @@ export function ProgrammeListing() {
             <div className="h-1 w-1 rounded-full bg-accent" />
             <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Programmes</span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">Our Training Programmes</h2>
+          <TextReveal
+            as="h2"
+            variant="fade-up"
+            className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+          >
+            Our Training Programmes
+          </TextReveal>
 
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             {filters.map((f) => (
@@ -52,15 +60,16 @@ export function ProgrammeListing() {
           </div>
         </div>
 
+        <SectionReveal variant="fade-up">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
               <motion.div
                 key={p.id}
                 layout
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
+                initial={{ opacity: 0, scale: 0.97, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.97, filter: "blur(4px)" }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
                 className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated"
               >
@@ -104,6 +113,7 @@ export function ProgrammeListing() {
             ))}
           </AnimatePresence>
         </div>
+        </SectionReveal>
       </div>
     </section>
   );

@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Shield, Calendar, Database, Brain, Mic, BookOpen, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 const divisions = [
   {
@@ -11,7 +14,7 @@ const divisions = [
     desc: "End-to-end protection for critical infrastructure, banks, and government.",
     href: "/security",
     size: "sm:col-span-2 lg:col-span-2 lg:row-span-2",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=70",
+    image: "/cyber/cyber_image_02.jpg",
     featured: true,
   },
   {
@@ -19,7 +22,7 @@ const divisions = [
     desc: "Independent research and policy analysis for the digital age.",
     href: "/think-tank",
     size: "",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70",
+    image: "/cyber/cyber_image_04.jpg",
     featured: false,
   },
   {
@@ -27,7 +30,7 @@ const divisions = [
     desc: "AI-powered transparency tool for accessing public documents.",
     href: "/public-record",
     size: "",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70",
+    image: "/cyber/cyber_image_20.jpg",
     featured: false,
   },
   {
@@ -35,7 +38,7 @@ const divisions = [
     desc: "High-level forums like the Cyber Luncheon for digital leaders.",
     href: "/events",
     size: "",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=70",
+    image: "/cyber/cyber_image_25.jpg",
     featured: false,
   },
   {
@@ -43,7 +46,7 @@ const divisions = [
     desc: "Amplifying narratives through podcasts, reports, and coverage.",
     href: "/media",
     size: "",
-    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=70",
+    image: "/cyber/cyber_image_16.jpg",
     featured: false,
   },
   {
@@ -51,7 +54,7 @@ const divisions = [
     desc: "Empowering SMEs and citizens with essential digital skills and safety.",
     href: "/literacy",
     size: "sm:col-span-2 lg:col-span-2",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=70",
+    image: "/cyber/cyber_image_33.jpg",
     featured: false,
   },
 ];
@@ -62,7 +65,7 @@ export function FeaturedDivision() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80"
+          src="/cyber/cyber_image_04.jpg"
           alt=""
           fill
           className="object-cover"
@@ -77,9 +80,10 @@ export function FeaturedDivision() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-6"
             >
               <div className="h-1 w-1 rounded-full bg-accent" />
@@ -88,23 +92,22 @@ export function FeaturedDivision() {
               </span>
             </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+            <TextReveal
+              as="h2"
+              variant="blur-in"
+              staggerSpeed={0.05}
+              delay={0.1}
               className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.05] tracking-tight"
             >
-              Six divisions,{" "}
-              <span className="text-gradient-accent">one integrated mission</span>.
-            </motion.h2>
+              Six divisions, one integrated mission.
+            </TextReveal>
           </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-brand-medium/70 max-w-sm text-base leading-relaxed"
           >
             Every division strengthens the others — security informs research, events build community, media amplifies findings.
@@ -112,19 +115,17 @@ export function FeaturedDivision() {
         </div>
 
         {/* Bento Grid — 4 cols on desktop, 2 on tablet */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px] lg:auto-rows-[240px]">
-          {divisions.map((div, idx) => (
-            <motion.div
+        <SectionReveal variant="fade-up" staggerChildren={0.1} delay={0.2} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px] lg:auto-rows-[240px]">
+          {divisions.map((div) => (
+            <RevealItem
               key={div.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
+              variant="scale-fade"
               className={div.size}
             >
+              <TiltCard maxTilt={6} glowColor="249, 115, 22" hoverScale={1.01} className="h-full">
               <Link
                 href={div.href}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-elevated hover:border-accent/25 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 transition-all duration-500 hover:shadow-elevated hover:border-accent/25 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 {/* Background image */}
                 <Image src={div.image} alt={div.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
@@ -158,9 +159,10 @@ export function FeaturedDivision() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+              </TiltCard>
+            </RevealItem>
           ))}
-        </div>
+        </SectionReveal>
       </div>
     </section>
   );

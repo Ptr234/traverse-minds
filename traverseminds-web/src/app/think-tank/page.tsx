@@ -3,6 +3,9 @@ import { Hero } from "@/components/think-tank/Hero";
 import { ResearchAreas } from "@/components/think-tank/ResearchAreas";
 import { Publications } from "@/components/think-tank/Publications";
 import { Button } from "@/components/ui/Button";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionReveal } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight, FileText, Filter } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 export default function ThinkTankPage() {
   return (
     <div className="flex flex-col">
+      <PageTransition>
       <Hero />
       <ResearchAreas />
       <Publications />
@@ -22,22 +26,26 @@ export default function ThinkTankPage() {
         <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
 
         <div className="container-max relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Evidence Briefs</span>
-          </div>
+          <SectionReveal variant="fade-up">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Evidence Briefs</span>
+            </div>
+          </SectionReveal>
 
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="clip-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
             Evidence Briefs
-          </h2>
+          </TextReveal>
 
-          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-            <FileText className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-            <p className="text-lg font-semibold text-primary">Coming Soon</p>
-            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
-              Short-form rapid summaries of our key research findings. Coming soon.
-            </p>
-          </div>
+          <SectionReveal variant="scale-fade" delay={0.15}>
+            <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+              <FileText className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+              <p className="text-lg font-semibold text-primary">Coming Soon</p>
+              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+                Short-form rapid summaries of our key research findings. Coming soon.
+              </p>
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -48,34 +56,36 @@ export default function ThinkTankPage() {
 
         <div className="container-max relative z-10">
           <div className="flex flex-col items-center justify-between gap-12 lg:flex-row">
-            <div className="max-w-2xl text-center lg:text-left">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-                Get the <span className="text-gradient-accent">State of Digital Rights</span> Report
-              </h2>
+            <SectionReveal variant="clip-left" className="max-w-2xl text-center lg:text-left">
+              <TextReveal variant="blur-in" className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
+                Get the State of Digital Rights Report
+              </TextReveal>
               <p className="mt-5 text-base text-white/50 leading-relaxed">
                 Our annual comprehensive analysis of the digital policy landscape
                 across Uganda, Kenya, and Tanzania. Free for registered organisations.
               </p>
-            </div>
+            </SectionReveal>
 
-            <div className="w-full max-w-sm rounded-3xl border border-white/6 bg-surface-dark-elevated p-8">
-              <h3 className="font-display text-lg font-bold text-white">Download the Report</h3>
-              <form className="mt-6 space-y-4">
-                <input
-                  type="email"
-                  placeholder="Your work email"
-                  className="w-full rounded-xl border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none focus:border-accent/40 transition-colors"
-                  required
-                />
-                <Button variant="primary" className="w-full">
-                  Send me the PDF
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <p className="text-[11px] text-center text-white/20">
-                  By downloading, you agree to join our research mailing list.
-                </p>
-              </form>
-            </div>
+            <SectionReveal variant="slide-up" delay={0.2} className="w-full max-w-sm">
+              <div className="rounded-3xl border border-white/6 bg-surface-dark-elevated p-8">
+                <h3 className="font-display text-lg font-bold text-white">Download the Report</h3>
+                <form className="mt-6 space-y-4">
+                  <input
+                    type="email"
+                    placeholder="Your work email"
+                    className="w-full rounded-xl border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none focus:border-accent/40 transition-colors"
+                    required
+                  />
+                  <Button variant="primary" className="w-full">
+                    Send me the PDF
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <p className="text-[11px] text-center text-white/20">
+                    By downloading, you agree to join our research mailing list.
+                  </p>
+                </form>
+              </div>
+            </SectionReveal>
           </div>
         </div>
       </section>
@@ -85,20 +95,22 @@ export default function ThinkTankPage() {
         <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
 
         <div className="container-max relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
             Commission Research
-          </h2>
-          <p className="mt-5 mx-auto max-w-2xl text-base text-brand-medium/60 leading-relaxed">
-            Need deep-dive analysis on a specific digital policy or civic-tech topic?
-            Our researchers are available for commissioned projects, gap analyses,
-            and impact assessments.
-          </p>
-          <div className="mt-10">
-            <Button variant="primary" size="lg" href="/contact?subject=research">
-              Enquire About Research Services
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
+          </TextReveal>
+          <SectionReveal variant="fade-blur" delay={0.1}>
+            <p className="mt-5 mx-auto max-w-2xl text-base text-brand-medium/60 leading-relaxed">
+              Need deep-dive analysis on a specific digital policy or civic-tech topic?
+              Our researchers are available for commissioned projects, gap analyses,
+              and impact assessments.
+            </p>
+            <div className="mt-10">
+              <Button variant="primary" size="lg" href="/contact?subject=research">
+                Enquire About Research Services
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -107,24 +119,29 @@ export default function ThinkTankPage() {
         <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
 
         <div className="container-max relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Archive</span>
-          </div>
+          <SectionReveal variant="mask-wipe">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+              <div className="h-1 w-1 rounded-full bg-accent" />
+              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Archive</span>
+            </div>
+          </SectionReveal>
 
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="slide-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
             Research Archive
-          </h2>
+          </TextReveal>
 
-          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-            <Filter className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-            <p className="text-lg font-semibold text-primary">Coming Soon</p>
-            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
-              Full research archive with topic, country, and year filtering — coming with our first publications.
-            </p>
-          </div>
+          <SectionReveal variant="clip-inset" delay={0.15}>
+            <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+              <Filter className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+              <p className="text-lg font-semibold text-primary">Coming Soon</p>
+              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+                Full research archive with topic, country, and year filtering — coming with our first publications.
+              </p>
+            </div>
+          </SectionReveal>
         </div>
       </section>
+      </PageTransition>
     </div>
   );
 }

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, FileDown, Clock, Brain } from "lucide-react";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const reports = [
   {
@@ -40,9 +42,10 @@ export function ThinkTankPreview() {
         {/* Header — centered */}
         <div className="text-center mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-6"
           >
             <div className="h-1 w-1 rounded-full bg-accent" />
@@ -51,22 +54,21 @@ export function ThinkTankPreview() {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          <TextReveal
+            as="h2"
+            variant="clip-up"
+            staggerSpeed={0.06}
+            delay={0.1}
             className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-[1.05] tracking-tight"
           >
-            Latest from the{" "}
-            <span className="text-gradient-emerald">Think Tank</span>
-          </motion.h2>
+            Latest from the Think Tank
+          </TextReveal>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
+            transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 text-base text-brand-medium/60 leading-relaxed max-w-xl mx-auto"
           >
             Independent research and policy analysis shaping the digital future of East Africa.
@@ -74,14 +76,11 @@ export function ThinkTankPreview() {
         </div>
 
         {/* Featured report + side stack */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
+        <SectionReveal variant="clip-up" staggerChildren={0.15} delay={0.2} className="grid grid-cols-1 lg:grid-cols-5 gap-5">
           {/* Featured (first report) */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-3 bento-card hover-glow-accent flex flex-col justify-between min-h-[360px]"
+          <RevealItem
+            variant="slide-up"
+            className="lg:col-span-3 bento-card hover-glow-accent flex flex-col justify-between min-h-90"
           >
             <div>
               <div className="flex items-center justify-between mb-6">
@@ -117,21 +116,13 @@ export function ThinkTankPreview() {
                 <Brain className="h-5 w-5 text-primary/30" />
               </div>
             </div>
-          </motion.div>
+          </RevealItem>
 
           {/* Side stack (remaining reports) */}
-          <div className="lg:col-span-2 flex flex-col gap-5">
-            {reports.slice(1).map((report, idx) => (
-              <motion.div
+          <RevealItem variant="slide-up" className="lg:col-span-2 flex flex-col gap-5">
+            {reports.slice(1).map((report) => (
+              <div
                 key={report.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.1 + idx * 0.1,
-                  duration: 0.7,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
                 className="bento-card hover-glow-accent flex flex-col justify-between flex-1"
               >
                 <div>
@@ -165,17 +156,17 @@ export function ThinkTankPreview() {
                     Download
                   </button>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
-        </div>
+          </RevealItem>
+        </SectionReveal>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 text-center"
         >
           <Button variant="outline" size="lg" href="/think-tank">

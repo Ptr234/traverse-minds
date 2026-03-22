@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { SectionReveal } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 const countries = [
   { name: "Uganda", code: "UG", records: "15,000+", flag: "https://flagcdn.com/ug.svg" },
@@ -18,16 +20,15 @@ export function Coverage() {
 
       <div className="container-max relative z-10">
         <div className="flex flex-col items-center justify-between gap-16 lg:flex-row">
-          <div className="max-w-xl">
+          <SectionReveal variant="clip-left" className="max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-6">
               <div className="h-1 w-1 rounded-full bg-accent" />
               <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Coverage</span>
             </div>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
-              Unrivalled coverage{" "}
-              <span className="text-gradient-accent">across East Africa</span>
-            </h2>
+            <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+              Unrivalled coverage across East Africa
+            </TextReveal>
 
             <p className="mt-5 text-base text-brand-medium/60 leading-relaxed">
               We are building the most comprehensive digital archive of public records
@@ -49,15 +50,16 @@ export function Coverage() {
                 </div>
               ))}
             </div>
-          </div>
+          </SectionReveal>
 
           {/* Stats visual */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative w-full max-w-md aspect-square rounded-3xl bg-primary overflow-hidden shadow-elevated"
-          >
+          <SectionReveal variant="scale-fade" delay={0.2} className="relative w-full max-w-md aspect-square rounded-3xl bg-primary overflow-hidden shadow-elevated">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="h-full w-full"
+            >
             <div className="absolute inset-0 dot-grid opacity-30" />
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
             <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-emerald/10 blur-3xl" />
@@ -68,6 +70,7 @@ export function Coverage() {
               <p className="mt-3 text-sm text-white/50">Updated every 24 hours</p>
             </div>
           </motion.div>
+          </SectionReveal>
         </div>
       </div>
     </section>

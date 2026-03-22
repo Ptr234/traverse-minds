@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { TeamCard } from "./TeamCard";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -23,8 +25,8 @@ export function TeamGrid() {
       <div className="container-max relative z-10">
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5"
           >
@@ -33,15 +35,14 @@ export function TeamGrid() {
               Our People
             </span>
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
+          <TextReveal
+            as="h2"
+            variant="blur-in"
+            staggerSpeed={0.06}
             className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
           >
             Meet the Team
-          </motion.h2>
+          </TextReveal>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -53,32 +54,17 @@ export function TeamGrid() {
           </motion.p>
         </div>
 
-        <motion.div
+        <SectionReveal
+          variant="fade-up"
+          staggerChildren={0.1}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.08 } },
-          }}
         >
           {teamMembers.map((member, i) => (
-            <motion.div
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-                },
-              }}
-            >
+            <RevealItem key={i} variant="scale-fade">
               <TeamCard {...member} />
-            </motion.div>
+            </RevealItem>
           ))}
-        </motion.div>
+        </SectionReveal>
       </div>
     </section>
   );

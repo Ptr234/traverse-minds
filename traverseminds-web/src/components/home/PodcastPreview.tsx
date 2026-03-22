@@ -3,6 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Mic, Headphones, Rss } from "lucide-react";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { FloatingOrbs } from "@/components/ui/FloatingOrbs";
+import { MouseGlow } from "@/components/ui/MouseGlow";
 
 const subscribeLinks = [
   {
@@ -42,7 +46,7 @@ export function PodcastPreview() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1800&q=80"
+          src="/cyber/cyber_image_30.jpg"
           alt=""
           fill
           className="object-cover"
@@ -52,6 +56,8 @@ export function PodcastPreview() {
       </div>
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       <div className="absolute bottom-0 left-0 h-100 w-100 translate-y-1/3 -translate-x-1/4 rounded-full bg-emerald/6 blur-[140px] pointer-events-none" />
+      <FloatingOrbs variant="emerald" />
+      <MouseGlow color="16, 185, 129" size={450} intensity={0.05} />
 
       <div className="container-max relative z-10">
         {/* Centered header */}
@@ -68,16 +74,15 @@ export function PodcastPreview() {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          <TextReveal
+            as="h2"
+            variant="fade-up"
+            staggerSpeed={0.08}
+            delay={0.1}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
           >
-            Facts &amp;{" "}
-            <span className="text-gradient-accent">Figures</span>
-          </motion.h2>
+            Facts & Figures
+          </TextReveal>
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -93,11 +98,9 @@ export function PodcastPreview() {
         {/* Content grid: Visual + Episode list */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Left — Mic visual + subscribe */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <SectionReveal
+            variant="scale-fade"
+            delay={0.2}
             className="lg:col-span-2 flex flex-col items-center justify-center rounded-3xl border border-white/6 bg-white/3 p-10"
           >
             <div className="relative mb-8">
@@ -163,19 +166,16 @@ export function PodcastPreview() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </SectionReveal>
 
           {/* Right — Episode preview list */}
-          <div className="lg:col-span-3 flex flex-col gap-4">
-            {episodes.map((ep, idx) => (
-              <motion.div
+          <SectionReveal variant="clip-right" staggerChildren={0.12} delay={0.3} className="lg:col-span-3 flex flex-col gap-4">
+            {episodes.map((ep) => (
+              <RevealItem
                 key={ep.num}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.15 + idx * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group flex items-center gap-6 rounded-2xl border border-white/6 bg-white/3 p-6 transition-all duration-500 hover:bg-white/5 hover:border-accent/20 hover:-translate-y-0.5"
+                variant="slide-up"
               >
+                <div className="group flex items-center gap-6 rounded-2xl border border-white/6 bg-white/3 p-6 transition-all duration-500 hover:bg-white/5 hover:border-accent/20 hover:-translate-y-0.5">
                 {/* Episode number */}
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent/10 transition-all duration-500 group-hover:bg-accent/20 group-hover:scale-105">
                   <span className="font-mono text-lg font-bold text-accent">{ep.num}</span>
@@ -200,16 +200,19 @@ export function PodcastPreview() {
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
-              </motion.div>
+                </div>
+              </RevealItem>
             ))}
 
             {/* More episodes placeholder */}
-            <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/10 p-6">
-              <p className="text-sm text-white/30 font-medium">
-                More episodes launching soon...
-              </p>
-            </div>
-          </div>
+            <RevealItem variant="fade-up">
+              <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/10 p-6">
+                <p className="text-sm text-white/30 font-medium">
+                  More episodes launching soon...
+                </p>
+              </div>
+            </RevealItem>
+          </SectionReveal>
         </div>
       </div>
     </section>

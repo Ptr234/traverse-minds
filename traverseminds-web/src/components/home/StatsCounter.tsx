@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Shield, Globe, Users, Layers } from "lucide-react";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const stats = [
   {
@@ -12,7 +13,7 @@ const stats = [
     suffix: "",
     label: "Security Services",
     description: "Pen testing, ISO 27001, BoU audit, and more",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=70",
+    image: "/cyber/cyber_image_02.jpg",
   },
   {
     icon: Globe,
@@ -20,7 +21,7 @@ const stats = [
     suffix: "",
     label: "EAC Countries",
     description: "Uganda, Kenya, Tanzania, Rwanda, Burundi",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70",
+    image: "/cyber/cyber_image_20.jpg",
   },
   {
     icon: Users,
@@ -28,7 +29,7 @@ const stats = [
     suffix: "",
     label: "Integrated Divisions",
     description: "One company, six interconnected teams",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=70",
+    image: "/cyber/cyber_image_44.jpg",
   },
   {
     icon: Layers,
@@ -36,7 +37,7 @@ const stats = [
     suffix: "",
     label: "Audiences Served",
     description: "Institutions, researchers, policy-makers, citizens",
-    image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=600&q=70",
+    image: "/cyber/cyber_image_11.jpg",
   },
 ];
 
@@ -66,16 +67,13 @@ export function StatsCounter() {
   return (
     <section className="relative z-20 -mt-16 px-6 pb-0">
       <div className="container-max">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat, i) => (
-            <motion.div
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.map((stat) => (
+            <RevealItem
               key={stat.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const }}
-              className="group relative overflow-hidden rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-elevated border border-white/0 hover:border-accent/20"
+              variant="scale-fade"
             >
+              <div className="group relative overflow-hidden rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-elevated border border-white/0 hover:border-accent/20">
               {/* Background image */}
               <Image src={stat.image} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 25vw" />
               <div className="absolute inset-0 bg-primary/80 group-hover:bg-primary/70 transition-colors duration-500" />
@@ -98,9 +96,10 @@ export function StatsCounter() {
                 <h3 className="mt-2 text-sm font-semibold text-white/80">{stat.label}</h3>
                 <p className="mt-1.5 text-xs text-white/65 leading-relaxed">{stat.description}</p>
               </div>
-            </motion.div>
+              </div>
+            </RevealItem>
           ))}
-        </div>
+        </SectionReveal>
       </div>
     </section>
   );

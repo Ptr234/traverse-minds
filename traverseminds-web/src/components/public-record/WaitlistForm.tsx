@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SectionReveal } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 const waitlistSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -94,13 +96,13 @@ export function WaitlistForm() {
   return (
     <section id="waitlist" className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl">
+        <SectionReveal variant="fade-blur" className="mx-auto max-w-3xl">
           <div className="text-center">
-            <h2 className="font-display text-3xl font-bold text-brand-green md:text-4xl">
-              Join the <span className="text-brand-amber">Private Beta</span>
-            </h2>
+            <TextReveal variant="slide-up" className="font-display text-3xl font-bold text-brand-green md:text-4xl">
+              Join the Private Beta
+            </TextReveal>
             <p className="mt-4 text-brand-medium">
-              We are onboarding users in small batches to ensure the highest 
+              We are onboarding users in small batches to ensure the highest
               quality of service. Reserve your spot today.
             </p>
           </div>
@@ -217,7 +219,7 @@ export function WaitlistForm() {
               </p>
             )}
           </form>
-        </div>
+        </SectionReveal>
       </div>
     </section>
   );

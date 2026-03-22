@@ -3,13 +3,14 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight } from "lucide-react";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1800&q=80",
-  "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=1800&q=80",
-  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1800&q=80",
-  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1800&q=80",
+  "/cyber/cyber_image_20.jpg",
+  "/cyber/cyber_image_11.jpg",
+  "/cyber/cyber_image_08.jpg",
+  "/cyber/cyber_image_21.jpg",
 ];
 
 export function Hero() {
@@ -20,27 +21,46 @@ export function Hero() {
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
         <motion.div
           className="max-w-3xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8">
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8"
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+          >
             <div className="h-1 w-1 rounded-full bg-accent" />
             <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/60">Public Record EA</span>
-          </div>
+          </motion.div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
-            East Africa&apos;s government records —{" "}
-            <span className="text-gradient-accent">intelligently searchable</span>
-          </h1>
+          <TextReveal
+            as="h1"
+            variant="blur-in"
+            delay={0.3}
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
+          >
+            East Africa&apos;s government records — intelligently searchable
+          </TextReveal>
 
-          <p className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl">
+          <motion.p
+            className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl"
+            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+          >
             Search, summarise, and monitor public documents, court records,
             and regulatory updates across Uganda, Kenya, Tanzania, Rwanda,
             and Burundi.
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <motion.div
+            className="mt-10 flex flex-col gap-4 sm:flex-row"
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] as const }}
+          >
             <Button variant="primary" size="lg" href="#waitlist">
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
@@ -48,7 +68,7 @@ export function Hero() {
             <Button variant="outline-dark" size="lg">
               See How it Works
             </Button>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

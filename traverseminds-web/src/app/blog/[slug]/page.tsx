@@ -12,7 +12,7 @@ const mockPost = {
   division: "Security",
   date: "12 March 2026",
   readTime: "6 min read",
-  image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1200&q=80",
+  image: "/cyber/cyber_image_14.jpg",
   author: {
     name: "Christine Masika",
     role: "Founder & CEO",

@@ -4,13 +4,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { NetworkConstellation } from "@/components/ui/NetworkConstellation";
 import { useRef } from "react";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1800&q=80",
-  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1800&q=80",
-  "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1800&q=80",
-  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1800&q=80",
+  "/cyber/cyber_image_02.jpg",
+  "/cyber/cyber_image_08.jpg",
+  "/cyber/cyber_image_14.jpg",
+  "/cyber/cyber_image_20.jpg",
 ];
 
 const stagger = {
@@ -55,6 +56,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       <ImageSlideshow images={heroImages} overlay="bg-primary/70" />
+      <NetworkConstellation nodeCount={60} connectionDistance={140} speed={0.6} />
 
       <motion.div
         style={{ y, opacity }}

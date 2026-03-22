@@ -2,6 +2,8 @@ import { sanityClient } from "@/sanity/client";
 import Link from "next/link";
 import { Download, Calendar, User, FileText } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 interface Report {
   _id: string;
@@ -38,27 +40,28 @@ export async function Publications() {
       <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
 
       <div className="container-max relative z-10">
-        <div className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between mb-14">
+        <SectionReveal variant="clip-left" className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between mb-14">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
               <div className="h-1 w-1 rounded-full bg-accent" />
               <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Research</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            <TextReveal variant="slide-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
               Latest Publications
-            </h2>
+            </TextReveal>
             <p className="mt-3 text-brand-medium/60">
               Independent analysis and policy recommendations for East Africa&apos;s digital economy.
             </p>
           </div>
           <Button variant="outline" href="/think-tank/archive">View Full Archive</Button>
-        </div>
+        </SectionReveal>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <SectionReveal variant="fade-up" staggerChildren={0.12} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reports.length > 0 ? (
             reports.map((report: Report) => (
-              <div
+              <RevealItem
                 key={report._id}
+                variant="slide-up"
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border-light bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:border-accent/15"
               >
                 <div className="relative h-44 w-full bg-primary/3 flex items-center justify-center">
@@ -115,15 +118,15 @@ export async function Publications() {
                     )}
                   </div>
                 </div>
-              </div>
+              </RevealItem>
             ))
           ) : (
-            <div className="col-span-full rounded-2xl border-2 border-dashed border-border-light py-16 text-center">
+            <RevealItem variant="fade-blur" className="col-span-full rounded-2xl border-2 border-dashed border-border-light py-16 text-center">
               <FileText className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
               <p className="text-brand-muted">No reports published yet. Check back soon.</p>
-            </div>
+            </RevealItem>
           )}
-        </div>
+        </SectionReveal>
       </div>
     </section>
   );

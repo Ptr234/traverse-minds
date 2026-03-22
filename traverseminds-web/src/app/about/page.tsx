@@ -5,6 +5,9 @@ import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { CalendlyEmbed } from "@/components/about/CalendlyEmbed";
 import { Check, Handshake } from "lucide-react";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 export const metadata: Metadata = {
   title: "About Traverse Minds",
@@ -31,7 +34,7 @@ const eacCountries = [
 
 export default function AboutPage() {
   return (
-    <>
+    <PageTransition>
       <MissionStatement />
 
       {/* The Model — One Company Six Divisions */}
@@ -42,61 +45,70 @@ export default function AboutPage() {
         <div className="container-max relative z-10">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             {/* Image */}
-            <div className="relative">
-              <div className="relative aspect-square overflow-hidden rounded-3xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-                  alt="Team collaboration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-linear-to-tr from-primary/70 via-primary/10 to-transparent" />
+            <SectionReveal variant="clip-inset">
+              <div className="relative">
+                <div className="relative aspect-square overflow-hidden rounded-3xl">
+                  <Image
+                    src="/cyber/cyber_image_44.jpg"
+                    alt="Team collaboration"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-tr from-primary/70 via-primary/10 to-transparent" />
+                </div>
+                {/* Floating badge */}
+                <div className="absolute -bottom-5 -right-3 rounded-2xl border border-white/10 bg-white p-5 shadow-elevated md:-right-6">
+                  <p className="font-display text-4xl font-bold text-accent">6</p>
+                  <p className="text-xs text-brand-medium mt-0.5">
+                    Integrated<br />Divisions
+                  </p>
+                </div>
               </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-5 -right-3 rounded-2xl border border-white/10 bg-white p-5 shadow-elevated md:-right-6">
-                <p className="font-display text-4xl font-bold text-accent">6</p>
-                <p className="text-xs text-brand-medium mt-0.5">
-                  Integrated<br />Divisions
-                </p>
-              </div>
-            </div>
+            </SectionReveal>
 
             {/* Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
-                <div className="h-1 w-1 rounded-full bg-accent" />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">
-                  Our Model
-                </span>
+            <SectionReveal variant="clip-right" delay={0.2}>
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
+                  <div className="h-1 w-1 rounded-full bg-accent" />
+                  <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">
+                    Our Model
+                  </span>
+                </div>
+
+                <TextReveal
+                  as="h2"
+                  variant="blur-in"
+                  className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight"
+                >
+                  One Company, Six Divisions
+                </TextReveal>
+
+                <p className="mt-4 text-base leading-relaxed text-white/55">
+                  Traverse Minds is one integrated organisation where every division
+                  strengthens the others. Security audits are informed by Think Tank
+                  research. Events build community for all divisions. Media amplifies
+                  research findings to a wider audience.
+                </p>
+
+                <SectionReveal variant="fade-up" staggerChildren={0.08} className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {divisions.map((d) => (
+                    <RevealItem key={d.name} variant="scale-fade">
+                      <div
+                        className="flex items-start gap-3 rounded-xl border border-white/6 bg-white/3 p-4 transition-colors hover:border-accent/20 hover:bg-white/5"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <div>
+                          <p className="text-sm font-semibold text-white">{d.name}</p>
+                          <p className="text-xs text-white/50">{d.desc}</p>
+                        </div>
+                      </div>
+                    </RevealItem>
+                  ))}
+                </SectionReveal>
               </div>
-
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-                One Company, Six Divisions
-              </h2>
-
-              <p className="mt-4 text-base leading-relaxed text-white/55">
-                Traverse Minds is one integrated organisation where every division
-                strengthens the others. Security audits are informed by Think Tank
-                research. Events build community for all divisions. Media amplifies
-                research findings to a wider audience.
-              </p>
-
-              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {divisions.map((d) => (
-                  <div
-                    key={d.name}
-                    className="flex items-start gap-3 rounded-xl border border-white/6 bg-white/3 p-4 transition-colors hover:border-accent/20 hover:bg-white/5"
-                  >
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    <div>
-                      <p className="text-sm font-semibold text-white">{d.name}</p>
-                      <p className="text-xs text-white/50">{d.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            </SectionReveal>
           </div>
         </div>
       </section>
@@ -113,29 +125,35 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">
+          <TextReveal
+            as="h2"
+            variant="fade-up"
+            className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight"
+          >
             Serving the East African Community
-          </h2>
+          </TextReveal>
           <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
             Our work spans all five EAC member states, building a safer digital future across the region.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-14">
+          <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-10 flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-14">
             {eacCountries.map((country) => (
-              <div key={country.code} className="flex flex-col items-center gap-3 group">
-                <div className="h-14 w-20 overflow-hidden rounded-lg border border-border-light shadow-sm transition-all duration-300 group-hover:shadow-card group-hover:-translate-y-1">
-                  <Image
-                    src={`https://flagcdn.com/w80/${country.code}.png`}
-                    alt={`${country.name} flag`}
-                    width={80}
-                    height={56}
-                    className="h-full w-full object-cover"
-                  />
+              <RevealItem key={country.code} variant="scale-fade">
+                <div className="flex flex-col items-center gap-3 group">
+                  <div className="h-14 w-20 overflow-hidden rounded-lg border border-border-light shadow-sm transition-all duration-300 group-hover:shadow-card group-hover:-translate-y-1">
+                    <Image
+                      src={`https://flagcdn.com/w80/${country.code}.png`}
+                      alt={`${country.name} flag`}
+                      width={80}
+                      height={56}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <span className="text-sm font-semibold text-primary/70">{country.name}</span>
                 </div>
-                <span className="text-sm font-semibold text-primary/70">{country.name}</span>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -154,17 +172,23 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal
+            as="h2"
+            variant="clip-up"
+            className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+          >
             Partners & Affiliations
-          </h2>
+          </TextReveal>
 
-          <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-            <Handshake className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-            <p className="text-lg font-semibold text-primary">Coming Soon</p>
-            <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
-              Partner logos will appear here as relationships are established.
-            </p>
-          </div>
+          <SectionReveal variant="clip-inset" className="mt-10">
+            <div className="rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
+              <Handshake className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
+              <p className="text-lg font-semibold text-primary">Coming Soon</p>
+              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+                Partner logos will appear here as relationships are established.
+              </p>
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
@@ -181,31 +205,36 @@ export default function AboutPage() {
               </span>
             </div>
 
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">
+            <TextReveal
+              as="h2"
+              variant="fade-up"
+              className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight"
+            >
               Company Details
-            </h2>
+            </TextReveal>
 
-            <div className="mt-8 inline-grid grid-cols-1 gap-4 text-left sm:grid-cols-2">
+            <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-8 inline-grid grid-cols-1 gap-4 text-left sm:grid-cols-2">
               {[
                 { label: "Registered Name", value: "Traverse Minds UG" },
                 { label: "Registration No.", value: "[To be added]" },
                 { label: "Registered Address", value: "Kampala, Uganda" },
                 { label: "Contact", value: "hello@traverseminds.ug" },
               ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-border-light bg-surface-elevated px-6 py-4"
-                >
-                  <p className="text-xs text-brand-muted">{item.label}</p>
-                  <p className="mt-1 text-sm font-semibold text-primary">{item.value}</p>
-                </div>
+                <RevealItem key={item.label} variant="slide-up">
+                  <div
+                    className="rounded-2xl border border-border-light bg-surface-elevated px-6 py-4"
+                  >
+                    <p className="text-xs text-brand-muted">{item.label}</p>
+                    <p className="mt-1 text-sm font-semibold text-primary">{item.value}</p>
+                  </div>
+                </RevealItem>
               ))}
-            </div>
+            </SectionReveal>
           </div>
         </div>
       </section>
 
       <CalendlyEmbed />
-    </>
+    </PageTransition>
   );
 }

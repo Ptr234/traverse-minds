@@ -2,18 +2,21 @@
 
 import { motion } from "framer-motion";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { NetworkConstellation } from "@/components/ui/NetworkConstellation";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1800&q=80",
-  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1800&q=80",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=80",
-  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80",
+  "/cyber/cyber_image_44.jpg",
+  "/cyber/cyber_image_37.jpg",
+  "/cyber/cyber_image_35.jpg",
+  "/cyber/cyber_image_24.jpg",
 ];
 
 export function MissionStatement() {
   return (
     <section className="relative min-h-[80vh] flex items-center overflow-hidden">
       <ImageSlideshow images={heroImages} overlay="bg-primary/70" />
+      <NetworkConstellation nodeCount={45} connectionDistance={130} speed={0.5} />
 
       <div className="relative z-10 container-max px-6 lg:px-8 py-32 lg:py-40">
         <div className="max-w-3xl">
@@ -29,16 +32,20 @@ export function MissionStatement() {
               </span>
             </div>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]">
-              A digitally secure{" "}
-              <span className="text-gradient-accent">East Africa</span>
-            </h1>
+            <TextReveal
+              as="h1"
+              variant="slide-up"
+              staggerSpeed={0.05}
+              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
+            >
+              A digitally secure East Africa
+            </TextReveal>
           </motion.div>
 
           <motion.p
             className="mt-6 max-w-xl text-lg text-white/50 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
           >
             Built for Africa &middot; Driven by Evidence. Technology serving the

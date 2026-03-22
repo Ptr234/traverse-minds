@@ -3,14 +3,16 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Search, FileText, Bell, Zap, Database, ShieldCheck } from "lucide-react";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 const features = [
-  { icon: Search, title: "Semantic Search", description: "Search documents by meaning and context, not just keywords. Find relevant case law or regulatory updates in seconds.", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=70" },
-  { icon: FileText, title: "AI Summarisation", description: "Get concise, accurate summaries of lengthy documents, policy briefs, and court judgements instantly.", image: "https://images.unsplash.com/photo-1504711434969-e33886168d0c?w=600&q=70" },
-  { icon: Bell, title: "Smart Alerts", description: "Set up custom monitors for specific keywords, organisations, or topics. Get notified when new records are indexed.", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=70" },
-  { icon: Zap, title: "Cross-Border Intel", description: "Compare regulations and public records across Uganda, Kenya, Tanzania, Rwanda, and Burundi in a single view.", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=70" },
-  { icon: Database, title: "Vast Archive", description: "Access a growing database of thousands of gazettes, hansards, and court records dating back decades.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=70" },
-  { icon: ShieldCheck, title: "Verified Sources", description: "Every document is linked to its official source, ensuring the highest level of evidentiary integrity.", image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&q=70" },
+  { icon: Search, title: "Semantic Search", description: "Search documents by meaning and context, not just keywords. Find relevant case law or regulatory updates in seconds.", image: "/cyber/cyber_image_08.jpg" },
+  { icon: FileText, title: "AI Summarisation", description: "Get concise, accurate summaries of lengthy documents, policy briefs, and court judgements instantly.", image: "/cyber/cyber_image_11.jpg" },
+  { icon: Bell, title: "Smart Alerts", description: "Set up custom monitors for specific keywords, organisations, or topics. Get notified when new records are indexed.", image: "/cyber/cyber_image_21.jpg" },
+  { icon: Zap, title: "Cross-Border Intel", description: "Compare regulations and public records across Uganda, Kenya, Tanzania, Rwanda, and Burundi in a single view.", image: "/cyber/cyber_image_20.jpg" },
+  { icon: Database, title: "Vast Archive", description: "Access a growing database of thousands of gazettes, hansards, and court records dating back decades.", image: "/cyber/cyber_image_06.jpg" },
+  { icon: ShieldCheck, title: "Verified Sources", description: "Every document is linked to its official source, ensuring the highest level of evidentiary integrity.", image: "/cyber/cyber_image_14.jpg" },
 ];
 
 export function Features() {
@@ -18,26 +20,23 @@ export function Features() {
     <section className="relative bg-white section-padding overflow-hidden">
       <div className="container-max relative z-10">
         <div className="text-center mb-16">
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
+          <motion.div initial={{ opacity: 0, y: 12, filter: "blur(4px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
             <div className="h-1 w-1 rounded-full bg-accent" />
             <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Platform</span>
           </motion.div>
-          <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
-            Built to empower <span className="text-gradient-accent">evidence-based action</span>
-          </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 text-brand-medium/60 max-w-2xl mx-auto">
+          <TextReveal variant="clip-up" delay={0.05} className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+            Built to empower evidence-based action
+          </TextReveal>
+          <motion.p initial={{ opacity: 0, y: 10, filter: "blur(4px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 text-brand-medium/60 max-w-2xl mx-auto">
             Three pillars of intelligence to navigate East Africa&apos;s public record landscape.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, idx) => (
-            <motion.div
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => (
+            <RevealItem
               key={feature.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+              variant="scale-fade"
               className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated min-h-56"
             >
               <Image src={feature.image} alt={feature.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
@@ -50,9 +49,9 @@ export function Features() {
                 <h3 className="mt-5 font-display text-lg font-bold text-white">{feature.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/55">{feature.description}</p>
               </div>
-            </motion.div>
+            </RevealItem>
           ))}
-        </div>
+        </SectionReveal>
       </div>
     </section>
   );

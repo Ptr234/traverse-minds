@@ -5,6 +5,10 @@ import Image from "next/image";
 import { CountdownTimer } from "@/components/events/CountdownTimer";
 import { Button } from "@/components/ui/Button";
 import { Calendar, MapPin, Ticket, ArrowRight, Users, ShieldCheck } from "lucide-react";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionReveal } from "@/components/ui/SectionReveal";
+import { FloatingOrbs } from "@/components/ui/FloatingOrbs";
+import { MouseGlow } from "@/components/ui/MouseGlow";
 
 const EVENT_DATE = "2026-05-15T12:00:00+03:00";
 
@@ -19,7 +23,7 @@ export function UpcomingEvent() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1800&q=80"
+          src="/cyber/cyber_image_25.jpg"
           alt=""
           fill
           className="object-cover"
@@ -29,6 +33,8 @@ export function UpcomingEvent() {
       </div>
       <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" />
       <div className="absolute top-0 right-0 h-100 w-100 translate-x-1/3 -translate-y-1/3 rounded-full bg-accent/8 blur-[140px]" />
+      <FloatingOrbs variant="mixed" />
+      <MouseGlow color="249, 115, 22" size={500} intensity={0.06} />
 
       <div className="container-max relative z-10">
         {/* Centered header */}
@@ -45,16 +51,15 @@ export function UpcomingEvent() {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          <TextReveal
+            as="h2"
+            variant="blur-in"
+            staggerSpeed={0.06}
+            delay={0.1}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.05]"
           >
-            Cyber Luncheon{" "}
-            <span className="text-gradient-accent">Kampala</span>
-          </motion.h2>
+            Cyber Luncheon Kampala
+          </TextReveal>
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -87,11 +92,9 @@ export function UpcomingEvent() {
         </div>
 
         {/* Card — 3 columns: Date/Venue | Countdown | CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        <SectionReveal
+          variant="clip-inset"
+          delay={0.25}
           className="overflow-hidden rounded-3xl border border-white/8 bg-surface-dark-elevated hover-glow-accent transition-all duration-700"
         >
           <div className="grid grid-cols-1 md:grid-cols-3">
@@ -143,7 +146,7 @@ export function UpcomingEvent() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </SectionReveal>
       </div>
     </section>
   );
