@@ -5,42 +5,32 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { motion } from "framer-motion";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+const gnEase = [0.215, 0.61, 0.355, 1] as const;
 
 export function EACMapReveal({ children }: { children: ReactNode }) {
   return (
-    <section className="relative bg-white section-padding overflow-hidden border-t border-border-light">
-      <div className="container-max">
-        <div className="text-center mb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5"
-          >
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-              Coverage
-            </span>
-          </motion.div>
+    <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
+      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px 80px" }}>
+        <div className="text-center" style={{ marginBottom: 40 }}>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Coverage</p>
 
           <TextReveal
             as="h2"
             variant="fade-up"
-            staggerSpeed={0.06}
+            staggerSpeed={0.03}
             delay={0.1}
-            className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+            className="font-display"
+            style={{ fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.8px", color: "#000" }}
           >
             Operating Across East Africa
           </TextReveal>
 
           <motion.p
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6, ease }}
-            className="mt-3 text-brand-medium/60 max-w-lg mx-auto"
+            transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
+            style={{ marginTop: 12, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 460, margin: "12px auto 0" }}
           >
             Headquartered in Kampala, serving all five EAC member states.
           </motion.p>

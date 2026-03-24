@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { Mail, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { TextReveal } from "@/components/ui/TextReveal";
+
+const gnEase = [0.215, 0.61, 0.355, 1] as const;
 
 interface NewsletterFormData {
   email: string;
@@ -27,133 +29,104 @@ export function NewsletterSignup() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-surface-elevated section-padding">
-      {/* Background */}
-      <div className="absolute inset-0 dot-grid-light opacity-50 pointer-events-none" />
-      <div className="absolute top-0 right-0 h-80 w-80 -translate-y-1/2 translate-x-1/3 rounded-full bg-accent/5 blur-[100px]" />
-      <div className="absolute bottom-0 left-0 h-80 w-80 translate-y-1/2 -translate-x-1/3 rounded-full bg-emerald/5 blur-[100px]" />
+    <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
+      <div style={{ maxWidth: 596, margin: "0 auto", padding: "0 24px 80px" }} className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35, ease: gnEase }}
+        >
+          <Mail className="mx-auto mb-4" style={{ height: 24, width: 24, color: "#ff4c00" }} />
 
-      <div className="container-max relative z-10">
-        <div className="mx-auto max-w-2xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <TextReveal
+            as="h2"
+            variant="fade-up"
+            staggerSpeed={0.03}
+            delay={0.1}
+            className="font-display"
+            style={{ fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.8px", color: "#000" }}
           >
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 ring-1 ring-primary/10 transition-all duration-500 hover:ring-accent/30 hover:bg-accent/5 hover:scale-105">
-              <Mail className="h-6 w-6 text-accent" />
-            </div>
+            Stay ahead of the threat landscape.
+          </TextReveal>
 
-            <TextReveal
-              as="h2"
-              variant="blur-in"
-              staggerSpeed={0.05}
-              delay={0.15}
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary"
+          <p style={{ marginTop: 16, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 480, margin: "16px auto 0" }}>
+            Get our weekly intelligence briefing on East African cybersecurity
+            trends, policy updates, and exclusive event invitations.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35, delay: 0.1, ease: gnEase }}
+          style={{ marginTop: 40 }}
+        >
+          {isSubmitted ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center gap-4"
+              style={{ padding: 32, borderRadius: 8, background: "rgba(43,146,57,0.08)", border: "1px solid rgba(43,146,57,0.2)" }}
             >
-              Stay ahead of the threat landscape.
-            </TextReveal>
+              <div className="flex items-center justify-center" style={{ height: 48, width: 48, background: "#2b9239", borderRadius: 4 }}>
+                <CheckCircle2 className="h-6 w-6 text-white" />
+              </div>
+              <div className="text-center">
+                <h3 style={{ fontSize: 21, fontWeight: 500, color: "#000" }}>Subscription Confirmed</h3>
+                <p style={{ color: "#515459", marginTop: 4, fontSize: 16 }}>Check your inbox to verify your email address.</p>
+              </div>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} className="relative" noValidate>
+              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Enter your professional email"
+                  aria-describedby={errors.email ? "newsletter-error" : undefined}
+                  aria-invalid={!!errors.email}
+                  className={cn("flex-1 px-4 outline-none", errors.email ? "border-red-400" : "")}
+                  style={{
+                    height: 48,
+                    fontSize: 16,
+                    fontWeight: 400,
+                    lineHeight: "125%",
+                    color: "#000",
+                    background: "#fff",
+                    border: errors.email ? "1px solid #d63a3a" : "1px solid rgba(81,84,89,0.16)",
+                    borderRadius: 4,
+                    transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+                  }}
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Please enter a valid email address" },
+                  })}
+                />
+                <Button type="submit" variant="primary" size="md" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Sending...</span>
+                  ) : (
+                    <span className="flex items-center gap-2">Subscribe <ArrowRight className="h-4 w-4" /></span>
+                  )}
+                </Button>
+              </div>
+              {errors.email && (
+                <motion.p id="newsletter-error" role="alert" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+                  style={{ position: "absolute", left: 12, bottom: -24, fontSize: 14, color: "#d63a3a", fontWeight: 500 }}>
+                  {errors.email.message}
+                </motion.p>
+              )}
+            </form>
+          )}
 
-            <p className="mt-4 text-base text-brand-medium/60 leading-relaxed max-w-lg mx-auto">
-              Get our weekly intelligence briefing on East African cybersecurity
-              trends, policy updates, and exclusive event invitations.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-10"
-          >
-            {isSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center gap-4 rounded-2xl bg-emerald/5 border border-emerald/15 p-8"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald text-white">
-                  <CheckCircle2 className="h-6 w-6" />
-                </div>
-                <div className="text-center">
-                  <h3 className="text-lg font-bold text-primary">Subscription Confirmed</h3>
-                  <p className="text-brand-medium/60 mt-1">
-                    Check your inbox to verify your email address.
-                  </p>
-                </div>
-              </motion.div>
-            ) : (
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="relative mx-auto max-w-lg"
-                noValidate
-              >
-                <label htmlFor="newsletter-email" className="sr-only">
-                  Email address
-                </label>
-                <div className="relative flex flex-col gap-3 sm:flex-row">
-                  <input
-                    id="newsletter-email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Enter your professional email"
-                    aria-describedby={errors.email ? "newsletter-error" : undefined}
-                    aria-invalid={!!errors.email}
-                    className={cn(
-                      "h-14 w-full rounded-2xl border bg-white px-6 text-base text-primary placeholder:text-brand-muted/50 outline-none transition-all duration-200 focus:ring-2 focus:ring-accent/15 shadow-sm",
-                      errors.email
-                        ? "border-red-400 focus:border-red-400 focus:ring-red-400/15"
-                        : "border-border-light focus:border-accent"
-                    )}
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Please enter a valid email address",
-                      },
-                    })}
-                  />
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="h-14 px-8 shrink-0"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <Sparkles className="h-4 w-4 animate-spin" />
-                        Sending...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        Subscribe
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
-                    )}
-                  </Button>
-                </div>
-                {errors.email && (
-                  <motion.p
-                    id="newsletter-error"
-                    role="alert"
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute left-3 -bottom-7 text-sm text-red-500 font-medium"
-                  >
-                    {errors.email.message}
-                  </motion.p>
-                )}
-              </form>
-            )}
-
-            <p className="mt-10 text-xs text-brand-muted/50 uppercase tracking-widest">
-              Data protection compliant &bull; No spam &bull; Unsubscribe anytime
-            </p>
-          </motion.div>
-        </div>
+          <p style={{ marginTop: 40, fontSize: 12, color: "#919499", letterSpacing: "0.6px", textTransform: "uppercase" as const, fontWeight: 700 }}>
+            Data protection compliant &bull; No spam &bull; Unsubscribe anytime
+          </p>
+        </motion.div>
       </div>
     </section>
   );

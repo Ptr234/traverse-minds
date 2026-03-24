@@ -7,153 +7,85 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const reports = [
-  {
-    title: "Data Protection in Uganda: 2025 Status Report",
-    excerpt: "A comprehensive review of PDPA enforcement, institutional readiness, and compliance gaps across key sectors.",
-    tag: "Policy",
-    tagColor: "bg-accent/15 text-accent",
-    number: "01",
-  },
-  {
-    title: "AI Governance Framework for East African Regulators",
-    excerpt: "Proposed regulatory pathways for AI deployment in public services, finance, and healthcare across the EAC.",
-    tag: "AI & Governance",
-    tagColor: "bg-emerald/15 text-emerald",
-    number: "02",
-  },
-  {
-    title: "Digital Rights in the EAC: Annual Review",
-    excerpt: "Tracking internet freedom, data sovereignty, and digital inclusion metrics across five member states.",
-    tag: "Digital Rights",
-    tagColor: "bg-blue-500/15 text-blue-500",
-    number: "03",
-  },
+  { title: "Data Protection in Uganda: 2025 Status Report", excerpt: "A comprehensive review of PDPA enforcement, institutional readiness, and compliance gaps across key sectors.", tag: "Policy", number: "01" },
+  { title: "AI Governance Framework for East African Regulators", excerpt: "Proposed regulatory pathways for AI deployment in public services, finance, and healthcare across the EAC.", tag: "AI & Governance", number: "02" },
+  { title: "Digital Rights in the EAC: Annual Review", excerpt: "Tracking internet freedom, data sovereignty, and digital inclusion metrics across five member states.", tag: "Digital Rights", number: "03" },
 ];
+
+const gnEase = [0.215, 0.61, 0.355, 1] as const;
 
 export function ThinkTankPreview() {
   return (
-    <section className="relative overflow-hidden bg-white section-padding">
-      {/* Background accents */}
-      <div className="absolute top-0 right-0 -translate-y-1/3 translate-x-1/4 h-120 w-120 rounded-full bg-accent/3 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/4 h-100 w-100 rounded-full bg-emerald/3 blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 dot-grid-light opacity-50 pointer-events-none" />
-
-      <div className="container-max relative z-10">
-        {/* Header — centered */}
-        <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-6"
-          >
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-              Think Tank
-            </span>
-          </motion.div>
-
+    <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
+      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px 80px" }}>
+        {/* Header */}
+        <div className="text-center" style={{ marginBottom: 48 }}>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Think Tank</p>
           <TextReveal
             as="h2"
             variant="clip-up"
-            staggerSpeed={0.06}
+            staggerSpeed={0.03}
             delay={0.1}
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-[1.05] tracking-tight"
+            className="font-display"
+            style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.8px", color: "#000" }}
           >
             Latest from the Think Tank
           </TextReveal>
-
           <motion.p
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 text-base text-brand-medium/60 leading-relaxed max-w-xl mx-auto"
+            transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
+            style={{ marginTop: 16, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 500, margin: "16px auto 0" }}
           >
             Independent research and policy analysis shaping the digital future of East Africa.
           </motion.p>
         </div>
 
-        {/* Featured report + side stack */}
-        <SectionReveal variant="clip-up" staggerChildren={0.15} delay={0.2} className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-          {/* Featured (first report) */}
-          <RevealItem
-            variant="slide-up"
-            className="lg:col-span-3 bento-card hover-glow-accent flex flex-col justify-between min-h-90"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <span className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${reports[0].tagColor}`}>
-                  {reports[0].tag}
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-600">
-                  <Clock className="h-3 w-3" />
-                  Coming soon
-                </span>
+        {/* Featured + side stack */}
+        <SectionReveal variant="fade-up" staggerChildren={0.1} delay={0.15} className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* Featured report */}
+          <RevealItem variant="fade-up" className="lg:col-span-3">
+            <div className="editorial-card-lg flex flex-col justify-between" style={{ padding: 48, minHeight: 400 }}>
+              <div>
+                <div className="flex items-center justify-between" style={{ marginBottom: 24 }}>
+                  <span className="eyebrow" style={{ color: "#ff4c00" }}>{reports[0].tag}</span>
+                  <span className="flex items-center gap-1.5" style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#919499" }}>
+                    <Clock className="h-3 w-3" /> Coming soon
+                  </span>
+                </div>
+                <span style={{ fontSize: 12, color: "#c1c4c9", fontFamily: "var(--font-mono)", letterSpacing: "0.6px" }}>Report {reports[0].number}</span>
+                <h3 className="font-display" style={{ marginTop: 8, fontSize: 32, fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.64px", color: "#000" }}>
+                  {reports[0].title}
+                </h3>
+                <p style={{ marginTop: 16, fontSize: 16, lineHeight: "125%", color: "#515459", maxWidth: 500 }}>{reports[0].excerpt}</p>
               </div>
-
-              <span className="font-mono text-xs text-brand-muted/40 tracking-wider">
-                Report {reports[0].number}
-              </span>
-              <h3 className="mt-2 font-display text-2xl md:text-3xl font-bold text-primary leading-snug tracking-tight">
-                {reports[0].title}
-              </h3>
-              <p className="mt-4 text-base text-brand-medium/60 leading-relaxed max-w-lg">
-                {reports[0].excerpt}
-              </p>
-            </div>
-
-            <div className="mt-8 flex items-center gap-4">
-              <button
-                disabled
-                className="inline-flex items-center gap-2 rounded-xl border border-border-light bg-surface-elevated px-5 py-3 text-sm font-semibold text-brand-muted cursor-not-allowed opacity-50 transition-all"
-              >
-                <FileDown className="h-4 w-4" />
-                Download Report
-              </button>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/5">
-                <Brain className="h-5 w-5 text-primary/30" />
+              <div style={{ marginTop: 32 }}>
+                <button disabled className="btn-tag opacity-50 cursor-not-allowed flex items-center gap-2">
+                  <FileDown className="h-4 w-4" /> Download Report
+                </button>
               </div>
             </div>
           </RevealItem>
 
-          {/* Side stack (remaining reports) */}
-          <RevealItem variant="slide-up" className="lg:col-span-2 flex flex-col gap-5">
+          {/* Side stack */}
+          <RevealItem variant="fade-up" className="lg:col-span-2 flex flex-col gap-6">
             {reports.slice(1).map((report) => (
-              <div
-                key={report.title}
-                className="bento-card hover-glow-accent flex flex-col justify-between flex-1"
-              >
+              <div key={report.title} className="editorial-card flex flex-col justify-between flex-1" style={{ padding: 32 }}>
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${report.tagColor}`}>
-                      {report.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600">
-                      <Clock className="h-2.5 w-2.5" />
-                      Soon
-                    </span>
+                  <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
+                    <span className="eyebrow" style={{ color: "#ff4c00" }}>{report.tag}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#919499" }}>Soon</span>
                   </div>
-
-                  <span className="font-mono text-xs text-brand-muted/40 tracking-wider">
-                    Report {report.number}
-                  </span>
-                  <h3 className="mt-1.5 font-display text-lg font-bold text-primary leading-snug">
+                  <span style={{ fontSize: 12, color: "#c1c4c9", fontFamily: "var(--font-mono)" }}>Report {report.number}</span>
+                  <h3 className="font-display" style={{ marginTop: 8, fontSize: 21, fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.21px", color: "#000" }}>
                     {report.title}
                   </h3>
-                  <p className="mt-2 text-sm text-brand-medium/60 leading-relaxed">
-                    {report.excerpt}
-                  </p>
+                  <p style={{ marginTop: 8, fontSize: 14, lineHeight: "125%", color: "#515459" }}>{report.excerpt}</p>
                 </div>
-
-                <div className="mt-5">
-                  <button
-                    disabled
-                    className="inline-flex items-center gap-2 rounded-xl border border-border-light bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-brand-muted cursor-not-allowed opacity-50 transition-all"
-                  >
-                    <FileDown className="h-4 w-4" />
-                    Download
+                <div style={{ marginTop: 20 }}>
+                  <button disabled className="btn-tag opacity-50 cursor-not-allowed flex items-center gap-2 text-xs">
+                    <FileDown className="h-3.5 w-3.5" /> Download
                   </button>
                 </div>
               </div>
@@ -161,17 +93,15 @@ export function ThinkTankPreview() {
           </RevealItem>
         </SectionReveal>
 
-        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 text-center"
+          transition={{ delay: 0.3, duration: 0.35, ease: gnEase }}
+          className="text-center" style={{ marginTop: 40 }}
         >
-          <Button variant="outline" size="lg" href="/think-tank">
-            View All Research
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <Button variant="outline" size="md" href="/think-tank">
+            View All Research <ArrowRight className="h-4 w-4" />
           </Button>
         </motion.div>
       </div>

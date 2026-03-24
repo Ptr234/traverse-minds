@@ -5,27 +5,36 @@ import Link from "next/link";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+/*
+  GatesNotes Button Spec:
+  - Primary: bg #313439, hover #000, text white, 4px radius, 12px 16px padding
+  - Font: 16px, weight 500, line-height 100%
+  - Transition: all .35s cubic-bezier(.215,.61,.355,1)
+*/
+
 const buttonVariants = cva(
-  "group relative inline-flex items-center justify-center font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] cursor-pointer overflow-hidden",
+  "group relative inline-flex items-center justify-center gap-2 font-medium cursor-pointer disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-accent text-white rounded-full shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 hover:brightness-110 hover:scale-[1.02]",
+          "bg-[#313439] text-white rounded-sm hover:bg-[#000000]",
         secondary:
-          "bg-primary text-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:bg-primary-light",
+          "bg-[#212429] text-white rounded-sm hover:bg-[#000000]",
         outline:
-          "border border-border-light bg-transparent text-primary rounded-full hover:border-accent hover:text-accent hover:bg-accent-muted",
+          "border border-[rgba(81,84,89,0.64)] bg-white text-[#000000] rounded-sm hover:bg-[#000000] hover:text-white",
         ghost:
-          "text-brand-medium bg-transparent rounded-full hover:text-primary hover:bg-surface-elevated",
+          "text-[#515459] bg-transparent rounded-sm hover:text-[#000000] hover:bg-[#f0f1f4]",
         "outline-dark":
-          "border border-white/10 bg-white/5 text-white rounded-full backdrop-blur-sm hover:border-accent hover:bg-accent/10 hover:text-accent",
+          "border border-[rgba(81,84,89,0.64)] bg-transparent text-white rounded-sm hover:bg-white hover:text-[#000000]",
+        tag:
+          "border border-[rgba(81,84,89,0.64)] bg-white text-[#000000] rounded-sm hover:bg-[#000000] hover:text-white text-xs capitalize",
       },
       size: {
-        sm: "h-9 px-5 text-xs tracking-wider uppercase font-bold gap-2",
-        md: "h-11 px-7 text-sm gap-2",
-        lg: "h-14 px-10 text-base gap-3",
-        xl: "h-16 px-12 text-lg gap-3",
+        sm: "h-10 px-4 text-sm",
+        md: "py-3 px-4 text-base",
+        lg: "py-3.5 px-5 text-base",
+        xl: "py-4 px-6 text-lg",
       },
     },
     defaultVariants: {
@@ -42,31 +51,31 @@ interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, href, children, ...props }, ref) => {
-    const shimmer = (
-      <span className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_2s_infinite] bg-linear-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-    );
+  ({ className, variant, size, href, children, style, ...props }, ref) => {
+    const transitionStyle = {
+      transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      lineHeight: "100%",
+      fontWeight: 500,
+      ...style,
+    };
 
     if (href) {
       const isExternal = href.startsWith("http") || href.startsWith("mailto:");
       if (isExternal) {
         return (
-          <a href={href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant, size, className }))}>
-            {(variant === "primary" || variant === "secondary") && shimmer}
+          <a href={href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant, size, className }))} style={transitionStyle}>
             {children}
           </a>
         );
       }
       return (
-        <Link href={href} className={cn(buttonVariants({ variant, size, className }))}>
-          {(variant === "primary" || variant === "secondary") && shimmer}
+        <Link href={href} className={cn(buttonVariants({ variant, size, className }))} style={transitionStyle}>
           {children}
         </Link>
       );
     }
     return (
-      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
-        {(variant === "primary" || variant === "secondary") && shimmer}
+      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} style={transitionStyle} {...props}>
         {children}
       </button>
     );

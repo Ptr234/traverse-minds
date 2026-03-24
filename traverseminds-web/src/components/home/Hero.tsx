@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { NetworkConstellation } from "@/components/ui/NetworkConstellation";
-import { useRef } from "react";
 
 const heroImages = [
   "/cyber/cyber_image_02.jpg",
@@ -16,138 +14,81 @@ const heroImages = [
 
 const stagger = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] as const },
   },
 };
 
 export function Hero() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
-    >
-      <ImageSlideshow images={heroImages} overlay="bg-primary/70" />
-      <NetworkConstellation nodeCount={60} connectionDistance={140} speed={0.6} />
+    <section className="relative flex items-end overflow-hidden" style={{ minHeight: "85vh" }}>
+      {/* Full-bleed image with GatesNotes gradient fade to bg */}
+      <div className="absolute inset-0">
+        <ImageSlideshow images={heroImages} overlay="bg-black/20" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 50%, #f0f1f4 100%)",
+          }}
+        />
+      </div>
 
+      {/* Text overlay — bottom-left, GatesNotes positioning */}
       <motion.div
-        style={{ y, opacity }}
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="relative z-10 w-full container-max px-6 lg:px-8 pt-32 pb-24 lg:pt-40"
+        className="relative z-10 w-full pb-16 pt-40"
+        style={{ maxWidth: 1240, margin: "0 auto", padding: "160px 24px 64px" }}
       >
-        <div className="max-w-4xl mx-auto text-center lg:text-left lg:mx-0">
-          <motion.div
-            variants={fadeUp}
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md mb-8 animate-badge-pulse"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald" />
-            </span>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
-              Built for Africa &middot; Driven by Evidence
-            </span>
-          </motion.div>
+        {/* GatesNotes: text overlay card with blur */}
+        <div
+          style={{
+            maxWidth: 520,
+            padding: "32px 24px",
+            borderRadius: 8,
+            background: "hsla(0,0%,100%,0.8)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <motion.p variants={fadeUp} className="eyebrow mb-4" style={{ color: "#515459" }}>
+            Built for Africa &middot; Driven by Evidence
+          </motion.p>
 
           <motion.h1
             variants={fadeUp}
-            className="font-display text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.92] font-bold text-white tracking-tight"
+            className="font-display font-bold"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: "100%", letterSpacing: "-1.12px", color: "#000" }}
           >
-            Securing the{" "}
-            <span className="text-gradient-accent">Digital Frontier</span>{" "}
-            of East Africa.
+            Securing the Digital Frontier of East Africa.
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="mt-8 max-w-xl text-lg md:text-xl text-white/65 leading-relaxed mx-auto lg:mx-0"
+            style={{ marginTop: 16, fontSize: 16, fontWeight: 400, lineHeight: "125%", color: "#313439" }}
           >
             Uganda&apos;s integrated civic-tech company. Six divisions working together
             across cybersecurity, public records, events, digital literacy,
             media, and policy research.
           </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-          >
-            <Button variant="primary" size="lg" href="/contact">
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-3" style={{ marginTop: 24 }}>
+            <Button variant="primary" size="md" href="/contact">
               Launch Inquiry
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button variant="outline-dark" size="lg" href="/think-tank">
+            <Button variant="outline" size="md" href="/think-tank">
               Explore Research
             </Button>
           </motion.div>
-
-          <motion.div
-            variants={scaleIn}
-            className="mt-14 flex items-center justify-center lg:justify-start gap-8"
-          >
-            {[
-              { num: "6", label: "Divisions" },
-              { num: "5", label: "EAC Countries" },
-              { num: "1", label: "Mission" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center lg:text-left"
-              >
-                <p className="font-display text-2xl font-bold text-white">{stat.num}</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/60">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </motion.div>
-
-      <motion.button
-        type="button"
-        aria-label="Scroll to content"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer z-20 bg-transparent border-none p-3"
-        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-white/30">Scroll</span>
-        <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-          <ChevronDown className="h-4 w-4 text-white/30" />
-        </motion.div>
-      </motion.button>
     </section>
   );
 }

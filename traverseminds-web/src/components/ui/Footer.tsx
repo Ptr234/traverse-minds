@@ -1,204 +1,123 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Mail, ArrowUpRight, ShieldCheck, Linkedin, Twitter, MessageSquare, Music, Rss, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { Linkedin, Twitter, Music, Rss } from "lucide-react";
 
-const footerLinks = {
-  company: [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Our Team", href: "/about#team" },
-    { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/contact" },
-  ],
-  divisions: [
-    { label: "Cybersecurity", href: "/security" },
-    { label: "Public Record EA", href: "/public-record" },
-    { label: "Events", href: "/events" },
-    { label: "Digital Literacy", href: "/literacy" },
-    { label: "Media Division", href: "/media" },
-    { label: "Think Tank", href: "/think-tank" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Cookie Policy", href: "/cookies" },
-  ],
-};
+const sectionLinks = [
+  { label: "Divisions", href: "/security" },
+  { label: "Events", href: "/events" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Contact Us", href: "/contact" },
+];
 
 const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/traverseminds" },
   { icon: Twitter, label: "X / Twitter", href: "https://x.com/traverseminds" },
-  { icon: MessageSquare, label: "WhatsApp", href: "https://wa.me/256700000000" },
   { icon: Music, label: "Spotify", href: "#" },
   { icon: Rss, label: "RSS", href: "/blog/rss.xml" },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary text-white">
-      {/* Background layers */}
-      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 h-125 w-125 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/5 blur-[120px]" />
-      <div className="absolute top-0 right-0 h-100 w-100 translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald/5 blur-[120px]" />
+    <div style={{ background: "#f5f5f7", paddingBottom: 120 }}>
+      {/* Card edge top — paper stack effect */}
+      <div className="card-edge-top" />
 
-      <div className="relative">
-        {/* Newsletter Banner */}
-        <div className="border-b border-white/8">
-          <div className="container-max section-padding-sm">
-            <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-lg">
-                <motion.h2
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl"
-                >
-                  Stay ahead of the
-                  <span className="text-gradient-accent"> threat landscape</span>.
-                </motion.h2>
-                <p className="mt-3 text-white/70 text-base leading-relaxed">
-                  Weekly intelligence on East African cybersecurity, policy trends, and exclusive event invitations.
-                </p>
-              </div>
-
-              <form className="relative w-full max-w-md">
-                <label htmlFor="footer-email" className="sr-only">Email address</label>
-                <input
-                  id="footer-email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="Enter your professional email"
-                  className="h-12 w-full rounded-2xl border border-white/10 bg-white/6 pl-6 pr-14 text-base text-white placeholder:text-white/40 outline-none transition-all duration-200 focus:border-accent/40 focus:bg-white/8 focus:ring-2 focus:ring-accent/20"
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe to newsletter"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-white transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-accent/25 active:scale-95"
-                >
-                  <Send className="h-4 w-4" />
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Footer Grid */}
-        <div className="container-max section-padding">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Brand Column */}
-            <div className="lg:col-span-4">
-              <Link href="/" className="inline-flex items-center gap-3 group">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 transition-colors group-hover:bg-accent/20">
-                  <span className="text-sm font-black tracking-tighter text-white">TM</span>
-                </div>
-                <span className="text-xl font-bold tracking-tight text-white">
-                  Traverse<span className="text-accent">Minds</span>
-                </span>
+      <footer
+        style={{
+          background: "#212429",
+          color: "hsla(0,0%,100%,0.8)",
+          paddingTop: 96,
+          paddingBottom: 40,
+          borderRadius: "0 0 16px 16px",
+          boxShadow: "0 2.5px 2px rgba(0,0,0,0.06), 0 1px 0 rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.1)",
+          backdropFilter: "blur(60px)",
+        }}
+      >
+        {/* Top — Large section links + social */}
+        <div className="mx-auto flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12" style={{ maxWidth: 1240, padding: "0 24px" }}>
+          {/* Section Links — GatesNotes: 40px, weight 500 */}
+          <div className="flex flex-wrap gap-8">
+            {sectionLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-white hover:text-accent transition-colors duration-350"
+                style={{
+                  fontSize: 40,
+                  fontWeight: 500,
+                  lineHeight: "125%",
+                  letterSpacing: "-0.8px",
+                  transitionTimingFunction: "cubic-bezier(0.215, 0.61, 0.355, 1)",
+                }}
+              >
+                {l.label}
               </Link>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/70">
-                Uganda&apos;s integrated civic-tech company. Cybersecurity,
-                public records, events, digital literacy, media, and policy
-                research for East Africa.
-              </p>
-              <div className="mt-8 flex gap-3">
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/8 bg-white/5 text-white/70 transition-all duration-200 hover:border-accent/30 hover:bg-accent/10 hover:text-accent hover:scale-105"
-                  >
-                    <span className="sr-only">{s.label}</span>
-                    <s.icon className="h-4.5 w-4.5" />
-                  </a>
-                ))}
-              </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Links */}
-            <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
-              {[
-                { title: "Ecosystem", links: footerLinks.company },
-                { title: "Divisions", links: footerLinks.divisions },
-              ].map((group) => (
-                <div key={group.title}>
-                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-6">
-                    {group.title}
-                  </h3>
-                  <ul className="space-y-1">
-                    {group.links.map((l) => (
-                      <li key={l.href}>
-                        <Link
-                          href={l.href}
-                          className="group/link inline-flex min-h-11 items-center gap-1.5 py-2 text-[14px] text-white/70 transition-colors duration-200 hover:text-white"
-                        >
-                          {l.label}
-                          <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-y-0" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-
-              {/* Contact Column */}
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-6">
-                  Reach Out
-                </h3>
-                <ul className="space-y-5">
-                  <li className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/6 text-accent">
-                      <MapPin className="h-3.5 w-3.5" />
-                    </div>
-                    <div>
-                      <span className="text-sm text-white/70 leading-snug">
-                        Kampala,<br />Uganda
-                      </span>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/6 text-accent">
-                      <Mail className="h-3.5 w-3.5" />
-                    </div>
-                    <a
-                      href="mailto:hello@traverseminds.ug"
-                      className="text-sm text-white/70 hover:text-white transition-colors mt-1.5"
-                    >
-                      hello@traverseminds.ug
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          {/* Social Icons */}
+          <div className="flex items-center gap-6">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                className="text-white/80 hover:text-accent transition-colors duration-350"
+                style={{ transitionTimingFunction: "cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              >
+                <span className="sr-only">{s.label}</span>
+                <s.icon className="h-6 w-6" />
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/8">
-          <div className="container-max flex flex-col items-center justify-between gap-5 px-6 py-6 md:flex-row">
-            <p className="text-xs text-white/50">
-              &copy; {new Date().getFullYear()} Traverse Minds UG. All rights reserved.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {footerLinks.legal.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="inline-flex min-h-11 items-center px-1 text-xs text-white/50 hover:text-accent transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-            <div className="flex items-center gap-2 rounded-full border border-emerald/25 bg-emerald/8 px-4 py-1.5 text-xs text-emerald backdrop-blur-sm">
-              <ShieldCheck className="h-3 w-3" />
-              <span className="font-medium">PDPA Compliant</span>
-            </div>
+        {/* Bottom — Legal links + copyright */}
+        <div
+          className="mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-20"
+          style={{ maxWidth: 1240, padding: "0 24px" }}
+        >
+          <div className="flex flex-wrap gap-10">
+            {legalLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-[#919499] hover:text-white transition-colors duration-350"
+                style={{
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: "125%",
+                  letterSpacing: "0.07px",
+                  transitionTimingFunction: "cubic-bezier(0.215, 0.61, 0.355, 1)",
+                }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          <p style={{ fontSize: 14, color: "#919499" }}>
+            &copy; {new Date().getFullYear()} Traverse Minds UG
+          </p>
+        </div>
+      </footer>
+
+      {/* Brand Signature Area — like GatesNotes signature SVG section */}
+      <div className="text-center" style={{ paddingTop: 80 }}>
+        <div className="inline-flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-sm" style={{ background: "#212429" }}>
+            <span className="text-xs font-black tracking-tighter text-white">TM</span>
           </div>
         </div>
+        <p style={{ fontSize: 14, color: "#919499", letterSpacing: "0.6px", textTransform: "uppercase" as const, fontWeight: 700 }}>
+          Built for Africa. Driven by Evidence.
+        </p>
       </div>
-    </footer>
+    </div>
   );
 }

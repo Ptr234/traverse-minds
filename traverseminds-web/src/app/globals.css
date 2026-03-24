@@ -3,150 +3,88 @@
 
 @theme inline {
   /* ═══════════════════════════════════════════════════
-     OBSIDIAN LUXE — 2026 Design System
+     EDITORIAL — GatesNotes Design System (Exact Match)
      Traverse Minds UG
   ═══════════════════════════════════════════════════ */
 
-  /* Core Palette */
-  --color-primary: #0A0F1C;
-  --color-primary-light: #141B2D;
-  --color-accent: #F97316;
-  --color-accent-hover: #FB923C;
-  --color-accent-muted: rgba(249, 115, 22, 0.15);
-  --color-emerald: #10B981;
-  --color-emerald-muted: rgba(16, 185, 129, 0.15);
+  /* ── GatesNotes Neutral Palette ── */
+  --color-gn-100: #000000;
+  --color-gn-200: #212429;
+  --color-gn-300: #313439;
+  --color-gn-400: #515459;
+  --color-gn-500: #919499;
+  --color-gn-600: #c1c4c9;
+  --color-gn-700: #d1d4d9;
+  --color-gn-800: #e1e4e9;
+  --color-gn-900: #f0f1f4;
+  --color-gn-1000: #ffffff;
+
+  /* ── Mapped Design Tokens ── */
+  --color-primary: #212429;
+  --color-primary-light: #313439;
+  --color-accent: #ff4c00;
+  --color-accent-hover: #ff5c00;
+  --color-accent-muted: rgba(255, 76, 0, 0.15);
+  --color-emerald: #2b9239;
+  --color-emerald-muted: rgba(43, 146, 57, 0.15);
 
   /* Surfaces */
-  --color-bg-light: #FAFBFC;
-  --color-bg-dark: #070B14;
-  --color-surface-light: #FFFFFF;
-  --color-surface-elevated: #F1F3F5;
-  --color-surface-dark: #0D1220;
-  --color-surface-dark-elevated: #151C2E;
+  --color-bg-light: #f5f5f7;
+  --color-bg-dark: #212429;
+  --color-bg-editorial: #f0f1f4;
+  --color-bg-editorial-warm: #f1f4f9;
+  --color-surface-light: #ffffff;
+  --color-surface-elevated: #f0f1f4;
+  --color-surface-dark: #212429;
+  --color-surface-dark-elevated: #313439;
 
   /* Borders */
-  --color-border-light: rgba(0, 0, 0, 0.06);
+  --color-border-light: rgba(0, 0, 0, 0.08);
   --color-border-dark: rgba(255, 255, 255, 0.08);
-  --color-border-accent: rgba(249, 115, 22, 0.3);
+  --color-border-accent: rgba(255, 76, 0, 0.3);
 
-  /* Glass tokens */
-  --color-glass-light: rgba(255, 255, 255, 0.6);
-  --color-glass-dark: rgba(10, 15, 28, 0.6);
-  --color-glass-border-light: rgba(255, 255, 255, 0.2);
-  --color-glass-border-dark: rgba(255, 255, 255, 0.06);
-
-  /* Legacy brand colors - kept for compatibility */
+  /* Legacy brand colors — kept for other pages */
   --color-brand-green: #022c22;
   --color-brand-green-light: #059669;
   --color-brand-amber: #b45309;
   --color-brand-amber-light: #f59e0b;
   --color-brand-teal: #115e59;
-  --color-brand-charcoal: #0f172a;
-  --color-brand-medium: #475569;
-  --color-brand-muted: #94a3b8;
-  --color-brand-offwhite: #f8fafc;
+  --color-brand-charcoal: #212429;
+  --color-brand-medium: #515459;
+  --color-brand-muted: #919499;
+  --color-brand-offwhite: #f5f5f7;
 
   /* Typography */
   --font-sans: var(--font-body), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), "Space Grotesk", sans-serif;
   --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
 
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-  --radius-2xl: 40px;
-  --radius-pill: 9999px;
+  /* Radius — GatesNotes Scale: 4px / 8px / 16px */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
+  --radius-2xl: 16px;
+  --radius-pill: 1000px;
 
-  /* Shadows */
-  --shadow-glow-accent: 0 0 60px rgba(249, 115, 22, 0.15);
-  --shadow-glow-emerald: 0 0 60px rgba(16, 185, 129, 0.15);
-  --shadow-elevated: 0 20px 60px -15px rgba(0, 0, 0, 0.15);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 24px rgba(0, 0, 0, 0.06);
+  /* Shadows — GatesNotes Triple Shadow */
+  --shadow-card: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
+  --shadow-elevated: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
+  --shadow-glow-accent: none;
+  --shadow-glow-emerald: none;
 
   /* Animations */
   --animate-shimmer: shimmer 2.5s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-aurora: aurora 15s ease-in-out infinite;
-  --animate-grain: grain 8s steps(10) infinite;
 
   @keyframes shimmer {
     from { background-position: 200% 0; }
     to { background-position: -200% 0; }
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    33% { transform: translateY(-8px) rotate(1deg); }
-    66% { transform: translateY(4px) rotate(-0.5deg); }
-  }
-
-  @keyframes aurora {
-    0%, 100% {
-      background-position: 0% 50%;
-      filter: hue-rotate(0deg);
-    }
-    25% { background-position: 50% 100%; }
-    50% {
-      background-position: 100% 50%;
-      filter: hue-rotate(15deg);
-    }
-    75% { background-position: 50% 0%; }
-  }
-
-  @keyframes grain {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -10%); }
-    20% { transform: translate(-15%, 5%); }
-    30% { transform: translate(7%, -25%); }
-    40% { transform: translate(-5%, 25%); }
-    50% { transform: translate(-15%, 10%); }
-    60% { transform: translate(15%, 0%); }
-    70% { transform: translate(0%, 15%); }
-    80% { transform: translate(3%, 35%); }
-    90% { transform: translate(-10%, 10%); }
-  }
-
-  @keyframes scan-line {
-    0% { top: -5%; }
-    100% { top: 105%; }
-  }
-
-  @keyframes border-beam {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-  }
-
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-
-  @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0), 0 0 60px rgba(249, 115, 22, 0); }
-    50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.15), 0 0 60px rgba(249, 115, 22, 0.05); }
-  }
-
-  @keyframes card-shine {
-    from { transform: translateX(-100%) skewX(-15deg); }
-    to { transform: translateX(200%) skewX(-15deg); }
-  }
-
-  @keyframes icon-float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-3px) scale(1.05); }
-  }
-
-  @keyframes badge-pulse {
-    0%, 100% { border-color: rgba(255, 255, 255, 0.1); }
-    50% { border-color: rgba(249, 115, 22, 0.3); }
-  }
-
-  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
-  --animate-icon-float: icon-float 3s ease-in-out infinite;
-  --animate-badge-pulse: badge-pulse 4s ease-in-out infinite;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -155,52 +93,90 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
 }
 
 body {
-  background-color: var(--color-bg-light);
-  color: var(--color-brand-charcoal);
+  background-color: #f5f5f7;
+  color: #000000;
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.25;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
 }
 
-/* Prevent iOS auto-zoom on input focus (requires >= 16px) */
+/* Hide scrollbar — GatesNotes pattern */
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar { display: none; }
+
+/* Prevent iOS auto-zoom on input focus */
 input, select, textarea {
   font-size: 16px;
 }
 
-/* Subtle film grain overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  animation: grain 8s steps(10) infinite;
-}
-
 /* ═══════════════════════════════════════════════════
-   TYPOGRAPHY
+   TYPOGRAPHY — GatesNotes Exact Values
 ═══════════════════════════════════════════════════ */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   text-wrap: balance;
-  letter-spacing: -0.03em;
   font-weight: 700;
 }
 
-h1 { letter-spacing: -0.04em; }
+h1 { font-size: 68px; line-height: 100%; letter-spacing: -1.12px; }
+h2 { font-size: 40px; line-height: 100%; letter-spacing: -0.8px; font-weight: 500; }
+h3 { font-size: 32px; line-height: 125%; letter-spacing: -0.64px; font-weight: 500; }
+h4 { font-size: 16px; line-height: 125%; letter-spacing: 0; font-weight: 400; }
 
-p { text-wrap: pretty; }
+p {
+  text-wrap: pretty;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 125%;
+}
+
+/* Eyebrow labels — GatesNotes: 12px/700/0.6px tracking */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 125%;
+}
+
+.eyebrow-accent {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 125%;
+  color: var(--color-accent);
+}
+
+.eyebrow-muted {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 125%;
+  color: #515459;
+}
+
+.eyebrow-light {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 125%;
+  color: rgba(255, 255, 255, 0.5);
+}
 
 /* Selection */
 ::selection {
@@ -209,263 +185,169 @@ p { text-wrap: pretty; }
 }
 
 /* ═══════════════════════════════════════════════════
-   SCROLLBAR
+   GatesNotes TRANSITION — Global Easing
+   cubic-bezier(.215, .61, .355, 1)
 ═══════════════════════════════════════════════════ */
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.3);
-  border-radius: 20px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-accent);
+.gn-transition {
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 /* ═══════════════════════════════════════════════════
-   GLASSMORPHISM
+   GRADIENT MASKS — GatesNotes Image Fade Pattern
 ═══════════════════════════════════════════════════ */
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+.gradient-mask-b {
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
-.glass-dark {
-  background: rgba(10, 15, 28, 0.65);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+.gradient-mask-t {
+  mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+}
+
+.gradient-mask-r {
+  mask-image: linear-gradient(to right, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);
+}
+
+.gradient-mask-hero {
+  mask-image: linear-gradient(to bottom, black 30%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 85%);
 }
 
 /* ═══════════════════════════════════════════════════
-   MESH GRADIENTS & BACKGROUNDS
+   CARDS — GatesNotes Exact Styles
 ═══════════════════════════════════════════════════ */
 
-.mesh-gradient-primary {
-  background-color: var(--color-primary);
-  background-image:
-    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(249, 115, 22, 0.08) 0, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.08) 0, transparent 50%);
+/* Standard card — 8px radius, triple shadow */
+.editorial-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.mesh-gradient-dark {
-  background-color: var(--color-bg-dark);
-  background-image:
-    radial-gradient(at 20% 80%, rgba(249, 115, 22, 0.06) 0, transparent 50%),
-    radial-gradient(at 80% 20%, rgba(16, 185, 129, 0.06) 0, transparent 50%);
+/* Large card — 16px radius, triple shadow */
+.editorial-card-lg {
+  position: relative;
+  overflow: hidden;
+  background: #f1f4f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.aurora-bg {
-  background: linear-gradient(
-    -45deg,
-    var(--color-primary) 0%,
-    #0D2818 25%,
-    #1A0F0A 50%,
-    var(--color-primary) 75%,
-    #0A1628 100%
-  );
-  background-size: 400% 400%;
-  animation: aurora 15s ease-in-out infinite;
+/* Dark card */
+.editorial-card-dark {
+  position: relative;
+  overflow: hidden;
+  background: #212429;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.dot-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
-  background-size: 40px 40px;
+/* Card title hover — text turns accent */
+.editorial-card:hover h3,
+.editorial-card-lg:hover h3 {
+  color: var(--color-accent);
 }
 
-.dot-grid-light {
-  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
-  background-size: 40px 40px;
+/* Thin editorial divider */
+.editorial-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.editorial-divider-dark {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Card edge separators — GatesNotes paper stack effect */
+.card-edge-top {
+  height: 16px;
+  border-radius: 0 0 16px 16px;
+  background: #ffffff;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.125);
+}
+
+.card-edge-bottom {
+  height: 16px;
+  border-radius: 16px 16px 0 0;
+  background: #ffffff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.125);
 }
 
 /* ═══════════════════════════════════════════════════
-   TEXT EFFECTS
+   BUTTONS — GatesNotes Exact Styles
 ═══════════════════════════════════════════════════ */
 
-.text-gradient-accent {
-  background: linear-gradient(135deg, #F97316 0%, #FB923C 50%, #FBBF24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* GatesNotes primary button: #313439 bg, 4px radius, hover #000 */
+.btn-gn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: #313439;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.btn-gn:hover {
+  background: #000000;
 }
 
-.text-gradient-premium {
-  background: linear-gradient(135deg, #E2E8F0 0%, #FFFFFF 40%, #CBD5E1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Tag/pill button — GatesNotes breadcrumb style */
+.btn-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgba(81, 84, 89, 0.64);
+  border-radius: 4px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.07px;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-/* Shimmer text animation */
-.text-shimmer {
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(255, 255, 255, 0.15) 37%,
-    transparent 50%
-  ) var(--color-accent);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
+.btn-tag:hover {
+  background: #000000;
+  color: #ffffff;
 }
 
 /* ═══════════════════════════════════════════════════
-   CARDS
+   NAV GLASS — GatesNotes backdrop blur segments
 ═══════════════════════════════════════════════════ */
 
-.bento-card {
-  @apply relative overflow-hidden rounded-2xl border border-border-light bg-white p-8 transition-all duration-500;
-  box-shadow: var(--shadow-card);
+.nav-glass {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
 }
 
-.bento-card:hover {
-  @apply -translate-y-1;
-  box-shadow: var(--shadow-elevated);
-  border-color: rgba(249, 115, 22, 0.15);
+.nav-glass:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
-/* Card shine sweep on hover */
-.bento-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(249, 115, 22, 0.03) 40%,
-    rgba(249, 115, 22, 0.06) 50%,
-    rgba(249, 115, 22, 0.03) 60%,
-    transparent 80%
-  );
-  transform: translateX(-100%) skewX(-15deg);
-  transition: none;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bento-card:hover::before {
-  animation: card-shine 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.bento-card-dark {
-  @apply relative overflow-hidden rounded-2xl p-8 transition-all duration-500;
-  background: var(--color-surface-dark-elevated);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.bento-card-dark:hover {
-  @apply -translate-y-1;
-  border-color: rgba(249, 115, 22, 0.2);
-  box-shadow: var(--shadow-glow-accent);
-}
-
-/* Shine sweep for dark cards */
-.bento-card-dark::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.02) 40%,
-    rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.02) 60%,
-    transparent 80%
-  );
-  transform: translateX(-100%) skewX(-15deg);
-  transition: none;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bento-card-dark:hover::before {
-  animation: card-shine 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* ═══════════════════════════════════════════════════
-   HOVER GLOW UTILITIES
-═══════════════════════════════════════════════════ */
-
-.hover-glow-accent {
-  transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.hover-glow-accent:hover {
-  box-shadow: 0 0 24px rgba(249, 115, 22, 0.12), 0 0 64px rgba(249, 115, 22, 0.04);
-  border-color: rgba(249, 115, 22, 0.2);
-}
-
-.hover-glow-emerald {
-  transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.hover-glow-emerald:hover {
-  box-shadow: 0 0 24px rgba(16, 185, 129, 0.12), 0 0 64px rgba(16, 185, 129, 0.04);
-  border-color: rgba(16, 185, 129, 0.2);
-}
-
-/* ═══════════════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════════════ */
-
-.btn-premium {
-  @apply relative inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 active:scale-[0.97];
-}
-
-.btn-primary-glow {
-  @apply bg-accent text-white px-8 py-4 rounded-full font-bold;
-  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-primary-glow:hover {
-  box-shadow: 0 0 30px 4px rgba(249, 115, 22, 0.25);
-  transform: translateY(-2px);
-}
-
-/* CTA glow pulse — use on primary CTA wrappers */
-.cta-glow-pulse {
-  animation: glow-pulse 3s ease-in-out infinite;
-  border-radius: 9999px;
-}
-
-/* Icon float hover — use on icon containers */
-.icon-hover-float {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.group:hover .icon-hover-float {
-  transform: translateY(-2px) scale(1.1);
-}
-
-/* Smooth text color shift */
-.text-shift {
-  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+/* Expanded menu overlay */
+.menu-overlay {
+  background: rgba(225, 228, 233, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid #d1d4d9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -473,132 +355,74 @@ p { text-wrap: pretty; }
 ═══════════════════════════════════════════════════ */
 
 .section-padding {
-  @apply px-6 py-24 lg:px-8 lg:py-32;
+  @apply px-6 py-14 lg:px-8 lg:py-14;
+  padding-top: 56px;
 }
 
 .section-padding-sm {
-  @apply px-6 py-16 lg:px-8 lg:py-20;
+  @apply px-6 py-10 lg:px-8 lg:py-12;
 }
 
 .container-max {
-  @apply mx-auto max-w-7xl;
+  @apply mx-auto;
+  max-width: 1240px;
 }
 
-/* Scan line effect for dark sections */
-.scan-line::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
-  animation: scan-line 8s linear infinite;
+.container-narrow {
+  @apply mx-auto;
+  max-width: 596px;
+}
+
+/* Section top border — GatesNotes rail separator */
+.section-border {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding-top: 56px;
 }
 
 /* ═══════════════════════════════════════════════════
-   SECTION DIVIDERS & REVEALS
+   LINK HOVER — GatesNotes Pattern
 ═══════════════════════════════════════════════════ */
 
-/* Animated gradient divider between sections */
-.section-divider {
-  position: relative;
-  height: 1px;
-  width: 100%;
-  overflow: hidden;
-}
-
-.section-divider::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(249, 115, 22, 0.4) 30%,
-    rgba(16, 185, 129, 0.3) 50%,
-    rgba(249, 115, 22, 0.4) 70%,
-    transparent 100%
-  );
-  transform: scaleX(0);
-  transform-origin: center;
-  animation: divider-expand 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-play-state: paused;
-}
-
-.section-divider.is-visible::after {
-  animation-play-state: running;
-}
-
-@keyframes divider-expand {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-/* Scroll-triggered accent line */
-.reveal-line {
-  position: relative;
-}
-
-.reveal-line::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-emerald));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-line.is-visible::before {
-  transform: scaleX(1);
+a {
+  transition: color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 /* ═══════════════════════════════════════════════════
    FOCUS & ACCESSIBILITY
 ═══════════════════════════════════════════════════ */
 
-/* Visible focus rings for keyboard navigation (UX skill: severity HIGH) */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
-/* Remove default outline only when using mouse/touch */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Enhanced focus for form inputs */
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
   outline: none;
   border-color: var(--color-accent) !important;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 76, 0, 0.15);
 }
 
-/* Skip-to-content link */
 .skip-link {
   @apply sr-only;
 }
 .skip-link:focus {
-  @apply not-sr-only fixed top-4 left-4 z-10000 rounded-lg bg-accent px-6 py-3 text-sm font-bold text-white shadow-lg;
+  @apply not-sr-only fixed top-4 left-4 z-10000 bg-accent px-6 py-3 text-sm font-bold text-white;
 }
 
 /* ═══════════════════════════════════════════════════
    INTERACTIVE ELEMENTS
 ═══════════════════════════════════════════════════ */
 
-/* cursor-pointer on all clickable elements (UX skill checklist) */
 a, button, [role="button"], summary, label[for] {
   cursor: pointer;
 }
 
-/* Minimum touch target sizing (UX skill: 44x44px) */
 @media (pointer: coarse) {
   a, button, [role="button"], input[type="checkbox"], input[type="radio"] {
     min-height: 44px;
@@ -616,10 +440,5 @@ a, button, [role="button"], summary, label[for] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  body::before {
-    animation: none;
-    display: none;
   }
 }

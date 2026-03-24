@@ -18,6 +18,7 @@ interface SectionRevealProps {
   children: ReactNode;
   variant?: RevealVariant;
   className?: string;
+  style?: React.CSSProperties;
   delay?: number;
   duration?: number;
   staggerChildren?: number;
@@ -30,21 +31,18 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const revealVariants: Record<RevealVariant, Variants> = {
   "fade-up": {
-    hidden: { opacity: 0, y: 60, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.9, ease },
+      transition: { duration: 0.6, ease },
     },
   },
   "fade-blur": {
-    hidden: { opacity: 0, filter: "blur(20px)", scale: 0.96 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
-      scale: 1,
-      transition: { duration: 1, ease },
+      transition: { duration: 0.6, ease },
     },
   },
   "clip-up": {
@@ -52,7 +50,7 @@ const revealVariants: Record<RevealVariant, Variants> = {
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
-      transition: { duration: 1, ease },
+      transition: { duration: 0.7, ease },
     },
   },
   "clip-left": {
@@ -60,7 +58,7 @@ const revealVariants: Record<RevealVariant, Variants> = {
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
-      transition: { duration: 1, ease },
+      transition: { duration: 0.7, ease },
     },
   },
   "clip-right": {
@@ -68,33 +66,31 @@ const revealVariants: Record<RevealVariant, Variants> = {
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
-      transition: { duration: 1, ease },
+      transition: { duration: 0.7, ease },
     },
   },
   "clip-inset": {
-    hidden: { clipPath: "inset(8% 8% 8% 8%)", opacity: 0, scale: 0.95 },
+    hidden: { clipPath: "inset(4% 4% 4% 4%)", opacity: 0 },
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
-      scale: 1,
-      transition: { duration: 1.1, ease },
+      transition: { duration: 0.7, ease },
     },
   },
   "slide-up": {
-    hidden: { y: 100, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.85, ease },
+      transition: { duration: 0.5, ease },
     },
   },
   "scale-fade": {
-    hidden: { scale: 0.88, opacity: 0, filter: "blur(6px)" },
+    hidden: { scale: 0.97, opacity: 0 },
     visible: {
       scale: 1,
       opacity: 1,
-      filter: "blur(0px)",
-      transition: { duration: 1, ease },
+      transition: { duration: 0.6, ease },
     },
   },
   "mask-wipe": {
@@ -105,7 +101,7 @@ const revealVariants: Record<RevealVariant, Variants> = {
     visible: {
       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
       opacity: 1,
-      transition: { duration: 1.2, ease },
+      transition: { duration: 0.8, ease },
     },
   },
 };
@@ -134,6 +130,7 @@ export function SectionReveal({
   children,
   variant = "fade-up",
   className,
+  style,
   delay = 0,
   duration,
   staggerChildren,
@@ -174,6 +171,7 @@ export function SectionReveal({
       whileInView="visible"
       viewport={{ once, margin }}
       className={className}
+      style={style}
     >
       {children}
     </Component>

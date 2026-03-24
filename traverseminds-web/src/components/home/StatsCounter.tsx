@@ -1,44 +1,14 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { Shield, Globe, Users, Layers } from "lucide-react";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const stats = [
-  {
-    icon: Shield,
-    value: 6,
-    suffix: "",
-    label: "Security Services",
-    description: "Pen testing, ISO 27001, BoU audit, and more",
-    image: "/cyber/cyber_image_02.jpg",
-  },
-  {
-    icon: Globe,
-    value: 5,
-    suffix: "",
-    label: "EAC Countries",
-    description: "Uganda, Kenya, Tanzania, Rwanda, Burundi",
-    image: "/cyber/cyber_image_20.jpg",
-  },
-  {
-    icon: Users,
-    value: 6,
-    suffix: "",
-    label: "Integrated Divisions",
-    description: "One company, six interconnected teams",
-    image: "/cyber/cyber_image_44.jpg",
-  },
-  {
-    icon: Layers,
-    value: 4,
-    suffix: "",
-    label: "Audiences Served",
-    description: "Institutions, researchers, policy-makers, citizens",
-    image: "/cyber/cyber_image_11.jpg",
-  },
+  { value: 6, label: "Security Services", description: "Pen testing, ISO 27001, BoU audit, and more" },
+  { value: 5, label: "EAC Countries", description: "Uganda, Kenya, Tanzania, Rwanda, Burundi" },
+  { value: 6, label: "Integrated Divisions", description: "One company, six interconnected teams" },
+  { value: 4, label: "Audiences Served", description: "Institutions, researchers, policy-makers, citizens" },
 ];
 
 function AnimatedNumber({ value }: { value: number }) {
@@ -65,37 +35,23 @@ function AnimatedNumber({ value }: { value: number }) {
 
 export function StatsCounter() {
   return (
-    <section className="relative z-20 -mt-16 px-6 pb-0">
-      <div className="container-max">
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {stats.map((stat) => (
-            <RevealItem
-              key={stat.label}
-              variant="scale-fade"
-            >
-              <div className="group relative overflow-hidden rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-elevated border border-white/0 hover:border-accent/20">
-              {/* Background image */}
-              <Image src={stat.image} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 25vw" />
-              <div className="absolute inset-0 bg-primary/80 group-hover:bg-primary/70 transition-colors duration-500" />
-
-              {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ boxShadow: "inset 0 1px 0 rgba(249, 115, 22, 0.1)" }} />
-
-              <div className="relative z-10">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-accent icon-hover-float backdrop-blur-sm">
-                  <stat.icon className="h-5 w-5 transition-transform duration-500 group-hover:rotate-6" />
-                </div>
-
-                <div className="flex items-baseline gap-0.5">
-                  <span className="font-display text-4xl lg:text-5xl font-bold tracking-tighter text-white">
-                    <AnimatedNumber value={stat.value} />
-                  </span>
-                  {stat.suffix && <span className="text-xl font-bold text-accent">{stat.suffix}</span>}
-                </div>
-
-                <h3 className="mt-2 text-sm font-semibold text-white/80">{stat.label}</h3>
-                <p className="mt-1.5 text-xs text-white/65 leading-relaxed">{stat.description}</p>
-              </div>
+    <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
+      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px 56px" }}>
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <RevealItem key={stat.label} variant="fade-up">
+              <div
+                className={i < stats.length - 1 ? "lg:border-r" : ""}
+                style={{
+                  padding: "32px 24px",
+                  borderColor: "rgba(0,0,0,0.1)",
+                }}
+              >
+                <p className="font-display" style={{ fontSize: 48, fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
+                  <AnimatedNumber value={stat.value} />
+                </p>
+                <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 500, color: "#212429" }}>{stat.label}</h3>
+                <p style={{ marginTop: 4, fontSize: 14, color: "#919499", lineHeight: "125%" }}>{stat.description}</p>
               </div>
             </RevealItem>
           ))}

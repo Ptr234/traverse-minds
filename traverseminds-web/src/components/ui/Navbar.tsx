@@ -6,116 +6,60 @@ import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
-  ArrowUpRight,
-  ChevronRight,
   ChevronDown,
+  Search,
   Shield,
   Database,
   BookOpen,
   Mic,
   Brain,
 } from "lucide-react";
-import { Button } from "./Button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
 const divisions = [
-  {
-    label: "Traverse Security",
-    href: "/security",
-    description: "Cybersecurity for banks & government",
-    icon: Shield,
-  },
-  {
-    label: "Public Record EA",
-    href: "/public-record",
-    description: "AI-powered public document platform",
-    icon: Database,
-  },
-  {
-    label: "Digital Literacy",
-    href: "/literacy",
-    description: "Cyber safety training for all",
-    icon: BookOpen,
-  },
-  {
-    label: "Traverse Media",
-    href: "/media",
-    description: "Facts & Figures Podcast",
-    icon: Mic,
-  },
-  {
-    label: "Think Tank",
-    href: "/think-tank",
-    description: "Policy research & analysis",
-    icon: Brain,
-  },
+  { label: "Traverse Security", href: "/security", description: "Cybersecurity for banks & government", icon: Shield },
+  { label: "Public Record EA", href: "/public-record", description: "AI-powered public document platform", icon: Database },
+  { label: "Digital Literacy", href: "/literacy", description: "Cyber safety training for all", icon: BookOpen },
+  { label: "Traverse Media", href: "/media", description: "Facts & Figures Podcast", icon: Mic },
+  { label: "Think Tank", href: "/think-tank", description: "Policy research & analysis", icon: Brain },
 ];
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Divisions", href: "#divisions" }, // triggers mega-menu
+  { label: "Divisions", href: "#divisions" },
   { label: "Events", href: "/events" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Mobile links: flat list for drawer (divisions grouped separately)  */
-/* ------------------------------------------------------------------ */
+const ease = [0.215, 0.61, 0.355, 1] as const;
 
-const mobileMainLinks = [
-  { label: "Home", href: "/" },
-  { label: "Events", href: "/events" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Navbar                                                             */
-/* ------------------------------------------------------------------ */
+/* GatesNotes glass segment style */
+const glassStyle: React.CSSProperties = {
+  background: "rgba(0, 0, 0, 0.8)",
+  backdropFilter: "blur(40px)",
+  WebkitBackdropFilter: "blur(40px)",
+  borderRadius: 4,
+  transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+};
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMegaOpen, setIsMegaOpen] = useState(false);
-  const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false);
   const pathname = usePathname();
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /* ---- scroll detection ---- */
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 30);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  /* ---- lock body scroll for mobile menu ---- */
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMobileOpen]);
 
-  /* ---- close mega-menu on outside click ---- */
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (
-        megaRef.current &&
-        !megaRef.current.contains(e.target as Node) &&
-        megaTriggerRef.current &&
-        !megaTriggerRef.current.contains(e.target as Node)
-      ) {
+      if (megaRef.current && !megaRef.current.contains(e.target as Node) &&
+          megaTriggerRef.current && !megaTriggerRef.current.contains(e.target as Node)) {
         setIsMegaOpen(false);
       }
     }
@@ -123,13 +67,11 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  /* ---- close mega-menu on route change ---- */
   useEffect(() => {
     setIsMegaOpen(false);
     setIsMobileOpen(false);
   }, [pathname]);
 
-  /* ---- hover helpers for mega-menu (desktop) ---- */
   const openMega = useCallback(() => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setIsMegaOpen(true);
@@ -139,161 +81,163 @@ export function Navbar() {
     hoverTimeoutRef.current = setTimeout(() => setIsMegaOpen(false), 250);
   }, []);
 
-  /* ---- helpers ---- */
   const isDivisionActive = divisions.some((d) => pathname === d.href);
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-        className={cn(
-          "fixed top-0 inset-x-0 z-100 transition-all duration-500",
-          isScrolled ? "py-3" : "py-5"
-        )}
+      {/* ======== GatesNotes Segmented Header ======== */}
+      <nav
+        className="fixed top-0 inset-x-0 z-100"
+        style={{ pointerEvents: "none", paddingTop: 24 }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div
-            className={cn(
-              "relative flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-500",
-              isScrolled
-                ? "glass-panel shadow-lg"
-                : "glass-panel shadow-sm"
-            )}
+        <div
+          className="mx-auto flex items-center"
+          style={{ maxWidth: 1240, padding: "0 24px" }}
+        >
+          {/* ── LEFT SEGMENT: Logo button (64x56) ── */}
+          <Link
+            href="/"
+            className="shrink-0 flex items-center justify-center hover:!bg-[rgba(0,0,0,0.6)]"
+            style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
-            {/* Logo */}
-            <Link href="/" className="relative z-110 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition-all duration-500">
-                <span className="text-sm font-black tracking-tighter">TM</span>
-              </div>
-              <span className="text-lg font-bold tracking-tight text-primary transition-colors duration-500">
-                Traverse<span className="text-accent">Minds</span>
-              </span>
-            </Link>
+            {/* Stacked logo like GatesNotes LogoStack.svg */}
+            <div className="flex flex-col items-center leading-none">
+              <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: "-0.5px", color: "#fff" }}>TM</span>
+            </div>
+          </Link>
 
-            {/* Desktop Nav */}
-            <div className="hidden items-center gap-1 md:flex">
-              {navLinks.map((link) => {
-                /* --- Divisions trigger (mega-menu) --- */
-                if (link.href === "#divisions") {
-                  return (
-                    <div
-                      key="divisions-trigger"
-                      className="relative"
-                      onMouseEnter={openMega}
-                      onMouseLeave={scheduleMegaClose}
-                    >
-                      <button
-                        ref={megaTriggerRef}
-                        onClick={() => setIsMegaOpen((p) => !p)}
-                        className={cn(
-                          "relative flex items-center gap-1 px-4 py-2 text-[13px] font-medium transition-all duration-300 rounded-lg cursor-pointer",
-                          isDivisionActive || isMegaOpen
-                            ? "text-accent"
-                            : "text-primary/60 hover:text-primary hover:bg-primary/5"
-                        )}
-                      >
-                        {link.label}
-                        <ChevronDown
-                          className={cn(
-                            "h-3.5 w-3.5 transition-transform duration-300",
-                            isMegaOpen && "rotate-180"
-                          )}
-                        />
-                        {isDivisionActive && !isMegaOpen && (
-                          <motion.div
-                            layoutId="nav-indicator"
-                            className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-accent"
-                            transition={{
-                              type: "spring",
-                              stiffness: 300,
-                              damping: 30,
-                            }}
-                          />
-                        )}
-                      </button>
-                    </div>
-                  );
-                }
+          {/* 2px gap */}
+          <div style={{ width: 2, flexShrink: 0 }} />
 
-                /* --- Normal link --- */
-                const isActive = pathname === link.href;
+          {/* ── CENTER SEGMENT: Nav links ── */}
+          <div
+            className="hidden md:flex items-center flex-1"
+            style={{ ...glassStyle, height: 56, pointerEvents: "auto" }}
+          >
+            {navLinks.map((link) => {
+              if (link.href === "#divisions") {
                 return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                      "relative px-4 py-2 text-[13px] font-medium transition-all duration-300 rounded-lg",
-                      isActive
-                        ? "text-accent"
-                        : "text-primary/60 hover:text-primary hover:bg-primary/5"
-                    )}
+                  <div
+                    key="divisions-trigger"
+                    className="relative h-full"
+                    onMouseEnter={openMega}
+                    onMouseLeave={scheduleMegaClose}
                   >
-                    {link.label}
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-indicator"
-                        className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-accent"
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30,
-                        }}
+                    <button
+                      ref={megaTriggerRef}
+                      onClick={() => setIsMegaOpen((p) => !p)}
+                      className="flex items-center gap-1 h-full cursor-pointer"
+                      style={{
+                        padding: "0 24px",
+                        fontSize: 16,
+                        fontWeight: 400,
+                        letterSpacing: "0.02em",
+                        color: isDivisionActive || isMegaOpen ? "#fff" : "#d3d3d3",
+                        borderBottom: isDivisionActive || isMegaOpen ? "2px solid #fff" : "2px solid transparent",
+                        transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderBottomColor = "#fff"; }}
+                      onMouseLeave={(e) => {
+                        if (!isDivisionActive && !isMegaOpen) {
+                          e.currentTarget.style.color = "#d3d3d3";
+                          e.currentTarget.style.borderBottomColor = "transparent";
+                        }
+                      }}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className="transition-transform duration-200"
+                        style={{ height: 14, width: 14, transform: isMegaOpen ? "rotate(180deg)" : "none" }}
                       />
-                    )}
-                  </Link>
+                    </button>
+                  </div>
                 );
-              })}
-            </div>
+              }
 
-            {/* Desktop CTA */}
-            <div className="hidden items-center gap-3 md:flex">
-              <Button
-                variant="primary"
-                size="sm"
-                href="/contact"
-                className="shadow-none"
-              >
-                Get Started
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Button>
-            </div>
-
-            {/* Mobile Toggle */}
-            <button
-              className="relative z-110 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/5 text-primary transition-all duration-300 md:hidden"
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-            >
-              <AnimatePresence mode="wait">
-                {isMobileOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-5 w-5" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-5 w-5" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center h-full"
+                  style={{
+                    padding: "0 24px",
+                    fontSize: 16,
+                    fontWeight: 400,
+                    letterSpacing: "0.02em",
+                    color: isActive ? "#fff" : "#d3d3d3",
+                    borderBottom: isActive ? "2px solid #fff" : "2px solid transparent",
+                    transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderBottomColor = "#fff"; }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "#d3d3d3";
+                      e.currentTarget.style.borderBottomColor = "transparent";
+                    }
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
+
+          {/* ── MOBILE: Center logo bar ── */}
+          <div
+            className="md:hidden flex items-center justify-center flex-1"
+            style={{
+              ...glassStyle,
+              height: 48,
+              borderRadius: 0,
+              pointerEvents: "auto",
+            }}
+          >
+            <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.3px", color: "#fff" }}>
+              Traverse<span style={{ color: "#ff4c00" }}>Minds</span>
+            </span>
+          </div>
+
+          {/* 2px gap */}
+          <div style={{ width: 2, flexShrink: 0 }} className="hidden md:block" />
+
+          {/* ── RIGHT SEGMENT: Search/CTA button (64x56) ── */}
+          <Link
+            href="/contact"
+            className="hidden md:flex shrink-0 items-center justify-center hover:!bg-[rgba(0,0,0,0.6)]"
+            style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
+          >
+            <Search style={{ height: 20, width: 20, color: "#fff" }} />
+          </Link>
+
+          {/* ── MOBILE: Hamburger (right segment) ── */}
+          <button
+            className="md:hidden shrink-0 flex items-center justify-center"
+            style={{
+              ...glassStyle,
+              width: 58,
+              height: 48,
+              borderRadius: "0 4px 4px 0",
+              pointerEvents: "auto",
+            }}
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          >
+            <AnimatePresence mode="wait">
+              {isMobileOpen ? (
+                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <X style={{ height: 20, width: 20, color: "#fff" }} />
+                </motion.div>
+              ) : (
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <Menu style={{ height: 20, width: 20, color: "#fff" }} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
         </div>
 
-        {/* ======== Desktop Mega-Menu Dropdown ======== */}
+        {/* ======== Desktop Mega-Menu (Expanded) ======== */}
         <AnimatePresence>
           {isMegaOpen && (
             <motion.div
@@ -301,66 +245,62 @@ export function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.35, ease }}
               className="hidden md:block"
+              style={{
+                pointerEvents: "auto",
+                background: "rgba(225, 228, 233, 0.96)",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+                borderBottom: "1px solid #d1d4d9",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.16)",
+                marginTop: 8,
+              }}
               onMouseEnter={openMega}
               onMouseLeave={scheduleMegaClose}
             >
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-2">
-                <div className="rounded-2xl bg-white shadow-xl border border-border-light p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent/80 mb-4">
-                    Our Divisions
-                  </p>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                    {divisions.map((div) => {
-                      const Icon = div.icon;
-                      const isActive = pathname === div.href;
-                      return (
-                        <Link
-                          key={div.href}
-                          href={div.href}
-                          className={cn(
-                            "group/mega flex items-start gap-4 rounded-xl p-4 transition-all duration-300",
-                            isActive
-                              ? "bg-accent/10 text-accent"
-                              : "hover:bg-primary/5"
-                          )}
-                        >
-                          <div
-                            className={cn(
-                              "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors duration-300",
-                              isActive
-                                ? "bg-accent/20 text-accent"
-                                : "bg-primary/5 text-primary/60 group-hover/mega:bg-accent/10 group-hover/mega:text-accent"
-                            )}
-                          >
-                            <Icon className="h-5 w-5" />
-                          </div>
-                          <div className="min-w-0">
-                            <span
-                              className={cn(
-                                "block text-sm font-semibold tracking-tight transition-colors duration-300",
-                                isActive
-                                  ? "text-accent"
-                                  : "text-primary group-hover/mega:text-accent"
-                              )}
-                            >
-                              {div.label}
-                            </span>
-                            <span className="mt-0.5 block text-xs leading-snug text-brand-muted">
-                              {div.description}
-                            </span>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+              <div style={{ maxWidth: 1240, margin: "0 auto", padding: "48px 24px 64px" }}>
+                <p style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.6px", color: "#515459", marginBottom: 24 }}>
+                  Our Divisions
+                </p>
+                {/* GatesNotes divider line */}
+                <div style={{ width: 80, height: 1, background: "rgba(81,84,89,0.64)", marginBottom: 35 }} />
+                <div className="grid grid-cols-2 lg:grid-cols-3" style={{ gap: "16px 48px" }}>
+                  {divisions.map((div) => {
+                    const Icon = div.icon;
+                    const isActive = pathname === div.href;
+                    return (
+                      <Link
+                        key={div.href}
+                        href={div.href}
+                        className="group flex items-start gap-4"
+                        style={{
+                          padding: "12px 0",
+                          fontSize: 24,
+                          fontWeight: 500,
+                          letterSpacing: "-0.24px",
+                          color: isActive ? "#ff4c00" : "#000",
+                          transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = "#ff4c00"; }}
+                        onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = "#000"; }}
+                      >
+                        <Icon style={{ height: 20, width: 20, marginTop: 6, opacity: 0.4, flexShrink: 0 }} />
+                        <div>
+                          <span className="block">{div.label}</span>
+                          <span className="block" style={{ fontSize: 14, fontWeight: 400, color: "#919499", letterSpacing: "0", marginTop: 2 }}>
+                            {div.description}
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.nav>
+      </nav>
 
       {/* ======== Fullscreen Mobile Menu ======== */}
       <AnimatePresence>
@@ -369,177 +309,43 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-90 bg-bg-light"
+            transition={{ duration: 0.35, ease }}
+            className="fixed inset-0 z-90"
+            style={{
+              background: "rgba(225, 228, 233, 0.96)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+            }}
           >
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-accent/5 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald/5 blur-3xl" />
-            </div>
-
-            <div className="relative flex h-full flex-col pt-28 pb-10 px-8 overflow-y-auto">
-              <nav className="flex-1">
-                <div className="flex flex-col gap-2">
-                  {/* Main links */}
-                  {mobileMainLinks.map((link, idx) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <motion.div
-                        key={link.href}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{
-                          delay: 0.05 + idx * 0.05,
-                          duration: 0.4,
-                          ease: [0.16, 1, 0.3, 1] as const,
-                        }}
-                      >
-                        <Link
-                          href={link.href}
-                          onClick={() => setIsMobileOpen(false)}
-                          className={cn(
-                            "group flex items-center justify-between rounded-2xl px-6 py-5 transition-all duration-300",
-                            isActive
-                              ? "bg-accent/10 text-accent"
-                              : "text-primary hover:bg-primary/5"
-                          )}
-                        >
-                          <div className="flex items-center gap-5">
-                            <span className="font-mono text-xs text-brand-muted">
-                              {String(idx + 1).padStart(2, "0")}
-                            </span>
-                            <span className="text-2xl font-bold tracking-tight">
-                              {link.label}
-                            </span>
-                          </div>
-                          <ChevronRight
-                            className={cn(
-                              "h-5 w-5 transition-transform duration-300",
-                              isActive
-                                ? "text-accent"
-                                : "text-brand-muted group-hover:translate-x-1"
-                            )}
-                          />
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-
-                  {/* Divisions Section */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.05 + mobileMainLinks.length * 0.05,
-                      duration: 0.4,
-                      ease: [0.16, 1, 0.3, 1] as const,
-                    }}
-                  >
-                    <button
-                      onClick={() => setMobileDivisionsOpen((p) => !p)}
-                      className={cn(
-                        "group flex w-full items-center justify-between rounded-2xl px-6 py-5 transition-all duration-300 cursor-pointer",
-                        isDivisionActive
-                          ? "bg-accent/10 text-accent"
-                          : "text-primary hover:bg-primary/5"
-                      )}
+            <div style={{ maxWidth: 1240, margin: "0 auto", padding: "96px 24px 40px", height: "100%", display: "flex", flexDirection: "column" as const }}>
+              <nav style={{ flex: 1, paddingTop: 32 }}>
+                {["Divisions", "Events", "Blog", "About", "Contact"].map((label) => {
+                  const href = label === "Divisions" ? "/security" : `/${label.toLowerCase()}`;
+                  const isActive = pathname === href;
+                  return (
+                    <Link
+                      key={label}
+                      href={href}
+                      onClick={() => setIsMobileOpen(false)}
+                      className="block"
+                      style={{
+                        padding: "20px 0",
+                        fontSize: 24,
+                        fontWeight: 500,
+                        letterSpacing: "-0.24px",
+                        color: isActive ? "#ff4c00" : "#000",
+                        borderBottom: "1px solid #d1d4d9",
+                        transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "#ff4c00"; }}
+                      onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = "#000"; }}
                     >
-                      <div className="flex items-center gap-5">
-                        <span className="font-mono text-xs text-brand-muted">
-                          {String(mobileMainLinks.length + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-2xl font-bold tracking-tight">
-                          Divisions
-                        </span>
-                      </div>
-                      <ChevronDown
-                        className={cn(
-                          "h-5 w-5 text-brand-muted transition-transform duration-300",
-                          mobileDivisionsOpen && "rotate-180 text-accent"
-                        )}
-                      />
-                    </button>
-
-                    <AnimatePresence>
-                      {mobileDivisionsOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                          className="overflow-hidden"
-                        >
-                          <div className="flex flex-col gap-1 pl-4 pt-1 pb-2">
-                            {divisions.map((div) => {
-                              const Icon = div.icon;
-                              const isActive = pathname === div.href;
-                              return (
-                                <Link
-                                  key={div.href}
-                                  href={div.href}
-                                  onClick={() => setIsMobileOpen(false)}
-                                  className={cn(
-                                    "flex items-center gap-4 rounded-xl px-5 py-4 transition-all duration-300",
-                                    isActive
-                                      ? "bg-accent/10 text-accent"
-                                      : "text-primary/80 hover:bg-primary/5"
-                                  )}
-                                >
-                                  <div
-                                    className={cn(
-                                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors",
-                                      isActive
-                                        ? "bg-accent/20 text-accent"
-                                        : "bg-primary/5 text-primary/50"
-                                    )}
-                                  >
-                                    <Icon className="h-4 w-4" />
-                                  </div>
-                                  <div className="min-w-0">
-                                    <span
-                                      className={cn(
-                                        "block text-base font-semibold tracking-tight",
-                                        isActive ? "text-accent" : "text-primary"
-                                      )}
-                                    >
-                                      {div.label}
-                                    </span>
-                                    <span className="block text-xs text-brand-muted leading-snug">
-                                      {div.description}
-                                    </span>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </div>
+                      {label}
+                    </Link>
+                  );
+                })}
               </nav>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
-                className="space-y-4"
-              >
-                <Button
-                  variant="primary"
-                  size="xl"
-                  href="/contact"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="w-full justify-center"
-                >
-                  Get Started
-                  <ArrowUpRight className="h-5 w-5" />
-                </Button>
-                <p className="text-center text-xs text-brand-muted">
-                  hello@traverseminds.ug
-                </p>
-              </motion.div>
+              <p style={{ fontSize: 14, color: "#919499" }}>hello@traverseminds.ug</p>
             </div>
           </motion.div>
         )}

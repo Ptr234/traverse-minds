@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { type ReactNode, type ElementType } from "react";
+import { type ReactNode } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -10,6 +10,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 interface TextRevealProps {
   children: string;
   className?: string;
+  style?: React.CSSProperties;
   as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
   delay?: number;
   staggerSpeed?: number;
@@ -20,12 +21,11 @@ interface TextRevealProps {
 
 const wordVariants: Record<string, Variants> = {
   "fade-up": {
-    hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, ease },
+      transition: { duration: 0.5, ease },
     },
   },
   "slide-up": {
@@ -33,16 +33,14 @@ const wordVariants: Record<string, Variants> = {
     visible: {
       y: "0%",
       opacity: 1,
-      transition: { duration: 0.5, ease },
+      transition: { duration: 0.4, ease },
     },
   },
   "blur-in": {
-    hidden: { opacity: 0, filter: "blur(12px)", scale: 0.9 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
-      scale: 1,
-      transition: { duration: 0.7, ease },
+      transition: { duration: 0.5, ease },
     },
   },
   "clip-up": {
@@ -50,7 +48,7 @@ const wordVariants: Record<string, Variants> = {
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
-      transition: { duration: 0.6, ease },
+      transition: { duration: 0.5, ease },
     },
   },
 };
@@ -58,9 +56,10 @@ const wordVariants: Record<string, Variants> = {
 export function TextReveal({
   children,
   className,
+  style,
   as = "h2",
   delay = 0,
-  staggerSpeed = 0.04,
+  staggerSpeed = 0.03,
   once = true,
   margin = "-80px",
   variant = "fade-up",
@@ -85,6 +84,7 @@ export function TextReveal({
       whileInView="visible"
       viewport={{ once, margin }}
       className={className}
+      style={style}
       aria-label={children}
     >
       {words.map((word, i) => (
@@ -103,7 +103,7 @@ export function TextReveal({
   );
 }
 
-/* ── Line reveal — splits children by <br /> or newlines ── */
+/* ── Line reveal ── */
 
 interface LineRevealProps {
   children: ReactNode;
@@ -115,12 +115,11 @@ interface LineRevealProps {
 }
 
 const lineVariant: Variants = {
-  hidden: { opacity: 0, y: 32, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.7, ease },
+    transition: { duration: 0.5, ease },
   },
 };
 
@@ -128,7 +127,7 @@ export function LineReveal({
   children,
   className,
   delay = 0,
-  staggerSpeed = 0.12,
+  staggerSpeed = 0.1,
   once = true,
   margin = "-60px",
 }: LineRevealProps) {
@@ -163,7 +162,7 @@ export function LineReveal({
   );
 }
 
-/* ── Character reveal — for short accent text ── */
+/* ── Character reveal ── */
 
 interface CharRevealProps {
   children: string;
@@ -176,11 +175,11 @@ interface CharRevealProps {
 }
 
 const charVariant: Variants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease },
+    transition: { duration: 0.3, ease },
   },
 };
 

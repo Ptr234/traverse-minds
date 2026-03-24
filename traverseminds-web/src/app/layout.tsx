@@ -4,6 +4,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 
 import { CookieBanner } from "@/components/ui/CookieBanner";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { StructuredData } from "@/components/seo/StructuredData";
 import "./globals.css";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
+        <SmoothScroll />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
