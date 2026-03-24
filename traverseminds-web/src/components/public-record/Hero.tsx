@@ -21,18 +21,16 @@ export function Hero() {
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
         <motion.div
           className="max-w-3xl"
-          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8"
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/60">Public Record EA</span>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Public Record EA</p>
           </motion.div>
 
           <TextReveal
@@ -41,14 +39,15 @@ export function Hero() {
             delay={0.3}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
           >
-            East Africa&apos;s government records — intelligently searchable
+            East Africa&apos;s government records -- intelligently searchable
           </TextReveal>
 
           <motion.p
-            className="mt-6 text-lg text-white/50 leading-relaxed max-w-xl"
-            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+            className="mt-6 text-lg leading-relaxed max-w-xl"
+            style={{ color: "rgba(255,255,255,0.5)" }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
           >
             Search, summarise, and monitor public documents, court records,
             and regulatory updates across Uganda, Kenya, Tanzania, Rwanda,
@@ -57,9 +56,9 @@ export function Hero() {
 
           <motion.div
             className="mt-10 flex flex-col gap-4 sm:flex-row"
-            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] as const }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.65, ease: [0.215, 0.61, 0.355, 1] }}
           >
             <Button variant="primary" size="lg" href="#waitlist">
               Join the Waitlist

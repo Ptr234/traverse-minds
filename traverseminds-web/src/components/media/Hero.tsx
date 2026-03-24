@@ -21,16 +21,11 @@ export function Hero() {
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
         <motion.div
           className="max-w-2xl"
-          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md mb-8">
-            <Mic className="h-3 w-3 text-accent" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
-              New Episode Weekly
-            </span>
-          </div>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>New Episode Weekly</p>
 
           <TextReveal
             as="h1"
@@ -40,7 +35,7 @@ export function Hero() {
             Facts & Figures The Policy Podcast
           </TextReveal>
 
-          <p className="mt-6 text-lg text-white/50 leading-relaxed">
+          <p className="mt-6 text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
             Unpacking the data, laws, and technology shaping East Africa.
             Join our experts and guest policy-makers as they navigate the complexities of the regional digital landscape.
           </p>
@@ -51,7 +46,7 @@ export function Hero() {
             </Button>
             <div className="flex items-center gap-5 px-2">
               {["Spotify", "Apple", "Google"].map((p) => (
-                <span key={p} className="text-xs font-semibold text-white/50 hover:text-white cursor-pointer transition-colors uppercase tracking-wider">
+                <span key={p} className="text-xs font-semibold cursor-pointer uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)", transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                   {p}
                 </span>
               ))}

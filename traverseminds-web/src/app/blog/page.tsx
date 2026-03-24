@@ -37,29 +37,27 @@ export default function BlogPage() {
         <div className="container-max relative z-10 px-6 lg:px-8">
           <div className="max-w-2xl">
             <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 backdrop-blur-md mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Latest Insights</span>
+              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Latest Insights</p>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.1, duration: 0.8 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
             >
-              News & <span className="text-gradient-accent">insights</span>
+              News & <span style={{ color: "#ff4c00" }}>insights</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-              className="mt-6 max-w-lg text-lg text-white/50 leading-relaxed"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+              className="mt-6 max-w-lg text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
             >
               Cybersecurity analysis, event recaps, policy explainers, and data-driven research from across our six divisions.
             </motion.p>
@@ -68,21 +66,20 @@ export default function BlogPage() {
       </section>
 
       {/* Filter + Grid */}
-      <section className="relative bg-surface-elevated section-padding overflow-hidden">
-        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
-
+      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10">
           {/* Search Input */}
           <SectionReveal variant="fade-blur">
             <div className="mb-6">
               <div className="relative max-w-md">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-brand-muted/40" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#919499" }} />
                 <input
                   type="text"
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-2xl border border-border-light bg-white py-3 pl-11 pr-4 text-sm text-primary placeholder:text-brand-muted/40 outline-none focus:border-accent/40 focus:shadow-sm transition-all"
+                  className="w-full border bg-white py-3 pl-11 pr-4 text-sm outline-none"
+                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                 />
               </div>
             </div>
@@ -100,19 +97,19 @@ export default function BlogPage() {
                 <motion.div
                   key={post.slug}
                   layout
-                  initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
-                  transition={{ duration: 0.4 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
                 >
                   <PostCard {...post} />
                 </motion.div>
               ))}
             </motion.div>
             {filtered.length === 0 && (
-              <div className="col-span-full rounded-3xl border-2 border-dashed border-border-light py-20 text-center">
-                <p className="text-lg font-semibold text-primary">Coming soon</p>
-                <p className="mt-2 text-base text-brand-muted max-w-md mx-auto">
+              <div className="col-span-full border-2 border-dashed py-20 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+                <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming soon</p>
+                <p className="mt-2 text-base max-w-md mx-auto" style={{ color: "#919499" }}>
                   Our first articles are being written. Subscribe to our newsletter to be notified when we publish.
                 </p>
               </div>

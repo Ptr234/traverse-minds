@@ -66,23 +66,18 @@ export default function LiteracyPage() {
         <ProgrammeListing />
 
         {/* Delivery Formats */}
-        <section className="relative bg-white section-padding overflow-hidden border-t border-border-light">
-          <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
           <div className="container-max relative z-10">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-                <div className="h-1 w-1 rounded-full bg-accent" />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Delivery</span>
-              </div>
+              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Delivery</p>
               <TextReveal
                 as="h2"
                 variant="clip-up"
-                className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
               >
                 Delivery Formats
               </TextReveal>
-              <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+              <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
                 Choose the training format that works best for your team and schedule.
               </p>
             </div>
@@ -91,12 +86,12 @@ export default function LiteracyPage() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
                 {deliveryFormats.map((format) => (
                   <RevealItem key={format.title} variant="scale-fade">
-                    <div className="group flex flex-col items-center text-center rounded-2xl border border-border-light bg-white p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:border-accent/15">
-                      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 text-primary transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:scale-110">
-                        <format.icon className="h-6 w-6" />
+                    <div className="group flex flex-col items-center text-center border bg-white p-8" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+                      <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                        <format.icon className="h-6 w-6" style={{ color: "#000" }} />
                       </div>
-                      <h3 className="font-display text-lg font-bold text-primary">{format.title}</h3>
-                      <p className="mt-3 text-sm text-brand-medium/60 leading-relaxed">{format.desc}</p>
+                      <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{format.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed" style={{ color: "#515459" }}>{format.desc}</p>
                     </div>
                   </RevealItem>
                 ))}
@@ -106,16 +101,10 @@ export default function LiteracyPage() {
         </section>
 
         {/* Learning Outcomes */}
-        <section className="relative bg-primary section-padding overflow-hidden">
-          <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
-          <div className="absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-accent/5 blur-[120px]" />
-
+        <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
           <div className="container-max relative z-10">
             <div className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-5">
-                <div className="h-1 w-1 rounded-full bg-accent" />
-                <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">Outcomes</span>
-              </div>
+              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Outcomes</p>
               <TextReveal
                 as="h2"
                 variant="blur-in"
@@ -123,7 +112,7 @@ export default function LiteracyPage() {
               >
                 Learning Outcomes
               </TextReveal>
-              <p className="mt-3 text-white/50 max-w-xl mx-auto">
+              <p className="mt-3 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.5)" }}>
                 Every participant leaves with practical skills they can apply immediately.
               </p>
             </div>
@@ -132,12 +121,12 @@ export default function LiteracyPage() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
                 {learningOutcomes.map((outcome) => (
                   <RevealItem key={outcome.title} variant="slide-up">
-                    <div className="rounded-2xl border border-white/6 bg-white/3 p-7 transition-all duration-300 hover:border-accent/20 hover:bg-white/5">
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/6">
+                    <div className="border border-white/6 bg-white/3 p-7" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center bg-white/6" style={{ borderRadius: 8 }}>
                         <outcome.icon className="h-6 w-6 text-accent" />
                       </div>
                       <h3 className="font-display text-base font-bold text-white">{outcome.title}</h3>
-                      <p className="mt-2 text-sm text-white/45 leading-relaxed">{outcome.desc}</p>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{outcome.desc}</p>
                     </div>
                   </RevealItem>
                 ))}
@@ -147,20 +136,17 @@ export default function LiteracyPage() {
         </section>
 
         {/* Organisation Booking */}
-        <section className="relative bg-surface-elevated section-padding overflow-hidden">
-          <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
-          <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 h-96 w-96 rounded-full border-40 border-primary/3 pointer-events-none" />
-
+        <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
           <div className="container-max relative z-10">
             <div className="max-w-2xl">
               <TextReveal
                 as="h2"
                 variant="fade-up"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary tracking-tight"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight" style={{ color: "#000" }}
               >
                 Train your entire organisation
               </TextReveal>
-              <p className="mt-5 text-base text-brand-medium/60 leading-relaxed">
+              <p className="mt-5 text-base leading-relaxed" style={{ color: "#515459" }}>
                 Cybersecurity is a team effort. We provide tailored on-site
                 training for government departments and corporate teams,
                 focused on the specific threats relevant to your sector.
@@ -178,19 +164,17 @@ export default function LiteracyPage() {
         </section>
 
         {/* Community Outreach */}
-        <section className="relative bg-white section-padding overflow-hidden">
-          <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
           <div className="container-max relative z-10 text-center">
             <TextReveal
               as="h2"
               variant="clip-up"
-              className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+              className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
             >
               Community Outreach
             </TextReveal>
             <SectionReveal variant="fade-blur" delay={0.1}>
-              <p className="mt-5 mx-auto max-w-2xl text-base text-brand-medium/60 leading-relaxed">
+              <p className="mt-5 mx-auto max-w-2xl text-base leading-relaxed" style={{ color: "#515459" }}>
                 As part of our civic mission, we run free digital safety workshops
                 in local languages for community groups and senior citizens.
                 Want us to visit your community?

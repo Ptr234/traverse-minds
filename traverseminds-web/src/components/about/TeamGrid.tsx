@@ -19,27 +19,22 @@ const teamMembers = [
 
 export function TeamGrid() {
   return (
-    <section id="team" className="relative bg-white section-padding overflow-hidden">
-      <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+    <section id="team" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5"
+            transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-              Our People
-            </span>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our People</p>
           </motion.div>
           <TextReveal
             as="h2"
             variant="blur-in"
             staggerSpeed={0.06}
-            className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+            className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
           >
             Meet the Team
           </TextReveal>
@@ -47,8 +42,8 @@ export function TeamGrid() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-3 text-brand-medium/60 max-w-md mx-auto"
+            transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+            className="mt-3 max-w-md mx-auto" style={{ color: "#515459" }}
           >
             Local experts building for East Africa. Team profiles updated as we grow.
           </motion.p>

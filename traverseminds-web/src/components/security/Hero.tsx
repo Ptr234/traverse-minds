@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { TextReveal } from "@/components/ui/TextReveal";
-import { NetworkConstellation } from "@/components/ui/NetworkConstellation";
 import { ArrowDown, ShieldCheck, ArrowRight } from "lucide-react";
 
 const heroImages = [
@@ -18,20 +17,14 @@ export function SecurityHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ImageSlideshow images={heroImages} overlay="bg-primary/70" />
-      <NetworkConstellation nodeCount={55} connectionDistance={130} speed={0.5} color="16, 185, 129" color2="249, 115, 22" />
 
       <div className="relative z-10 w-full container-max px-6 lg:px-8 pt-32 pb-24 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
         >
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md mb-8">
-            <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
-              Institutional Grade Protection
-            </span>
-          </div>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Institutional Grade Protection</p>
         </motion.div>
 
         <TextReveal
@@ -45,25 +38,25 @@ export function SecurityHero() {
         </TextReveal>
 
         <motion.p
-          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-          className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-white/50 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+          className="mt-8 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
         >
           Penetration testing, ISO 27001 compliance, Bank of Uganda audits,
-          threat modelling, incident response, and regulatory advisory —
+          threat modelling, incident response, and regulatory advisory --
           delivered by a team based in Kampala.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button variant="primary" size="lg" href="#enquiry">
             Request Assessment
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4" />
           </Button>
           <Button variant="outline-dark" size="lg" href="#capability">
             Explore Capability

@@ -37,17 +37,14 @@ export default function AboutPage() {
     <PageTransition>
       <MissionStatement />
 
-      {/* The Model — One Company Six Divisions */}
-      <section className="relative overflow-hidden bg-primary section-padding">
-        <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
-        <div className="absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-accent/5 blur-[120px]" />
-
+      {/* The Model -- One Company Six Divisions */}
+      <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             {/* Image */}
             <SectionReveal variant="clip-inset">
               <div className="relative">
-                <div className="relative aspect-square overflow-hidden rounded-3xl">
+                <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 16 }}>
                   <Image
                     src="/cyber/cyber_image_44.jpg"
                     alt="Team collaboration"
@@ -58,9 +55,9 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-linear-to-tr from-primary/70 via-primary/10 to-transparent" />
                 </div>
                 {/* Floating badge */}
-                <div className="absolute -bottom-5 -right-3 rounded-2xl border border-white/10 bg-white p-5 shadow-elevated md:-right-6">
-                  <p className="font-display text-4xl font-bold text-accent">6</p>
-                  <p className="text-xs text-brand-medium mt-0.5">
+                <div className="absolute -bottom-5 -right-3 border border-white/10 bg-white p-5 md:-right-6" style={{ borderRadius: 8, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+                  <p className="font-display text-4xl font-bold" style={{ color: "#ff4c00" }}>6</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#515459" }}>
                     Integrated<br />Divisions
                   </p>
                 </div>
@@ -70,12 +67,7 @@ export default function AboutPage() {
             {/* Content */}
             <SectionReveal variant="clip-right" delay={0.2}>
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5 mb-6">
-                  <div className="h-1 w-1 rounded-full bg-accent" />
-                  <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/55">
-                    Our Model
-                  </span>
-                </div>
+                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our Model</p>
 
                 <TextReveal
                   as="h2"
@@ -85,7 +77,7 @@ export default function AboutPage() {
                   One Company, Six Divisions
                 </TextReveal>
 
-                <p className="mt-4 text-base leading-relaxed text-white/55">
+                <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
                   Traverse Minds is one integrated organisation where every division
                   strengthens the others. Security audits are informed by Think Tank
                   research. Events build community for all divisions. Media amplifies
@@ -96,12 +88,13 @@ export default function AboutPage() {
                   {divisions.map((d) => (
                     <RevealItem key={d.name} variant="scale-fade">
                       <div
-                        className="flex items-start gap-3 rounded-xl border border-white/6 bg-white/3 p-4 transition-colors hover:border-accent/20 hover:bg-white/5"
+                        className="flex items-start gap-3 border border-white/6 bg-white/3 p-4"
+                        style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       >
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         <div>
                           <p className="text-sm font-semibold text-white">{d.name}</p>
-                          <p className="text-xs text-white/50">{d.desc}</p>
+                          <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>{d.desc}</p>
                         </div>
                       </div>
                     </RevealItem>
@@ -114,25 +107,18 @@ export default function AboutPage() {
       </section>
 
       {/* EAC Country Flags */}
-      <section className="relative bg-white section-padding-sm overflow-hidden">
-        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-              Regional Reach
-            </span>
-          </div>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Regional Reach</p>
 
           <TextReveal
             as="h2"
             variant="fade-up"
-            className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight"
+            className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
           >
             Serving the East African Community
           </TextReveal>
-          <p className="mt-3 text-brand-medium/60 max-w-xl mx-auto">
+          <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
             Our work spans all five EAC member states, building a safer digital future across the region.
           </p>
 
@@ -140,7 +126,7 @@ export default function AboutPage() {
             {eacCountries.map((country) => (
               <RevealItem key={country.code} variant="scale-fade">
                 <div className="flex flex-col items-center gap-3 group">
-                  <div className="h-14 w-20 overflow-hidden rounded-lg border border-border-light shadow-sm transition-all duration-300 group-hover:shadow-card group-hover:-translate-y-1">
+                  <div className="h-14 w-20 overflow-hidden border shadow-sm" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <Image
                       src={`https://flagcdn.com/w80/${country.code}.png`}
                       alt={`${country.name} flag`}
@@ -149,7 +135,7 @@ export default function AboutPage() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <span className="text-sm font-semibold text-primary/70">{country.name}</span>
+                  <span className="text-sm font-semibold" style={{ color: "#313439" }}>{country.name}</span>
                 </div>
               </RevealItem>
             ))}
@@ -161,30 +147,23 @@ export default function AboutPage() {
       <TeamGrid />
 
       {/* Partners & Affiliations */}
-      <section className="relative bg-surface-elevated section-padding overflow-hidden">
-        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
-
+      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-              Partners
-            </span>
-          </div>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Partners</p>
 
           <TextReveal
             as="h2"
             variant="clip-up"
-            className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight"
+            className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
           >
             Partners & Affiliations
           </TextReveal>
 
           <SectionReveal variant="clip-inset" className="mt-10">
-            <div className="rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-              <Handshake className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-              <p className="text-lg font-semibold text-primary">Coming Soon</p>
-              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+              <Handshake className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
+              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
+              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
                 Partner logos will appear here as relationships are established.
               </p>
             </div>
@@ -193,22 +172,15 @@ export default function AboutPage() {
       </section>
 
       {/* Legal / Registration */}
-      <section className="relative overflow-hidden bg-white section-padding-sm">
-        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">
-                Legal
-              </span>
-            </div>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Legal</p>
 
             <TextReveal
               as="h2"
               variant="fade-up"
-              className="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight"
+              className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
             >
               Company Details
             </TextReveal>
@@ -222,10 +194,11 @@ export default function AboutPage() {
               ].map((item) => (
                 <RevealItem key={item.label} variant="slide-up">
                   <div
-                    className="rounded-2xl border border-border-light bg-surface-elevated px-6 py-4"
+                    className="border px-6 py-4"
+                    style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
                   >
-                    <p className="text-xs text-brand-muted">{item.label}</p>
-                    <p className="mt-1 text-sm font-semibold text-primary">{item.value}</p>
+                    <p className="text-xs" style={{ color: "#919499" }}>{item.label}</p>
+                    <p className="mt-1 text-sm font-semibold" style={{ color: "#000" }}>{item.value}</p>
                   </div>
                 </RevealItem>
               ))}

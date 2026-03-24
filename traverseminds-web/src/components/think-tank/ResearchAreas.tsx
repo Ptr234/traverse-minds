@@ -17,17 +17,27 @@ const areas = [
 
 export function ResearchAreas() {
   return (
-    <section className="relative bg-surface-elevated section-padding overflow-hidden">
+    <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
         <div className="text-center mb-16">
-          <motion.div initial={{ opacity: 0, y: 12, filter: "blur(4px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-            <div className="h-1 w-1 rounded-full bg-accent" />
-            <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Focus Areas</span>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+          >
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Focus Areas</p>
           </motion.div>
-          <TextReveal variant="fade-up" delay={0.05} className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="fade-up" delay={0.05} className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
             Our core research areas
           </TextReveal>
-          <motion.p initial={{ opacity: 0, y: 10, filter: "blur(4px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 text-brand-medium/60 max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+            className="mt-3 max-w-2xl mx-auto" style={{ color: "#515459" }}
+          >
             We focus on the most critical intersections of technology, law, and society in East Africa.
           </motion.p>
         </div>
@@ -37,17 +47,18 @@ export function ResearchAreas() {
             <RevealItem
               key={area.title}
               variant="scale-fade"
-              className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated min-h-56"
             >
-              <Image src={area.image} alt={area.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-              <div className="absolute inset-0 bg-primary/80 group-hover:bg-primary/70 transition-colors duration-500" />
+              <div className="group relative overflow-hidden min-h-56" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                <Image src={area.image} alt={area.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                <div className="absolute inset-0 bg-primary/80" style={{ transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
 
-              <div className="relative z-10 p-7">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-accent transition-all duration-500 group-hover:scale-110">
-                  <area.icon className="h-5 w-5" />
+                <div className="relative z-10 p-7">
+                  <div className="flex h-12 w-12 items-center justify-center bg-white/10 text-accent" style={{ borderRadius: 8 }}>
+                    <area.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 font-display text-lg font-bold text-white">{area.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{area.description}</p>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-bold text-white">{area.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/55">{area.description}</p>
               </div>
             </RevealItem>
           ))}

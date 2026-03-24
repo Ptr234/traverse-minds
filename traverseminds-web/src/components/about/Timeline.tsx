@@ -46,21 +46,17 @@ export function Timeline() {
         />
         <div className="absolute inset-0 bg-primary/90" />
       </div>
-      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
 
       <div className="container-max relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-5"
+              transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-white/50">
-                Our Journey
-              </span>
+              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our Journey</p>
             </motion.div>
             <TextReveal
               as="h2"
@@ -93,7 +89,7 @@ export function Timeline() {
                           : "md:ml-auto md:pl-8"
                       }`}
                     >
-                      <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5">
+                      <div className="border border-white/10 bg-white/5 p-6" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                         <span className="inline-block rounded-full bg-accent/20 px-3 py-1 text-xs font-bold text-accent">
                           {m.year}
                         </span>

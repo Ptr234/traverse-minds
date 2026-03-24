@@ -25,11 +25,17 @@ export function DivisionFilter({ active, onChange }: DivisionFilterProps) {
           key={f.value}
           onClick={() => onChange(f.value)}
           className={cn(
-            "min-h-11 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300",
+            "min-h-11 px-5 py-2.5 text-sm font-medium",
             active === f.value
-              ? "bg-brand-green text-white"
-              : "border border-light-border bg-white text-brand-medium hover:border-brand-green hover:text-brand-charcoal"
+              ? "bg-accent text-white"
+              : "border bg-white"
           )}
+          style={{
+            borderRadius: 999,
+            transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
+            borderColor: active === f.value ? "transparent" : "rgba(0,0,0,0.1)",
+            color: active === f.value ? "#fff" : "#515459",
+          }}
         >
           {f.label}
         </button>

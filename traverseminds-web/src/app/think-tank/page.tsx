@@ -22,26 +22,21 @@ export default function ThinkTankPage() {
       <Publications />
 
       {/* Evidence Briefs */}
-      <section className="relative bg-surface-elevated section-padding overflow-hidden border-t border-border-light">
-        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
-
+      <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
           <SectionReveal variant="fade-up">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Evidence Briefs</span>
-            </div>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Evidence Briefs</p>
           </SectionReveal>
 
-          <TextReveal variant="clip-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="clip-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
             Evidence Briefs
           </TextReveal>
 
           <SectionReveal variant="scale-fade" delay={0.15}>
-            <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-              <FileText className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-              <p className="text-lg font-semibold text-primary">Coming Soon</p>
-              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
+            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+              <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
+              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
+              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
                 Short-form rapid summaries of our key research findings. Coming soon.
               </p>
             </div>
@@ -50,30 +45,28 @@ export default function ThinkTankPage() {
       </section>
 
       {/* Gated Content */}
-      <section className="relative bg-primary section-padding overflow-hidden">
-        <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 h-96 w-96 -translate-x-1/3 translate-y-1/3 rounded-full bg-accent/5 blur-[120px]" />
-
+      <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10">
           <div className="flex flex-col items-center justify-between gap-12 lg:flex-row">
             <SectionReveal variant="clip-left" className="max-w-2xl text-center lg:text-left">
               <TextReveal variant="blur-in" className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
                 Get the State of Digital Rights Report
               </TextReveal>
-              <p className="mt-5 text-base text-white/50 leading-relaxed">
+              <p className="mt-5 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
                 Our annual comprehensive analysis of the digital policy landscape
                 across Uganda, Kenya, and Tanzania. Free for registered organisations.
               </p>
             </SectionReveal>
 
             <SectionReveal variant="slide-up" delay={0.2} className="w-full max-w-sm">
-              <div className="rounded-3xl border border-white/6 bg-surface-dark-elevated p-8">
+              <div className="border border-white/6 bg-surface-dark-elevated p-8" style={{ borderRadius: 16 }}>
                 <h3 className="font-display text-lg font-bold text-white">Download the Report</h3>
                 <form className="mt-6 space-y-4">
                   <input
                     type="email"
                     placeholder="Your work email"
-                    className="w-full rounded-xl border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none focus:border-accent/40 transition-colors"
+                    className="w-full border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none"
+                    style={{ borderRadius: 8, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     required
                   />
                   <Button variant="primary" className="w-full">
@@ -91,15 +84,13 @@ export default function ThinkTankPage() {
       </section>
 
       {/* Commission Research */}
-      <section id="commission" className="relative bg-white section-padding overflow-hidden">
-        <div className="absolute inset-0 dot-grid-light opacity-30 pointer-events-none" />
-
+      <section id="commission" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
-          <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
             Commission Research
           </TextReveal>
           <SectionReveal variant="fade-blur" delay={0.1}>
-            <p className="mt-5 mx-auto max-w-2xl text-base text-brand-medium/60 leading-relaxed">
+            <p className="mt-5 mx-auto max-w-2xl text-base leading-relaxed" style={{ color: "#515459" }}>
               Need deep-dive analysis on a specific digital policy or civic-tech topic?
               Our researchers are available for commissioned projects, gap analyses,
               and impact assessments.
@@ -115,27 +106,22 @@ export default function ThinkTankPage() {
       </section>
 
       {/* Research Filter Placeholder */}
-      <section className="relative bg-surface-elevated section-padding overflow-hidden">
-        <div className="absolute inset-0 dot-grid-light opacity-40 pointer-events-none" />
-
+      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
           <SectionReveal variant="mask-wipe">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/8 bg-primary/3 px-4 py-1.5 mb-5">
-              <div className="h-1 w-1 rounded-full bg-accent" />
-              <span className="text-[11px] uppercase tracking-[0.15em] font-semibold text-primary/50">Archive</span>
-            </div>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Archive</p>
           </SectionReveal>
 
-          <TextReveal variant="slide-up" className="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight">
+          <TextReveal variant="slide-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
             Research Archive
           </TextReveal>
 
           <SectionReveal variant="clip-inset" delay={0.15}>
-            <div className="mt-10 rounded-3xl border-2 border-dashed border-border-light py-16 max-w-2xl mx-auto">
-              <Filter className="mx-auto h-10 w-10 text-brand-muted/30 mb-4" />
-              <p className="text-lg font-semibold text-primary">Coming Soon</p>
-              <p className="mt-2 text-brand-medium/60 max-w-md mx-auto">
-                Full research archive with topic, country, and year filtering — coming with our first publications.
+            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+              <Filter className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
+              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
+              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
+                Full research archive with topic, country, and year filtering -- coming with our first publications.
               </p>
             </div>
           </SectionReveal>

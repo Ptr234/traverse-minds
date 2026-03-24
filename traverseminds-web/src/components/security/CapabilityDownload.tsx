@@ -17,8 +17,8 @@ interface DownloadFormData {
 
 const inputCls = (err: boolean) =>
   cn(
-    "h-12 w-full rounded-xl border bg-white px-4 text-sm text-primary outline-none transition-all duration-300 placeholder:text-brand-muted/50 focus:border-accent focus:ring-2 focus:ring-accent/15",
-    err ? "border-red-400" : "border-border-light"
+    "h-12 w-full border bg-white px-4 text-sm outline-none",
+    err ? "border-red-400" : ""
   );
 
 export function CapabilityDownload() {
@@ -42,17 +42,14 @@ export function CapabilityDownload() {
   };
 
   return (
-    <section id="capability" className="relative bg-primary section-padding overflow-hidden">
-      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 h-96 w-96 -translate-x-1/3 translate-y-1/3 rounded-full bg-accent/5 blur-[120px]" />
-
+    <section id="capability" style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
         <SectionReveal variant="clip-inset">
-          <div className="rounded-3xl border border-white/6 bg-surface-dark-elevated p-8 md:p-12">
+          <div className="border border-white/6 bg-surface-dark-elevated p-8 md:p-12" style={{ borderRadius: 16 }}>
             <div className="flex flex-col items-start gap-10 md:flex-row md:items-center">
               <div className="flex-1">
                 <SectionReveal variant="fade-up" delay={0.1}>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
                     <FileDown className="h-6 w-6 text-accent" />
                   </div>
                 </SectionReveal>
@@ -65,7 +62,7 @@ export function CapabilityDownload() {
                   Capability Statement
                 </TextReveal>
                 <SectionReveal variant="fade-up" delay={0.25}>
-                  <p className="mt-3 max-w-lg text-white/50 leading-relaxed">
+                  <p className="mt-3 max-w-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
                     Download our detailed capability statement covering team credentials, service methodology, and compliance certifications.
                   </p>
                 </SectionReveal>
@@ -77,7 +74,7 @@ export function CapabilityDownload() {
                       "Compliance framework coverage",
                       "Engagement models and pricing",
                     ].map((t) => (
-                      <li key={t} className="flex items-center gap-2.5 text-sm text-white/55">
+                      <li key={t} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
                         <CheckCircle2 className="h-4 w-4 text-emerald shrink-0" />
                         {t}
                       </li>
@@ -91,7 +88,8 @@ export function CapabilityDownload() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center rounded-2xl border border-emerald/20 bg-emerald/10 p-8 text-center"
+                    className="flex flex-col items-center border border-emerald/20 bg-emerald/10 p-8 text-center"
+                    style={{ borderRadius: 8 }}
                   >
                     <CheckCircle2 className="h-10 w-10 text-emerald" />
                     <p className="mt-3 font-semibold text-white">Download ready</p>
@@ -101,11 +99,11 @@ export function CapabilityDownload() {
                     </Button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 rounded-2xl border border-white/6 bg-white/3 p-6 backdrop-blur-sm" noValidate>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border border-white/6 bg-white/3 p-6" style={{ borderRadius: 8 }} noValidate>
                     <p className="text-sm font-medium text-white/60">Enter your details to download:</p>
-                    <input type="text" placeholder="Full Name" autoComplete="name" className={inputCls(!!errors.name)} {...register("name", { required: "Required" })} />
-                    <input type="email" placeholder="Work Email" autoComplete="email" className={inputCls(!!errors.email)} {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid" } })} />
-                    <input type="text" placeholder="Organisation" autoComplete="organization" className={inputCls(!!errors.organisation)} {...register("organisation", { required: "Required" })} />
+                    <input type="text" placeholder="Full Name" autoComplete="name" className={inputCls(!!errors.name)} style={{ borderRadius: 8, borderColor: errors.name ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("name", { required: "Required" })} />
+                    <input type="email" placeholder="Work Email" autoComplete="email" className={inputCls(!!errors.email)} style={{ borderRadius: 8, borderColor: errors.email ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid" } })} />
+                    <input type="text" placeholder="Organisation" autoComplete="organization" className={inputCls(!!errors.organisation)} style={{ borderRadius: 8, borderColor: errors.organisation ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("organisation", { required: "Required" })} />
                     {serverError && <p className="text-sm text-red-400">{serverError}</p>}
                     <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
                       {isSubmitting ? "Processing..." : "Unlock Download"}
