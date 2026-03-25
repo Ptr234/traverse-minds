@@ -1,11 +1,11 @@
 import type { NextConfig } from "next";
 
-const isGithubPages = process.env.GITHUB_PAGES === "true";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: isGithubPages ? "/traverse-minds" : "",
-  assetPrefix: isGithubPages ? "/traverse-minds/" : "",
+  basePath: basePath,
+  assetPrefix: basePath,
   images: {
     unoptimized: true,
     remotePatterns: [
