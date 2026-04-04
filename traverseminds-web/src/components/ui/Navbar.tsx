@@ -272,10 +272,11 @@ export function Navbar() {
                   </p>
                   <Link 
                     href="/about" 
+                    onClick={() => setIsMegaOpen(false)}
                     className="group inline-flex items-center gap-2 text-sm font-semibold text-gn-100 hover:text-accent transition-colors"
                   >
                     The Traverse Model
-                    <div className="w-5 h-[1px] bg-gn-100 group-hover:bg-accent group-hover:w-8 transition-all duration-300" />
+                    <div className="w-5 h-px bg-gn-100 group-hover:bg-accent group-hover:w-8 transition-all duration-300" />
                   </Link>
                 </div>
 
@@ -288,6 +289,7 @@ export function Navbar() {
                       <Link
                         key={div.href}
                         href={div.href}
+                        onClick={() => setIsMegaOpen(false)}
                         className="group flex flex-col items-start"
                       >
                         <div className="mb-4 flex items-center justify-center w-10 h-10 rounded-lg bg-gn-900 group-hover:bg-accent-muted transition-colors duration-300">

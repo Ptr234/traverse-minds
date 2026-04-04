@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion"; // used in components but maybe not directly in this file anymore?
 import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";

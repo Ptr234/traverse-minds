@@ -82,6 +82,7 @@ people who have verbally expressed interest in a security audit,
 penetration test, or compliance review.
 
 **What "done" looks like:**
+
 - `/security` page live with all 6 services described
 - Enquiry form working and routing to HubSpot
 - Capability statement PDF downloadable (email-gated)
@@ -98,6 +99,7 @@ penetration test, or compliance review.
 an intimate, high-quality lunch discussion about cyber threats.
 
 **What "done" looks like:**
+
 - `/events/cyber-luncheon` page live
 - Event date, venue, and agenda confirmed
 - RSVP form working
@@ -115,6 +117,7 @@ law firms, researchers, or government staff who have explicitly
 said they would pay for better access to public documents.
 
 **What "done" looks like:**
+
 - `/public-record` landing page live (no backend product yet)
 - Waitlist form live with persona selector
 - 100+ waitlist signups from genuine target users
@@ -131,6 +134,7 @@ ready to publish, or a confirmed relationship with a donor,
 OGP partner, or government ministry.
 
 **What "done" looks like:**
+
 - `/think-tank` page live
 - First full research report published and downloadable
 - Report shared with at least 50 target readers
@@ -276,7 +280,7 @@ something worth writing about — which only exists after Step 1–5.
 ### What makes a good first article for each division
 
 | Division | First article topic |
-|---|---|
+| --- | --- |
 | Security | "The top 5 cyber threats facing Ugandan banks in 2026" |
 | Events | "What we learned at the first Cyber Luncheon Kampala" |
 | Public Record EA | "Why Uganda's public data is scattered — and what we're doing about it" |
@@ -357,7 +361,7 @@ it is a separate application, not a page on the main site.
 ## What "Finished" Means for Each Step
 
 | Step | Finished when |
-|---|---|
+| --- | --- |
 | 0 — Foundation | Site loads, emails send, CMS works, privacy policy live |
 | 1 — Lead Division | Page live + primary function working + 1 real outcome produced |
 | 2 — Homepage | Stranger understands the company in 8 seconds |
@@ -387,7 +391,7 @@ it is a separate application, not a page on the main site.
 ## Current Status (March 2026)
 
 | Item | Status |
-|---|---|
+| --- | --- |
 | Vision & strategy | Complete |
 | Master plan document | Complete |
 | Domain (traverseminds.ug) | Registered (503 — not yet live) |
