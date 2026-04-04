@@ -30,6 +30,7 @@ const navLinks = [
   { label: "Events", href: "/events" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
+  { label: "Meet Christine", href: "/meet-christine" },
 ];
 
 const ease = [0.215, 0.61, 0.355, 1] as const;
