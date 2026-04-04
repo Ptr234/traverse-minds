@@ -42,50 +42,6 @@ export default function MediaPage() {
                 </div>
               </SectionReveal>
               <SectionReveal variant="clip-right" delay={0.2} className="order-1 lg:order-2">
-... User modified the `new_string` content to be: import type { Metadata } from "next";
-import Image from "next/image";
-
-import { Hero as MediaHero } from "@/components/media/Hero";
-import { Button } from "@/components/ui/Button";
-import { Newspaper, MessageSquare, Download, ArrowRight, Mic, Rss } from "lucide-react";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
-import { PageTransition } from "@/components/ui/PageTransition";
-
-export const metadata: Metadata = {
-  title: "Traverse Media & Facts & Figures Podcast | Traverse Minds",
-  description: "Facts & Figures -- East Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
-};
-
-const podcastPlatforms = [
-  { name: "Spotify", href: "#", color: "bg-[#1DB954]" },
-  { name: "Apple Podcasts", href: "#", color: "bg-[#9933CC]" },
-  { name: "Google Podcasts", href: "#", color: "bg-[#4285F4]" },
-  { name: "RSS Feed", href: "#", color: "bg-[#EE802F]" },
-];
-
-export default function MediaPage() {
-  return (
-    <main className="flex flex-col">
-      <PageTransition>
-        <MediaHero />
-
-        {/* Media Philosophy */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
-              <SectionReveal variant="clip-inset" className="order-2 lg:order-1">
-                <div className="relative aspect-4/5 overflow-hidden" style={{ borderRadius: 16, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                  <Image
-                    src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=2070&auto=format&fit=crop"
-                    alt="Newsroom and digital media"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-              </SectionReveal>
-              <SectionReveal variant="clip-right" delay={0.2} className="order-1 lg:order-2">
                 <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our Mission</p>
 
                 <TextReveal
@@ -250,4 +206,4 @@ export default function MediaPage() {
     </main>
   );
 }
-.
+

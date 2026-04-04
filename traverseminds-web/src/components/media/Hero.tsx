@@ -16,24 +16,6 @@ const heroImages = [
 export function Hero() {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-... User modified the `new_string` content to be: "use client";
-
-import { motion } from "framer-motion";
-import { Mic, Play } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { TextReveal } from "@/components/ui/TextReveal";
-
-const heroImages = [
-  "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=2070&auto=format&fit=crop",
-];
-
-export function Hero() {
-  return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
       <ImageSlideshow images={heroImages} overlay="bg-primary/65" />
 
       <div className="container-max relative z-10 px-6 lg:px-8 pt-32 pb-24 lg:pt-40">
@@ -75,4 +57,3 @@ export function Hero() {
     </section>
   );
 }
-.

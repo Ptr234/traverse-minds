@@ -19,27 +19,6 @@ const blogHeroImages = [
 
 const mockPosts: {
   title: string; slug: string; excerpt: string; division: string;
-... User modified the `new_string` content to be: "use client";
-
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { PostCard } from "@/components/blog/PostCard";
-import { DivisionFilter } from "@/components/blog/DivisionFilter";
-import { NewsletterSignup } from "@/components/home/NewsletterSignup";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { Search } from "lucide-react";
-
-const blogHeroImages = [
-  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
-];
-
-const mockPosts: {
-  title: string; slug: string; excerpt: string; division: string;
   date: string; readTime: string; image: string;
   author: { name: string; photo: string };
 }[] = [];
@@ -143,4 +122,4 @@ export default function BlogPage() {
     </PageTransition>
   );
 }
-.
+

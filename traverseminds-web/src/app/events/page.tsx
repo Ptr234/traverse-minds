@@ -33,41 +33,6 @@ const upcomingEvents = [
 ];
 
 export default function EventsPage() {
-... User modified the `new_string` content to be: "use client";
-
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
-import { Calendar, MapPin, ArrowRight, Users, Mic, Clock } from "lucide-react";
-
-const eventsHeroImages = [
-  "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
-];
-
-const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
-
-const upcomingEvents = [
-  {
-    title: "Cyber Luncheon Kampala -- May 2026",
-    type: "Luncheon",
-    date: "15 May 2026",
-    location: "Kampala, Uganda",
-    slug: "/events/cyber-luncheon",
-    image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
-    featured: true,
-  },
-];
-
-export default function EventsPage() {
   const [activeType, setActiveType] = useState<string>("All");
 
   return (
