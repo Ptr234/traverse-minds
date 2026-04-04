@@ -7,10 +7,10 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { BookOpen, ArrowRight } from "lucide-react";
 
 const heroImages = [
-  "/cyber/cyber_image_04.jpg",
-  "/cyber/cyber_image_06.jpg",
-  "/cyber/cyber_image_11.jpg",
-  "/cyber/cyber_image_15.jpg",
+  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
 ];
 
 export function Hero() {

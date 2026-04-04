@@ -7,10 +7,10 @@ import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const heroImages = [
-  "/cyber/cyber_image_33.jpg",
-  "/cyber/cyber_image_44.jpg",
-  "/cyber/cyber_image_05.jpg",
-  "/cyber/cyber_image_40.jpg",
+  "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2104&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=2070&auto=format&fit=crop",
 ];
 
 const audiences = [

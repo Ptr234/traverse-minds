@@ -19,7 +19,7 @@ export function PublicRecordTeaser() {
   return (
     <section className="relative overflow-hidden" style={{ background: "#212429" }}>
       {/* Subtle background image */}
-      <Image src="/cyber/cyber_image_09.jpg" alt="" fill className="object-cover" style={{ opacity: 0.08 }} sizes="100vw" priority={false} />
+      <Image src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" alt="" fill className="object-cover" style={{ opacity: 0.08 }} sizes="100vw" priority={false} />
 
       <div className="relative z-10" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px 24px" }}>
         <SectionReveal variant="fade-up" className="mx-auto text-center" style={{ maxWidth: 596 }}>

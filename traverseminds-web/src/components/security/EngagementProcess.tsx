@@ -6,10 +6,25 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const steps = [
-  { icon: Search, step: "01", title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session.", image: "/cyber/cyber_image_07.jpg" },
-  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit -- penetration tests, compliance reviews, or threat assessments.", image: "/cyber/cyber_image_18.jpg" },
-  { icon: FileText, step: "03", title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps.", image: "/cyber/cyber_image_45.jpg" },
-  { icon: Wrench, step: "04", title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly.", image: "/cyber/cyber_image_01.jpg" },
+  { icon: Search, step: "01", title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session.", image: "https://images.unsplash.com/photo-1454165833762-01953e68d21f?q=80&w=2070&auto=format&fit=crop" },
+  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit -- penetration tests, compliance reviews, or threat assessments.", image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop" },
+  { icon: FileText, step: "03", title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" },
+  { icon: Wrench, step: "04", title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly.", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" },
+];
+
+export function EngagementProcess() {
+... User modified the `new_string` content to be: "use client";
+
+import Image from "next/image";
+import { Search, ClipboardCheck, FileText, Wrench } from "lucide-react";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
+
+const steps = [
+  { icon: Search, step: "01", title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session.", image: "https://images.unsplash.com/photo-1454165833762-01953e68d21f?q=80&w=2070&auto=format&fit=crop" },
+  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit -- penetration tests, compliance reviews, or threat assessments.", image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop" },
+  { icon: FileText, step: "03", title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" },
+  { icon: Wrench, step: "04", title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly.", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" },
 ];
 
 export function EngagementProcess() {

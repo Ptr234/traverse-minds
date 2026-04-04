@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 
 const heroImages = [
-  "/cyber/cyber_image_02.jpg",
-  "/cyber/cyber_image_08.jpg",
-  "/cyber/cyber_image_14.jpg",
-  "/cyber/cyber_image_20.jpg",
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1451187530220-cf00172e0478?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1510511459019-5dee997dd1db?q=80&w=2070&auto=format&fit=crop",
 ];
 
 const stagger = {

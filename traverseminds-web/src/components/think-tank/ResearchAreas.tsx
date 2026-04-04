@@ -7,12 +7,12 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const areas = [
-  { icon: Shield, title: "Data Protection", description: "Analysing the impact and implementation of the Uganda PDPA 2019 and regional data protection frameworks.", image: "/cyber/cyber_image_14.jpg" },
-  { icon: Brain, title: "AI Governance", description: "Researching ethics, bias, and regulatory approaches to Artificial Intelligence in the African context.", image: "/cyber/cyber_image_17.jpg" },
-  { icon: Shield, title: "Cybersecurity Policy", description: "Evaluating national cybersecurity strategies, incident reporting frameworks, and sector-specific regulations across the EAC.", image: "/cyber/cyber_image_08.jpg" },
-  { icon: Globe, title: "Open Government", description: "Advocating for data transparency, digitisation of public records, and OGP commitments to improve accountability.", image: "/cyber/cyber_image_06.jpg" },
-  { icon: Users, title: "Digital Rights", description: "Investigating online freedoms, surveillance oversight, and the balance between security and civil liberties.", image: "/cyber/cyber_image_33.jpg" },
-  { icon: FileText, title: "Public Procurement", description: "Analysing transparency in government procurement processes and the role of technology in reducing corruption.", image: "/cyber/cyber_image_11.jpg" },
+  { icon: Shield, title: "Data Protection", description: "Analysing the impact and implementation of the Uganda PDPA 2019 and regional data protection frameworks.", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop" },
+  { icon: Brain, title: "AI Governance", description: "Researching ethics, bias, and regulatory approaches to Artificial Intelligence in the African context.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop" },
+  { icon: Shield, title: "Cybersecurity Policy", description: "Evaluating national cybersecurity strategies, incident reporting frameworks, and sector-specific regulations across the EAC.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
+  { icon: Globe, title: "Open Government", description: "Advocating for data transparency, digitisation of public records, and OGP commitments to improve accountability.", image: "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop" },
+  { icon: Users, title: "Digital Rights", description: "Investigating online freedoms, surveillance oversight, and the balance between security and civil liberties.", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop" },
+  { icon: FileText, title: "Public Procurement", description: "Analysing transparency in government procurement processes and the role of technology in reducing corruption.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" },
 ];
 
 export function ResearchAreas() {

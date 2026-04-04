@@ -1,24 +1,41 @@
-import type { Metadata } from "next";
+"use client";
+
+import { motion } from "framer-motion";
+import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { EACMap } from "@/components/ui/EACMap";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 const contactHeroImages = [
-  "/cyber/cyber_image_04.jpg",
-  "/cyber/cyber_image_22.jpg",
-  "/cyber/cyber_image_32.jpg",
-  "/cyber/cyber_image_06.jpg",
+  "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2020&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
 ];
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with Traverse Minds UG. Cybersecurity services, events, research partnerships. Based in Kampala, Uganda.",
-};
+export default function ContactPage() {
+... User modified the `new_string` content to be: "use client";
+
+import { motion } from "framer-motion";
+import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
+import { ContactForm } from "@/components/contact/ContactForm";
+import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
+import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { EACMap } from "@/components/ui/EACMap";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { PageTransition } from "@/components/ui/PageTransition";
+
+const contactHeroImages = [
+  "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2020&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
+];
 
 export default function ContactPage() {
   return (
@@ -208,3 +225,4 @@ export default function ContactPage() {
     </PageTransition>
   );
 }
+.

@@ -7,12 +7,12 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const divisions = [
-  { id: "security", name: "Cybersecurity", icon: Shield, desc: "End-to-end protection for critical infrastructure, banks, and government.", href: "/security", image: "/cyber/cyber_image_02.jpg" },
-  { id: "think-tank", name: "Think Tank", icon: Brain, desc: "Independent research and policy analysis for the digital age.", href: "/think-tank", image: "/cyber/cyber_image_04.jpg" },
-  { id: "public-record", name: "Public Record EA", icon: Database, desc: "AI-powered transparency tool for accessing public documents.", href: "/public-record", image: "/cyber/cyber_image_20.jpg" },
-  { id: "events", name: "Events", icon: Calendar, desc: "High-level forums like the Cyber Luncheon for digital leaders.", href: "/events", image: "/cyber/cyber_image_25.jpg" },
-  { id: "media", name: "Media", icon: Mic, desc: "Amplifying narratives through podcasts, reports, and coverage.", href: "/media", image: "/cyber/cyber_image_16.jpg" },
-  { id: "literacy", name: "Digital Literacy", icon: BookOpen, desc: "Empowering SMEs and citizens with essential digital skills and safety.", href: "/literacy", image: "/cyber/cyber_image_33.jpg" },
+  { id: "security", name: "Cybersecurity", icon: Shield, desc: "End-to-end protection for critical infrastructure, banks, and government.", href: "/security", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
+  { id: "think-tank", name: "Think Tank", icon: Brain, desc: "Independent research and policy analysis for the digital age.", href: "/think-tank", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" },
+  { id: "public-record", name: "Public Record EA", icon: Database, desc: "AI-powered transparency tool for accessing public documents.", href: "/public-record", image: "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2030&auto=format&fit=crop" },
+  { id: "events", name: "Events", icon: Calendar, desc: "High-level forums like the Cyber Luncheon for digital leaders.", href: "/events", image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop" },
+  { id: "media", name: "Media", icon: Mic, desc: "Amplifying narratives through podcasts, reports, and coverage.", href: "/media", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=2070&auto=format&fit=crop" },
+  { id: "literacy", name: "Digital Literacy", icon: BookOpen, desc: "Empowering SMEs and citizens with essential digital skills and safety.", href: "/literacy", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2104&auto=format&fit=crop" },
 ];
 
 export function FeaturedDivision() {

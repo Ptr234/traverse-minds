@@ -40,7 +40,7 @@ export function PodcastPreview() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <Image src="/cyber/cyber_image_30.jpg" alt="" fill className="object-cover" style={{ opacity: 0.06 }} sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=2070&auto=format&fit=crop" alt="" fill className="object-cover" style={{ opacity: 0.06 }} sizes="100vw" />
         <div className="absolute inset-0" style={{ background: "#212429" }} />
       </div>
 

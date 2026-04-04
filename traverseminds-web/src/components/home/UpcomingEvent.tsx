@@ -20,7 +20,7 @@ export function UpcomingEvent() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <Image src="/cyber/cyber_image_25.jpg" alt="" fill className="object-cover" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop" alt="" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: "rgba(33,36,41,0.88)" }} />
       </div>
 

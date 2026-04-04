@@ -12,10 +12,10 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { Calendar, MapPin, ArrowRight, Users, Mic, Clock } from "lucide-react";
 
 const eventsHeroImages = [
-  "/cyber/cyber_image_29.jpg",
-  "/cyber/cyber_image_25.jpg",
-  "/cyber/cyber_image_10.jpg",
-  "/cyber/cyber_image_38.jpg",
+  "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
 ];
 
 const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
@@ -27,7 +27,42 @@ const upcomingEvents = [
     date: "15 May 2026",
     location: "Kampala, Uganda",
     slug: "/events/cyber-luncheon",
-    image: "/cyber/cyber_image_25.jpg",
+    image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
+    featured: true,
+  },
+];
+
+export default function EventsPage() {
+... User modified the `new_string` content to be: "use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { Calendar, MapPin, ArrowRight, Users, Mic, Clock } from "lucide-react";
+
+const eventsHeroImages = [
+  "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+];
+
+const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
+
+const upcomingEvents = [
+  {
+    title: "Cyber Luncheon Kampala -- May 2026",
+    type: "Luncheon",
+    date: "15 May 2026",
+    location: "Kampala, Uganda",
+    slug: "/events/cyber-luncheon",
+    image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
     featured: true,
   },
 ];
@@ -158,8 +193,8 @@ export default function EventsPage() {
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <SectionReveal variant="fade-up" staggerChildren={0.12} className="container-max relative z-10 max-w-4xl mx-auto grid grid-cols-1 gap-5 md:grid-cols-2">
           {[
-            { icon: Mic, title: "Speak at Our Events", desc: "Share your expertise with East Africa's cybersecurity community.", img: "/cyber/cyber_image_10.jpg" },
-            { icon: Users, title: "Sponsor an Event", desc: "Put your brand in front of top cybersecurity decision-makers.", img: "/cyber/cyber_image_38.jpg" },
+            { icon: Mic, title: "Speak at Our Events", desc: "Share your expertise with East Africa's cybersecurity community.", img: "https://images.unsplash.com/photo-1475721027785-f749ce072e32?q=80&w=2070&auto=format&fit=crop" },
+            { icon: Users, title: "Sponsor an Event", desc: "Put your brand in front of top cybersecurity decision-makers.", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=2070&auto=format&fit=crop" },
           ].map((c) => (
             <RevealItem key={c.title} variant="scale-fade">
               <div className="group overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>

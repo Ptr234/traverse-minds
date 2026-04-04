@@ -80,7 +80,7 @@ export function WhatWeDo() {
           <SectionReveal variant="clip-inset" delay={0.2}>
             <div className="relative overflow-hidden" style={{ aspectRatio: "380/500", borderRadius: 8 }}>
               <Image
-                src="/cyber/cyber_image_02.jpg"
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
                 alt="Digital Security"
                 fill
                 className="object-cover"

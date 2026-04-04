@@ -46,7 +46,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 16 }}>
                   <Image
-                    src="/cyber/cyber_image_44.jpg"
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
                     alt="Team collaboration"
                     fill
                     className="object-cover"

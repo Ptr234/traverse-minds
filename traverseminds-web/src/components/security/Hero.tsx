@@ -7,10 +7,10 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowDown, ShieldCheck, ArrowRight } from "lucide-react";
 
 const heroImages = [
-  "/cyber/cyber_image_14.jpg",
-  "/cyber/cyber_image_02.jpg",
-  "/cyber/cyber_image_21.jpg",
-  "/cyber/cyber_image_01.jpg",
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?q=80&w=2070&auto=format&fit=crop",
 ];
 
 export function SecurityHero() {

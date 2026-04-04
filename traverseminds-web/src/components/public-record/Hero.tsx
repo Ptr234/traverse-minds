@@ -7,10 +7,28 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight } from "lucide-react";
 
 const heroImages = [
-  "/cyber/cyber_image_20.jpg",
-  "/cyber/cyber_image_11.jpg",
-  "/cyber/cyber_image_08.jpg",
-  "/cyber/cyber_image_21.jpg",
+  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2030&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2070&auto=format&fit=crop",
+];
+
+export function Hero() {
+  return (
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+... User modified the `new_string` content to be: "use client";
+
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { ArrowRight } from "lucide-react";
+
+const heroImages = [
+  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2030&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2070&auto=format&fit=crop",
 ];
 
 export function Hero() {

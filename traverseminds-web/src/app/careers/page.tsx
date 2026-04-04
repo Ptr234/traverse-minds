@@ -10,10 +10,10 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { Briefcase, Users, Zap, Globe, ArrowRight, GraduationCap, Loader2, CheckCircle } from "lucide-react";
 
 const careersHeroImages = [
-  "/cyber/cyber_image_44.jpg",
-  "/cyber/cyber_image_35.jpg",
-  "/cyber/cyber_image_37.jpg",
-  "/cyber/cyber_image_24.jpg",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2074&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop",
 ];
 
 const benefits = [

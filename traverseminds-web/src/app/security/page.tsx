@@ -87,7 +87,7 @@ export default function SecurityPage() {
             <SectionReveal variant="clip-inset" delay={0.2}>
               <div className="relative aspect-4/3 min-h-80 overflow-hidden" style={{ borderRadius: 16 }}>
                 <Image
-                  src="/cyber/cyber_image_13.jpg"
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
                   alt="Team working on cybersecurity in an office"
                   fill
                   className="object-cover"
