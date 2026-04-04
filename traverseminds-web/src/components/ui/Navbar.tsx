@@ -114,7 +114,7 @@ export function Navbar() {
 
           {/* ── CENTER SEGMENT: Nav links ── */}
           <div
-            className="hidden md:flex items-center flex-1"
+            className="hidden md:flex items-center justify-center flex-1"
             style={{ ...glassStyle, height: 56, pointerEvents: "auto" }}
           >
             {navLinks.map((link) => {
