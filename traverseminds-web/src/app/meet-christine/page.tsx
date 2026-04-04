@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ArrowRight, Twitter, Linkedin, Mail, Play, BookOpen, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
