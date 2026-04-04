@@ -64,7 +64,7 @@ export function Hero() {
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button variant="outline-dark" size="lg">
+            <Button variant="outline-dark" size="lg" href="#features">
               See How it Works
             </Button>
           </motion.div>
