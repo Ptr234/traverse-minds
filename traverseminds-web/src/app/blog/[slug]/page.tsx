@@ -54,7 +54,7 @@ export default function BlogPostPage() {
       <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="absolute inset-0">
           <Image src={mockPost.image} alt="" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-green via-brand-green/85 to-brand-green/60" />
+          <div className="absolute inset-0 bg-linear-to-t from-brand-green via-brand-green/85 to-brand-green/60" />
         </div>
         <div className="relative mx-auto max-w-3xl">
           <Link href="/blog" className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white">

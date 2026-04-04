@@ -39,16 +39,16 @@ export function TrustLogoStrip({
         className={cn(
           "pointer-events-none absolute inset-y-0 left-0 z-10 w-24",
           isDark
-            ? "bg-gradient-to-r from-primary to-transparent"
-            : "bg-gradient-to-r from-bg-light to-transparent",
+            ? "bg-linear-to-r from-primary to-transparent"
+            : "bg-linear-to-r from-bg-light to-transparent",
         )}
       />
       <div
         className={cn(
           "pointer-events-none absolute inset-y-0 right-0 z-10 w-24",
           isDark
-            ? "bg-gradient-to-l from-primary to-transparent"
-            : "bg-gradient-to-l from-bg-light to-transparent",
+            ? "bg-linear-to-l from-primary to-transparent"
+            : "bg-linear-to-l from-bg-light to-transparent",
         )}
       />
 

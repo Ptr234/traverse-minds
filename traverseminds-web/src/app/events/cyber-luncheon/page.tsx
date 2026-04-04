@@ -24,8 +24,8 @@ export default function CyberLuncheonPage() {
       <section className="relative min-h-[80vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-light-surface/60 via-transparent to-light-surface/80" />
+          <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/85 to-white/40" />
+          <div className="absolute inset-0 bg-linear-to-b from-light-surface/60 via-transparent to-light-surface/80" />
         </div>
         <Particles />
         <div className="relative mx-auto flex min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">

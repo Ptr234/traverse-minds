@@ -129,16 +129,16 @@ export function PodcastPreview() {
                   <div className="flex-1 min-w-0">
                     <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.3)" }}>{ep.tag}</span>
                     <h3
-                      className="font-display group-hover:!text-[#ff4c00]"
+                      className="font-display group-hover:text-accent!"
                       style={{ marginTop: 4, fontSize: 21, fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.21px", color: "#fff", transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     >
                       {ep.title}
                     </h3>
-                  </div>
+                    </div>
 
-                  {/* Play button — GatesNotes: hover turns accent */}
-                  <div
-                    className="hidden sm:flex items-center justify-center shrink-0 group-hover:!bg-[#ff4c00] group-hover:!text-white"
+                    {/* Play button — GatesNotes: hover turns accent */}
+                    <div
+                    className="hidden sm:flex items-center justify-center shrink-0 group-hover:bg-accent! group-hover:text-white!"
                     style={{
                       height: 40, width: 40,
                       borderRadius: 4,
@@ -147,7 +147,7 @@ export function PodcastPreview() {
                       backdropFilter: "blur(10px)",
                       transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
                     }}
-                  >
+                    >
                     <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 ml-0.5" aria-hidden><path d="M8 5v14l11-7z" /></svg>
                   </div>
                 </div>

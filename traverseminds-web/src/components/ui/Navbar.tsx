@@ -14,7 +14,6 @@ import {
   Mic,
   Brain,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
 const divisions = [
@@ -48,6 +47,14 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setIsMegaOpen(false);
+    setIsMobileOpen(false);
+  }
+
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -67,11 +74,6 @@ export function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    setIsMegaOpen(false);
-    setIsMobileOpen(false);
-  }, [pathname]);
 
   const openMega = useCallback(() => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -98,7 +100,7 @@ export function Navbar() {
           {/* ── LEFT SEGMENT: Logo button (64x56) ── */}
           <Link
             href="/"
-            className="shrink-0 flex items-center justify-center hover:!bg-[rgba(0,0,0,0.6)]"
+            className="shrink-0 flex items-center justify-center hover:bg-[rgba(0,0,0,0.6)]!"
             style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
             {/* Stacked logo like GatesNotes LogoStack.svg */}
@@ -205,7 +207,7 @@ export function Navbar() {
           {/* ── RIGHT SEGMENT: Search/CTA button (64x56) ── */}
           <Link
             href="/contact"
-            className="hidden md:flex shrink-0 items-center justify-center hover:!bg-[rgba(0,0,0,0.6)]"
+            className="hidden md:flex shrink-0 items-center justify-center hover:bg-[rgba(0,0,0,0.6)]!"
             style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
             <Search style={{ height: 20, width: 20, color: "#fff" }} />
