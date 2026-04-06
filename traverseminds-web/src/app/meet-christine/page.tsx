@@ -309,7 +309,7 @@ export default function MeetChristinePage() {
                   <div key={row.label} className={cn(
                     "group p-5 flex flex-col gap-2 transition-colors",
                     i !== 4 ? "border-b border-white/5" : "",
-                    "hover:bg-white/[0.02]"
+                    "hover:bg-white/2"
                   )}>
                     <div className="flex items-center gap-2.5">
                       <span className="text-accent/60 group-hover:text-accent transition-colors">

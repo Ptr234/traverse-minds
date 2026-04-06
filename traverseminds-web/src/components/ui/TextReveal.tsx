@@ -8,7 +8,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 /* ── Word-by-word reveal ─────────────────────────── */
 
 interface TextRevealProps {
-  children: string;
+  children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
   as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
@@ -65,8 +65,7 @@ export function TextReveal({
   variant = "fade-up",
 }: TextRevealProps) {
   const Tag = motion[as] as typeof motion.h2;
-  const words = children.split(" ");
-
+  
   const container: Variants = {
     hidden: {},
     visible: {
@@ -76,6 +75,28 @@ export function TextReveal({
       },
     },
   };
+
+  if (typeof children !== "string") {
+    return (
+      <Tag
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once, margin }}
+        className={className}
+        style={style}
+      >
+        <motion.span
+          variants={wordVariants[variant]}
+          className="inline-block"
+        >
+          {children}
+        </motion.span>
+      </Tag>
+    );
+  }
+
+  const words = children.split(" ");
 
   return (
     <Tag
@@ -165,7 +186,7 @@ export function LineReveal({
 /* ── Character reveal ── */
 
 interface CharRevealProps {
-  children: string;
+  children: ReactNode;
   className?: string;
   as?: "span" | "p" | "h3" | "h4";
   delay?: number;
@@ -193,8 +214,7 @@ export function CharReveal({
   margin = "-60px",
 }: CharRevealProps) {
   const Tag = motion[as] as typeof motion.span;
-  const chars = children.split("");
-
+  
   const container: Variants = {
     hidden: {},
     visible: {
@@ -204,6 +224,24 @@ export function CharReveal({
       },
     },
   };
+
+  if (typeof children !== "string") {
+    return (
+      <Tag
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once, margin }}
+        className={className}
+      >
+        <motion.span variants={charVariant} className="inline-block">
+          {children}
+        </motion.span>
+      </Tag>
+    );
+  }
+
+  const chars = children.split("");
 
   return (
     <Tag

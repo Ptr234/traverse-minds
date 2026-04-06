@@ -5,6 +5,7 @@ import { Hero } from "@/components/public-record/Hero";
 import { Features } from "@/components/public-record/Features";
 import { Coverage } from "@/components/public-record/Coverage";
 import { WaitlistForm } from "@/components/public-record/WaitlistForm";
+import { SearchInterface } from "@/components/public-record/SearchInterface";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -49,14 +50,33 @@ const pricingPlans = {
 
 export default function PublicRecordPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchJurisdiction, setSearchJurisdiction] = useState("All Africa");
+
   const plans = pricingPlans[billing];
+
+  const handleSearch = (query: string, jurisdiction: string) => {
+    setSearchQuery(query);
+    setSearchJurisdiction(jurisdiction);
+    setIsSearching(true);
+  };
 
   return (
     <div className="flex flex-col">
       <PageTransition>
-      <Hero />
+      <Hero onSearch={handleSearch} />
       <Features />
       <Coverage />
+
+      {/* Search Interface Modal-like Overlay */}
+      {isSearching && (
+        <SearchInterface 
+          query={searchQuery} 
+          initialJurisdiction={searchJurisdiction} 
+          onClose={() => setIsSearching(false)} 
+        />
+      )}
 
       {/* Who it's for */}
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

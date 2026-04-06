@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, CheckCircle, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
+import { cn } from "@/lib/utils";
 
 const waitlistSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -15,7 +16,6 @@ const waitlistSchema = z.object({
   organisation: z.string().optional(),
   persona: z.string().min(1, "Please select your primary role"),
   countryInterest: z.array(z.string()).min(1, "Select at least one country"),
-  message: z.string().optional(),
 });
 
 type WaitlistValues = z.infer<typeof waitlistSchema>;
@@ -34,8 +34,14 @@ const countries = [
   { label: "Kenya", value: "kenya" },
   { label: "Tanzania", value: "tanzania" },
   { label: "Rwanda", value: "rwanda" },
-  { label: "Burundi", value: "burundi" },
+  { label: "Nigeria", value: "nigeria" },
+  { label: "South Africa", value: "south-africa" },
 ];
+
+const inputClasses = (hasError?: boolean) => cn(
+  "h-12 w-full border-b bg-transparent px-0 text-base outline-none transition-all duration-300 placeholder:text-black/20 focus:border-accent",
+  hasError ? "border-red-500" : "border-black/10"
+);
 
 export function WaitlistForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -73,159 +79,155 @@ export function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <div className="bg-white p-8 text-center border" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
-          <CheckCircle className="h-10 w-10" />
+      <section className="py-24 bg-white">
+        <div className="container-max max-w-xl mx-auto px-6 text-center">
+          <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-emerald/10 text-emerald mb-8">
+            <CheckCircle className="h-10 w-10" />
+          </div>
+          <h3 className="font-display text-3xl font-bold text-black mb-4">You&apos;re on the list</h3>
+          <p className="text-black/60 mb-10 leading-relaxed">
+            Thank you for your interest. We&apos;ll reach out as soon as we open access for your cohort.
+          </p>
+          <Button
+            variant="outline"
+            onClick={() => setStatus("idle")}
+          >
+            Back to Public Record
+          </Button>
         </div>
-        <h3 className="mt-6 font-display text-2xl font-bold" style={{ color: "#000" }}>You&apos;re on the list!</h3>
-        <p className="mt-4" style={{ color: "#515459" }}>
-          Thank you for your interest in Public Record Africa. We&apos;ll notify you
-          as soon as we&apos;re ready for your early access.
-        </p>
-        <Button
-          variant="outline"
-          className="mt-8"
-          onClick={() => setStatus("idle")}
-        >
-          Back to site
-        </Button>
-      </div>
+      </section>
     );
   }
 
   return (
-    <section id="waitlist" style={{ background: "#ffffff", paddingTop: 56, paddingBottom: 56 }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionReveal variant="fade-blur" className="mx-auto max-w-3xl">
-          <div className="text-center">
-            <TextReveal variant="slide-up" className="font-display text-3xl font-bold md:text-4xl" style={{ color: "#000" }}>
-              Join the Private Beta
+    <section id="waitlist" className="py-24 bg-[#fafbfc] border-t border-black/5">
+      <div className="container-max max-w-4xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+          <div className="lg:col-span-2">
+            <TextReveal variant="blur-in" className="font-display text-4xl font-bold leading-tight text-black mb-6">
+              Get priority <span className="text-accent">early access</span>
             </TextReveal>
-            <p className="mt-4" style={{ color: "#515459" }}>
-              We are onboarding users in small batches to ensure the highest
-              quality of service. Reserve your spot today.
+            <p className="text-black/60 leading-relaxed mb-8">
+              Join the private beta. We are onboarding users in small batches to ensure high data integrity and specialized support.
             </p>
+            <div className="space-y-4">
+              {["Cross-border search", "AI Case Summaries", "Real-time alerts"].map(item => (
+                <div key={item} className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-black/40">
+                  <div className="h-1 w-4 bg-accent" />
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mt-12 space-y-6 border p-6 md:p-10"
-            style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
-          >
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-sm font-bold" style={{ color: "#000" }}>Full Name *</label>
-                <input
-                  type="text"
-                  autoComplete="name"
-                  {...register("name")}
-                  className="h-12 w-full border bg-white px-4 text-base outline-none"
-                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                  placeholder="John Doe"
-                />
-                {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
+          <div className="lg:col-span-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-white p-8 md:p-12 shadow-2xl shadow-black/5 border border-black/5 rounded-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Full Name</label>
+                  <input
+                    type="text"
+                    {...register("name")}
+                    className={inputClasses(!!errors.name)}
+                    placeholder="Jane Doe"
+                  />
+                  {errors.name && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.name.message}</p>}
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Work Email</label>
+                  <input
+                    type="email"
+                    {...register("email")}
+                    className={inputClasses(!!errors.email)}
+                    placeholder="jane@organization.com"
+                  />
+                  {errors.email && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.email.message}</p>}
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold" style={{ color: "#000" }}>Email Address *</label>
-                <input
-                  type="email"
-                  autoComplete="email"
-                  {...register("email")}
-                  className="h-12 w-full border bg-white px-4 text-base outline-none"
-                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                  placeholder="john@example.com"
-                />
-                {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
-              </div>
-            </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Organisation</label>
+                  <input
+                    type="text"
+                    {...register("organisation")}
+                    className={inputClasses()}
+                    placeholder="e.g. Acme Legal"
+                  />
+                </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-sm font-bold" style={{ color: "#000" }}>Organisation (Optional)</label>
-                <input
-                  type="text"
-                  autoComplete="organization"
-                  {...register("organisation")}
-                  className="h-12 w-full border bg-white px-4 text-base outline-none"
-                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                  placeholder="e.g. Acme Law"
-                />
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Primary Role</label>
+                  <select
+                    {...register("persona")}
+                    className={inputClasses(!!errors.persona)}
+                  >
+                    <option value="">Select role...</option>
+                    {personas.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
+                  </select>
+                  {errors.persona && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.persona.message}</p>}
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold" style={{ color: "#000" }}>Your Primary Role *</label>
-                <select
-                  {...register("persona")}
-                  className="h-12 w-full border bg-white px-4 text-base outline-none"
-                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              <div className="space-y-4">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-black/40 block">Jurisdictions of Interest</label>
+                <div className="flex flex-wrap gap-2">
+                  {countries.map(c => (
+                    <label 
+                      key={c.value} 
+                      className={cn(
+                        "group relative px-4 py-2 border transition-all cursor-pointer rounded-full text-xs font-bold",
+                        "hover:border-accent hover:bg-accent/5"
+                      )}
+                      style={{ 
+                        borderColor: "rgba(0,0,0,0.1)",
+                        backgroundColor: "transparent"
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        value={c.value}
+                        {...register("countryInterest")}
+                        className="sr-only peer"
+                      />
+                      <span className="peer-checked:text-accent transition-colors">{c.label}</span>
+                      <div className="absolute inset-0 border border-accent opacity-0 peer-checked:opacity-100 rounded-full transition-opacity pointer-events-none" />
+                    </label>
+                  ))}
+                </div>
+                {errors.countryInterest && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.countryInterest.message}</p>}
+              </div>
+
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full group py-6 h-auto text-sm"
+                  disabled={status === "loading"}
                 >
-                  <option value="">Select a role</option>
-                  {personas.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
-                </select>
-                {errors.persona && <p className="text-xs text-red-500">{errors.persona.message}</p>}
+                  {status === "loading" ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      Join the Private Beta
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  )}
+                </Button>
+                <p className="mt-6 text-[10px] leading-relaxed text-black/30 text-center uppercase tracking-widest">
+                  Secure processing in accordance with Uganda PDPA 2019.
+                </p>
               </div>
-            </div>
 
-            <div className="space-y-3">
-              <label className="text-sm font-bold" style={{ color: "#000" }}>Country Interest (Select all that apply) *</label>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {countries.map(c => (
-                  <label key={c.value} className="flex min-h-11 items-center gap-2 border bg-white p-3 cursor-pointer" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <input
-                      type="checkbox"
-                      value={c.value}
-                      {...register("countryInterest")}
-                      className="h-5 w-5 rounded accent-accent"
-                    />
-                    <span className="text-base" style={{ color: "#313439" }}>{c.label}</span>
-                  </label>
-                ))}
-              </div>
-              {errors.countryInterest && <p className="text-xs text-red-500">{errors.countryInterest.message}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-bold" style={{ color: "#000" }}>Specific Research Needs (Optional)</label>
-              <textarea
-                {...register("message")}
-                rows={4}
-                className="w-full border bg-white px-4 py-3 text-base outline-none"
-                style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                placeholder="What specific types of records are you interested in?"
-              />
-            </div>
-
-            <p className="text-xs" style={{ color: "#919499" }}>
-              By joining the waitlist, you agree to our Privacy Policy and consent
-              to receive updates about Public Record Africa. We respect your data in
-              accordance with Uganda PDPA 2019.
-            </p>
-
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              className="w-full"
-              disabled={status === "loading"}
-            >
-              {status === "loading" ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                "Request Early Access"
+              {status === "error" && (
+                <p className="text-center text-xs font-bold text-red-500 uppercase tracking-wider">
+                  Submission failed. Please try again.
+                </p>
               )}
-            </Button>
-
-            {status === "error" && (
-              <p className="text-center text-sm font-medium text-red-500">
-                Something went wrong. Please try again or contact hello@traverseminds.ug
-              </p>
-            )}
-          </form>
-        </SectionReveal>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   );

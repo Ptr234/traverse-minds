@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-multipart
+easyocr
+instructor
+openai
+typesense
+pydantic
+python-dotenv
+pdf2image
+Pillow
