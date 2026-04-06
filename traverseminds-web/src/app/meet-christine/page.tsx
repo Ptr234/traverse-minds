@@ -9,11 +9,57 @@ import { cn } from "@/lib/utils";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const TABS = [
-  { id: "about",    label: "About" },
-  { id: "work",     label: "Competencies" },
+  { id: "about",      label: "About" },
+  { id: "work",       label: "Competencies" },
+  { id: "affiliations", label: "Affiliations" },
   { id: "experience", label: "Experience" },
-  { id: "thinking", label: "Recognition" },
-  { id: "connect",  label: "Connect" },
+  { id: "thinking",   label: "Recognition" },
+  { id: "connect",    label: "Connect" },
+];
+
+const ORGANISATIONS = [
+  { 
+    name: "Uganda Investment Authority", 
+    logo: "/logo/uganda-investment-authority-uia-logo-png_seeklogo-548098.png",
+    link: "https://www.ugandainvest.go.ug/", 
+    role: "Information Security Specialist" 
+  },
+  { 
+    name: "NITA-U", 
+    logo: "/logo/NITA.LOGOS8-07.png", 
+    link: "https://www.nita.go.ug/", 
+    role: "Information Security Graduate Trainee" 
+  },
+  { 
+    name: "Centenary Bank", 
+    logo: "/logo/centenary-bank-logo.png", 
+    link: "https://www.centenarybank.co.ug/", 
+    role: "Information Security Intern" 
+  },
+  { 
+    name: "Applied Principles Consulting", 
+    logo: "/logo/Appliedprincipleslogo.png",
+    link: "#", 
+    role: "Lead IT Ops" 
+  },
+  { 
+    name: "Kikorongo Safari Lodge", 
+    logo: "/logo/kikorongologo.png", 
+    link: "https://kikorongosafarilodge.com", 
+    role: "Founder & CEO" 
+  },
+  { 
+    name: "TMFE Group, Sydney", 
+    logo: "/logo/logo-TMFE-Black.svg", 
+    link: "#", 
+    role: "Cyber Security Consultant" 
+  },
+  { 
+    name: "Tilenga Project", 
+    logo: "/logo/Tilengalogo.png", 
+    link: "#", 
+    role: "Strategic Security Consultant" 
+  },
 ];
 
 const COMPETENCIES = [
@@ -337,19 +383,19 @@ export default function MeetChristinePage() {
           <div className="max-w-2xl mb-16">
             <Eyebrow>Core Competencies</Eyebrow>
             <BigHeading>Mastery across the digital spectrum</BigHeading>
-            <p className="text-gn-400 text-lg leading-relaxed">
+            <p className="text-gn-400 text-lg leading-relaxed font-light">
               Masiika&apos;s expertise spans from low-level digital forensics and incident response to high-level national strategy and regional policy harmonization.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
             {COMPETENCIES.map((c, i) => (
-              <div key={i} className="bg-white p-10 border border-border-light shadow-sm hover:shadow-md transition-shadow group">
-                <h3 className="text-xl font-bold text-gn-100 mb-4 group-hover:text-accent transition-colors">{c.title}</h3>
-                <p className="text-gn-400 text-[15px] leading-relaxed mb-8">{c.desc}</p>
+              <div key={i} className="bg-white p-10 border border-border-light shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 group rounded-sm">
+                <h3 className="text-xl font-bold text-gn-100 mb-4 group-hover:text-accent transition-colors font-display tracking-tight">{c.title}</h3>
+                <p className="text-gn-400 text-[15px] leading-relaxed mb-8 font-light">{c.desc}</p>
                 <div className="flex flex-wrap gap-2">
                   {c.items.map(item => (
-                    <span key={item} className="text-[10px] font-bold uppercase tracking-widest bg-bg-light px-3 py-1.5 text-gn-500 border border-border-light">
+                    <span key={item} className="text-[10px] font-bold uppercase tracking-widest bg-bg-light px-3 py-1.5 text-gn-500 border border-border-light group-hover:border-accent/20 transition-colors">
                       {item}
                     </span>
                   ))}
@@ -358,37 +404,121 @@ export default function MeetChristinePage() {
             ))}
           </div>
 
-          <div className="mt-12 bg-bg-dark p-12 text-white overflow-hidden relative">
+          <div className="mt-16 bg-bg-dark p-12 text-white overflow-hidden relative rounded-sm shadow-2xl">
             <div className="relative z-10 grid lg:grid-cols-2 gap-12">
               <div>
-                <p className="text-accent text-[10px] font-bold tracking-[0.3em] uppercase mb-6">Technical Proficiencies</p>
-                <div className="grid sm:grid-cols-2 gap-8">
+                <p className="text-accent text-[10px] font-bold tracking-[0.3em] uppercase mb-8 opacity-80">Technical Proficiencies</p>
+                <div className="grid sm:grid-cols-2 gap-x-12 gap-y-10">
                   <div>
                     <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Programming</p>
-                    <p className="text-sm font-medium">Python, C++, SQL</p>
+                    <p className="text-sm font-medium tracking-wide">Python, C++, SQL</p>
                   </div>
                   <div>
                     <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Security Tools</p>
-                    <p className="text-sm font-medium">Nmap, Metasploit, Burp Suite, OWASP ZAP, Splunk</p>
+                    <p className="text-sm font-medium tracking-wide">Nmap, Metasploit, Burp Suite, OWASP ZAP, Splunk</p>
                   </div>
                   <div>
                     <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Forensics</p>
-                    <p className="text-sm font-medium">EnCase, Axiom, Cellebrite, FTK</p>
+                    <p className="text-sm font-medium tracking-wide">EnCase, Axiom, Cellebrite, FTK</p>
                   </div>
                   <div>
                     <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Frameworks</p>
-                    <p className="text-sm font-medium">NIST, ISO 27001, COBIT, GDPR</p>
+                    <p className="text-sm font-medium tracking-wide">NIST, ISO 27001, COBIT, GDPR</p>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center border-l border-white/10 lg:pl-12">
-                <p className="font-display text-2xl italic mb-6 text-white/90">
+                <p className="font-display text-2xl italic mb-6 text-white/90 leading-relaxed font-light">
                   &quot;Technology is a tool for progress, but evidence is the anchor that keeps it serving the people.&quot;
                 </p>
-                <p className="text-accent text-xs font-bold tracking-widest uppercase">— Masiika Christine Thembo</p>
+                <div className="flex items-center gap-4">
+                  <div className="h-px w-8 bg-accent" />
+                  <p className="text-accent text-xs font-bold tracking-widest uppercase m-0">Masiika Christine Thembo</p>
+                </div>
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -mr-32 -mt-32" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[100px] -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] -ml-32 -mb-32" />
+          </div>
+        </div>
+      </section>
+
+      {/* ══ AFFILIATIONS ══ */}
+      <SectionAnchor id="affiliations" />
+      <section className="bg-white py-24 md:py-32 overflow-hidden border-t border-border-light">
+        <div className="mx-auto max-w-295 px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-10">
+            <div className="max-w-2xl">
+              <Eyebrow>Strategic Global Network</Eyebrow>
+              <BigHeading className="mb-0">Organisations & Affiliations</BigHeading>
+              <p className="text-gn-400 text-lg mt-6 leading-relaxed font-light max-w-xl">
+                Collaborating with leading public institutions and private enterprises to architect secure digital futures across Africa and beyond.
+              </p>
+            </div>
+            <div className="hidden lg:block w-px h-24 bg-border-light" />
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-accent" />
+                <span className="text-[11px] font-bold tracking-widest uppercase text-gn-100">National Strategy</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-accent" />
+                <span className="text-[11px] font-bold tracking-widest uppercase text-gn-100">Critical Infrastructure</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 size={16} className="text-accent" />
+                <span className="text-[11px] font-bold tracking-widest uppercase text-gn-100">Executive Advisory</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border-light border border-border-light">
+            {ORGANISATIONS.map((org, i) => (
+              <a
+                key={i}
+                href={org.link}
+                target={org.link !== "#" ? "_blank" : undefined}
+                rel={org.link !== "#" ? "noopener noreferrer" : undefined}
+                className="group relative bg-white p-10 aspect-square flex flex-col items-center justify-center text-center transition-all duration-500 hover:bg-bg-light/30"
+              >
+                {/* Logo Container */}
+                <div className="relative w-full h-20 mb-8 transition-all duration-500 group-hover:scale-105 flex items-center justify-center grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100">
+                  {org.logo ? (
+                    <Image
+                      src={`${basePath}${org.logo}`}
+                      alt={`${org.name} logo`}
+                      fill
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-2xl font-display font-bold opacity-20 uppercase tracking-tighter">
+                      {org.name.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  )}
+                </div>
+                
+                <div className="space-y-2">
+                  <h4 className="text-[10px] font-bold text-gn-100 group-hover:text-accent transition-colors leading-tight font-display tracking-[0.2em] uppercase">
+                    {org.name}
+                  </h4>
+                  <p className="text-[9px] text-gn-500 font-bold tracking-[0.1em] uppercase opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                    {org.role}
+                  </p>
+                </div>
+
+                {org.link !== "#" && (
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all transform -translate-y-1 group-hover:translate-y-0">
+                    <Globe size={10} className="text-accent" />
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+          
+          <div className="mt-20 flex flex-wrap justify-center gap-x-12 gap-y-6 opacity-40">
+            {["Partnership", "Innovation", "Resilience", "Governance", "Leadership"].map((word) => (
+              <span key={word} className="text-[10px] font-bold tracking-[0.4em] uppercase text-gn-100">{word}</span>
+            ))}
           </div>
         </div>
       </section>
