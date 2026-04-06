@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Twitter, Linkedin, Mail, Play, BookOpen, Award, CheckCircle2, Globe } from "lucide-react";
+import { Twitter, Linkedin, Mail, Play, BookOpen, Award, CheckCircle2, Globe, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -286,22 +286,45 @@ export default function MeetChristinePage() {
             <div className="relative mb-8 aspect-3/4 w-full overflow-hidden rounded-sm editorial-card">
               <Image src={`${basePath}/Christine.jpg`} alt="Masiika Christine Thembo" fill className="object-cover object-[50%_8%]" />
             </div>
-            <div className="border border-border-light rounded-sm bg-white overflow-hidden shadow-card">
-              <div className="p-5 bg-bg-light border-b border-border-light">
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent m-0">Fast Facts</p>
-              </div>
-              {[
-                { label: "Education", value: "MA Policy (Candidate) · PGD Security Mgmt · B.IT (Hons)" },
-                { label: "Credentials", value: "CHFI · EnCase · CIIP · Digital Identity · Cyber Essentials" },
-                { label: "Leadership", value: "President (Women in Design UG) · Founder (CyberLuncheon)" },
-                { label: "Founded", value: "Traverse Minds · Ngyero Design · Kikorongo Safari Lodge" },
-                { label: "Impact", value: "300+ personnel trained · $2M+ recovered · 60% risk reduction" },
-              ].map((row, i, arr) => (
-                <div key={row.label} className={cn("grid grid-cols-[100px_1fr] gap-4 p-5", i < arr.length - 1 ? "border-b border-border-light" : "")}>
-                  <p className="text-[10px] font-bold tracking-widest uppercase text-gn-500 m-0 pt-0.5">{row.label}</p>
-                  <p className="text-sm text-gn-100 m-0 font-medium leading-relaxed">{row.value}</p>
+            <div className="bg-bg-dark rounded-sm overflow-hidden shadow-2xl border border-white/5">
+              <div className="p-6 bg-white/5 border-b border-white/5 flex items-center justify-between">
+                <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-accent m-0 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  Fast Facts
+                </p>
+                <div className="flex gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
                 </div>
-              ))}
+              </div>
+              <div className="p-1 sm:p-2">
+                {[
+                  { icon: <BookOpen size={14} />, label: "Education", value: "MA Policy (Candidate) · PGD Security Mgmt · B.IT (Hons)" },
+                  { icon: <Award size={14} />, label: "Credentials", value: "CHFI · EnCase · CIIP · Digital Identity · Cyber Essentials" },
+                  { icon: <Users size={14} />, label: "Leadership", value: "President (Women in Design UG) · Founder (CyberLuncheon)" },
+                  { icon: <Globe size={14} />, label: "Founded", value: "Traverse Minds · Ngyero Design · Kikorongo Safari Lodge" },
+                  { icon: <CheckCircle2 size={14} />, label: "Impact", value: "300+ personnel trained · $2M+ recovered · 60% risk reduction" },
+                ].map((row, i) => (
+                  <div key={row.label} className={cn(
+                    "group p-5 flex flex-col gap-2 transition-colors",
+                    i !== 4 ? "border-b border-white/5" : "",
+                    "hover:bg-white/[0.02]"
+                  )}>
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-accent/60 group-hover:text-accent transition-colors">
+                        {row.icon}
+                      </span>
+                      <p className="text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 m-0">
+                        {row.label}
+                      </p>
+                    </div>
+                    <p className="text-[13px] text-white/90 m-0 font-medium leading-relaxed pl-6.5">
+                      {row.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
