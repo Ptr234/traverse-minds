@@ -21,7 +21,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 
 const TABS = [
   { id: "about",        label: "About" },
@@ -312,7 +312,7 @@ export default function MeetChristinePage() {
         {/* Left Side: Image */}
         <div className="relative h-[60vh] lg:h-auto overflow-hidden group">
           <Image
-            src={`${basePath}/Christine.jpg`}
+            src={`${basePath}/christine.jpg`}
             alt="Masiika Christine Thembo"
             fill
             priority
@@ -483,7 +483,7 @@ export default function MeetChristinePage() {
                 </div>
               </div>
               <div className="aspect-4/5 relative grayscale hover:grayscale-0 transition-all duration-700">
-                <Image src={`${basePath}/Christine.jpg`} alt="Masiika" fill className="object-cover object-[50%_15%]" />
+                <Image src={`${basePath}/christine.jpg`} alt="Masiika" fill className="object-cover object-[50%_15%]" />
                 <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
               </div>
             </div>
