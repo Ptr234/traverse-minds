@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 
 // TODO: Replace with Sanity CMS dynamic data
 const mockPost = {

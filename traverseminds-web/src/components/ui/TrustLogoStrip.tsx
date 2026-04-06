@@ -1,22 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 
 interface TrustLogoStripProps {
   /** "dark" renders white text on transparent; "light" (default) renders dark text */
   variant?: "light" | "dark";
-  /** Override the default placeholder labels */
-  logos?: string[];
+  /** Override the default logo images */
+  logos?: { src: string; alt: string }[];
   className?: string;
 }
 
 const DEFAULT_LOGOS = [
-  "Partner 1",
-  "Partner 2",
-  "Partner 3",
-  "Partner 4",
-  "Partner 5",
-  "Partner 6",
+  { src: "/logo/uganda-investment-authority-uia-logo-png_seeklogo-548098.png", alt: "Uganda Investment Authority" },
+  { src: "/logo/centenary-bank-logo.png", alt: "Centenary Bank" },
+  { src: "/logo/Tilengalogo.png", alt: "Tilenga Project" },
+  { src: "/logo/Appliedprincipleslogo.png", alt: "Applied Principles Consulting" },
+  { src: "/logo/NITA.LOGOS8-07.png", alt: "NITA-U" },
+  { src: "/logo/kikorongologo.png", alt: "Kikorongo Safari Lodge" },
+  { src: "/logo/logo-TMFE-Black.svg", alt: "TMFE Group" },
 ];
 
 export function TrustLogoStrip({
@@ -29,7 +33,7 @@ export function TrustLogoStrip({
   return (
     <div
       className={cn(
-        "group relative w-full overflow-hidden py-8",
+        "group relative w-full overflow-hidden py-12",
         className,
       )}
       aria-label="Trusted partners"
@@ -37,7 +41,7 @@ export function TrustLogoStrip({
       {/* Fade edges */}
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 w-24",
+          "pointer-events-none absolute inset-y-0 left-0 z-10 w-32",
           isDark
             ? "bg-linear-to-r from-primary to-transparent"
             : "bg-linear-to-r from-bg-light to-transparent",
@@ -45,7 +49,7 @@ export function TrustLogoStrip({
       />
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 w-24",
+          "pointer-events-none absolute inset-y-0 right-0 z-10 w-32",
           isDark
             ? "bg-linear-to-l from-primary to-transparent"
             : "bg-linear-to-l from-bg-light to-transparent",
@@ -54,21 +58,26 @@ export function TrustLogoStrip({
 
       {/* Scrolling track — pauses on hover via group-hover */}
       <div
-        className="flex w-max animate-[marquee_30s_linear_infinite] group-hover:[animation-play-state:paused]"
+        className="flex w-max animate-[marquee_40s_linear_infinite] items-center group-hover:[animation-play-state:paused]"
       >
         {/* Original + duplicate for seamless loop */}
-        {[...logos, ...logos].map((label, i) => (
+        {[...logos, ...logos, ...logos].map((logo, i) => (
           <div
-            key={`${label}-${i}`}
+            key={`${logo.alt}-${i}`}
             className={cn(
-              "mx-6 flex h-14 w-40 shrink-0 items-center justify-center rounded-lg border text-sm font-semibold tracking-wide transition-all duration-300",
-              "grayscale hover:grayscale-0 hover:opacity-100",
-              isDark
-                ? "border-white/10 bg-white/5 text-white/50 hover:border-accent hover:text-white"
-                : "border-border-light bg-surface-elevated text-brand-medium opacity-60 hover:border-accent hover:text-primary hover:opacity-100",
+              "mx-10 flex h-16 w-48 shrink-0 items-center justify-center transition-all duration-500",
+              "grayscale hover:grayscale-0 opacity-60 hover:opacity-100",
             )}
           >
-            {label}
+            <div className="relative h-12 w-full">
+              <Image
+                src={`${basePath}${logo.src}`}
+                alt={logo.alt}
+                fill
+                className="object-contain"
+                sizes="200px"
+              />
+            </div>
           </div>
         ))}
       </div>
