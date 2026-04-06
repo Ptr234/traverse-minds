@@ -23,7 +23,7 @@ export function NewsletterSignup() {
     formState: { errors, isSubmitting },
   } = useForm<NewsletterFormData>();
 
-  const onSubmit = async (data: NewsletterFormData) => {
+  const onSubmit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitted(true);
   };

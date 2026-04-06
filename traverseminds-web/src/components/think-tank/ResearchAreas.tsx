@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Shield, Brain, Fingerprint, Globe, Users, FileText } from "lucide-react";
+import { Shield, Brain, Globe, Users, FileText } from "lucide-react";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 

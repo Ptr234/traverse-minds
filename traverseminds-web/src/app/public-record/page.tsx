@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
-import { Scale, Search, BookOpen, Building2, ShieldCheck, ArrowRight } from "lucide-react";
+import { Scale, Search, BookOpen, Building2, ShieldCheck } from "lucide-react";
 
 const audiences = [
   {

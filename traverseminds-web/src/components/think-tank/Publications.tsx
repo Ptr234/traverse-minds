@@ -12,7 +12,7 @@ interface Report {
   abstract: string;
   publicationDate: string;
   authors: { name: string }[];
-  featuredImage: any;
+  featuredImage: unknown;
   pdfUrl: string;
   topics: string[];
 }

@@ -8,7 +8,12 @@ const COOKIE_CONSENT_KEY = "tm-cookie-consent";
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => { if (!localStorage.getItem(COOKIE_CONSENT_KEY)) setIsVisible(true); }, []);
+  useEffect(() => { 
+    const handle = setTimeout(() => {
+      if (!localStorage.getItem(COOKIE_CONSENT_KEY)) setIsVisible(true); 
+    }, 0);
+    return () => clearTimeout(handle);
+  }, []);
   const handle = (v: string) => { localStorage.setItem(COOKIE_CONSENT_KEY, v); setIsVisible(false); };
   if (!isVisible) return null;
 

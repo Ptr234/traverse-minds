@@ -45,8 +45,10 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setTimeLeft(calcTimeLeft(targetDate));
+    const handle = setTimeout(() => {
+      setMounted(true);
+      setTimeLeft(calcTimeLeft(targetDate));
+    }, 0);
 
     const interval = setInterval(() => {
       const tl = calcTimeLeft(targetDate);
@@ -56,7 +58,10 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
       setTimeLeft(tl);
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(handle);
+      clearInterval(interval);
+    };
   }, [targetDate]);
 
   if (!mounted) {

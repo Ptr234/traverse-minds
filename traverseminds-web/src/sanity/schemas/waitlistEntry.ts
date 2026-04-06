@@ -1,3 +1,5 @@
+import { type Rule } from "sanity";
+
 export const waitlistEntry = {
   name: "waitlistEntry",
   title: "Waitlist Entry",
@@ -7,13 +9,13 @@ export const waitlistEntry = {
       name: "name",
       title: "Name",
       type: "string",
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "email",
       title: "Email",
       type: "string",
-      validation: (Rule: any) => Rule.required().email(),
+      validation: (rule: Rule) => rule.required().email(),
     },
     {
       name: "organisation",
@@ -34,7 +36,7 @@ export const waitlistEntry = {
           { title: "Other", value: "other" },
         ],
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "countryInterest",

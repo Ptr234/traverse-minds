@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Clock, BookOpen, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { TextReveal } from "@/components/ui/TextReveal";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 
 const programmes = [
   { id: 1, title: "CyberSafe Schools", audience: "students", duration: "4 Weeks", format: "In-person Workshops", description: "Equipping students with the skills to identify online grooming, cyberbullying, and misinformation.", topics: ["Password Safety", "Privacy Settings", "Digital Footprint"], image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2104&auto=format&fit=crop" },

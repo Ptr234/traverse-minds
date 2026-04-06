@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -14,7 +14,7 @@ const mockPost = {
   readTime: "6 min read",
   image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
   author: {
-    name: "Christine Masika",
+    name: "Masiika Christine Thembo",
     role: "Founder & CEO",
     photo: `${basePath}/christine-masika.jpg`,
   },

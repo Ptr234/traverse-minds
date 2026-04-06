@@ -1,3 +1,5 @@
+import { type Rule } from "sanity";
+
 export const report = {
   name: "report",
   title: "Research Report",
@@ -7,20 +9,20 @@ export const report = {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "slug",
       title: "Slug",
       type: "slug",
       options: { source: "title", maxLength: 96 },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "abstract",
       title: "Abstract / Summary",
       type: "text",
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "authors",
@@ -47,7 +49,7 @@ export const report = {
       name: "publicationDate",
       title: "Publication Date",
       type: "date",
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: "pdfFile",

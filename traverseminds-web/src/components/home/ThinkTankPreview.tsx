@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, FileDown, Clock, Brain } from "lucide-react";
+import { ArrowRight, FileDown, Clock } from "lucide-react";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 

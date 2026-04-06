@@ -9,7 +9,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const teamMembers = [
   {
-    name: "Christine Masika",
+    name: "Masiika Christine Thembo",
     title: "Founder & CEO",
     division: "Leadership",
     photo: `${basePath}/christine-masika.jpg`,

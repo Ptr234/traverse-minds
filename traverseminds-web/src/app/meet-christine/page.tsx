@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { ArrowRight, Twitter, Linkedin, Mail, Play, BookOpen, Shield } from "lucide-react";
+import { Twitter, Linkedin, Mail, Play, BookOpen, Award, CheckCircle2, Globe } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -11,25 +10,112 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const TABS = [
   { id: "about",    label: "About" },
-  { id: "work",     label: "Work" },
-  { id: "thinking", label: "Thinking" },
+  { id: "work",     label: "Competencies" },
+  { id: "experience", label: "Experience" },
+  { id: "thinking", label: "Recognition" },
   { id: "connect",  label: "Connect" },
 ];
 
-const DOMAINS = [
-  { icon: <Shield size={22}/>,   title: "Cybersecurity",    desc: "Audits, incident response, and capacity-building to reduce digital risk across African organisations." },
-  { icon: <BookOpen size={22}/>, title: "Civic Tech",       desc: "Technology that strengthens public institutions and improves citizen-facing services in Uganda." },
-  { icon: "📊",                  title: "Policy Research",  desc: "Evidence-based analysis of Uganda's PDPA 2019, cross-border data flows, and African digital rights." },
-  { icon: "📡",                  title: "Data Journalism",  desc: "Training newsrooms to investigate technology issues with data and hold power to account." },
-  { icon: "🤖",                  title: "AI Governance",    desc: "Examining automation's intersection with public administration, elections, and economic opportunity." },
-  { icon: "🔒",                  title: "Payment Security", desc: "Advising fintechs and regulators on unified security standards for cross-border mobile money." },
+const COMPETENCIES = [
+  { 
+    title: "Digital Governance & Policy", 
+    desc: "National Cybersecurity Strategy Development, Data Protection Frameworks (GDPR/AU), and Public-Private Partnership Development.",
+    items: ["National Strategy", "Regulatory Compliance", "PPP Development"]
+  },
+  { 
+    title: "National Security & Risk Management", 
+    desc: "Critical Infrastructure Protection, Threat Intelligence, and Security Audits (ISO 27001, NIST, COBIT).",
+    items: ["CIP & Incident Response", "Vulnerability & Pentesting", "Digital Forensics"]
+  },
+  { 
+    title: "Capacity Building", 
+    desc: "Technical training design, institutional strengthening, and gender-inclusive STEM initiatives.",
+    items: ["Training Design", "Mentorship Programs", "Knowledge Transfer"]
+  },
+  { 
+    title: "Project Leadership", 
+    desc: "Agile management of multidisciplinary teams (30+ staff), budget oversight, and stakeholder relations.",
+    items: ["Agile Management", "Strategic Planning", "Change Management"]
+  },
 ];
 
-const ARTICLES = [
-  { title: "Uganda's PDPA 2019: The road ahead",            category: "Policy",     desc: "An analysis of the implementation gaps in our national data protection framework.", image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=900&auto=format&fit=crop" },
-  { title: "The role of AI in African governance",          category: "Technology", desc: "How we can leverage automation while ensuring transparency and preserving local context.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=900&auto=format&fit=crop" },
-  { title: "Securing Africa's payment systems",        category: "Security",   desc: "Why cross-border interoperability requires a unified security standard.", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=900&auto=format&fit=crop" },
-  { title: "Open data and the accountability gap in Uganda",category: "Policy",     desc: "Why government datasets should be public — and what it takes to get there.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=900&auto=format&fit=crop" },
+const EXPERIENCE = [
+  {
+    company: "Uganda Investment Authority",
+    role: "Information Security Specialist",
+    period: "Dec 2023 - Present",
+    desc: "Leading cybersecurity initiatives for Uganda's primary investment promotion agency.",
+    impact: [
+      "Reduced security exposure by 60% across 15+ government portals.",
+      "Developed policy frameworks for regional cybersecurity harmonization.",
+      "Ensured business continuity for critical government digital services."
+    ]
+  },
+  {
+    company: "Traverse Security / Think Tank",
+    role: "Researcher Lead & Cyber Advisor",
+    period: "Jan 2022 - Present",
+    desc: "Advancing cybersecurity policy and conducting applied research on emerging economies.",
+    impact: [
+      "Designed penetration testing frameworks for FINTECH regulatory compliance.",
+      "Facilitated 20+ training sessions for legal professionals on cyber law.",
+      "Produced technical materials on threat modeling for African operational contexts."
+    ]
+  },
+  {
+    company: "TMFE Group, Sydney",
+    role: "Cyber Security Consultant (Remote)",
+    period: "Nov 2020 - Mar 2021",
+    desc: "Strategic guidance for international digital transformation initiatives.",
+    impact: [
+      "Authored 6 technical papers on IoT security and ML applications.",
+      "Developed information security programs for emerging technology adoption.",
+      "Established best practices for remote security operations across distributed teams."
+    ]
+  },
+  {
+    company: "Applied Principles Consulting",
+    role: "Digital Forensics Analyst & Lead IT Ops",
+    period: "Jul 2019 - Aug 2020",
+    desc: "Strengthening financial sector stability through advanced security services.",
+    impact: [
+      "Managed 15+ investigations recovering $2M+ in fraudulent assets.",
+      "Pioneered mobile forensics methodologies adopted by regional agencies.",
+      "Contributed to 40% revenue growth through innovative service offerings."
+    ]
+  },
+  {
+    company: "Ngyero Design & Kikorongo Safari Lodge",
+    role: "Founder & CEO",
+    period: "2018 - Present",
+    desc: "Entrepreneurship driving sustainable development and local economic growth.",
+    impact: [
+      "Created 30+ direct employment opportunities in rural Uganda.",
+      "Designed 15 unique facilities across 15 hectares with eco-focus.",
+      "Managed multidisciplinary teams of 30+ professionals."
+    ]
+  },
+  {
+    company: "NITA-U",
+    role: "Information Security Graduate Trainee",
+    period: "Oct 2016 - Sept 2017",
+    desc: "Contributing to national digital transformation and resilience strategy.",
+    impact: [
+      "Co-developed the National Information Security Framework (NISF).",
+      "Established national CERT capabilities and threat intelligence feeds.",
+      "Trained 300+ government personnel on encryption and cyber hygiene."
+    ]
+  },
+  {
+    company: "Centenary Bank",
+    role: "Information Security Intern",
+    period: "Mar 2016 - May 2016",
+    desc: "Securing digital banking infrastructure for financial inclusion.",
+    impact: [
+      "Reduced fraudulent ATM transactions by 35% using behavioral analytics.",
+      "Implemented encryption protocols safeguarding customer financial data."
+    ]
+  }
 ];
 
 interface EyebrowProps {
@@ -67,13 +153,13 @@ interface TabBarProps {
 function TabBar({ active, onChange }: TabBarProps) {
   return (
     <div className="sticky top-0 z-50 bg-white border-b border-border-light">
-      <div className="mx-auto flex max-w-295 px-8">
+      <div className="mx-auto flex max-w-295 px-8 overflow-x-auto scrollbar-hide">
         {TABS.map(t => (
           <button
             key={t.id}
             onClick={() => onChange(t.id)}
             className={cn(
-              "bg-none border-none cursor-pointer px-6.5 pt-4.5 pb-3.5 text-[13px] font-bold tracking-wider uppercase transition-colors duration-150 font-sans",
+              "bg-none border-none cursor-pointer px-6.5 pt-4.5 pb-3.5 text-[13px] font-bold tracking-wider uppercase transition-colors duration-150 font-sans whitespace-nowrap",
               active === t.id ? "text-accent border-b-3 border-accent" : "text-gn-500 border-b-3 border-transparent"
             )}
           >
@@ -85,11 +171,7 @@ function TabBar({ active, onChange }: TabBarProps) {
   );
 }
 
-interface SectionAnchorProps {
-  id: string;
-}
-
-function SectionAnchor({ id }: SectionAnchorProps) {
+function SectionAnchor({ id }: { id: string }) {
   return <div id={id} className="scroll-mt-14" />;
 }
 
@@ -107,45 +189,38 @@ export default function MeetChristinePage() {
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="font-sans text-gn-100 bg-white">
 
-      {/* ── HERO — split layout: photo fills left, dark panel right ── */}
+      {/* ── HERO ── */}
       <section className="grid md:grid-cols-2 min-h-screen bg-bg-dark">
-
-        {/* Photo column — portrait, full, objectPosition shows face */}
         <div className="relative overflow-hidden min-h-[50vh] md:min-h-screen">
           <Image
             src={`${basePath}/Christine.jpg`}
-            alt="Christine Masika"
+            alt="Masiika Christine Thembo"
             fill
             priority
             className="object-cover object-[50%_8%]"
           />
-          {/* Right-edge fade into dark panel */}
           <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[rgba(33,36,41,0.92)] md:block hidden" />
         </div>
 
-        {/* Text column */}
         <div className="flex flex-col justify-center p-8 md:p-16 lg:pl-13 bg-bg-dark">
-          <p className="eyebrow-accent mb-5 text-accent">
-            Founder & CEO · Traverse Minds
+          <p className="eyebrow-accent mb-5 text-accent uppercase tracking-widest font-bold text-xs">
+            Senior Cybersecurity & Digital Governance Specialist
           </p>
-          <h1 className="font-display text-[clamp(48px,6vw,88px)] font-bold text-white leading-[0.92] tracking-tight mb-9 uppercase">
-            Meet<br />Christine
+          <h1 className="font-display text-[clamp(40px,5vw,72px)] font-bold text-white leading-[0.95] tracking-tight mb-9 uppercase">
+            Masiika<br />Christine Thembo
           </h1>
-          <p className="text-lg leading-relaxed text-white/65 max-w-105 mb-12">
-            Cybersecurity professional, civic-tech advocate, and founder of Traverse Minds — building digital resilience across Africa.
+          <p className="text-lg leading-relaxed text-white/65 max-w-115 mb-12">
+            Multilingual cybersecurity leader with 8+ years advancing digital transformation, governance, and inclusive development across Africa&apos;s public and private sectors.
           </p>
 
-          {/* Stats */}
           <div className="flex gap-10 mb-13 border-t border-white/12 pt-9">
-            {[{ v: "6", l: "Divisions" }, { v: "2024", l: "Founded" }, { v: "Africa", l: "Focus region" }].map(s => (
+            {[{ v: "8+", l: "Years Exp" }, { v: "Top 50", l: "Women in Cyber" }, { v: "SDG", l: "Advocate" }].map(s => (
               <div key={s.l}>
                 <p className="font-display text-3xl font-bold text-white mb-0">{s.v}</p>
                 <p className="text-[11px] tracking-widest uppercase text-white/40 mt-1.5 mb-0">{s.l}</p>
@@ -153,87 +228,77 @@ export default function MeetChristinePage() {
             ))}
           </div>
 
-          {/* CTAs */}
           <div className="flex gap-3.5 flex-wrap">
             <Button onClick={() => scrollTo("connect")} variant="primary" size="lg" className="uppercase tracking-wider">
-              Work with Traverse
+              Work with Masiika
             </Button>
             <Button onClick={() => scrollTo("thinking")} variant="outline-dark" size="lg" className="uppercase tracking-wider text-white/80">
-              Read insights
+              Recognition
             </Button>
           </div>
         </div>
       </section>
 
-      {/* ── TABS ── */}
       <TabBar active={activeTab} onChange={id => { setActiveTab(id); scrollTo(id); }} />
 
       {/* ══ ABOUT ══ */}
       <SectionAnchor id="about" />
       <section className="py-22 bg-white">
         <div className="mx-auto grid max-w-295 items-start gap-x-20 px-8 lg:grid-cols-[1.1fr_0.9fr]">
-
-          {/* Bio */}
           <div>
-            <Eyebrow>About Christine</Eyebrow>
-            <BigHeading>Building Africa&apos;s digital future from the inside out</BigHeading>
+            <Eyebrow>Executive Summary</Eyebrow>
+            <BigHeading>Bridging technology, policy, and sustainable development</BigHeading>
 
-            <p className="text-[19px] leading-relaxed text-gn-400 mb-6 italic font-display">
-              &quot;I believe Africa&apos;s digital future depends on our ability to secure our own infrastructure and build technology that serves the public interest.&quot;
+            <p className="text-[19px] leading-relaxed text-gn-400 mb-8 italic font-display">
+              &quot;I believe Africa&apos;s digital future depends on building sustainable ecosystems that promote inclusive growth, gender equality, and good governance.&quot;
             </p>
-            <p className="text-base leading-loose text-gn-400 mb-5">
-              Christine Masika founded Traverse Minds in 2024 to address a specific, urgent gap: Uganda — and Africa more broadly — was rapidly digitising its economy and public services without the homegrown cybersecurity and civic-tech capacity to protect them.
-            </p>
-            <p className="text-base leading-loose text-gn-400 mb-5">
-              With a background in computer science and strategic intelligence, Christine built Traverse into an integrated six-division powerhouse combining technical security consulting with deep policy research, data journalism, and AI governance work.
-            </p>
-            <p className="text-base leading-loose text-gn-400 mb-10">
-              Beyond Traverse, she is a regular commentator on technology policy across Africa and an advocate for digital literacy in underserved communities. Her guiding principle: evidence over assumption, always.
-            </p>
-
-            {/* Pull quote */}
-            <div className="border-l-4 border-accent pl-6 mb-10 py-0.5">
-              <p className="font-display text-xl italic text-gn-100 leading-relaxed mb-2.5">
-                &quot;Technology is a tool for progress, but evidence is the anchor that keeps it serving the people.&quot;
+            
+            <div className="space-y-6 text-base leading-loose text-gn-400 mb-10">
+              <p>
+                Masiika Christine Thembo is a recognized expert in cyber resilience, digital infrastructure protection, and capacity building with a proven impact in emerging economies. Recently featured among <strong>Africa&apos;s Top 50 Women in Cybersecurity</strong>, she has demonstrated mastery in policy development and multi-stakeholder partnerships.
               </p>
-              <cite className="text-xs not-italic font-bold tracking-widest uppercase text-accent">— Christine Masika</cite>
+              <p>
+                Her work bridges the technical with the tactical, ensuring technology serves the public interest in alignment with UN Sustainable Development Goals 5, 8, 9, and 16. She leads institutional strengthening initiatives that have reduced security exposure by 60% for national agencies.
+              </p>
+              <div className="bg-bg-light p-6 border-l-4 border-accent">
+                <p className="font-bold text-gn-100 uppercase tracking-widest text-xs mb-3">Core Value Proposition</p>
+                <p className="text-[15px] italic leading-relaxed">
+                  Building sustainable digital ecosystems that promote inclusive growth, gender equality, and good governance through evidence-based policy and robust technical mastery.
+                </p>
+              </div>
             </div>
 
             <div className="flex gap-2.5 items-center">
-              <span className="text-[12px] font-bold tracking-widest uppercase text-gn-500 mr-2">Follow</span>
-              {[{ Icon: Twitter, label: "Twitter" }, { Icon: Linkedin, label: "LinkedIn" }, { Icon: Mail, label: "Email", href: "mailto:hello@traverseminds.ug" }].map(({ Icon, label, href = "#" }) => (
-                <a key={label} href={href} title={label} className="flex h-9.5 w-9.5 items-center justify-center border border-border-light text-gn-500 no-underline transition-all duration-150 hover:bg-accent hover:border-accent hover:text-white">
-                  <Icon size={15} />
+              <span className="text-[12px] font-bold tracking-widest uppercase text-gn-500 mr-4">Follow</span>
+              {[
+                { Icon: Twitter, label: "Twitter" }, 
+                { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/christinemasika" }, 
+                { Icon: Mail, label: "Email", href: "mailto:christinethembo@gmail.com" }
+              ].map(({ Icon, label, href = "#" }) => (
+                <a key={label} href={href} title={label} className="flex h-10 w-10 items-center justify-center border border-border-light text-gn-500 transition-all hover:bg-accent hover:border-accent hover:text-white">
+                  <Icon size={16} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Sidebar: portrait + facts */}
           <div className="mt-12 lg:mt-0">
-            {/* Portrait — 3:4 aspect, objectPosition shows face */}
-            <div className="relative mb-7 aspect-3/4 w-full overflow-hidden rounded-sm bg-bg-light editorial-card">
-              <Image
-                src={`${basePath}/Christine.jpg`}
-                alt="Christine Masika"
-                fill
-                className="object-cover object-[50%_8%]"
-              />
+            <div className="relative mb-8 aspect-3/4 w-full overflow-hidden rounded-sm editorial-card">
+              <Image src={`${basePath}/Christine.jpg`} alt="Masiika Christine Thembo" fill className="object-cover object-[50%_8%]" />
             </div>
-            {/* Facts table */}
             <div className="border border-border-light rounded-sm bg-white overflow-hidden shadow-card">
+              <div className="p-5 bg-bg-light border-b border-border-light">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent m-0">Fast Facts</p>
+              </div>
               {[
-                { label: "Focus",     value: "Cybersecurity · Civic-Tech · Policy" },
-                { label: "Education", value: "Computer Science & Strategic Intel" },
-                { label: "Location",  value: "Kampala, Uganda" },
-                { label: "Interests", value: "Data Journalism · AI Ethics · Digital Rights" },
-                { label: "Founded",   value: "Traverse Minds, 2024" },
+                { label: "Education", value: "MA Policy (Candidate) · PGD Security Mgmt · B.IT (Hons)" },
+                { label: "Credentials", value: "CHFI · EnCase · CIIP · Digital Identity · Cyber Essentials" },
+                { label: "Leadership", value: "President (Women in Design UG) · Founder (CyberLuncheon)" },
+                { label: "Founded", value: "Traverse Minds · Ngyero Design · Kikorongo Safari Lodge" },
+                { label: "Impact", value: "300+ personnel trained · $2M+ recovered · 60% risk reduction" },
               ].map((row, i, arr) => (
-                <div key={row.label} className={cn(
-                  "grid grid-cols-[100px_1fr] gap-4 p-[15px_20px]",
-                  i < arr.length - 1 ? "border-b border-border-light" : ""
-                )}>
-                  <p className="text-[11px] font-bold tracking-widest uppercase text-gn-500 m-0 pt-0.5">{row.label}</p>
+                <div key={row.label} className={cn("grid grid-cols-[100px_1fr] gap-4 p-5", i < arr.length - 1 ? "border-b border-border-light" : "")}>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-gn-500 m-0 pt-0.5">{row.label}</p>
                   <p className="text-sm text-gn-100 m-0 font-medium leading-relaxed">{row.value}</p>
                 </div>
               ))}
@@ -242,155 +307,191 @@ export default function MeetChristinePage() {
         </div>
       </section>
 
-      {/* ── FULL-WIDTH DARK STATEMENT ── */}
-      <section className="bg-bg-dark py-24 px-8">
-        <div className="mx-auto max-w-215 text-center">
-          <p className="font-display text-[clamp(22px,3.2vw,38px)] font-bold text-white leading-snug italic mb-5">
-            &quot;Africa doesn&apos;t need to import its digital security. We have the talent, the context, and the urgency to build it here.&quot;
-          </p>
-          <p className="text-xs font-bold tracking-[0.12em] uppercase text-accent">— Christine Masika</p>
-        </div>
-      </section>
-
-      {/* ══ WORK ══ */}
+      {/* ══ COMPETENCIES ══ */}
       <SectionAnchor id="work" />
-      <section className="bg-bg-light py-22">
-        <div className="mx-auto grid max-w-295 items-start gap-x-18 px-8 lg:grid-cols-[300px_1fr]">
-          <div className="lg:sticky lg:top-20 mb-12 lg:mb-0">
-            <Eyebrow>What Christine does</Eyebrow>
-            <BigHeading>Six domains. One mission.</BigHeading>
-            <p className="text-[15px] leading-relaxed text-gn-400 mb-8">
-              At Traverse Minds, technical security consulting, civic technology, and policy research reinforce one another — each division building evidence and capacity the others need.
-            </p>
-            <Button variant="ghost" href="/about" className="uppercase tracking-widest p-0 hover:bg-transparent hover:text-accent group">
-              About Traverse <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-sm overflow-hidden shadow-card">
-            {DOMAINS.map(d => (
-              <div key={d.title} className="bg-white p-8 group hover:bg-bg-editorial-warm transition-colors duration-300">
-                <div className="text-accent mb-3.5 flex">
-                  {typeof d.icon === "string" ? <span className="text-[22px]">{d.icon}</span> : d.icon}
-                </div>
-                <h3 className="text-base font-bold text-gn-100 mb-2.5">{d.title}</h3>
-                <p className="text-sm leading-relaxed text-gn-400 m-0">{d.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ALTERNATING TIMELINE ── */}
-      <section className="bg-white py-22">
+      <section className="bg-bg-light py-24">
         <div className="mx-auto max-w-295 px-8">
-          <Eyebrow>Journey</Eyebrow>
-          <BigHeading>How Christine got here</BigHeading>
-          <div className="mt-12 relative">
-            <div className="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 bg-border-light md:block" />
-            {[
-              { year: "2016", side: "left",  text: "Began her computer science degree with a dual focus on software engineering and information security." },
-              { year: "2019", side: "right", text: "Interned with a regional fintech, discovering first-hand how thin the security posture of Africa&apos;s digital payments infrastructure really was." },
-              { year: "2021", side: "left",  text: "Joined an intelligence consultancy, honing skills in open-source intelligence, strategic analysis, and adversarial threat modelling." },
-              { year: "2022", side: "right", text: "Co-authored Uganda&apos;s first independent civic-tech assessment, which informed the NITA-U digital strategy review." },
-              { year: "2024", side: "left",  text: "Founded Traverse Minds Ltd, launching six integrated divisions spanning cybersecurity, civic tech, data journalism, and AI governance." },
-            ].map((item) => (
-              <div key={item.year} className="grid md:grid-cols-[1fr_60px_1fr] mb-0">
-                {item.side === "left" ? (
-                  <>
-                    <div className="md:pr-10 pb-12 md:text-right">
-                      <p className="text-[11px] font-bold tracking-widest uppercase text-accent mb-1.5">{item.year}</p>
-                      <p className="text-[15px] leading-relaxed text-gn-400 m-0">{item.text}</p>
-                    </div>
-                    <div className="hidden md:flex justify-center pt-1">
-                      <div className="w-3 h-3 rounded-full bg-accent border-[3px] border-white shadow-[0_0_0_1px_rgba(255,76,0,1)] shrink-0" />
-                    </div>
-                    <div className="hidden md:block" />
-                  </>
-                ) : (
-                  <>
-                    <div className="hidden md:block" />
-                    <div className="hidden md:flex justify-center pt-1">
-                      <div className="w-3 h-3 rounded-full bg-accent border-[3px] border-white shadow-[0_0_0_1px_rgba(255,76,0,1)] shrink-0" />
-                    </div>
-                    <div className="md:pl-10 pb-12">
-                      <p className="text-[11px] font-bold tracking-widest uppercase text-accent mb-1.5">{item.year}</p>
-                      <p className="text-[15px] leading-relaxed text-gn-400 m-0">{item.text}</p>
-                    </div>
-                  </>
-                )}
+          <div className="max-w-2xl mb-16">
+            <Eyebrow>Core Competencies</Eyebrow>
+            <BigHeading>Mastery across the digital spectrum</BigHeading>
+            <p className="text-gn-400 text-lg leading-relaxed">
+              Masiika&apos;s expertise spans from low-level digital forensics and incident response to high-level national strategy and regional policy harmonization.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {COMPETENCIES.map((c, i) => (
+              <div key={i} className="bg-white p-10 border border-border-light shadow-sm hover:shadow-md transition-shadow group">
+                <h3 className="text-xl font-bold text-gn-100 mb-4 group-hover:text-accent transition-colors">{c.title}</h3>
+                <p className="text-gn-400 text-[15px] leading-relaxed mb-8">{c.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {c.items.map(item => (
+                    <span key={item} className="text-[10px] font-bold uppercase tracking-widest bg-bg-light px-3 py-1.5 text-gn-500 border border-border-light">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 bg-bg-dark p-12 text-white overflow-hidden relative">
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12">
+              <div>
+                <p className="text-accent text-[10px] font-bold tracking-[0.3em] uppercase mb-6">Technical Proficiencies</p>
+                <div className="grid sm:grid-cols-2 gap-8">
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Programming</p>
+                    <p className="text-sm font-medium">Python, C++, SQL</p>
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Security Tools</p>
+                    <p className="text-sm font-medium">Nmap, Metasploit, Burp Suite, OWASP ZAP, Splunk</p>
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Forensics</p>
+                    <p className="text-sm font-medium">EnCase, Axiom, Cellebrite, FTK</p>
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">Frameworks</p>
+                    <p className="text-sm font-medium">NIST, ISO 27001, COBIT, GDPR</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center border-l border-white/10 lg:pl-12">
+                <p className="font-display text-2xl italic mb-6 text-white/90">
+                  &quot;Technology is a tool for progress, but evidence is the anchor that keeps it serving the people.&quot;
+                </p>
+                <p className="text-accent text-xs font-bold tracking-widest uppercase">— Masiika Christine Thembo</p>
+              </div>
+            </div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -mr-32 -mt-32" />
+          </div>
+        </div>
+      </section>
+
+      {/* ══ EXPERIENCE ══ */}
+      <SectionAnchor id="experience" />
+      <section className="bg-white py-24 px-8">
+        <div className="mx-auto max-w-295">
+          <Eyebrow>Professional Experience</Eyebrow>
+          <BigHeading>A decade of digital impact</BigHeading>
+          
+          <div className="mt-16 space-y-px bg-border-light border border-border-light overflow-hidden">
+            {EXPERIENCE.map((exp, i) => (
+              <div key={i} className="bg-white p-10 md:p-12 grid lg:grid-cols-[300px_1fr] gap-10 hover:bg-bg-light/50 transition-colors">
+                <div>
+                  <p className="text-accent font-bold tracking-widest uppercase text-[10px] mb-2">{exp.period}</p>
+                  <h3 className="text-lg font-bold text-gn-100 mb-1">{exp.role}</h3>
+                  <p className="text-gn-500 font-medium text-sm">{exp.company}</p>
+                </div>
+                <div>
+                  <p className="text-gn-400 leading-relaxed mb-6">{exp.desc}</p>
+                  <ul className="grid sm:grid-cols-2 gap-4 list-none p-0 m-0">
+                    {exp.impact.map((item, idx) => (
+                      <li key={idx} className="flex gap-3 text-sm text-gn-100 leading-snug">
+                        <CheckCircle2 size={16} className="text-accent shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ THINKING ══ */}
+      {/* ══ THINKING & RECOGNITION ══ */}
       <SectionAnchor id="thinking" />
-      <section className="bg-bg-light py-22">
+      <section className="bg-bg-dark py-24 text-white">
         <div className="mx-auto max-w-295 px-8">
-          <div className="flex justify-between items-end mb-12 flex-wrap gap-4">
-            <div><Eyebrow>Insights</Eyebrow><BigHeading className="m-0">What I&apos;m thinking about</BigHeading></div>
-            <Button variant="ghost" href="/blog" className="uppercase tracking-widest p-0 hover:bg-transparent hover:text-accent group">
-              All insights <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-
-          {/* Featured */}
-          <Link href="/blog" className="no-underline grid md:grid-cols-2 mb-0.5 bg-white border border-border-light overflow-hidden rounded-sm editorial-card group">
-            <div className="relative min-h-80">
-              <Image src={ARTICLES[0].image} alt={ARTICLES[0].title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div className="grid lg:grid-cols-[1fr_400px] gap-20">
+            <div>
+              <p className="text-accent text-[10px] font-bold tracking-[0.3em] uppercase mb-6">Thought Leadership</p>
+              <h2 className="font-display text-4xl font-bold mb-12">Global Recognition & Speaking</h2>
+              
+              <div className="space-y-10">
+                {[
+                  { event: "(ISC)² Keynote (2021)", title: "Mentoring Women in Cybersecurity", detail: "Global audience of 2,000+ professionals." },
+                  { event: "Africa Tech Summit (2019)", title: "Cybersecurity Challenges in Africa", detail: "Expert panelist on regional digital transformation." },
+                  { event: "Bowmans & Citibank Fintech (2018)", title: "Digital Economy Transformation", detail: "Leveraging technology for financial inclusion." },
+                  { event: "Kipya Cyber Security (2018)", title: "Blockchain in Digital Forensics", detail: "Exploring emerging investigative technologies." },
+                ].map((s, i) => (
+                  <div key={i} className="border-l border-white/10 pl-8 relative">
+                    <div className="absolute left-0 top-0 w-1 h-8 bg-accent -translate-x-1/2" />
+                    <p className="text-accent font-bold text-[10px] tracking-widest uppercase mb-2">{s.event}</p>
+                    <h4 className="text-xl font-bold mb-1">{s.title}</h4>
+                    <p className="text-white/50 text-sm">{s.detail}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="p-10 md:p-11 flex flex-col justify-center">
-              <p className="text-[10px] font-bold tracking-widest uppercase text-accent mb-3">{ARTICLES[0].category} · Featured</p>
-              <h3 className="font-display text-[26px] font-bold text-gn-100 leading-tight mb-4 group-hover:text-accent transition-colors">{ARTICLES[0].title}</h3>
-              <p className="text-[15px] text-gn-400 leading-relaxed mb-7">{ARTICLES[0].desc}</p>
-              <span className="inline-flex items-center gap-2 text-[12px] font-bold text-accent tracking-widest uppercase">Read more <ArrowRight size={13} /></span>
-            </div>
-          </Link>
 
-          {/* 3-up */}
-          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-sm overflow-hidden shadow-card">
-            {ARTICLES.slice(1).map(a => (
-              <Link key={a.title} href="/blog" className="no-underline bg-white block group hover:bg-bg-editorial-warm transition-colors duration-300">
-                <div className="relative aspect-16/10 overflow-hidden">
-                  <Image src={a.image} alt={a.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="space-y-8">
+              <div className="bg-white/5 p-10 border border-white/10">
+                <Award className="text-accent mb-6" size={32} />
+                <h3 className="text-lg font-bold mb-4">Top 50 in Africa</h3>
+                <p className="text-white/60 text-sm leading-relaxed mb-6">
+                  Featured in the <strong>African Women in Cybersecurity Book 2020</strong> as one of the most influential professionals on the continent.
+                </p>
+                <div className="pt-6 border-t border-white/10">
+                  <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-2">Recognition</p>
+                  <p className="text-xs italic leading-loose">
+                    &quot;Recognized for demonstrated mastery in policy development, institutional strengthening, and multi-stakeholder partnerships.&quot;
+                  </p>
                 </div>
-                <div className="p-5 px-5.5 pb-6.5">
-                  <p className="text-[10px] font-bold tracking-widest uppercase text-accent mb-2">{a.category}</p>
-                  <h3 className="font-display text-[17px] font-bold text-gn-100 leading-snug mb-2 group-hover:text-accent transition-colors">{a.title}</h3>
-                  <p className="text-[13px] text-gn-400 leading-relaxed m-0">{a.desc}</p>
+              </div>
+
+              <div className="bg-white/5 p-10 border border-white/10">
+                <BookOpen className="text-accent mb-6" size={32} />
+                <h3 className="text-lg font-bold mb-4">Education & Certs</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-1">MA Policy Analysis</p>
+                    <p className="text-xs">Uganda Management Institute (Candidate)</p>
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-1">B.IT (Honors) Security</p>
+                    <p className="text-xs">Multimedia University, Malaysia</p>
+                  </div>
+                  <div className="pt-4 flex flex-wrap gap-2">
+                    {["CHFI", "EnCase", "CIIP", "ISO 27001"].map(c => (
+                      <span key={c} className="text-[9px] font-bold border border-white/20 px-2 py-1 rounded-full">{c}</span>
+                    ))}
+                  </div>
                 </div>
-              </Link>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── PODCAST BANNER ── */}
-      <section className="bg-bg-dark py-0 overflow-hidden">
-        <div className="mx-auto grid max-w-295 md:grid-cols-2">
-          <div className="p-8 md:p-18 md:pr-16 lg:pl-8">
-            <Eyebrow>Podcast</Eyebrow>
-            <BigHeading light>Facts & Figures</BigHeading>
-            <p className="text-base leading-relaxed text-white/65 max-w-105 mb-9">
-              Every two weeks Christine dissects technology, data, and democracy in Africa with practitioners, policymakers, and researchers shaping the region&apos;s digital agenda.
+      {/* ── PODCAST PREVIEW ── */}
+      <section className="bg-white py-24 overflow-hidden border-b border-border-light">
+        <div className="mx-auto grid max-w-295 md:grid-cols-2 gap-20 px-8">
+          <div className="flex flex-col justify-center">
+            <Eyebrow>Media</Eyebrow>
+            <BigHeading>Facts & Figures</BigHeading>
+            <p className="text-base leading-relaxed text-gn-400 mb-9">
+              Every two weeks Masiika dissects technology, data, and democracy in Africa with practitioners, policymakers, and researchers shaping the region&apos;s digital agenda.
             </p>
-            <Button variant="primary" href="/media" size="lg" className="uppercase tracking-widest bg-accent hover:bg-accent-hover text-white">
-              <Play size={14} fill="#fff" /> Listen now
-            </Button>
+            <div className="flex gap-4">
+              <Button variant="primary" href="/media" size="lg" className="uppercase tracking-widest">
+                <Play size={14} className="mr-2" /> Listen now
+              </Button>
+              <Button variant="outline" href="/media" size="lg" className="uppercase tracking-widest">
+                All Episodes
+              </Button>
+            </div>
           </div>
-          <div className="relative min-h-85 overflow-hidden">
-            <Image
-              src={`${basePath}/Christine.jpg`}
-              alt="Facts and Figures podcast"
-              fill
-              className="object-cover object-[50%_12%] opacity-45"
-            />
-            <div className="absolute bottom-8 left-8 right-8 bg-black/75 p-5 px-6 rounded-sm backdrop-blur-md border border-white/10">
-              <p className="text-[10px] font-bold tracking-widest uppercase text-accent mb-1.5">Latest episode</p>
-              <p className="text-base font-bold text-white mb-1">AI & Electoral Integrity in Africa</p>
-              <p className="text-[13px] text-white/50 m-0">48 min · April 2025</p>
+          <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl">
+            <Image src={`${basePath}/Christine.jpg`} alt="Podcast" fill className="object-cover grayscale opacity-50" />
+            <div className="absolute inset-0 bg-accent/20 mix-blend-multiply" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform">
+                <Play size={24} className="text-accent fill-accent ml-1" />
+              </div>
             </div>
           </div>
         </div>
@@ -398,51 +499,70 @@ export default function MeetChristinePage() {
 
       {/* ══ CONNECT ══ */}
       <SectionAnchor id="connect" />
-      <section className="bg-white py-22">
-        <div className="mx-auto grid max-w-295 px-8 lg:grid-cols-2 gap-x-22">
-          <div className="mb-16 lg:mb-0">
-            <Eyebrow>Newsletter</Eyebrow>
-            <BigHeading>Stay in the loop</BigHeading>
-            <p className="text-base text-gn-400 leading-relaxed mb-8">
-              Weekly analysis of Uganda&apos;s data protection landscape, notable cybersecurity incidents, and civic-tech developments across Africa — straight to your inbox.
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-295 px-8 grid lg:grid-cols-2 gap-20">
+          <div>
+            <Eyebrow>Collaborate</Eyebrow>
+            <BigHeading>Contact & Inquiries</BigHeading>
+            <p className="text-lg text-gn-400 mb-12">
+              National strategy development, security assessments, speaking engagements, or academic research collaborations.
             </p>
-            <div className="flex mb-3">
-              <input type="email" placeholder="Enter your email address" className="flex-1 p-[14px_18px] text-[15px] border border-border-light border-r-0 outline-none font-sans text-gn-100 bg-white focus:border-accent transition-colors" />
-              <Button variant="primary" className="rounded-none uppercase tracking-widest whitespace-nowrap bg-accent hover:bg-accent-hover">Subscribe</Button>
+            <div className="space-y-6">
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 bg-bg-light flex items-center justify-center rounded-sm text-accent"><Mail size={20} /></div>
+                <div>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-gn-500 mb-1">Email</p>
+                  <p className="text-gn-100 font-medium">christinethembo@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 bg-bg-light flex items-center justify-center rounded-sm text-accent"><Globe size={20} /></div>
+                <div>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-gn-500 mb-1">Location</p>
+                  <p className="text-gn-100 font-medium">Kampala, Uganda</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 bg-bg-light flex items-center justify-center rounded-sm text-accent"><Linkedin size={20} /></div>
+                <div>
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-gn-500 mb-1">Network</p>
+                  <p className="text-gn-100 font-medium">CyberLuncheon Founder</p>
+                </div>
+              </div>
             </div>
-            <p className="text-[12px] text-gn-500">No spam. Unsubscribe any time.</p>
           </div>
 
-          <div className="lg:border-l lg:border-border-light lg:pl-22">
-            <Eyebrow>Collaborate</Eyebrow>
-            <BigHeading>Work with Traverse</BigHeading>
-            <p className="text-base text-gn-400 leading-relaxed mb-8">
-              Security assessments, policy research, civic-tech development, or speaking engagements — Christine and the Traverse team are ready to engage.
-            </p>
-            <div className="flex gap-3 flex-wrap mb-10">
-              <Button variant="primary" href="/contact" size="lg" className="uppercase tracking-widest">
-                Get in touch
-              </Button>
-              <Button variant="outline" href="/about" size="lg" className="uppercase tracking-widest">
-                Our divisions
-              </Button>
-            </div>
-            <div className="pt-8 border-t border-border-light">
-              {[{ label: "Email", value: "hello@traverseminds.ug" }, { label: "Location", value: "Kampala, Uganda" }, { label: "Focus", value: "Africa" }].map(row => (
-                <div key={row.label} className="flex gap-5 mb-3">
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-gn-500 w-18 shrink-0">{row.label}</span>
-                  <span className="text-sm text-gn-100">{row.value}</span>
+          <div className="bg-bg-light p-10 md:p-12">
+            <h3 className="font-display text-2xl font-bold mb-8">Work with Masiika</h3>
+            <form className="space-y-6">
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold tracking-widest uppercase">Name</label>
+                  <input type="text" className="w-full bg-white border border-border-light p-3 text-sm focus:border-accent outline-none" />
                 </div>
-              ))}
-            </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold tracking-widest uppercase">Email</label>
+                  <input type="email" className="w-full bg-white border border-border-light p-3 text-sm focus:border-accent outline-none" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold tracking-widest uppercase">Subject</label>
+                <input type="text" className="w-full bg-white border border-border-light p-3 text-sm focus:border-accent outline-none" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold tracking-widest uppercase">Message</label>
+                <textarea rows={4} className="w-full bg-white border border-border-light p-3 text-sm focus:border-accent outline-none resize-none"></textarea>
+              </div>
+              <Button variant="primary" className="w-full uppercase tracking-widest py-4">Send Message</Button>
+            </form>
           </div>
         </div>
       </section>
 
       {/* Footer strip */}
-      <div className="bg-bg-light border-t-4 border-accent py-11 px-8 text-center">
-        <p className="text-[22px] font-display font-bold text-gn-100 mb-2">Traverse Minds</p>
-        <p className="text-sm text-gn-400 m-0">Kampala, Uganda · hello@traverseminds.ug</p>
+      <div className="bg-bg-dark text-white py-12 px-8 text-center border-t border-white/5">
+        <p className="text-xl font-display font-bold mb-2">Masiika Christine Thembo</p>
+        <p className="text-xs text-white/40 tracking-widest uppercase">Traverse Minds · Cyber Resilience · Sustainable Development</p>
       </div>
 
     </div>
