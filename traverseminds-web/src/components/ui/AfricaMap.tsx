@@ -19,6 +19,11 @@ const DEFAULT_COUNTRIES: CountryData[] = [
   { name: "Tanzania", data: "Dar es Salaam" },
   { name: "Rwanda", data: "Kigali Hub" },
   { name: "Burundi", data: "Bujumbura" },
+  { name: "Nigeria", data: "West Africa Hub" },
+  { name: "South Africa", data: "Southern Africa Hub" },
+  { name: "Egypt", data: "North Africa Hub" },
+  { name: "Senegal", data: "Dakar Office" },
+  { name: "Ethiopia", data: "Addis Ababa Hub" },
 ];
 
 const COUNTRY_COORDS: Record<string, [number, number]> = {
@@ -27,6 +32,11 @@ const COUNTRY_COORDS: Record<string, [number, number]> = {
   Tanzania: [-6.369, 34.8888],
   Rwanda: [-1.9403, 29.8739],
   Burundi: [-3.3731, 29.9189],
+  Nigeria: [9.0820, 8.6753],
+  "South Africa": [-30.5595, 22.9375],
+  Egypt: [26.8206, 30.8025],
+  Senegal: [14.4974, -14.4524],
+  Ethiopia: [9.1450, 40.4897],
 };
 
 function MapInner({
@@ -68,8 +78,8 @@ function MapInner({
         )}
       >
         <MapContainer
-          center={[-1.5, 32]}
-          zoom={5}
+          center={[2.0, 16.0]}
+          zoom={3}
           scrollWheelZoom={false}
           className="h-full w-full z-0"
           style={{ height: "100%", width: "100%", borderRadius: "inherit" }}

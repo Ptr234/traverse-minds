@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
