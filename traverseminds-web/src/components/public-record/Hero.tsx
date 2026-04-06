@@ -103,7 +103,7 @@ export function Hero({ onSearch }: HeroProps) {
               </div>
 
               {/* Search Input */}
-              <div className="flex-grow relative">
+              <div className="grow relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-black/20" />
                 <input 
                   type="text" 
