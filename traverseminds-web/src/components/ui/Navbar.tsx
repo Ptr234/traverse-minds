@@ -18,7 +18,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const divisions = [
   { label: "Traverse Security", href: "/security", description: "Cybersecurity for banks & government", icon: Shield, tagline: "Protection" },
-  { label: "Public Record EA", href: "/public-record", description: "AI-powered public document platform", icon: Database, tagline: "Transparency" },
+  { label: "Public Record Africa", href: "/public-record", description: "AI-powered public document platform", icon: Database, tagline: "Transparency" },
   { label: "Digital Literacy", href: "/literacy", description: "Cyber safety training for all", icon: BookOpen, tagline: "Education" },
   { label: "Traverse Media", href: "/media", description: "Facts & Figures Podcast", icon: Mic, tagline: "Storytelling" },
   { label: "Think Tank", href: "/think-tank", description: "Policy research & analysis", icon: Brain, tagline: "Insight" },
@@ -268,7 +268,7 @@ export function Navbar() {
                     Integrated solutions for a <span className="text-accent">digital-first</span> Africa.
                   </h3>
                   <p className="text-gn-400 text-sm leading-relaxed mb-8">
-                    Six specialized divisions working in synergy to secure, inform, and empower the East African region.
+                    Six specialized divisions working in synergy to secure, inform, and empower the African region.
                   </p>
                   <Link 
                     href="/about" 
@@ -326,7 +326,7 @@ export function Navbar() {
               <div className="bg-gn-900/50 border-t border-gn-700/30 py-4">
                 <div className="container-max flex items-center justify-between">
                   <span className="text-xs text-gn-500 font-medium italic">
-                    Supporting the East African Community (EAC) digital transformation since 2024.
+                    Supporting Africa digital transformation since 2024.
                   </span>
                   <div className="flex gap-6">
                     <Link href="/careers" className="text-xs font-bold uppercase tracking-wider text-gn-400 hover:text-gn-100 transition-colors">Careers</Link>

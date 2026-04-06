@@ -14,7 +14,7 @@ const divisionColors: Record<string, string> = {
 const divisionLabels: Record<string, string> = {
   security: "Security",
   events: "Events",
-  ai: "Public Record EA",
+  ai: "Public Record Africa",
   literacy: "Literacy",
   media: "Media",
   thinktank: "Think Tank",

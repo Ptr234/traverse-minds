@@ -23,7 +23,7 @@ export function PublicRecordTeaser() {
 
       <div className="relative z-10" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px 24px" }}>
         <SectionReveal variant="fade-up" className="mx-auto text-center" style={{ maxWidth: 596 }}>
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 24 }}>Public Record EA</p>
+          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 24 }}>Public Record Africa</p>
 
           <TextReveal
             as="h2"
@@ -33,7 +33,7 @@ export function PublicRecordTeaser() {
             className="font-display"
             style={{ fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.8px", color: "#fff" }}
           >
-            East Africa&rsquo;s government records — intelligently searchable.
+            Africa&rsquo;s government records — intelligently searchable.
           </TextReveal>
 
           <motion.p
@@ -44,7 +44,7 @@ export function PublicRecordTeaser() {
             style={{ marginTop: 24, fontSize: 16, lineHeight: "125%", color: "rgba(255,255,255,0.5)", maxWidth: 500, margin: "24px auto 0" }}
           >
             AI-powered access to parliamentary records, gazettes, court filings,
-            and regulatory notices across the East African Community.
+            and regulatory notices across Africa.
           </motion.p>
 
           {/* Feature tags — GatesNotes breadcrumb style */}

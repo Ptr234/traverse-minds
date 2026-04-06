@@ -4,7 +4,7 @@ import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { EACMap } from "@/components/ui/EACMap";
+import { AfricaMap } from "@/components/ui/AfricaMap";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
@@ -70,7 +70,7 @@ export default function ContactPage() {
                     <div className="p-6">
                       <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>Prefer WhatsApp?</h3>
                       <p className="mt-2 text-sm" style={{ color: "#515459" }}>
-                        The fastest way to reach us in East Africa.
+                        The fastest way to reach us in Africa.
                       </p>
                       <div className="mt-4">
                         <WhatsAppButton />
@@ -111,7 +111,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold" style={{ color: "#000" }}>Location</h3>
                         <p className="mt-0.5 text-sm font-medium" style={{ color: "#313439" }}>Kampala, Uganda</p>
-                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Serving all 5 EAC countries</p>
+                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Serving all 5 African countries</p>
                       </div>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* EAC Coverage Map */}
+      {/* African Coverage Map */}
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max">
           <div className="text-center mb-10">
@@ -148,14 +148,14 @@ export default function ContactPage() {
               variant="fade-up"
               className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
             >
-              Serving the East African Community
+              Serving Africa
             </TextReveal>
             <p className="mt-3 max-w-lg mx-auto" style={{ color: "#515459" }}>
-              Headquartered in Kampala, operating across all five EAC member states.
+              Headquartered in Kampala, operating across all five African member states.
             </p>
           </div>
           <SectionReveal variant="clip-inset">
-            <EACMap />
+            <AfricaMap />
           </SectionReveal>
         </div>
       </section>

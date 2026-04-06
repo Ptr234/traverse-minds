@@ -23,7 +23,7 @@ interface ContactFormData {
 const divisionOptions = [
   { value: "security", label: "Traverse Security" },
   { value: "events", label: "Traverse Events" },
-  { value: "public-record", label: "Public Record EA" },
+  { value: "public-record", label: "Public Record Africa" },
   { value: "literacy", label: "Digital Literacy" },
   { value: "media", label: "Traverse Media" },
   { value: "think-tank", label: "Think Tank" },
@@ -269,7 +269,7 @@ export function ContactForm() {
         </div>
       )}
 
-      {/* Conditional: Public Record EA - Use Case */}
+      {/* Conditional: Public Record Africa - Use Case */}
       {selectedDivision === "public-record" && (
         <div>
           <label htmlFor="contact-usecase" className="mb-1.5 block text-sm font-medium text-primary">
@@ -287,7 +287,7 @@ export function ContactForm() {
                   : false,
             })}
           >
-            <option value="">How will you use Public Record EA?</option>
+            <option value="">How will you use Public Record Africa?</option>
             {useCaseOptions.map((o) => (
               <option key={o.value} value={o.value}>
                 {o.label}

@@ -16,7 +16,7 @@ import { TextReveal } from "@/components/ui/TextReveal";
 export const metadata: Metadata = {
   title: "Traverse Security -- Cybersecurity for Banks & Government",
   description:
-    "Cybersecurity services for East African institutions. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
+    "Cybersecurity services for African institutions. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
 };
 
 const WHATSAPP_NUMBER = "256700000000";
@@ -48,7 +48,7 @@ export default function SecurityPage() {
 
                 <SectionReveal variant="fade-up" delay={0.15}>
                   <p className="mt-5 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                    East African institutions face unique regulatory requirements
+                    African institutions face unique regulatory requirements
                     and threat landscapes. We combine deep local knowledge of
                     Bank of Uganda mandates and Uganda PDPA with international
                     security standards.

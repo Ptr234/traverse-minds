@@ -45,7 +45,7 @@ export function WhatWeDo() {
               Traverse Minds operates at the intersection of institutional security
               and public-interest research. Our six divisions work together to
               protect organisations, inform policy, and build digital capacity
-              across East Africa.
+              across Africa.
             </motion.p>
 
             <SectionReveal variant="fade-up" staggerChildren={0.08} delay={0.3} className="space-y-0" style={{ marginTop: 40 }}>

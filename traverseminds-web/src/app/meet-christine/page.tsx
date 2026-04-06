@@ -15,9 +15,9 @@ const TABS = [
 ];
 
 const DOMAINS = [
-  { icon: <Shield size={22}/>,   title: "Cybersecurity",    desc: "Audits, incident response, and capacity-building to reduce digital risk across East African organisations." },
+  { icon: <Shield size={22}/>,   title: "Cybersecurity",    desc: "Audits, incident response, and capacity-building to reduce digital risk across African organisations." },
   { icon: <BookOpen size={22}/>, title: "Civic Tech",       desc: "Technology that strengthens public institutions and improves citizen-facing services in Uganda." },
-  { icon: "📊",                  title: "Policy Research",  desc: "Evidence-based analysis of Uganda's PDPA 2019, cross-border data flows, and EAC digital rights." },
+  { icon: "📊",                  title: "Policy Research",  desc: "Evidence-based analysis of Uganda's PDPA 2019, cross-border data flows, and African digital rights." },
   { icon: "📡",                  title: "Data Journalism",  desc: "Training newsrooms to investigate technology issues with data and hold power to account." },
   { icon: "🤖",                  title: "AI Governance",    desc: "Examining automation's intersection with public administration, elections, and economic opportunity." },
   { icon: "🔒",                  title: "Payment Security", desc: "Advising fintechs and regulators on unified security standards for cross-border mobile money." },
@@ -26,7 +26,7 @@ const DOMAINS = [
 const ARTICLES = [
   { title: "Uganda's PDPA 2019: The road ahead",            category: "Policy",     desc: "An analysis of the implementation gaps in our national data protection framework.", image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=900&auto=format&fit=crop" },
   { title: "The role of AI in African governance",          category: "Technology", desc: "How we can leverage automation while ensuring transparency and preserving local context.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=900&auto=format&fit=crop" },
-  { title: "Securing East Africa's payment systems",        category: "Security",   desc: "Why cross-border interoperability requires a unified security standard.", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=900&auto=format&fit=crop" },
+  { title: "Securing Africa's payment systems",        category: "Security",   desc: "Why cross-border interoperability requires a unified security standard.", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=900&auto=format&fit=crop" },
   { title: "Open data and the accountability gap in Uganda",category: "Policy",     desc: "Why government datasets should be public — and what it takes to get there.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=900&auto=format&fit=crop" },
 ];
 
@@ -138,12 +138,12 @@ export default function MeetChristinePage() {
             Meet<br />Christine
           </h1>
           <p className="text-lg leading-relaxed text-white/65 max-w-105 mb-12">
-            Cybersecurity professional, civic-tech advocate, and founder of Traverse Minds — building digital resilience across the East African Community.
+            Cybersecurity professional, civic-tech advocate, and founder of Traverse Minds — building digital resilience across Africa.
           </p>
 
           {/* Stats */}
           <div className="flex gap-10 mb-13 border-t border-white/12 pt-9">
-            {[{ v: "6", l: "Divisions" }, { v: "2024", l: "Founded" }, { v: "EAC", l: "Focus region" }].map(s => (
+            {[{ v: "6", l: "Divisions" }, { v: "2024", l: "Founded" }, { v: "Africa", l: "Focus region" }].map(s => (
               <div key={s.l}>
                 <p className="font-display text-3xl font-bold text-white mb-0">{s.v}</p>
                 <p className="text-[11px] tracking-widest uppercase text-white/40 mt-1.5 mb-0">{s.l}</p>
@@ -180,13 +180,13 @@ export default function MeetChristinePage() {
               &quot;I believe Africa&apos;s digital future depends on our ability to secure our own infrastructure and build technology that serves the public interest.&quot;
             </p>
             <p className="text-base leading-loose text-gn-400 mb-5">
-              Christine Masika founded Traverse Minds in 2024 to address a specific, urgent gap: Uganda — and East Africa more broadly — was rapidly digitising its economy and public services without the homegrown cybersecurity and civic-tech capacity to protect them.
+              Christine Masika founded Traverse Minds in 2024 to address a specific, urgent gap: Uganda — and Africa more broadly — was rapidly digitising its economy and public services without the homegrown cybersecurity and civic-tech capacity to protect them.
             </p>
             <p className="text-base leading-loose text-gn-400 mb-5">
               With a background in computer science and strategic intelligence, Christine built Traverse into an integrated six-division powerhouse combining technical security consulting with deep policy research, data journalism, and AI governance work.
             </p>
             <p className="text-base leading-loose text-gn-400 mb-10">
-              Beyond Traverse, she is a regular commentator on technology policy across the EAC and an advocate for digital literacy in underserved communities. Her guiding principle: evidence over assumption, always.
+              Beyond Traverse, she is a regular commentator on technology policy across Africa and an advocate for digital literacy in underserved communities. Her guiding principle: evidence over assumption, always.
             </p>
 
             {/* Pull quote */}
@@ -372,7 +372,7 @@ export default function MeetChristinePage() {
             <Eyebrow>Podcast</Eyebrow>
             <BigHeading light>Facts & Figures</BigHeading>
             <p className="text-base leading-relaxed text-white/65 max-w-105 mb-9">
-              Every two weeks Christine dissects technology, data, and democracy in East Africa with practitioners, policymakers, and researchers shaping the region&apos;s digital agenda.
+              Every two weeks Christine dissects technology, data, and democracy in Africa with practitioners, policymakers, and researchers shaping the region&apos;s digital agenda.
             </p>
             <Button variant="primary" href="/media" size="lg" className="uppercase tracking-widest bg-accent hover:bg-accent-hover text-white">
               <Play size={14} fill="#fff" /> Listen now
@@ -387,7 +387,7 @@ export default function MeetChristinePage() {
             />
             <div className="absolute bottom-8 left-8 right-8 bg-black/75 p-5 px-6 rounded-sm backdrop-blur-md border border-white/10">
               <p className="text-[10px] font-bold tracking-widest uppercase text-accent mb-1.5">Latest episode</p>
-              <p className="text-base font-bold text-white mb-1">AI & Electoral Integrity in East Africa</p>
+              <p className="text-base font-bold text-white mb-1">AI & Electoral Integrity in Africa</p>
               <p className="text-[13px] text-white/50 m-0">48 min · April 2025</p>
             </div>
           </div>
@@ -402,7 +402,7 @@ export default function MeetChristinePage() {
             <Eyebrow>Newsletter</Eyebrow>
             <BigHeading>Stay in the loop</BigHeading>
             <p className="text-base text-gn-400 leading-relaxed mb-8">
-              Weekly analysis of Uganda&apos;s data protection landscape, notable cybersecurity incidents, and civic-tech developments across the EAC — straight to your inbox.
+              Weekly analysis of Uganda&apos;s data protection landscape, notable cybersecurity incidents, and civic-tech developments across Africa — straight to your inbox.
             </p>
             <div className="flex mb-3">
               <input type="email" placeholder="Enter your email address" className="flex-1 p-[14px_18px] text-[15px] border border-border-light border-r-0 outline-none font-sans text-gn-100 bg-white focus:border-accent transition-colors" />
@@ -426,7 +426,7 @@ export default function MeetChristinePage() {
               </Button>
             </div>
             <div className="pt-8 border-t border-border-light">
-              {[{ label: "Email", value: "hello@traverseminds.ug" }, { label: "Location", value: "Kampala, Uganda" }, { label: "Focus", value: "East African Community" }].map(row => (
+              {[{ label: "Email", value: "hello@traverseminds.ug" }, { label: "Location", value: "Kampala, Uganda" }, { label: "Focus", value: "Africa" }].map(row => (
                 <div key={row.label} className="flex gap-5 mb-3">
                   <span className="text-[11px] font-bold tracking-widest uppercase text-gn-500 w-18 shrink-0">{row.label}</span>
                   <span className="text-sm text-gn-100">{row.value}</span>

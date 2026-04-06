@@ -15,7 +15,7 @@ const audiences = [
   {
     icon: Scale,
     title: "Law Firms",
-    desc: "Search court records, regulatory filings, and legal precedents across all five EAC jurisdictions in seconds.",
+    desc: "Search court records, regulatory filings, and legal precedents across all five African jurisdictions in seconds.",
   },
   {
     icon: Search,
@@ -70,7 +70,7 @@ export default function PublicRecordPage() {
             </TextReveal>
             <SectionReveal variant="fade-up" delay={0.1}>
               <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-                Public Record EA serves professionals who need fast, reliable access to East African public documents.
+                Public Record Africa serves professionals who need fast, reliable access to African public documents.
               </p>
             </SectionReveal>
           </div>
@@ -115,7 +115,7 @@ export default function PublicRecordPage() {
             </p>
 
             <p className="mt-4 text-sm max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.35)" }}>
-              All data indexed by Public Record EA is sourced from publicly accessible government registries, court systems, and regulatory bodies. We add value through search, summarisation, and monitoring -- not through data restriction.
+              All data indexed by Public Record Africa is sourced from publicly accessible government registries, court systems, and regulatory bodies. We add value through search, summarisation, and monitoring -- not through data restriction.
             </p>
           </SectionReveal>
         </div>

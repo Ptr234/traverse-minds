@@ -31,7 +31,7 @@ export const teamMember = defineType({
         list: [
           { title: "Security", value: "security" },
           { title: "Events", value: "events" },
-          { title: "Public Record EA", value: "ai" },
+          { title: "Public Record Africa", value: "ai" },
           { title: "Digital Literacy", value: "literacy" },
           { title: "Media", value: "media" },
           { title: "Think Tank", value: "thinktank" },

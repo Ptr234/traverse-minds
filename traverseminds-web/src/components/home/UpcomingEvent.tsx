@@ -47,7 +47,7 @@ export function UpcomingEvent() {
             transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
             style={{ marginTop: 16, fontSize: 16, lineHeight: "125%", color: "rgba(255,255,255,0.5)", maxWidth: 500, margin: "16px auto 0" }}
           >
-            An intimate executive lunch for East Africa&apos;s CISO and policy leaders.
+            An intimate executive lunch for Africa&apos;s CISO and policy leaders.
           </motion.p>
 
           {/* Highlight tags */}

@@ -30,7 +30,7 @@ export function ComplianceFrameworks() {
           </TextReveal>
           <SectionReveal variant="fade-up" delay={0.15}>
             <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-              We assess and audit against the standards that matter most to East African institutions.
+              We assess and audit against the standards that matter most to African institutions.
             </p>
           </SectionReveal>
         </div>

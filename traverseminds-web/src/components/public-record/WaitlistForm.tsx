@@ -79,7 +79,7 @@ export function WaitlistForm() {
         </div>
         <h3 className="mt-6 font-display text-2xl font-bold" style={{ color: "#000" }}>You&apos;re on the list!</h3>
         <p className="mt-4" style={{ color: "#515459" }}>
-          Thank you for your interest in Public Record EA. We&apos;ll notify you
+          Thank you for your interest in Public Record Africa. We&apos;ll notify you
           as soon as we&apos;re ready for your early access.
         </p>
         <Button
@@ -198,7 +198,7 @@ export function WaitlistForm() {
 
             <p className="text-xs" style={{ color: "#919499" }}>
               By joining the waitlist, you agree to our Privacy Policy and consent
-              to receive updates about Public Record EA. We respect your data in
+              to receive updates about Public Record Africa. We respect your data in
               accordance with Uganda PDPA 2019.
             </p>
 

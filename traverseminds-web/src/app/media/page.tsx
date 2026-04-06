@@ -10,7 +10,7 @@ import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
   title: "Traverse Media & Facts & Figures Podcast | Traverse Minds",
-  description: "Facts & Figures -- East Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
+  description: "Facts & Figures -- Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
 };
 
 const podcastPlatforms = [
@@ -55,13 +55,13 @@ export default function MediaPage() {
                 <p className="mt-6 text-base leading-relaxed" style={{ color: "#515459" }}>
                   Traverse Media bridges the gap between complex research and everyday understanding.
                   Our flagship podcast, Facts &amp; Figures, translates Think Tank findings and
-                  Public Record EA data into accessible stories for East African citizens.
+                  Public Record Africa data into accessible stories for African citizens.
                 </p>
 
                 <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
                   {[
                     { icon: Newspaper, title: "Data Journalism", desc: "Turning public record datasets into impactful investigative stories and policy explainers." },
-                    { icon: MessageSquare, title: "Podcast & Video", desc: "Long-form conversations with East Africa's cybersecurity leaders, policy-makers, and civic-tech practitioners." },
+                    { icon: MessageSquare, title: "Podcast & Video", desc: "Long-form conversations with Africa's cybersecurity leaders, policy-makers, and civic-tech practitioners." },
                   ].map((item) => (
                     <div key={item.title} className="group flex flex-col gap-3">
                       <div className="flex h-11 w-11 items-center justify-center bg-primary/5" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
@@ -141,7 +141,7 @@ export default function MediaPage() {
               <SectionReveal variant="fade-blur" delay={0.1}>
                 <p className="mt-4 max-w-xl mx-auto leading-relaxed" style={{ color: "#515459" }}>
                   Pitch a topic or apply to be a guest on Facts &amp; Figures. We feature cybersecurity leaders,
-                  policy experts, and civic-tech practitioners from across East Africa.
+                  policy experts, and civic-tech practitioners from across Africa.
                 </p>
 
                 <div className="mt-10">

@@ -66,7 +66,7 @@ export function Hero() {
             className="font-display font-bold"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: "100%", letterSpacing: "-1.12px", color: "#000" }}
           >
-            Securing the Digital Frontier of East Africa.
+            Securing the Digital Frontier of Africa.
           </motion.h1>
 
           <motion.p

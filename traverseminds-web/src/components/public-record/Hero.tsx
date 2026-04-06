@@ -30,7 +30,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Public Record EA</p>
+            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Public Record Africa</p>
           </motion.div>
 
           <TextReveal
@@ -39,7 +39,7 @@ export function Hero() {
             delay={0.3}
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
           >
-            East Africa&apos;s government records -- intelligently searchable
+            Africa&apos;s government records -- intelligently searchable
           </TextReveal>
 
           <motion.p

@@ -17,7 +17,7 @@ const careersHeroImages = [
 ];
 
 const benefits = [
-  { icon: Globe, title: "Regional Impact", desc: "Work on projects that directly influence digital policy and security across East Africa." },
+  { icon: Globe, title: "Regional Impact", desc: "Work on projects that directly influence digital policy and security across Africa." },
   { icon: Users, title: "Expert Culture", desc: "Collaborate with some of the region's leading cybersecurity experts and researchers." },
   { icon: Zap, title: "Continuous Growth", desc: "Access to international certifications and specialized training programs." },
 ];

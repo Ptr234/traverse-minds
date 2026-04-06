@@ -11,7 +11,7 @@ import { MapPin, Calendar, Users, Utensils } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Cyber Luncheon Kampala — Traverse Events",
-  description: "An intimate lunch discussion about cyber threats facing East African institutions.",
+  description: "An intimate lunch discussion about cyber threats facing African institutions.",
 };
 
 const EVENT_DATE = "2026-05-15T12:00:00+03:00";
@@ -41,7 +41,7 @@ export default function CyberLuncheonPage() {
             </SectionReveal>
             <SectionReveal variant="slide-up" delay={0.2}>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-brand-medium">
-                An intimate, curated lunch for East Africa&apos;s cybersecurity leaders. Real conversations, no sales pitches.
+                An intimate, curated lunch for Africa&apos;s cybersecurity leaders. Real conversations, no sales pitches.
               </p>
             </SectionReveal>
             <SectionReveal variant="scale-fade" delay={0.3}>

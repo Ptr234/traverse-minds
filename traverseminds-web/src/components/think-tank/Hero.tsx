@@ -39,7 +39,7 @@ export function Hero() {
             delay={0.3}
             className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] font-bold text-white tracking-tight"
           >
-            Independent policy intelligence for East Africa&apos;s digital future
+            Independent policy intelligence for Africa&apos;s digital future
           </TextReveal>
 
           <motion.p
@@ -51,7 +51,7 @@ export function Hero() {
           >
             Bridging the gap between technology and policy. We provide
             independent research on data protection, AI governance,
-            cybersecurity policy, and digital rights across the EAC.
+            cybersecurity policy, and digital rights across Africa.
           </motion.p>
 
           <motion.div

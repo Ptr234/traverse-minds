@@ -10,7 +10,7 @@ const milestones = [
     year: "2024",
     title: "The idea takes shape",
     description:
-      "Founded in Kampala with a clear conviction: East Africa needs homegrown cybersecurity and civic-tech capacity.",
+      "Founded in Kampala with a clear conviction: Africa needs homegrown cybersecurity and civic-tech capacity.",
   },
   {
     year: "2025",
@@ -28,7 +28,7 @@ const milestones = [
     year: "2026",
     title: "Six divisions, one mission",
     description:
-      "Expanded to six interconnected divisions: Security, Events, Public Record EA, Digital Literacy, Media, and Think Tank.",
+      "Expanded to six interconnected divisions: Security, Events, Public Record Africa, Digital Literacy, Media, and Think Tank.",
   },
 ];
 

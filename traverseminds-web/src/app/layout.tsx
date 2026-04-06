@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Traverse Minds UG",
   },
   description:
-    "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for East Africa.",
+    "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
   metadataBase: new URL("https://traverseminds.ug"),
   openGraph: {
     type: "website",

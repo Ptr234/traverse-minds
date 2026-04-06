@@ -45,7 +45,7 @@ export function TeamGrid() {
             transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
             className="mt-3 max-w-md mx-auto" style={{ color: "#515459" }}
           >
-            Local experts building for East Africa. Team profiles updated as we grow.
+            Local experts building for Africa. Team profiles updated as we grow.
           </motion.p>
         </div>
 

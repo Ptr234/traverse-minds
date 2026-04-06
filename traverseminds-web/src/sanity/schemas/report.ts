@@ -75,7 +75,7 @@ export const report = {
           { title: "Tanzania", value: "tanzania" },
           { title: "Rwanda", value: "rwanda" },
           { title: "Burundi", value: "burundi" },
-          { title: "East Africa (Regional)", value: "regional" },
+          { title: "Africa (Regional)", value: "regional" },
         ],
       },
     },

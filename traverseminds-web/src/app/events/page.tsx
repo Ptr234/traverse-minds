@@ -64,7 +64,7 @@ export default function EventsPage() {
               transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
               className="mt-6 max-w-lg text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
             >
-              Luncheons, conferences, hackathons, and workshops -- curated for East Africa&apos;s cybersecurity decision-makers.
+              Luncheons, conferences, hackathons, and workshops -- curated for Africa&apos;s cybersecurity decision-makers.
             </motion.p>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function EventsPage() {
                       {ev.title}
                     </h3>
                     <p className="mt-3" style={{ color: "#515459" }}>
-                      An intimate, curated lunch for East Africa&apos;s cybersecurity leaders. 30 seats. Real conversations, no sales pitches.
+                      An intimate, curated lunch for Africa&apos;s cybersecurity leaders. 30 seats. Real conversations, no sales pitches.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-4 text-sm" style={{ color: "#919499" }}>
                       <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" />{ev.date}</span>
@@ -158,7 +158,7 @@ export default function EventsPage() {
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <SectionReveal variant="fade-up" staggerChildren={0.12} className="container-max relative z-10 max-w-4xl mx-auto grid grid-cols-1 gap-5 md:grid-cols-2">
           {[
-            { icon: Mic, title: "Speak at Our Events", desc: "Share your expertise with East Africa's cybersecurity community.", img: "https://images.unsplash.com/photo-1475721027785-f749ce072e32?q=80&w=2070&auto=format&fit=crop" },
+            { icon: Mic, title: "Speak at Our Events", desc: "Share your expertise with Africa's cybersecurity community.", img: "https://images.unsplash.com/photo-1475721027785-f749ce072e32?q=80&w=2070&auto=format&fit=crop" },
             { icon: Users, title: "Sponsor an Event", desc: "Put your brand in front of top cybersecurity decision-makers.", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=2070&auto=format&fit=crop" },
           ].map((c) => (
             <RevealItem key={c.title} variant="scale-fade">

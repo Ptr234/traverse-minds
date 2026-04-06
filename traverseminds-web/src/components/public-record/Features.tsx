@@ -38,7 +38,7 @@ export function Features() {
             transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
             className="mt-3 max-w-2xl mx-auto" style={{ color: "#515459" }}
           >
-            Three pillars of intelligence to navigate East Africa&apos;s public record landscape.
+            Three pillars of intelligence to navigate Africa&apos;s public record landscape.
           </motion.p>
         </div>
 

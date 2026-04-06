@@ -22,7 +22,7 @@ const mockPost = {
     <p>Uganda's banking sector is undergoing rapid digital transformation. Mobile banking, internet banking, and agent banking have expanded financial access across the country — but they've also expanded the attack surface for cybercriminals.</p>
     <p>Based on our security assessments across multiple Ugandan financial institutions in 2025-2026, here are the five most pressing cyber threats we're seeing.</p>
     <h2>1. Ransomware Targeting Core Banking Systems</h2>
-    <p>Ransomware attacks on financial institutions have increased by over 300% across East Africa in the past two years. Attackers are specifically targeting core banking systems, knowing that downtime costs banks millions in lost transactions and regulatory penalties.</p>
+    <p>Ransomware attacks on financial institutions have increased by over 300% across Africa in the past two years. Attackers are specifically targeting core banking systems, knowing that downtime costs banks millions in lost transactions and regulatory penalties.</p>
     <h2>2. Mobile Banking API Vulnerabilities</h2>
     <p>As banks rush to deploy mobile banking solutions, API security is often an afterthought. We've found critical vulnerabilities in mobile banking APIs that could allow attackers to access customer accounts, initiate unauthorised transfers, or extract personal data.</p>
     <h2>3. Insider Threats and Privileged Access Abuse</h2>

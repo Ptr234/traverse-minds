@@ -11,7 +11,7 @@ const services = [
   { icon: FileCheck2, title: "Bank of Uganda Audit", description: "Cybersecurity assessments aligned with Bank of Uganda regulatory requirements for supervised financial institutions.", image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070&auto=format&fit=crop" },
   { icon: AlertTriangle, title: "Threat Modelling", description: "Systematic identification of threats to your systems and data, with prioritised mitigation strategies.", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?q=80&w=2070&auto=format&fit=crop" },
   { icon: Siren, title: "Incident Response", description: "Rapid containment, investigation, and recovery when a breach occurs. 24-hour response commitment.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" },
-  { icon: Scale, title: "Regulatory Advisory", description: "Expert guidance on Uganda PDPA 2019, NIST, and East African data protection frameworks.", image: "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop" },
+  { icon: Scale, title: "Regulatory Advisory", description: "Expert guidance on Uganda PDPA 2019, NIST, and African data protection frameworks.", image: "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop" },
 ];
 
 export function ServiceCards() {
@@ -31,7 +31,7 @@ export function ServiceCards() {
           </TextReveal>
           <SectionReveal variant="fade-up" delay={0.15}>
             <p className="mt-4 max-w-2xl mx-auto text-base" style={{ color: "#515459" }}>
-              Six core capabilities designed for East African banks, government agencies, and enterprises.
+              Six core capabilities designed for African banks, government agencies, and enterprises.
             </p>
           </SectionReveal>
         </div>

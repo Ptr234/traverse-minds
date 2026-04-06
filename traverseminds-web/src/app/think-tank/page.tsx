@@ -9,7 +9,7 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight, FileText, Filter } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Think Tank | Evidence-Driven Digital Policy Research in East Africa",
+  title: "Think Tank | Evidence-Driven Digital Policy Research in Africa",
   description: "Bridging the gap between technology and policy. We provide independent research on data protection, AI governance, and digital rights.",
 };
 

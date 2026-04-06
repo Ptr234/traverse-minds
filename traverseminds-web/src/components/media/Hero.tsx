@@ -36,7 +36,7 @@ export function Hero() {
           </TextReveal>
 
           <p className="mt-6 text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-            Unpacking the data, laws, and technology shaping East Africa.
+            Unpacking the data, laws, and technology shaping Africa.
             Join our experts and guest policy-makers as they navigate the complexities of the regional digital landscape.
           </p>
 

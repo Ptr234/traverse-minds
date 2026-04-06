@@ -34,7 +34,7 @@ export function SecurityHero() {
           staggerSpeed={0.05}
           className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.92] font-bold text-white tracking-tight mx-auto max-w-5xl"
         >
-          Cybersecurity for banks &amp; government in East Africa.
+          Cybersecurity for banks &amp; government in Africa.
         </TextReveal>
 
         <motion.p

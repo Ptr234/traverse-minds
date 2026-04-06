@@ -12,13 +12,13 @@ import { TextReveal } from "@/components/ui/TextReveal";
 export const metadata: Metadata = {
   title: "About Traverse Minds",
   description:
-    "Uganda's integrated civic-tech company. Learn about our mission, team, and six interconnected divisions serving East Africa.",
+    "Uganda's integrated civic-tech company. Learn about our mission, team, and six interconnected divisions serving Africa.",
 };
 
 const divisions = [
   { name: "Traverse Security", desc: "Cybersecurity for banks and government" },
   { name: "Traverse Events", desc: "Cyber Luncheon, conferences, workshops" },
-  { name: "Public Record EA", desc: "AI-powered public document platform" },
+  { name: "Public Record Africa", desc: "AI-powered public document platform" },
   { name: "Digital Literacy", desc: "Cyber safety for schools, SMEs, government" },
   { name: "Traverse Media", desc: "Facts & Figures Podcast, data journalism" },
   { name: "Think Tank", desc: "Data protection, AI governance, OGP research" },
@@ -106,7 +106,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* EAC Country Flags */}
+      {/* African Country Flags */}
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 text-center">
           <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Regional Reach</p>
@@ -116,10 +116,10 @@ export default function AboutPage() {
             variant="fade-up"
             className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
           >
-            Serving the East African Community
+            Serving Africa
           </TextReveal>
           <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-            Our work spans all five EAC member states, building a safer digital future across the region.
+            Our work spans all five African member states, building a safer digital future across the region.
           </p>
 
           <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-10 flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-14">

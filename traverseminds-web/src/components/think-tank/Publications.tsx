@@ -45,7 +45,7 @@ export async function Publications() {
               Latest Publications
             </TextReveal>
             <p className="mt-3" style={{ color: "#515459" }}>
-              Independent analysis and policy recommendations for East Africa&apos;s digital economy.
+              Independent analysis and policy recommendations for Africa&apos;s digital economy.
             </p>
           </div>
           <Button variant="outline" href="/think-tank/archive">View Full Archive</Button>

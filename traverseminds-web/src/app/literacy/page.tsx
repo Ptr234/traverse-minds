@@ -21,7 +21,7 @@ const deliveryFormats = [
   {
     icon: Monitor,
     title: "Online",
-    desc: "Live virtual sessions with interactive exercises, accessible from anywhere in East Africa.",
+    desc: "Live virtual sessions with interactive exercises, accessible from anywhere in Africa.",
   },
   {
     icon: Layers,

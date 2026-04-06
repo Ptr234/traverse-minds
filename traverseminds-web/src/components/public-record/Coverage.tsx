@@ -22,7 +22,7 @@ export function Coverage() {
             <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Coverage</p>
 
             <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
-              Unrivalled coverage across East Africa
+              Unrivalled coverage across Africa
             </TextReveal>
 
             <p className="mt-5 text-base leading-relaxed" style={{ color: "#515459" }}>

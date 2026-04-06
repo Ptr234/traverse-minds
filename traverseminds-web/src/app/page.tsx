@@ -8,8 +8,8 @@ import { UpcomingEvent } from "@/components/home/UpcomingEvent";
 import { PodcastPreview } from "@/components/home/PodcastPreview";
 import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
-import { EACMap } from "@/components/ui/EACMap";
-import { EACMapReveal } from "@/components/home/EACMapReveal";
+import { AfricaMap } from "@/components/ui/AfricaMap";
+import { AfricaMapReveal } from "@/components/home/AfricaMapReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 export default function HomePage() {
@@ -23,10 +23,10 @@ export default function HomePage() {
       <ThinkTankPreview />
       <UpcomingEvent />
       <PodcastPreview />
-      {/* EAC Coverage */}
-      <EACMapReveal>
-        <EACMap />
-      </EACMapReveal>
+      {/* African Coverage */}
+      <AfricaMapReveal>
+        <AfricaMap />
+      </AfricaMapReveal>
 
       <section className="section-padding-sm overflow-hidden">
         <TrustLogoStrip variant="light" />

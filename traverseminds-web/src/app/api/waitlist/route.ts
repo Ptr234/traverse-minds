@@ -34,11 +34,11 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "Traverse Minds <hello@traverseminds.ug>",
       to: email,
-      subject: "You're on the list: Public Record EA",
+      subject: "You're on the list: Public Record Africa",
       text: `
         Hello ${name},
 
-        Thank you for joining the waitlist for Public Record EA — East Africa's AI-powered public document platform.
+        Thank you for joining the waitlist for Public Record Africa — Africa's AI-powered public document platform.
 
         We are currently in the private beta phase, indexing thousands of records across Uganda, Kenya, Tanzania, Rwanda, and Burundi. We will notify you as soon as your account is ready for early access.
 

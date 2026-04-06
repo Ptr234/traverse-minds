@@ -12,7 +12,7 @@ export function getOrganizationSchema(): WithContext<Organization> {
     url: "https://traverseminds.ug",
     logo: "https://traverseminds.ug/logo.png",
     description:
-      "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for East Africa.",
+      "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kampala",

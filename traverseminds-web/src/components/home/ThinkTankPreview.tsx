@@ -8,8 +8,8 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const reports = [
   { title: "Data Protection in Uganda: 2025 Status Report", excerpt: "A comprehensive review of PDPA enforcement, institutional readiness, and compliance gaps across key sectors.", tag: "Policy", number: "01" },
-  { title: "AI Governance Framework for East African Regulators", excerpt: "Proposed regulatory pathways for AI deployment in public services, finance, and healthcare across the EAC.", tag: "AI & Governance", number: "02" },
-  { title: "Digital Rights in the EAC: Annual Review", excerpt: "Tracking internet freedom, data sovereignty, and digital inclusion metrics across five member states.", tag: "Digital Rights", number: "03" },
+  { title: "AI Governance Framework for African Regulators", excerpt: "Proposed regulatory pathways for AI deployment in public services, finance, and healthcare across Africa.", tag: "AI & Governance", number: "02" },
+  { title: "Digital Rights in Africa: Annual Review", excerpt: "Tracking internet freedom, data sovereignty, and digital inclusion metrics across five member states.", tag: "Digital Rights", number: "03" },
 ];
 
 const gnEase = [0.215, 0.61, 0.355, 1] as const;
@@ -38,7 +38,7 @@ export function ThinkTankPreview() {
             transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
             style={{ marginTop: 16, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 500, margin: "16px auto 0" }}
           >
-            Independent research and policy analysis shaping the digital future of East Africa.
+            Independent research and policy analysis shaping the digital future of Africa.
           </motion.p>
         </div>
 

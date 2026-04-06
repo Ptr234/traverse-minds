@@ -51,7 +51,7 @@ export function NewsletterSignup() {
           </TextReveal>
 
           <p style={{ marginTop: 16, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 480, margin: "16px auto 0" }}>
-            Get our weekly intelligence briefing on East African cybersecurity
+            Get our weekly intelligence briefing on African cybersecurity
             trends, policy updates, and exclusive event invitations.
           </p>
         </motion.div>

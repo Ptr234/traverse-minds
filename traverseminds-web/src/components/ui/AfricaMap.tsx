@@ -8,7 +8,7 @@ interface CountryData {
   data: string;
 }
 
-interface EACMapProps {
+interface AfricaMapProps {
   countries?: CountryData[];
   className?: string;
 }
@@ -32,7 +32,7 @@ const COUNTRY_COORDS: Record<string, [number, number]> = {
 function MapInner({
   countries = DEFAULT_COUNTRIES,
   className,
-}: EACMapProps) {
+}: AfricaMapProps) {
   /* ---------- leaflet imports (client-only) ---------- */
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const L = require("leaflet") as typeof import("leaflet");
@@ -133,10 +133,10 @@ function MapInner({
 }
 
 /**
- * EAC Leaflet Map — interactive map of East African Community countries.
+ * African Leaflet Map — interactive map of Africa countries.
  * Dynamically imported with SSR disabled to avoid window/document errors.
  */
-const EACMap = dynamic(
+const AfricaMap = dynamic(
   () => Promise.resolve(MapInner),
   {
     ssr: false,
@@ -170,5 +170,5 @@ const EACMap = dynamic(
   },
 );
 
-export { EACMap };
-export type { EACMapProps, CountryData };
+export { AfricaMap };
+export type { AfricaMapProps, CountryData };

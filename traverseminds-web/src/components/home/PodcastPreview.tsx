@@ -32,7 +32,7 @@ const subscribeLinks = [
 
 const episodes = [
   { num: "01", title: "Uganda's Cyber Law: What Changed in 2025?", tag: "Policy" },
-  { num: "02", title: "Inside the EAC Data Sovereignty Debate", tag: "Governance" },
+  { num: "02", title: "Inside Africa Data Sovereignty Debate", tag: "Governance" },
   { num: "03", title: "Mobile Money Fraud: Prevention Playbook", tag: "Security" },
 ];
 
@@ -65,7 +65,7 @@ export function PodcastPreview() {
             transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
             style={{ marginTop: 16, fontSize: 16, lineHeight: "125%", color: "rgba(255,255,255,0.5)", maxWidth: 400, margin: "16px auto 0" }}
           >
-            Unpacking the data, laws, and technology shaping East Africa.
+            Unpacking the data, laws, and technology shaping Africa.
           </motion.p>
         </div>
 
