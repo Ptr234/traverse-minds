@@ -16,7 +16,7 @@ const mockPost = {
   author: {
     name: "Christine Masika",
     role: "Founder & CEO",
-    photo: "/christine-masika.jpg",
+    photo: `${basePath}/christine-masika.jpg`,
   },
   content: `
     <p>Uganda's banking sector is undergoing rapid digital transformation. Mobile banking, internet banking, and agent banking have expanded financial access across the country — but they've also expanded the attack surface for cybercriminals.</p>

@@ -12,7 +12,7 @@ const teamMembers = [
     name: "Christine Masika",
     title: "Founder & CEO",
     division: "Leadership",
-    photo: "/christine-masika.jpg",
+    photo: `${basePath}/christine-masika.jpg`,
     linkedIn: "https://linkedin.com/in/christinemasika",
   },
 ];

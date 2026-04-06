@@ -7,6 +7,8 @@ import { ArrowRight, Twitter, Linkedin, Mail, Play, BookOpen, Shield } from "luc
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const TABS = [
   { id: "about",    label: "About" },
   { id: "work",     label: "Work" },
@@ -119,7 +121,7 @@ export default function MeetChristinePage() {
         {/* Photo column — portrait, full, objectPosition shows face */}
         <div className="relative overflow-hidden min-h-[50vh] md:min-h-screen">
           <Image
-            src="/Christine.jpg"
+            src={`${basePath}/Christine.jpg`}
             alt="Christine Masika"
             fill
             priority
@@ -212,7 +214,7 @@ export default function MeetChristinePage() {
             {/* Portrait — 3:4 aspect, objectPosition shows face */}
             <div className="relative mb-7 aspect-3/4 w-full overflow-hidden rounded-sm bg-bg-light editorial-card">
               <Image
-                src="/Christine.jpg"
+                src={`${basePath}/Christine.jpg`}
                 alt="Christine Masika"
                 fill
                 className="object-cover object-[50%_8%]"
@@ -380,7 +382,7 @@ export default function MeetChristinePage() {
           </div>
           <div className="relative min-h-85 overflow-hidden">
             <Image
-              src="/Christine.jpg"
+              src={`${basePath}/Christine.jpg`}
               alt="Facts and Figures podcast"
               fill
               className="object-cover object-[50%_12%] opacity-45"
