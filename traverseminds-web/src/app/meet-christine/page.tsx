@@ -41,18 +41,18 @@ const ORGANISATIONS = [
     desc: "Leading cybersecurity initiatives for Uganda's primary investment promotion agency. Strengthened national digital infrastructure by implementing vulnerability management across 15+ government portals, reducing exposure by 60%."
   },
   { 
-    name: "Traverse Security", 
-    logo: "", 
-    link: "#", 
-    role: "Cyber Operations Researcher Lead",
-    desc: "Conducting applied research on cybersecurity challenges in emerging economies. Designing penetration testing frameworks for FINTECH compliance and producing training materials tailored for African operational contexts."
+    name: "Centenary Bank", 
+    logo: "/logo/centenary-bank-logo.png", 
+    link: "https://www.centenarybank.co.ug/", 
+    role: "Cyber Security Consultant",
+    desc: "Conducted deep-dive security assessments and penetration testing for mobile banking platforms, ensuring compliance with Bank of Uganda's stringent cybersecurity guidelines."
   },
   { 
-    name: "Traverse Think Tank", 
-    logo: "", 
+    name: "Tilenga Project", 
+    logo: "/logo/Tilengalogo.png", 
     link: "#", 
-    role: "Cyber Security Advisor",
-    desc: "Advancing cybersecurity policy through multi-stakeholder collaboration. Facilitated 20+ training sessions for legal professionals on cyber law, digital identity, and privacy protection."
+    role: "Information Security Advisor",
+    desc: "Providing strategic security guidance for critical infrastructure digital systems in the energy sector, focusing on threat modeling and industrial control systems (ICS) protection."
   },
   { 
     name: "Applied Principles Consulting", 
