@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Traverse Minds UG collects, uses, and protects your personal data under Uganda's PDPA 2019.",
+  description: "How Traverse Minds Africa collects, uses, and protects your personal data under Uganda's PDPA 2019.",
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       <div className="mt-10 space-y-8 leading-relaxed text-brand-medium">
         <section>
           <h2 className="font-display text-xl text-brand-green">1. Who We Are</h2>
-          <p className="mt-3">Traverse Minds UG (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a civic-tech company registered in Kampala, Uganda. We operate <strong className="text-brand-charcoal">traverseminds.ug</strong> and its associated services across six divisions.</p>
+          <p className="mt-3">Traverse Minds Africa (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a civic-tech company registered in Kampala, Uganda. We operate <strong className="text-brand-charcoal">traverseminds.ug</strong> and its associated services across six divisions.</p>
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">2. Legal Basis</h2>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">11. Contact Us</h2>
-          <p className="mt-3"><strong className="text-brand-charcoal">Traverse Minds UG</strong><br />Kampala, Uganda<br />hello@traverseminds.ug</p>
+          <p className="mt-3"><strong className="text-brand-charcoal">Traverse Minds Africa</strong><br />Kampala, Uganda<br />hello@traverseminds.ug</p>
         </section>
       </div>
     </div>

@@ -23,7 +23,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Traverse Minds - Document Ingestion Worker")
+app = FastAPI(title="Traverse Minds Africa - Document Ingestion Worker")
 
 # Initialize OpenAI client with Instructor
 client = instructor.patch(OpenAI(api_key=os.getenv("OPENAI_API_KEY")))

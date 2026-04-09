@@ -175,7 +175,12 @@ The DNA of Minimalist Monochrome (Mobile)
 1. Vertical Linearity
 The mobile screen is a continuous roll of paper. Structure is created not by boxes, but by horizontal lines (rules) that span the full width of the device. Content lives between these lines.
 2. Typography as Interface
-Buttons are often just large words. Navigation is text-based. The serif typeface (Playfair Display) acts as the primary image on the screen. Headlines must be large enough to break words onto new lines, creating graphic shapes.
+Buttons are often just large words. Navigation is text-based. The serif typeface (Playfair Display) acts as the primary image on the screen. Headlines must be large enoug\
+
+
+
+
+h to break words onto new lines, creating graphic shapes.
 3. The "Touch" Inversion
 Since there is no "hover" on mobile, interaction is communicated through inversion. When a user touches a white block, it turns black instantly. This zero-latency binary feedback replaces physical tactility.
 4. Zero Radius, Zero Fluff
@@ -663,7 +668,7 @@ Non-Genericness (The Bold Factor)
 ● ASCII Graphics: Use Text components for headers instead of PNG icons.
 Plaintext
 
- _  _  ____  ____ 
+ _  _  ____  ____
 ( \/ )(  _ \(  _ \
  \  /  ) _ ( )   /
   \/  (____/(_)\_)

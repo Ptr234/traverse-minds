@@ -54,7 +54,7 @@ export function RsvpForm({ eventTitle }: RsvpFormProps) {
         <input type="text" placeholder="e.g. vegetarian, halal, none" className={inp(false)} {...register("dietary")} /></div>
       <div className="flex items-start gap-3">
         <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 rounded accent-brand-green" {...register("consent", { required: "Required" })} />
-        <label className="text-sm text-brand-medium">I agree to Traverse Minds&apos; <a href="/privacy" target="_blank" className="text-brand-teal underline">Privacy Policy</a>. *</label>
+        <label className="text-sm text-brand-medium">I agree to Traverse Minds Africa&apos;s <a href="/privacy" target="_blank" className="text-brand-teal underline">Privacy Policy</a>. *</label>
       </div>
       {errors.consent && <p className="text-sm text-red-600">{errors.consent.message}</p>}
       {err && <div className="rounded-lg border border-red-500/30 bg-red-50 p-3 text-sm text-red-600">{err}</div>}

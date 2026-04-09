@@ -10,9 +10,9 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 export const metadata: Metadata = {
-  title: "About Traverse Minds",
+  title: "About Traverse Minds Africa",
   description:
-    "Uganda's integrated civic-tech company. Learn about our mission, team, and six interconnected divisions serving Africa.",
+    "Africa's integrated civic-tech company. Learn about our mission, team, and six interconnected divisions serving Africa.",
 };
 
 const divisions = [
@@ -78,7 +78,7 @@ export default function AboutPage() {
                 </TextReveal>
 
                 <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Traverse Minds is one integrated organisation where every division
+                  Traverse Minds Africa is one integrated organisation where every division
                   strengthens the others. Security audits are informed by Think Tank
                   research. Events build community for all divisions. Media amplifies
                   research findings to a wider audience.
@@ -187,7 +187,7 @@ export default function AboutPage() {
 
             <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-8 inline-grid grid-cols-1 gap-4 text-left sm:grid-cols-2">
               {[
-                { label: "Registered Name", value: "Traverse Minds UG" },
+                { label: "Registered Name", value: "Traverse Minds Africa" },
                 { label: "Registration No.", value: "[To be added]" },
                 { label: "Registered Address", value: "Kampala, Uganda" },
                 { label: "Contact", value: "hello@traverseminds.ug" },

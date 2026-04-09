@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     // 1. Send internal notification email
     await resend.emails.send({
-      from: "Traverse Minds <hello@traverseminds.ug>",
+      from: "Traverse Minds Africa <hello@traverseminds.ug>",
       to: "hello@traverseminds.ug",
       subject: `New Public Record Waitlist Entry: ${name}`,
       text: `
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     // 2. Send auto-reply to user
     await resend.emails.send({
-      from: "Traverse Minds <hello@traverseminds.ug>",
+      from: "Traverse Minds Africa <hello@traverseminds.ug>",
       to: email,
       subject: "You're on the list: Public Record Africa",
       text: `
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         In the meantime, feel free to follow our updates on LinkedIn or visit our website.
 
         Best regards,
-        The Traverse Minds Team
+        The Traverse Minds Africa Team
       `,
     });
 

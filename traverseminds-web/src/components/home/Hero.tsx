@@ -73,7 +73,7 @@ export function Hero() {
             variants={fadeUp}
             style={{ marginTop: 16, fontSize: 16, fontWeight: 400, lineHeight: "125%", color: "#313439" }}
           >
-            Uganda&apos;s integrated civic-tech company. Six divisions working together
+            Africa&apos;s integrated civic-tech company. Six divisions working together
             across cybersecurity, public records, events, digital literacy,
             media, and policy research.
           </motion.p>

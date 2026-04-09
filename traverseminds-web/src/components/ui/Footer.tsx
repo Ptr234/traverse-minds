@@ -102,7 +102,7 @@ export function Footer() {
             ))}
           </div>
           <p style={{ fontSize: 14, color: "#919499" }}>
-            &copy; {new Date().getFullYear()} Traverse Minds UG
+            &copy; {new Date().getFullYear()} Traverse Minds Africa
           </p>
         </div>
       </footer>

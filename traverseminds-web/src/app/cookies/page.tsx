@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Traverse Minds UG",
-  description: "Learn about how we use cookies to improve your experience on Traverse Minds platforms.",
+  title: "Cookie Policy | Traverse Minds Africa",
+  description: "Learn about how we use cookies to improve your experience on Traverse Minds Africa platforms.",
 };
 
 export default function CookiePolicyPage() {
@@ -18,14 +18,14 @@ export default function CookiePolicyPage() {
 
         <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:text-brand-green prose-a:text-brand-teal hover:prose-a:text-brand-amber">
           <p>
-            At Traverse Minds, we believe in being clear and open about how we collect 
+            At Traverse Minds Africa, we believe in being clear and open about how we collect 
             and use data related to you. In the spirit of transparency, this policy 
             provides detailed information about how and when we use cookies.
           </p>
 
           <h2>What is a cookie?</h2>
           <p>
-            A cookie is a small file placed onto your device that enables Traverse Minds 
+            A cookie is a small file placed onto your device that enables Traverse Minds Africa 
             features and functionality. For example, cookies enable us to identify 
             your device, secure your access to our sites, and even help us know 
             if someone attempts to access your account from a different device.
@@ -36,7 +36,7 @@ export default function CookiePolicyPage() {
             We use cookies for the following purposes:
           </p>
           <ul>
-            <li><strong>Authentication:</strong> If you&apos;re signed into Traverse Minds, cookies help us show you the right information and personalize your experience.</li>
+            <li><strong>Authentication:</strong> If you&apos;re signed into Traverse Minds Africa, cookies help us show you the right information and personalize your experience.</li>
             <li><strong>Security:</strong> We use cookies to enable and support our security features, and to help us detect malicious activity.</li>
             <li><strong>Preferences:</strong> Cookies can tell us which language you prefer and what your communications preferences are.</li>
             <li><strong>Analytics:</strong> These cookies help us learn how well our site and services perform. We use these cookies to understand, improve, and research products, features, and services.</li>

@@ -5,7 +5,7 @@ import { projectId, dataset } from "./src/sanity/env";
 
 export default defineConfig({
   name: "traverseminds",
-  title: "Traverse Minds CMS",
+  title: "Traverse Minds Africa CMS",
   projectId,
   dataset,
   plugins: [structureTool()],

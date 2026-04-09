@@ -10,16 +10,16 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Traverse Minds UG — Built for Africa, Driven by Evidence",
-    template: "%s | Traverse Minds UG",
+    default: "Traverse Minds Africa — Built for Africa, Driven by Evidence",
+    template: "%s | Traverse Minds Africa",
   },
   description:
-    "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
+    "Africa's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
   metadataBase: new URL("https://traverseminds.ug"),
   openGraph: {
     type: "website",
     locale: "en_UG",
-    siteName: "Traverse Minds UG",
+    siteName: "Traverse Minds Africa",
   },
   robots: {
     index: true,

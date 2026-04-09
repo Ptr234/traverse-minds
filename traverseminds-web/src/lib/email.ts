@@ -11,7 +11,7 @@ interface SendEmailParams {
 
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
   const { data, error } = await resend.emails.send({
-    from: `Traverse Minds <${process.env.EMAIL_FROM || "hello@traverseminds.ug"}>`,
+    from: `Traverse Minds Africa <${process.env.EMAIL_FROM || "hello@traverseminds.ug"}>`,
     to,
     subject,
     html,
@@ -38,7 +38,7 @@ export async function sendAutoReply({
 
   return sendEmail({
     to,
-    subject: "We received your enquiry — Traverse Minds",
+    subject: "We received your enquiry — Traverse Minds Africa",
     html: `
       <div style="font-family: 'IBM Plex Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
         <h2 style="color: #0D3B2E; font-size: 24px;">Thank you, ${name}.</h2>
@@ -51,7 +51,7 @@ export async function sendAutoReply({
         </p>
         <hr style="border: none; border-top: 1px solid #D3D1C7; margin: 24px 0;" />
         <p style="color: #888780; font-size: 13px;">
-          Traverse Minds UG · Kampala, Uganda<br />
+          Traverse Minds Africa · Kampala, Uganda<br />
           Built for Africa · Driven by Evidence
         </p>
       </div>

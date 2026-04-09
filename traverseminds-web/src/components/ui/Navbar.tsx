@@ -197,7 +197,7 @@ export function Navbar() {
             }}
           >
             <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.3px", color: "#fff" }}>
-              Traverse<span style={{ color: "#ff4c00" }}>Minds</span>
+              Traverse<span style={{ color: "#ff4c00" }}>Minds</span> Africa
             </span>
           </div>
 

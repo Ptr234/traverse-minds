@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       // Confirmation to attendee
       await sendEmail({
         to: email,
-        subject: `You're registered: ${eventTitle} — Traverse Minds`,
+        subject: `You're registered: ${eventTitle} — Traverse Minds Africa`,
         html: `
           <div style="font-family: 'IBM Plex Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
             <h2 style="color: #0D3B2E; font-size: 24px;">You're registered, ${name}!</h2>
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
             </p>
             <hr style="border: none; border-top: 1px solid #D3D1C7; margin: 24px 0;" />
             <p style="color: #888780; font-size: 13px;">
-              Traverse Minds UG · Kampala, Uganda<br />
+              Traverse Minds Africa · Kampala, Uganda<br />
               Built for Africa · Driven by Evidence
             </p>
           </div>

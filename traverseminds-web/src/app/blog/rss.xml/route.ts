@@ -28,9 +28,9 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Traverse Minds Blog</title>
+    <title>Traverse Minds Africa Blog</title>
     <link>${siteUrl}/blog</link>
-    <description>Cybersecurity analysis, event recaps, policy explainers, and data-driven research from Traverse Minds UG.</description>
+    <description>Cybersecurity analysis, event recaps, policy explainers, and data-driven research from Traverse Minds Africa.</description>
     <language>en</language>
     <atom:link href="${siteUrl}/blog/rss.xml" rel="self" type="application/rss+xml"/>
     ${posts

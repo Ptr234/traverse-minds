@@ -1,4 +1,4 @@
-# robots.txt — Traverse Minds UG
+# robots.txt — Traverse Minds Africa
 # https://traverseminds.ug
 
 User-agent: *

@@ -134,7 +134,7 @@ export function EnquiryForm() {
             <input id="consent" type="checkbox" className="mt-1 h-5 w-5 shrink-0 rounded accent-accent"
               {...register("consent", { required: "Required" })} />
             <label htmlFor="consent" className="text-sm" style={{ color: "#515459" }}>
-              I agree to Traverse Minds&apos; <a href="/privacy" target="_blank" className="text-accent underline underline-offset-2">Privacy Policy</a> and Uganda PDPA 2019. *
+              I agree to Traverse Minds Africa&apos;s <a href="/privacy" target="_blank" className="text-accent underline underline-offset-2">Privacy Policy</a> and Uganda PDPA 2019. *
             </label>
           </div>
           {errors.consent && <p className="text-sm text-red-500">{errors.consent.message}</p>}

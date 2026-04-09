@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Traverse Minds UG",
-  description: "Read our terms and conditions for using Traverse Minds services and platforms.",
+  title: "Terms of Service | Traverse Minds Africa",
+  description: "Read our terms and conditions for using Traverse Minds Africa services and platforms.",
 };
 
 export default function TermsPage() {
@@ -18,14 +18,14 @@ export default function TermsPage() {
 
         <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:text-brand-green prose-a:text-brand-teal hover:prose-a:text-brand-amber">
           <p>
-            Welcome to Traverse Minds. By accessing our website and using our services, 
+            Welcome to Traverse Minds Africa. By accessing our website and using our services, 
             you agree to be bound by the following terms and conditions. Please read 
             them carefully.
           </p>
 
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing or using any part of the Traverse Minds platform, you agree 
+            By accessing or using any part of the Traverse Minds Africa platform, you agree 
             to become bound by the terms and conditions of this agreement. If you do 
             not agree to all the terms and conditions of this agreement, then you 
             may not access the website or use any services.
@@ -33,7 +33,7 @@ export default function TermsPage() {
 
           <h2>2. Description of Service</h2>
           <p>
-            Traverse Minds provides cybersecurity assessments, public records intelligence, 
+            Traverse Minds Africa provides cybersecurity assessments, public records intelligence, 
             digital literacy training, and policy research services. We reserve the 
             right to modify or discontinue any service with or without notice.
           </p>
@@ -41,7 +41,7 @@ export default function TermsPage() {
           <h2>3. Intellectual Property</h2>
           <p>
             All content on this site, including text, graphics, logos, and software, 
-            is the property of Traverse Minds UG or its content suppliers and is 
+            is the property of Traverse Minds Africa or its content suppliers and is 
             protected by Ugandan and international copyright laws.
           </p>
 
@@ -49,13 +49,13 @@ export default function TermsPage() {
           <p>
             You agree not to use the website for any purpose that is unlawful or 
             prohibited by these terms. You may not use the website in any manner 
-            that could damage, disable, overburden, or impair any Traverse Minds 
-            server or the networks connected to any Traverse Minds server.
+            that could damage, disable, overburden, or impair any Traverse Minds Africa 
+            server or the networks connected to any Traverse Minds Africa server.
           </p>
 
           <h2>5. Limitation of Liability</h2>
           <p>
-            In no event shall Traverse Minds be liable for any direct, indirect, 
+            In no event shall Traverse Minds Africa be liable for any direct, indirect, 
             incidental, special, or consequential damages arising out of or in 
             any way connected with the use of our services or this website.
           </p>

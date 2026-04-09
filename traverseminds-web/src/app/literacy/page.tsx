@@ -8,15 +8,15 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
-  title: "Digital Literacy | Building a Cyber-Safe Generation in Uganda",
+  title: "Digital Literacy | Building a Cyber-Safe Generation in Africa",
   description: "Practical digital safety training for schools, SMEs, and government agencies.",
 };
 
 const deliveryFormats = [
   {
     icon: MapPin,
-    title: "In-person (Kampala)",
-    desc: "Face-to-face workshops and training sessions delivered at your premises or our Kampala training centre.",
+    title: "In-person",
+    desc: "Face-to-face workshops and training sessions delivered at your premises or our training centres.",
   },
   {
     icon: Monitor,
@@ -48,8 +48,8 @@ const learningOutcomes = [
   },
   {
     icon: ShieldCheck,
-    title: "Understand PDPA Rights",
-    desc: "Know your rights and obligations under the Uganda Personal Data Protection Act 2019.",
+    title: "Understand Data Rights",
+    desc: "Know your rights and obligations under data protection laws like Uganda's PDPA 2019.",
   },
   {
     icon: FileText,

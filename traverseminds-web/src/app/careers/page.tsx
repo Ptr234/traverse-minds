@@ -265,7 +265,7 @@ export default function CareersPage() {
                 variant="fade-up"
                 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
               >
-                Apply to Traverse Minds
+                Apply to Traverse Minds Africa
               </TextReveal>
               <SectionReveal variant="mask-wipe" delay={0.1}>
                 <p className="mt-3" style={{ color: "#515459" }}>
@@ -282,7 +282,7 @@ export default function CareersPage() {
                   </div>
                   <h3 className="mt-6 font-display text-2xl font-bold" style={{ color: "#000" }}>Application Received</h3>
                   <p className="mt-4" style={{ color: "#515459" }}>
-                    Thank you for your interest in Traverse Minds. We&apos;ll review your application and get back to you within 5 business days.
+                    Thank you for your interest in Traverse Minds Africa. We&apos;ll review your application and get back to you within 5 business days.
                   </p>
                   <div className="mt-8">
                     <Button variant="outline" onClick={() => setFormStatus("idle")}>
@@ -348,7 +348,7 @@ export default function CareersPage() {
                       required
                       value={formData.coverLetter}
                       onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
-                      placeholder="Tell us about yourself, your experience, and why you want to join Traverse Minds..."
+                      placeholder="Tell us about yourself, your experience, and why you want to join Traverse Minds Africa..."
                       className="w-full border bg-white px-4 py-3 text-sm outline-none resize-none"
                       style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     />
