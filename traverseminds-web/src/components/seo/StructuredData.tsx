@@ -8,11 +8,11 @@ export function getOrganizationSchema(): WithContext<Organization> {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Traverse Minds UG",
+    name: "Traverse Minds Africa",
     url: "https://traverseminds.ug",
     logo: "https://traverseminds.ug/logo.png",
     description:
-      "Uganda's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
+      "Africa's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kampala",
@@ -36,12 +36,12 @@ export function getLocalBusinessSchema(): WithContext<LocalBusiness> {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Traverse Minds UG",
+    name: "Traverse Minds Africa",
     url: "https://traverseminds.ug",
     logo: "https://traverseminds.ug/logo.png",
     image: "https://traverseminds.ug/logo.png",
     description:
-      "Uganda's integrated civic-tech company offering cybersecurity, public records intelligence, digital literacy, events, media, and policy research services.",
+      "Africa's integrated civic-tech company offering cybersecurity, public records intelligence, digital literacy, events, media, and policy research services.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kampala",
@@ -98,7 +98,7 @@ export function getEventSchema(data: {
       : undefined,
     organizer: {
       "@type": "Organization",
-      name: "Traverse Minds UG",
+      name: "Traverse Minds Africa",
       url: "https://traverseminds.ug",
     },
     ...(data.image && { image: data.image }),
@@ -131,7 +131,7 @@ export function getArticleSchema(data: {
     },
     publisher: {
       "@type": "Organization",
-      name: "Traverse Minds UG",
+      name: "Traverse Minds Africa",
       logo: {
         "@type": "ImageObject",
         url: "https://traverseminds.ug/logo.png",

@@ -29,7 +29,7 @@ export function PodcastEpisodeCard({
   const resolvedUrl =
     shareUrl ?? (typeof window !== "undefined" ? window.location.href : "");
 
-  const shareText = `${title} — Traverse Minds Podcast Ep. ${episodeNumber}`;
+  const shareText = `${title} — Traverse Minds Africa Podcast Ep. ${episodeNumber}`;
 
   const handleCopyLink = useCallback(() => {
     if (!resolvedUrl) return;

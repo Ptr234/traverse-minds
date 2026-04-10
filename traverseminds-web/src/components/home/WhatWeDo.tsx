@@ -42,7 +42,7 @@ export function WhatWeDo() {
               transition={{ duration: 0.35, delay: 0.2, ease: gnEase }}
               style={{ marginTop: 24, fontSize: 16, fontWeight: 400, lineHeight: "125%", color: "#313439", maxWidth: 500 }}
             >
-              Traverse Minds operates at the intersection of institutional security
+              Traverse Minds Africa operates at the intersection of institutional security
               and public-interest research. Our six divisions work together to
               protect organisations, inform policy, and build digital capacity
               across Africa.
