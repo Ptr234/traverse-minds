@@ -24,12 +24,25 @@ const divisions = [
   { name: "Think Tank", desc: "Data protection, AI governance, OGP research" },
 ];
 
-const eacCountries = [
-  { code: "ug", name: "Uganda" },
-  { code: "ke", name: "Kenya" },
-  { code: "tz", name: "Tanzania" },
-  { code: "rw", name: "Rwanda" },
-  { code: "bi", name: "Burundi" },
+const africanCountries = [
+  { code: "dz", name: "Algeria" }, { code: "ao", name: "Angola" }, { code: "bj", name: "Benin" },
+  { code: "bw", name: "Botswana" }, { code: "bf", name: "Burkina Faso" }, { code: "bi", name: "Burundi" },
+  { code: "cv", name: "Cabo Verde" }, { code: "cm", name: "Cameroon" }, { code: "cf", name: "Central African Republic" },
+  { code: "td", name: "Chad" }, { code: "km", name: "Comoros" }, { code: "cd", name: "DR Congo" },
+  { code: "cg", name: "Republic of the Congo" }, { code: "dj", name: "Djibouti" }, { code: "eg", name: "Egypt" },
+  { code: "gq", name: "Equatorial Guinea" }, { code: "er", name: "Eritrea" }, { code: "sz", name: "Eswatini" },
+  { code: "et", name: "Ethiopia" }, { code: "ga", name: "Gabon" }, { code: "gm", name: "Gambia" },
+  { code: "gh", name: "Ghana" }, { code: "gn", name: "Guinea" }, { code: "gw", name: "Guinea-Bissau" },
+  { code: "ci", name: "Ivory Coast" }, { code: "ke", name: "Kenya" }, { code: "ls", name: "Lesotho" },
+  { code: "lr", name: "Liberia" }, { code: "ly", name: "Libya" }, { code: "mg", name: "Madagascar" },
+  { code: "mw", name: "Malawi" }, { code: "ml", name: "Mali" }, { code: "mr", name: "Mauritania" },
+  { code: "mu", name: "Mauritius" }, { code: "ma", name: "Morocco" }, { code: "mz", name: "Mozambique" },
+  { code: "na", name: "Namibia" }, { code: "ne", name: "Niger" }, { code: "ng", name: "Nigeria" },
+  { code: "rw", name: "Rwanda" }, { code: "st", name: "Sao Tome and Principe" }, { code: "sn", name: "Senegal" },
+  { code: "sc", name: "Seychelles" }, { code: "sl", name: "Sierra Leone" }, { code: "so", name: "Somalia" },
+  { code: "za", name: "South Africa" }, { code: "ss", name: "South Sudan" }, { code: "sd", name: "Sudan" },
+  { code: "tz", name: "Tanzania" }, { code: "tg", name: "Togo" }, { code: "tn", name: "Tunisia" },
+  { code: "ug", name: "Uganda" }, { code: "zm", name: "Zambia" }, { code: "zw", name: "Zimbabwe" }
 ];
 
 export default function AboutPage() {
@@ -119,14 +132,14 @@ export default function AboutPage() {
             Serving Africa
           </TextReveal>
           <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-            Our work spans all five African member states, building a safer digital future across the region.
+            Our work spans across the African continent, building a safer digital future across the region.
           </p>
 
-          <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-10 flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-14">
-            {eacCountries.map((country) => (
+          <SectionReveal variant="fade-up" staggerChildren={0.02} className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
+            {africanCountries.map((country) => (
               <RevealItem key={country.code} variant="scale-fade">
-                <div className="flex flex-col items-center gap-3 group">
-                  <div className="h-14 w-20 overflow-hidden border shadow-sm" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                <div className="flex flex-col items-center gap-2 group">
+                  <div className="h-10 w-14 overflow-hidden border shadow-xs" style={{ borderRadius: 4, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <Image
                       src={`https://flagcdn.com/w80/${country.code}.png`}
                       alt={`${country.name} flag`}
@@ -135,7 +148,7 @@ export default function AboutPage() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <span className="text-sm font-semibold" style={{ color: "#313439" }}>{country.name}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#313439" }}>{country.name}</span>
                 </div>
               </RevealItem>
             ))}

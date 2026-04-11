@@ -6,7 +6,7 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 
 const stats = [
   { value: 6, label: "Security Services", description: "Pen testing, ISO 27001, BoU audit, and more" },
-  { value: 5, label: "African Countries", description: "Uganda, Kenya, Tanzania, Rwanda, Burundi" },
+  { value: 54, label: "African Countries", description: "Providing digital resilience across the continent" },
   { value: 6, label: "Integrated Divisions", description: "One company, six interconnected teams" },
   { value: 4, label: "Audiences Served", description: "Institutions, researchers, policy-makers, citizens" },
 ];

@@ -124,7 +124,7 @@ const EXPERIENCE = [
     ]
   },
   {
-    company: "Traverse Security & Think Tank",
+    company: "Traverse Minds Africa",
     role: "Researcher Lead & Cyber Advisor",
     period: "Jan 2022 - Present",
     desc: "Advancing cybersecurity policy and conducting applied research on challenges in emerging economies.",
