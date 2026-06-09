@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Download, Calendar, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/Button";
+import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 
 interface Author {
   name: string;
@@ -85,6 +86,8 @@ export default async function ReportPage({
 
   if (!report) notFound();
 
+  const pdfFilename = `${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`;
+
   return (
     <PageTransition>
       {/* Header */}
@@ -159,14 +162,13 @@ export default async function ReportPage({
                   PDF — available for free
                 </p>
               </div>
-              <a
-                href={`/api/reports/${report.slug.current}/download`}
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
-                style={{ background: "#ff4c00", borderRadius: 6 }}
-              >
-                <Download className="h-4 w-4" />
-                Download PDF
-              </a>
+              <PdfDownloadButton
+                pdfUrl={report.pdfUrl}
+                filename={pdfFilename}
+                label="Download PDF"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white cursor-pointer disabled:opacity-60"
+                style={{ background: "#ff4c00", borderRadius: 6, border: "none" }}
+              />
             </div>
           )}
 
@@ -185,14 +187,13 @@ export default async function ReportPage({
                     <p className="font-semibold mb-4" style={{ color: "#333" }}>
                       Your browser cannot display PDFs inline.
                     </p>
-                    <a
-                      href={`/api/reports/${report.slug.current}/download`}
-                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
-                      style={{ background: "#ff4c00", borderRadius: 6 }}
-                    >
-                      <Download className="h-4 w-4" />
-                      Download PDF instead
-                    </a>
+                    <PdfDownloadButton
+                      pdfUrl={report.pdfUrl}
+                      filename={pdfFilename}
+                      label="Download PDF instead"
+                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white cursor-pointer disabled:opacity-60"
+                      style={{ background: "#ff4c00", borderRadius: 6, border: "none" }}
+                    />
                   </div>
                 </object>
               </div>
