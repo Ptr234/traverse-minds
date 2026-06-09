@@ -6,7 +6,7 @@ const filters = [
   { value: "all", label: "All" },
   { value: "security", label: "Security" },
   { value: "events", label: "Events" },
-  { value: "ai", label: "AI / Public Record" },
+  { value: "public-record", label: "Public Record Africa" },
   { value: "literacy", label: "Literacy" },
   { value: "media", label: "Media" },
   { value: "thinktank", label: "Think Tank" },

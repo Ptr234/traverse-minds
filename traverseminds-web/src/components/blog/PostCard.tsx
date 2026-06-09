@@ -5,7 +5,7 @@ import { Calendar, Clock } from "lucide-react";
 const divisionColors: Record<string, string> = {
   security: "bg-[#0D3B2E]",
   events: "bg-[#E8912A]",
-  ai: "bg-[#185FA5]",
+  "public-record": "bg-[#185FA5]",
   literacy: "bg-[#3B6D11]",
   media: "bg-[#E05C3A]",
   thinktank: "bg-[#0F6E56]",
@@ -14,7 +14,7 @@ const divisionColors: Record<string, string> = {
 const divisionLabels: Record<string, string> = {
   security: "Security",
   events: "Events",
-  ai: "Public Record Africa",
+  "public-record": "Public Record Africa",
   literacy: "Literacy",
   media: "Media",
   thinktank: "Think Tank",

@@ -1,113 +1,137 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PortableText } from "next-sanity";
+import { sanityClient } from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
-const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
+const builder = imageUrlBuilder(sanityClient);
 
-// TODO: Replace with Sanity CMS dynamic data
-const mockPost = {
-  title: "The Top 5 Cyber Threats Facing Ugandan Banks in 2026",
-  division: "Security",
-  date: "12 March 2026",
-  readTime: "6 min read",
-  image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
-  author: {
-    name: "Masiika Christine Thembo",
-    role: "Founder & CEO",
-    photo: `${basePath}/christine-masika.jpg`,
-  },
-  content: `
-    <p>Uganda's banking sector is undergoing rapid digital transformation. Mobile banking, internet banking, and agent banking have expanded financial access across the country — but they've also expanded the attack surface for cybercriminals.</p>
-    <p>Based on our security assessments across multiple Ugandan financial institutions in 2025-2026, here are the five most pressing cyber threats we're seeing.</p>
-    <h2>1. Ransomware Targeting Core Banking Systems</h2>
-    <p>Ransomware attacks on financial institutions have increased by over 300% across Africa in the past two years. Attackers are specifically targeting core banking systems, knowing that downtime costs banks millions in lost transactions and regulatory penalties.</p>
-    <h2>2. Mobile Banking API Vulnerabilities</h2>
-    <p>As banks rush to deploy mobile banking solutions, API security is often an afterthought. We've found critical vulnerabilities in mobile banking APIs that could allow attackers to access customer accounts, initiate unauthorised transfers, or extract personal data.</p>
-    <h2>3. Insider Threats and Privileged Access Abuse</h2>
-    <p>Not all threats come from outside. Insider threats — whether malicious or negligent — remain one of the most difficult risks to manage. Banks with weak access controls and no privileged access monitoring are particularly vulnerable.</p>
-    <h2>4. Social Engineering and Business Email Compromise</h2>
-    <p>Phishing attacks targeting bank employees have become more sophisticated. Business email compromise (BEC) schemes targeting treasury and finance teams are costing Ugandan organisations significant sums.</p>
-    <h2>5. Compliance Gaps with Bank of Uganda Regulations</h2>
-    <p>Bank of Uganda's cybersecurity guidelines require supervised institutions to maintain specific security controls. Many banks are not fully compliant, leaving them exposed to both cyber attacks and regulatory action.</p>
-    <h2>What Banks Should Do Now</h2>
-    <p>The good news is that these threats are manageable with the right approach. Regular penetration testing, compliance auditing against Bank of Uganda guidelines, employee security awareness training, and incident response planning can dramatically reduce risk.</p>
-    <p>If your institution needs a security assessment, <a href="/security#enquiry">contact our team</a> for a confidential conversation.</p>
-  `,
-};
-
-export function generateStaticParams() {
-  // Placeholder — will be populated from Sanity CMS when posts are published
-  return [{ slug: "placeholder" }];
+async function getPost(slug: string) {
+  try {
+    return await sanityClient.fetch(
+      `*[_type == "post" && slug.current == $slug][0] {
+        _id, title, slug, excerpt, division, publishedAt, readTime,
+        featuredImage, body, tags,
+        "author": author->{ name, title, photo }
+      }`,
+      { slug }
+    );
+  } catch {
+    return null;
+  }
 }
 
-export const metadata: Metadata = {
-  title: mockPost.title,
-  description: "Based on our security assessments across Ugandan financial institutions, here are the five most pressing cyber threats we're seeing.",
+export async function generateStaticParams() {
+  try {
+    const slugs = await sanityClient.fetch<{ slug: string }[]>(
+      `*[_type == "post"]{ "slug": slug.current }`
+    );
+    return slugs.map((s) => ({ slug: s.slug }));
+  } catch {
+    return [{ slug: "placeholder" }];
+  }
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  if (!post) return { title: "Post not found" };
+  return {
+    title: post.seoTitle ?? post.title,
+    description: post.seoDescription ?? post.excerpt,
+  };
+}
+
+const divisionLabels: Record<string, string> = {
+  security: "Traverse Security",
+  events: "Traverse Events",
+  "public-record": "Public Record Africa",
+  literacy: "Digital Literacy",
+  media: "Traverse Media",
+  thinktank: "Think Tank",
 };
 
-export default function BlogPostPage() {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  if (!post) notFound();
+
+  const heroUrl = post.featuredImage?.asset
+    ? builder.image(post.featuredImage).width(1600).height(700).fit("crop").url()
+    : "/imagestouse/div-cybersecurity.jpeg";
+
+  const authorPhotoUrl = post.author?.photo?.asset
+    ? builder.image(post.author.photo).width(80).height(80).fit("crop").url()
+    : "/christine-masika.jpg";
+
   return (
     <>
-      {/* Hero */}
       <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="absolute inset-0">
-          <Image src={mockPost.image} alt="" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-linear-to-t from-brand-green via-brand-green/85 to-brand-green/60" />
+          <Image src={heroUrl} alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0D3B2E 0%, rgba(13,59,46,0.85) 50%, rgba(13,59,46,0.6) 100%)" }} />
         </div>
         <div className="relative mx-auto max-w-3xl">
-          <Link href="/blog" className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white">
+          <Link href="/blog" className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
             <ArrowLeft className="h-4 w-4" /> Back to Blog
           </Link>
-          <span className="mb-3 inline-block rounded-full bg-brand-amber px-3 py-1 text-xs font-semibold text-white">
-            {mockPost.division}
-          </span>
-          <h1 className="font-display text-3xl leading-snug text-white md:text-4xl lg:text-5xl">
-            {mockPost.title}
-          </h1>
+          {post.division && (
+            <span className="mb-3 inline-block px-3 py-1 text-xs font-semibold text-white" style={{ background: "#ff4c00", borderRadius: 999 }}>
+              {divisionLabels[post.division] ?? post.division}
+            </span>
+          )}
+          <h1 className="font-display text-3xl leading-snug text-white md:text-4xl lg:text-5xl">{post.title}</h1>
           <div className="mt-6 flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                <Image src={mockPost.author.photo} alt={mockPost.author.name} fill className="object-cover" sizes="40px" />
+            {post.author && (
+              <div className="flex items-center gap-3">
+                <div className="relative h-10 w-10 overflow-hidden rounded-full">
+                  <Image src={authorPhotoUrl} alt={post.author.name} fill className="object-cover" sizes="40px" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">{post.author.name}</p>
+                  <p className="text-xs text-white/50">{post.author.title}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-medium text-white">{mockPost.author.name}</p>
-                <p className="text-xs text-white/50">{mockPost.author.role}</p>
-              </div>
-            </div>
+            )}
             <div className="flex items-center gap-4 text-sm text-white/55">
-              <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" />{mockPost.date}</span>
-              <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />{mockPost.readTime}</span>
+              {post.publishedAt && (
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" />
+                  {new Date(post.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                </span>
+              )}
+              {post.readTime && (
+                <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />{post.readTime}</span>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Article body */}
-      <section className="bg-light-bg px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <section style={{ background: "#f0f1f4", padding: "48px 16px" }}>
         <div className="mx-auto max-w-3xl">
-          <article
-            className="prose max-w-none prose-headings:font-display prose-headings:text-brand-green prose-p:text-brand-medium prose-a:text-brand-teal prose-a:no-underline hover:prose-a:underline prose-strong:text-brand-charcoal prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: mockPost.content }}
-          />
+          {post.body ? (
+            <article className="prose max-w-none prose-headings:font-display prose-headings:text-[#0D3B2E] prose-p:text-[#444441] prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-black prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-relaxed">
+              <PortableText value={post.body} />
+            </article>
+          ) : (
+            post.excerpt && <p className="text-lg leading-relaxed" style={{ color: "#444441" }}>{post.excerpt}</p>
+          )}
 
-          {/* CTA */}
-          <div className="mt-16 rounded-2xl border border-light-border bg-light-card p-8 text-center md:p-10">
-            <h3 className="font-display text-xl text-brand-charcoal">Need a security assessment?</h3>
-            <p className="mt-2 text-brand-medium">
-              Our team can evaluate your organisation&apos;s cybersecurity posture against these threats.
-            </p>
+          <div className="mt-16 py-8 px-8 text-center" style={{ background: "#fff", borderRadius: 8, border: "1px solid rgba(0,0,0,0.1)" }}>
+            <h3 className="font-display text-xl" style={{ color: "#000" }}>Need a security assessment?</h3>
+            <p className="mt-2" style={{ color: "#515459" }}>Our team evaluates your organisation&apos;s cybersecurity posture.</p>
             <div className="mt-6">
-              <Button variant="primary" size="lg" href="/security#enquiry">
-                Request an Assessment
-              </Button>
+              <Button variant="primary" size="lg" href="/security#enquiry">Request an Assessment</Button>
             </div>
           </div>
 
-          {/* Back link */}
           <div className="mt-10">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-brand-muted transition-colors hover:text-brand-teal">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-sm" style={{ color: "#919499" }}>
               <ArrowLeft className="h-4 w-4" /> All Posts
             </Link>
           </div>

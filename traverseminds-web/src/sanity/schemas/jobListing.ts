@@ -5,82 +5,39 @@ export const jobListing = defineType({
   title: "Job Listing",
   type: "document",
   fields: [
+    defineField({ name: "title", title: "Job Title", type: "string", validation: (r) => r.required() }),
     defineField({
-      name: "title",
-      title: "Job Title",
-      type: "string",
-      validation: (rule) => rule.required(),
+      name: "division", title: "Division", type: "string",
+      options: { list: [
+        { title: "Traverse Security", value: "security" },
+        { title: "Traverse Events", value: "events" },
+        { title: "Public Record Africa", value: "public-record" },
+        { title: "Digital Literacy", value: "literacy" },
+        { title: "Traverse Media", value: "media" },
+        { title: "Think Tank", value: "thinktank" },
+      ]},
+      validation: (r) => r.required(),
     }),
     defineField({
-      name: "division",
-      title: "Division",
-      type: "string",
-      options: {
-        list: [
-          { title: "Security", value: "security" },
-          { title: "Events", value: "events" },
-          { title: "Public Record Africa", value: "ai" },
-          { title: "Digital Literacy", value: "literacy" },
-          { title: "Media", value: "media" },
-          { title: "Think Tank", value: "thinktank" },
-        ],
-      },
-      validation: (rule) => rule.required(),
+      name: "type", title: "Employment Type", type: "string",
+      options: { list: [
+        { title: "Full-Time", value: "full-time" },
+        { title: "Contract", value: "contract" },
+        { title: "Intern", value: "intern" },
+      ]},
+      validation: (r) => r.required(),
     }),
-    defineField({
-      name: "type",
-      title: "Employment Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Full-Time", value: "full-time" },
-          { title: "Contract", value: "contract" },
-          { title: "Intern", value: "intern" },
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Job Description",
-      type: "text",
-      rows: 10,
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "deadline",
-      title: "Application Deadline",
-      type: "date",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "isActive",
-      title: "Active",
-      type: "boolean",
-      initialValue: true,
-      description: "Whether this listing is currently visible on the careers page.",
-    }),
-    defineField({
-      name: "hiringManagerEmail",
-      title: "Hiring Manager Email",
-      type: "string",
-      validation: (rule) =>
-        rule.email().error("Must be a valid email address"),
-    }),
+    defineField({ name: "location", title: "Location", type: "string", initialValue: "Kampala, Uganda" }),
+    defineField({ name: "description", title: "Job Description", type: "text", rows: 10, validation: (r) => r.required() }),
+    defineField({ name: "deadline", title: "Application Deadline", type: "date", validation: (r) => r.required() }),
+    defineField({ name: "isActive", title: "Active", type: "boolean", initialValue: true }),
+    defineField({ name: "hiringManagerEmail", title: "Hiring Manager Email", type: "string", validation: (r) => r.email() }),
   ],
+  orderings: [{ title: "Deadline (Soonest)", name: "deadlineAsc", by: [{ field: "deadline", direction: "asc" }] }],
   preview: {
-    select: {
-      title: "title",
-      division: "division",
-      type: "type",
-      isActive: "isActive",
-    },
+    select: { title: "title", division: "division", type: "type", isActive: "isActive" },
     prepare({ title, division, type, isActive }) {
-      const badge = isActive ? "Open" : "Closed";
-      return {
-        title,
-        subtitle: `${division ?? "—"} / ${type ?? "—"} — ${badge}`,
-      };
+      return { title, subtitle: `${division ?? "—"} · ${type ?? "—"} · ${isActive ? "Open" : "Closed"}` };
     },
   },
 });
