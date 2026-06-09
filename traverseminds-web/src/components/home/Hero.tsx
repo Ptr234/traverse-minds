@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 
 const heroImages = [
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.07.jpeg",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.08.jpeg",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.09.jpeg",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.11.jpeg",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.14.jpeg",
+  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.07.webp",
+  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.08.webp",
+  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.09.webp",
+  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.11.webp",
+  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.14.webp",
 ];
 
 const stagger = {
