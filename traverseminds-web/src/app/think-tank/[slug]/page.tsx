@@ -160,10 +160,7 @@ export default async function ReportPage({
                 </p>
               </div>
               <a
-                href={report.pdfUrl}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/api/reports/${report.slug.current}/download`}
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
                 style={{ background: "#ff4c00", borderRadius: 6 }}
               >
@@ -189,10 +186,7 @@ export default async function ReportPage({
                       Your browser cannot display PDFs inline.
                     </p>
                     <a
-                      href={report.pdfUrl}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={`/api/reports/${report.slug.current}/download`}
                       className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
                       style={{ background: "#ff4c00", borderRadius: 6 }}
                     >
