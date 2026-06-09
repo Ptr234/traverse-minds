@@ -16,7 +16,7 @@ interface SendEmailParams {
 
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
   const { data, error } = await resend.emails.send({
-    from: `Traverse Minds Africa <${FROM}>`,
+    from: `Traverse Minds Ug <${FROM}>`,
     to,
     subject,
     html,
