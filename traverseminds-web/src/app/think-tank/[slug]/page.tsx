@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Download, Calendar, User, Tag } from "lucide-react";
+import { ArrowLeft, Download, Calendar, Tag } from "lucide-react";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/Button";
+
+interface Author {
+  name: string;
+  role?: string;
+  bio?: string;
+  photoUrl?: string;
+}
 
 interface Report {
   _id: string;
@@ -12,7 +20,7 @@ interface Report {
   slug: { current: string };
   abstract: string;
   publicationDate: string;
-  authors: { name: string }[];
+  authors: Author[];
   pdfUrl: string;
   topics: string[];
   countryCoverage: string[];
@@ -31,7 +39,7 @@ async function getReport(slug: string): Promise<Report | null> {
   try {
     const query = `*[_type == "report" && slug.current == $slug][0] {
       _id, title, slug, abstract, publicationDate,
-      "authors": authors[]->{name},
+      "authors": authors[]->{name, role, bio, "photoUrl": photo.asset->url},
       "pdfUrl": pdfFile.asset->url,
       topics,
       countryCoverage
@@ -119,12 +127,6 @@ export default async function ReportPage({
                 })}
               </span>
             )}
-            {report.authors?.[0] && (
-              <span className="flex items-center gap-2 text-sm">
-                <User className="h-4 w-4" />
-                {report.authors.map((a) => a.name).join(", ")}
-              </span>
-            )}
             {report.countryCoverage?.length > 0 && (
               <span className="flex items-center gap-2 text-sm">
                 <Tag className="h-4 w-4" />
@@ -132,6 +134,34 @@ export default async function ReportPage({
               </span>
             )}
           </div>
+
+          {/* Author chips in header */}
+          {report.authors?.length > 0 && (
+            <div className="flex flex-wrap gap-3 mt-6">
+              {report.authors.map((author) => (
+                <div key={author.name} className="flex items-center gap-2">
+                  {author.photoUrl ? (
+                    <Image
+                      src={author.photoUrl}
+                      alt={author.name}
+                      width={32}
+                      height={32}
+                      className="rounded-full object-cover"
+                      style={{ border: "2px solid rgba(255,255,255,0.15)" }}
+                    />
+                  ) : (
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: "#ff4c00" }}>
+                      {author.name.charAt(0)}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-sm font-medium text-white">{author.name}</p>
+                    {author.role && <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{author.role}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -199,6 +229,44 @@ export default async function ReportPage({
                     </a>
                   </div>
                 </object>
+              </div>
+            </div>
+          )}
+
+          {/* Author cards */}
+          {report.authors?.length > 0 && (
+            <div className="mb-10">
+              <p className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "#919499" }}>
+                {report.authors.length === 1 ? "About the Author" : "About the Authors"}
+              </p>
+              <div className="flex flex-col gap-4">
+                {report.authors.map((author) => (
+                  <div
+                    key={author.name}
+                    className="flex items-start gap-4 p-5"
+                    style={{ background: "#f0f1f4", borderRadius: 8 }}
+                  >
+                    {author.photoUrl ? (
+                      <Image
+                        src={author.photoUrl}
+                        alt={author.name}
+                        width={56}
+                        height={56}
+                        className="rounded-full object-cover shrink-0"
+                        style={{ border: "2px solid rgba(0,0,0,0.08)" }}
+                      />
+                    ) : (
+                      <div className="h-14 w-14 rounded-full shrink-0 flex items-center justify-center text-lg font-bold text-white" style={{ background: "#ff4c00" }}>
+                        {author.name.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-semibold" style={{ color: "#000" }}>{author.name}</p>
+                      {author.role && <p className="text-sm mt-0.5" style={{ color: "#ff4c00" }}>{author.role}</p>}
+                      {author.bio && <p className="text-sm mt-2 leading-relaxed" style={{ color: "#515459" }}>{author.bio}</p>}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
