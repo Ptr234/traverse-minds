@@ -23,8 +23,13 @@ export function NewsletterSignup() {
     formState: { errors, isSubmitting },
   } = useForm<NewsletterFormData>();
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  const onSubmit = async (data: NewsletterFormData) => {
+    const res = await fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: data.email }),
+    });
+    if (!res.ok) throw new Error((await res.json()).error || "Failed");
     setIsSubmitted(true);
   };
 
