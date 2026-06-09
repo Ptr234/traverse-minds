@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -105,10 +106,14 @@ export function Navbar() {
             className="shrink-0 flex items-center justify-center hover:bg-[rgba(0,0,0,0.6)]!"
             style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
-            {/* Stacked logo like GatesNotes LogoStack.svg */}
-            <div className="flex flex-col items-center leading-none">
-              <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: "-0.5px", color: "#fff" }}>TM</span>
-            </div>
+            <Image
+              src="/logo/logo-TMFE-Black.svg"
+              alt="Traverse Minds Africa"
+              width={38}
+              height={38}
+              style={{ filter: "invert(1)" }}
+              priority
+            />
           </Link>
 
           {/* 2px gap */}
