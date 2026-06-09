@@ -145,9 +145,7 @@ export default async function ArchivePage() {
                         </Link>
                         {report.pdfUrl && (
                           <a
-                            href={report.pdfUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={`${report.pdfUrl}?dl=${encodeURIComponent(`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`)}`}
                             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold"
                             style={{ borderRadius: 8, background: "rgba(0,0,0,0.04)", color: "#000" }}
                           >

@@ -163,45 +163,12 @@ export default async function ReportPage({
               </div>
               <a
                 href={`${report.pdfUrl}?dl=${encodeURIComponent(pdfFilename)}`}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
                 style={{ background: "#ff4c00", borderRadius: 6 }}
               >
                 <Download className="h-4 w-4" />
                 Download PDF
               </a>
-            </div>
-          )}
-
-          {/* Inline PDF viewer */}
-          {report.pdfUrl && (
-            <div className="mb-10">
-              <p className="text-sm font-semibold mb-3" style={{ color: "#888" }}>Read Online</p>
-              <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
-                <object
-                  data={report.pdfUrl}
-                  type="application/pdf"
-                  width="100%"
-                  style={{ height: "80vh", display: "block" }}
-                >
-                  <div className="flex flex-col items-center justify-center py-16 text-center" style={{ background: "#f0f1f4" }}>
-                    <p className="font-semibold mb-4" style={{ color: "#333" }}>
-                      Your browser cannot display PDFs inline.
-                    </p>
-                    <a
-                      href={`${report.pdfUrl}?dl=${encodeURIComponent(pdfFilename)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
-                      style={{ background: "#ff4c00", borderRadius: 6 }}
-                    >
-                      <Download className="h-4 w-4" />
-                      Download PDF instead
-                    </a>
-                  </div>
-                </object>
-              </div>
             </div>
           )}
 
