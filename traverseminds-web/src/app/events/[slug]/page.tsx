@@ -24,7 +24,7 @@ interface EventDetail {
   capacity?: number;
   tagline?: string;
   price?: string;
-  targetAudience?: string[];
+  galleryUrls?: string[];
   isFeatured?: boolean;
   isPast?: boolean;
 }
@@ -34,8 +34,9 @@ async function getEvent(slug: string): Promise<EventDetail | null> {
     return await sanityClient.fetch(
       `*[_type == "event" && slug.current == $slug][0]{
         _id, title, "slug": slug.current, type, date, endDate, location,
-        description, capacity, tagline, price, targetAudience, isFeatured, isPast,
-        "thumbnailUrl": thumbnail.asset->url
+        description, capacity, tagline, price, isFeatured, isPast,
+        "thumbnailUrl": thumbnail.asset->url,
+        "galleryUrls": galleryImages[].asset->url
       }`,
       { slug }
     );
@@ -178,22 +179,21 @@ export default async function EventPage({
         </div>
       </section>
 
-      {/* Who Should Attend */}
-      {event.targetAudience && event.targetAudience.length > 0 && (
+      {/* Gallery */}
+      {event.galleryUrls && event.galleryUrls.length > 0 && (
         <section className="bg-light-surface px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto max-w-7xl">
             <SectionReveal variant="fade-up">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Audience</span>
+              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Gallery</span>
             </SectionReveal>
             <TextReveal as="h2" variant="clip-up" className="mt-3 font-display text-2xl text-brand-green md:text-3xl">
-              Who Should Attend
+              Event Photos
             </TextReveal>
-            <SectionReveal variant="fade-up" staggerChildren={0.06} className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {event.targetAudience.map((role) => (
-                <RevealItem key={role} variant="scale-fade">
-                  <div className="flex items-center gap-3 rounded-lg border border-light-border bg-light-card px-4 py-3 text-left">
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-brand-amber" />
-                    <span className="text-sm text-brand-charcoal">{role}</span>
+            <SectionReveal variant="fade-up" staggerChildren={0.06} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {event.galleryUrls.map((url, i) => (
+                <RevealItem key={url} variant="scale-fade">
+                  <div className="relative aspect-square overflow-hidden rounded-lg">
+                    <Image src={url} alt={`${event.title} photo ${i + 1}`} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
                   </div>
                 </RevealItem>
               ))}

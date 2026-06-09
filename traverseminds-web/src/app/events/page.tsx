@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Mic, Users } from "lucide-react";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/Button";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { EventsHero } from "@/components/events/EventsHero";
 import { EventsGrid } from "@/components/events/EventsGrid";
 import type { SanityEvent } from "@/components/events/EventsGrid";
 
@@ -16,12 +14,6 @@ export const metadata: Metadata = {
   description: "Luncheons, conferences, hackathons, and workshops curated for Africa's cybersecurity decision-makers.",
 };
 
-const eventsHeroImages = [
-  "https://images.unsplash.com/photo-1540575861501-7ad0582371f3?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
-];
 
 async function getEvents(): Promise<SanityEvent[]> {
   try {
@@ -43,36 +35,7 @@ export default async function EventsPage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36">
-        <ImageSlideshow images={eventsHeroImages} overlay="bg-primary/70" />
-        <div className="container-max relative z-10 px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-            >
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Traverse Events</p>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
-            >
-              Where leaders <span style={{ color: "#ff4c00" }}>connect</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
-              className="mt-6 max-w-lg text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
-            >
-              Luncheons, conferences, hackathons, and workshops — curated for Africa&apos;s cybersecurity decision-makers.
-            </motion.p>
-          </div>
-        </div>
-      </section>
+      <EventsHero />
 
       {/* Events grid with filter — client component */}
       <EventsGrid events={events} />

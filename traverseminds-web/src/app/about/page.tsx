@@ -59,8 +59,8 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 16 }}>
                   <Image
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Team collaboration"
+                    src="/imagestouse/tec (2).jpg"
+                    alt="Traverse Minds team"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"

@@ -24,6 +24,68 @@ export interface SanityEvent {
 
 const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
 
+function FeaturedEventCard({ ev }: { ev: SanityEvent }) {
+  return (
+    <Link
+      href={`/events/${ev.slug}`}
+      className="group relative block overflow-hidden"
+      style={{ borderRadius: 20, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(0,0,0,0.12)" }}
+    >
+      {/* Background image */}
+      <div className="relative min-h-130 md:min-h-150">
+        {ev.thumbnailUrl ? (
+          <Image
+            src={ev.thumbnailUrl}
+            alt={ev.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="100vw"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0" style={{ background: "#212429" }} />
+        )}
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/10" />
+      </div>
+
+      {/* Content overlay */}
+      <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="bg-accent px-4 py-1.5 text-xs font-bold text-white uppercase tracking-widest" style={{ borderRadius: 999 }}>
+            Featured Event
+          </span>
+          {ev.type && (
+            <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white border border-white/30" style={{ borderRadius: 999 }}>
+              {ev.type}
+            </span>
+          )}
+        </div>
+        <h2 className="font-display text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.05] max-w-3xl">
+          {ev.title}
+        </h2>
+        {ev.tagline && (
+          <p className="mt-3 max-w-xl text-base md:text-lg" style={{ color: "rgba(255,255,255,0.7)" }}>{ev.tagline}</p>
+        )}
+        <div className="mt-5 flex flex-wrap gap-5 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+          <span className="flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
+            {new Date(ev.date).toLocaleDateString("en-UG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+          </span>
+          {ev.location && (
+            <span className="flex items-center gap-2"><MapPin className="h-4 w-4" />{ev.location}</span>
+          )}
+          {ev.price && (
+            <span className="flex items-center gap-2"><Tag className="h-4 w-4" />{ev.price}</span>
+          )}
+        </div>
+        <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-accent">
+          View Details & RSVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function EventCard({ ev }: { ev: SanityEvent }) {
   return (
     <Link
@@ -32,26 +94,20 @@ function EventCard({ ev }: { ev: SanityEvent }) {
       style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
     >
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="relative aspect-video md:aspect-auto md:min-h-90 overflow-hidden">
+        <div className="relative aspect-video md:aspect-auto md:min-h-72 overflow-hidden">
           {ev.thumbnailUrl ? (
             <Image
               src={ev.thumbnailUrl}
               alt={ev.title}
               fill
-              className="object-cover"
-              style={{ transition: "transform 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300" />
+            <div className="absolute inset-0 bg-linear-to-br from-gray-200 to-gray-300" />
           )}
           <div className="absolute inset-0 bg-linear-to-r from-transparent to-white/80 hidden md:block" />
           <div className="absolute inset-0 bg-linear-to-t from-white to-transparent md:hidden" />
-          {ev.isFeatured && (
-            <span className="absolute left-4 top-4 bg-accent px-4 py-1.5 text-xs font-semibold text-white shadow-lg" style={{ borderRadius: 999 }}>
-              Featured
-            </span>
-          )}
         </div>
         <div className="flex flex-col justify-center p-8 md:p-12">
           {ev.type && (
@@ -77,8 +133,8 @@ function EventCard({ ev }: { ev: SanityEvent }) {
               <span className="flex items-center gap-1.5"><Tag className="h-4 w-4" />{ev.price}</span>
             )}
           </div>
-          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent" style={{ transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-            View Details & RSVP <ArrowRight className="h-4 w-4" />
+          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent">
+            View Details & RSVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </div>
       </div>
@@ -92,14 +148,36 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
   const upcoming = events.filter((e) => !e.isPast);
   const past = events.filter((e) => e.isPast);
 
+  const featured = upcoming.find((e) => e.isFeatured);
+  const nonFeaturedUpcoming = upcoming.filter((e) => !e.isFeatured);
+
   const filteredUpcoming = activeType === "All"
-    ? upcoming
-    : upcoming.filter((e) => e.type?.toLowerCase() === activeType.toLowerCase());
+    ? nonFeaturedUpcoming
+    : nonFeaturedUpcoming.filter((e) => e.type?.toLowerCase() === activeType.toLowerCase());
 
   return (
     <>
+      {/* Featured Event */}
+      {featured && (
+        <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 0 }} className="relative overflow-hidden">
+          <div className="container-max relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+            >
+              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 24 }}>Featured</p>
+            </motion.div>
+            <SectionReveal variant="clip-inset">
+              <FeaturedEventCard ev={featured} />
+            </SectionReveal>
+          </div>
+        </section>
+      )}
+
       {/* Filter Tabs */}
-      <section style={{ background: "#f0f1f4", borderBottom: "1px solid rgba(0,0,0,0.1)" }} className="relative overflow-hidden">
+      <section style={{ background: "#f0f1f4", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingTop: featured ? 48 : 0 }} className="relative overflow-hidden">
         <div className="container-max relative z-10 px-6 lg:px-8 py-6">
           <div className="flex overflow-x-auto gap-2 pb-2 -mx-2 px-2">
             {eventTypes.map((type) => (
@@ -179,7 +257,7 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
                     <div className="relative aspect-video overflow-hidden">
                       {ev.thumbnailUrl
                         ? <Image src={ev.thumbnailUrl} alt={ev.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                        : <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300" />
+                        : <div className="absolute inset-0 bg-linear-to-br from-gray-200 to-gray-300" />
                       }
                     </div>
                     <div className="p-5">

@@ -31,10 +31,16 @@ const NewsletterSignup = dynamic(() =>
 async function getUpcomingEvent(): Promise<SanityUpcomingEvent | null> {
   try {
     return await sanityClient.fetch(
-      `*[_type == "event" && isPast != true] | order(date asc)[0]{
-        _id, title, "slug": slug.current, date, location, capacity, tagline, price,
-        "thumbnailUrl": thumbnail.asset->url
-      }`
+      `coalesce(
+        *[_type == "event" && isPast != true && isFeatured == true] | order(date asc)[0]{
+          _id, title, "slug": slug.current, date, location, capacity, tagline, price,
+          "thumbnailUrl": thumbnail.asset->url
+        },
+        *[_type == "event" && isPast != true] | order(date asc)[0]{
+          _id, title, "slug": slug.current, date, location, capacity, tagline, price,
+          "thumbnailUrl": thumbnail.asset->url
+        }
+      )`
     );
   } catch {
     return null;
