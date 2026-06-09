@@ -6,6 +6,8 @@ import { FeaturedDivision } from "@/components/home/FeaturedDivision";
 import { PublicRecordTeaser } from "@/components/home/PublicRecordTeaser";
 import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { PageTransition } from "@/components/ui/PageTransition";
+import { sanityClient } from "@/sanity/client";
+import type { SanityUpcomingEvent } from "@/components/home/UpcomingEvent";
 
 const ThinkTankPreview = dynamic(() =>
   import("@/components/home/ThinkTankPreview").then((m) => m.ThinkTankPreview)
@@ -26,7 +28,22 @@ const NewsletterSignup = dynamic(() =>
   import("@/components/home/NewsletterSignup").then((m) => m.NewsletterSignup)
 );
 
-export default function HomePage() {
+async function getUpcomingEvent(): Promise<SanityUpcomingEvent | null> {
+  try {
+    return await sanityClient.fetch(
+      `*[_type == "event" && isPast != true] | order(date asc)[0]{
+        _id, title, "slug": slug.current, date, location, capacity, tagline, price,
+        "thumbnailUrl": thumbnail.asset->url
+      }`
+    );
+  } catch {
+    return null;
+  }
+}
+
+export default async function HomePage() {
+  const upcomingEvent = await getUpcomingEvent();
+
   return (
     <PageTransition>
       <Hero />
@@ -35,7 +52,7 @@ export default function HomePage() {
       <FeaturedDivision />
       <PublicRecordTeaser />
       <ThinkTankPreview />
-      <UpcomingEvent />
+      <UpcomingEvent event={upcomingEvent} />
       <PodcastPreview />
       <AfricaMapReveal>
         <AfricaMap />

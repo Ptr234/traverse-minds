@@ -81,6 +81,25 @@ export const event = defineType({
       type: "number",
     }),
     defineField({
+      name: "tagline",
+      title: "Tagline",
+      type: "string",
+      description: "Short promotional line shown in teasers, e.g. 'An intimate executive lunch for Africa's CISO leaders.'",
+    }),
+    defineField({
+      name: "price",
+      title: "Price",
+      type: "string",
+      description: "e.g. Free, Complimentary, UGX 150,000",
+    }),
+    defineField({
+      name: "targetAudience",
+      title: "Target Audience",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Who should attend — each item is one role, e.g. 'CISOs & IT Security Managers'",
+    }),
+    defineField({
       name: "isFeatured",
       title: "Featured",
       type: "boolean",
