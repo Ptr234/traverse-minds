@@ -134,34 +134,6 @@ export default async function ReportPage({
               </span>
             )}
           </div>
-
-          {/* Author chips in header */}
-          {report.authors?.length > 0 && (
-            <div className="flex flex-wrap gap-3 mt-6">
-              {report.authors.map((author) => (
-                <div key={author.name} className="flex items-center gap-2">
-                  {author.photoUrl ? (
-                    <Image
-                      src={author.photoUrl}
-                      alt={author.name}
-                      width={32}
-                      height={32}
-                      className="rounded-full object-cover"
-                      style={{ border: "2px solid rgba(255,255,255,0.15)" }}
-                    />
-                  ) : (
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: "#ff4c00" }}>
-                      {author.name.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-sm font-medium text-white">{author.name}</p>
-                    {author.role && <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{author.role}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
