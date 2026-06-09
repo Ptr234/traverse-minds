@@ -17,28 +17,15 @@ export async function POST(req: NextRequest) {
 
     // Send notification email via Resend (if API key is set)
     if (process.env.RESEND_API_KEY) {
-      const { sendEmail, sendAutoReply } = await import("@/lib/email");
+      const { sendEmail, sendAutoReply, buildContactNotificationHtml, NOTIFY_TO } = await import("@/lib/email");
 
-      // Notify the team
       await sendEmail({
-        to: process.env.EMAIL_FROM || "traversemindsug@gmail.com",
+        to: NOTIFY_TO,
         subject: `New ${division || "general"} enquiry from ${name}`,
-        html: `
-          <h2>New Enquiry</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Organisation:</strong> ${organisation || "N/A"}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone || "N/A"}</p>
-          <p><strong>Division:</strong> ${division || "General"}</p>
-          <p><strong>Service:</strong> ${serviceType || "N/A"}</p>
-          <hr />
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>
-        `,
+        html: buildContactNotificationHtml({ name, organisation, email, phone, division, serviceType, message }),
         replyTo: email,
       });
 
-      // Auto-reply to enquirer
       await sendAutoReply({ to: email, name, division });
     }
 
