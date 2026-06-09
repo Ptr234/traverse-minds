@@ -107,11 +107,10 @@ export function Navbar() {
             style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
             <Image
-              src="/logo/logo-TMFE-Black.svg"
+              src="/traverselogo/icon-white.svg"
               alt="Traverse Minds Africa"
               width={38}
               height={38}
-              style={{ filter: "invert(1)" }}
               priority
             />
           </Link>
