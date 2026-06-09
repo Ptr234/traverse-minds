@@ -32,7 +32,7 @@ export function AfricaMapReveal({ children }: { children: ReactNode }) {
             transition={{ delay: 0.15, duration: 0.35, ease: gnEase }}
             style={{ marginTop: 12, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 460, margin: "12px auto 0" }}
           >
-            Headquartered in Kampala, serving all five African member states.
+            Headquartered in Kampala, serving all African countries.
           </motion.p>
         </div>
 

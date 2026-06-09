@@ -112,7 +112,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold" style={{ color: "#000" }}>Location</h3>
                         <p className="mt-0.5 text-sm font-medium" style={{ color: "#313439" }}>Kampala, Uganda</p>
-                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Serving all 5 African countries</p>
+                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Serving all African countries</p>
                       </div>
                     </div>
                   </div>
@@ -152,7 +152,7 @@ export default function ContactPage() {
               Serving Africa
             </TextReveal>
             <p className="mt-3 max-w-lg mx-auto" style={{ color: "#515459" }}>
-              Headquartered in Kampala, operating across all five African member states.
+              Headquartered in Kampala, operating across all African countries.
             </p>
           </div>
           <SectionReveal variant="clip-inset">

@@ -16,7 +16,7 @@ const audiences = [
   {
     icon: Scale,
     title: "Law Firms",
-    desc: "Search court records, regulatory filings, and legal precedents across all five African jurisdictions in seconds.",
+    desc: "Search court records, regulatory filings, and legal precedents across all African jurisdictions in seconds.",
   },
   {
     icon: Search,
