@@ -8,9 +8,9 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const features = [
-  { icon: ShieldCheck, title: "Institutional Security", desc: "End-to-end assessments for banks and government agencies using global frameworks." },
-  { icon: Globe, title: "Local Excellence", desc: "Deep roots in Kampala, providing on-the-ground expertise tailored for African realities." },
-  { icon: Zap, title: "Think Tank Driven", desc: "Direct intelligence pipeline from our research division to your security strategy." },
+  { icon: ShieldCheck, title: "Security Practice", desc: "End-to-end assessments for banks and government agencies using global frameworks." },
+  { icon: Globe, title: "Civic-Tech Builder", desc: "Building the tools, platforms, and systems that make public institutions work better for people." },
+  { icon: Zap, title: "Think Tank Intelligence", desc: "Evidence-based research that feeds directly into policy, strategy, and on-the-ground solutions." },
 ];
 
 const gnEase = [0.215, 0.61, 0.355, 1] as const;
@@ -32,7 +32,7 @@ export function WhatWeDo() {
               className="font-display"
               style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}
             >
-              Cybersecurity meets civic technology
+              A solutions centre for Africa&rsquo;s most complex challenges
             </TextReveal>
 
             <motion.p
@@ -40,12 +40,19 @@ export function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: 0.2, ease: gnEase }}
-              style={{ marginTop: 24, fontSize: 16, fontWeight: 400, lineHeight: "125%", color: "#313439", maxWidth: 500 }}
+              style={{ marginTop: 24, fontSize: 16, fontWeight: 400, lineHeight: "160%", color: "#313439", maxWidth: 500 }}
             >
-              Traverse Minds Africa operates at the intersection of institutional security
-              and public-interest research. Our six divisions work together to
-              protect organisations, inform policy, and build digital capacity
-              across Africa.
+              Africa&rsquo;s digital transformation is moving faster than its institutions, its regulations, and in many cases its defences. The gap between where things are and where they need to be is where Traverse Minds works.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: 0.28, ease: gnEase }}
+              style={{ marginTop: 16, fontSize: 16, fontWeight: 400, lineHeight: "160%", color: "#313439", maxWidth: 500 }}
+            >
+              Part security practice, part think tank, part civic-tech builder — we don&rsquo;t hand you a report and leave. We stay until the problem is solved.
             </motion.p>
 
             <SectionReveal variant="fade-up" staggerChildren={0.08} delay={0.3} className="space-y-0" style={{ marginTop: 40 }}>
@@ -69,8 +76,8 @@ export function WhatWeDo() {
               transition={{ duration: 0.35, delay: 0.4, ease: gnEase }}
               style={{ marginTop: 32 }}
             >
-              <Button variant="primary" size="md" href="/security">
-                Our Methodology
+              <Button variant="primary" size="md" href="/about">
+                How We Work
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </motion.div>
