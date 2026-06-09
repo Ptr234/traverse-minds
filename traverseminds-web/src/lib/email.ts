@@ -11,11 +11,11 @@ interface SendEmailParams {
 
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
   const { data, error } = await resend.emails.send({
-    from: `Traverse Minds Africa <${process.env.EMAIL_FROM || "hello@traverseminds.ug"}>`,
+    from: `Traverse Minds Africa <${process.env.EMAIL_FROM || "traversemindsug@gmail.com"}>`,
     to,
     subject,
     html,
-    replyTo: replyTo || process.env.EMAIL_FROM || "hello@traverseminds.ug",
+    replyTo: replyTo || process.env.EMAIL_FROM || "traversemindsug@gmail.com",
   });
 
   if (error) {

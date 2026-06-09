@@ -66,7 +66,7 @@ export default function PrivacyPage() {
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">8. Your Rights Under the PDPA</h2>
-          <p className="mt-3">You have the right to: <strong className="text-brand-charcoal">access</strong>, <strong className="text-brand-charcoal">correct</strong>, <strong className="text-brand-charcoal">delete</strong> your data, <strong className="text-brand-charcoal">withdraw consent</strong>, and lodge a <strong className="text-brand-charcoal">complaint</strong> with the Personal Data Protection Office of Uganda. Contact us at <strong className="text-brand-charcoal">hello@traverseminds.ug</strong>. We respond within 30 days.</p>
+          <p className="mt-3">You have the right to: <strong className="text-brand-charcoal">access</strong>, <strong className="text-brand-charcoal">correct</strong>, <strong className="text-brand-charcoal">delete</strong> your data, <strong className="text-brand-charcoal">withdraw consent</strong>, and lodge a <strong className="text-brand-charcoal">complaint</strong> with the Personal Data Protection Office of Uganda. Contact us at <strong className="text-brand-charcoal">traversemindsug@gmail.com</strong>. We respond within 30 days.</p>
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">9. Cookies</h2>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">11. Contact Us</h2>
-          <p className="mt-3"><strong className="text-brand-charcoal">Traverse Minds Africa</strong><br />Kampala, Uganda<br />hello@traverseminds.ug</p>
+          <p className="mt-3"><strong className="text-brand-charcoal">Traverse Minds Africa</strong><br />Kampala, Uganda<br />traversemindsug@gmail.com</p>
         </section>
       </div>
     </div>

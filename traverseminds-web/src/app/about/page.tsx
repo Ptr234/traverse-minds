@@ -203,7 +203,7 @@ export default function AboutPage() {
                 { label: "Registered Name", value: "Traverse Minds Africa" },
                 { label: "Registration No.", value: "[To be added]" },
                 { label: "Registered Address", value: "Kampala, Uganda" },
-                { label: "Contact", value: "hello@traverseminds.ug" },
+                { label: "Contact", value: "traversemindsug@gmail.com" },
               ].map((item) => (
                 <RevealItem key={item.label} variant="slide-up">
                   <div

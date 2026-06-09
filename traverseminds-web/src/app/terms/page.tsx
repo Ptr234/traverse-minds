@@ -71,7 +71,7 @@ export default function TermsPage() {
           <h2>7. Contact Information</h2>
           <p>
             If you have any questions about these Terms, please contact us at 
-            legal@traverseminds.ug.
+            traversemindsug@gmail.com.
           </p>
         </div>
       </div>

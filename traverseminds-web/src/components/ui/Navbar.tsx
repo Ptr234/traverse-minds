@@ -424,7 +424,7 @@ export function Navbar() {
               <div className="mt-12 space-y-8">
                 <div>
                   <p className="eyebrow-muted mb-4">Get in touch</p>
-                  <a href="mailto:hello@traverseminds.ug" className="text-lg font-medium text-gn-100">hello@traverseminds.ug</a>
+                  <a href="mailto:traversemindsug@gmail.com" className="text-lg font-medium text-gn-100">traversemindsug@gmail.com</a>
                 </div>
                 <div className="flex gap-4">
                   {/* Social links could go here */}

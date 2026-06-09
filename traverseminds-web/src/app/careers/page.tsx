@@ -147,7 +147,7 @@ export default function CareersPage() {
               </TextReveal>
               <SectionReveal variant="fade-up" delay={0.1}>
                 <p className="mt-3" style={{ color: "#515459" }}>
-                  We&apos;re growing. Send a speculative application to careers@traverseminds.ug
+                  We&apos;re growing. Send a speculative application to traversemindsug@gmail.com
                 </p>
               </SectionReveal>
             </div>
@@ -190,7 +190,7 @@ export default function CareersPage() {
                   <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>No current openings</h3>
                   <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
                     We don&apos;t have any open roles right now, but we&apos;re always interested in hearing from talented people.
-                    Send your CV to <a href="mailto:careers@traverseminds.ug" className="text-accent underline underline-offset-2">careers@traverseminds.ug</a>.
+                    Send your CV to <a href="mailto:traversemindsug@gmail.com" className="text-accent underline underline-offset-2">traversemindsug@gmail.com</a>.
                   </p>
                 </div>
               )}
@@ -389,7 +389,7 @@ export default function CareersPage() {
 
                   {formStatus === "error" && (
                     <p className="text-center text-sm font-medium text-red-500">
-                      Something went wrong. Please try again or email your application to careers@traverseminds.ug
+                      Something went wrong. Please try again or email your application to traversemindsug@gmail.com
                     </p>
                   )}
                 </form>

@@ -90,11 +90,11 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold" style={{ color: "#000" }}>Email</h3>
                         <a
-                          href="mailto:hello@traverseminds.ug"
+                          href="mailto:traversemindsug@gmail.com"
                           className="mt-0.5 block text-sm text-accent font-medium underline underline-offset-2"
                           style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                         >
-                          hello@traverseminds.ug
+                          traversemindsug@gmail.com
                         </a>
                         <p className="mt-1 text-xs" style={{ color: "#919499" }}>For formal enquiries and proposals</p>
                       </div>
@@ -189,12 +189,12 @@ export default function ContactPage() {
 
                 <div className="mt-6">
                   <a
-                    href="mailto:press@traverseminds.ug"
+                    href="mailto:traversemindsug@gmail.com"
                     className="inline-flex items-center gap-2 border border-accent/20 bg-accent/5 px-6 py-3.5 text-base font-semibold text-accent"
                     style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                   >
                     <Mail className="h-4 w-4" />
-                    press@traverseminds.ug
+                    traversemindsug@gmail.com
                   </a>
                 </div>
               </div>

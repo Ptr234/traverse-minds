@@ -26,7 +26,7 @@ export function getOrganizationSchema(): WithContext<Organization> {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "hello@traverseminds.ug",
+      email: "traversemindsug@gmail.com",
       availableLanguage: ["English"],
     },
   };
@@ -54,7 +54,7 @@ export function getLocalBusinessSchema(): WithContext<LocalBusiness> {
       longitude: 32.5825,
     },
     telephone: "+256-XXX-XXXXXX",
-    email: "hello@traverseminds.ug",
+    email: "traversemindsug@gmail.com",
     sameAs: [
       "https://www.linkedin.com/company/traverseminds",
       "https://twitter.com/traverseminds",

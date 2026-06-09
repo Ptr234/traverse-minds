@@ -17,8 +17,8 @@ export async function POST(req: Request) {
 
     // 1. Send internal notification email
     await resend.emails.send({
-      from: "Traverse Minds Africa <hello@traverseminds.ug>",
-      to: "hello@traverseminds.ug",
+      from: "Traverse Minds Africa <traversemindsug@gmail.com>",
+      to: "traversemindsug@gmail.com",
       subject: `New Public Record Waitlist Entry: ${name}`,
       text: `
         Name: ${name}
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     // 2. Send auto-reply to user
     await resend.emails.send({
-      from: "Traverse Minds Africa <hello@traverseminds.ug>",
+      from: "Traverse Minds Africa <traversemindsug@gmail.com>",
       to: email,
       subject: "You're on the list: Public Record Africa",
       text: `

@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
       // Notify the team
       await sendEmail({
-        to: process.env.EMAIL_FROM || "hello@traverseminds.ug",
+        to: process.env.EMAIL_FROM || "traversemindsug@gmail.com",
         subject: `New ${division || "general"} enquiry from ${name}`,
         html: `
           <h2>New Enquiry</h2>
