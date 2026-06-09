@@ -45,35 +45,36 @@ const revealVariants: Record<RevealVariant, Variants> = {
       transition: { duration: 0.6, ease },
     },
   },
+  // clip-* variants replaced with translate+opacity — identical feel, reliable on mobile
   "clip-up": {
-    hidden: { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 },
+    hidden: { opacity: 0, y: 32 },
     visible: {
-      clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
+      y: 0,
       transition: { duration: 0.7, ease },
     },
   },
   "clip-left": {
-    hidden: { clipPath: "inset(0% 100% 0% 0%)", opacity: 0 },
+    hidden: { opacity: 0, x: -32 },
     visible: {
-      clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
+      x: 0,
       transition: { duration: 0.7, ease },
     },
   },
   "clip-right": {
-    hidden: { clipPath: "inset(0% 0% 0% 100%)", opacity: 0 },
+    hidden: { opacity: 0, x: 32 },
     visible: {
-      clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
+      x: 0,
       transition: { duration: 0.7, ease },
     },
   },
   "clip-inset": {
-    hidden: { clipPath: "inset(4% 4% 4% 4%)", opacity: 0 },
+    hidden: { opacity: 0, scale: 0.96 },
     visible: {
-      clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
+      scale: 1,
       transition: { duration: 0.7, ease },
     },
   },
@@ -94,14 +95,11 @@ const revealVariants: Record<RevealVariant, Variants> = {
     },
   },
   "mask-wipe": {
-    hidden: {
-      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
-      opacity: 0,
-    },
+    hidden: { opacity: 0, x: -20 },
     visible: {
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
       opacity: 1,
-      transition: { duration: 0.8, ease },
+      x: 0,
+      transition: { duration: 0.6, ease },
     },
   },
 };
@@ -135,7 +133,7 @@ export function SectionReveal({
   duration,
   staggerChildren,
   once = true,
-  margin = "-80px",
+  margin = "0px 0px -40px 0px",
   as = "div",
 }: SectionRevealProps) {
   const Component = motion[as] as typeof motion.div;

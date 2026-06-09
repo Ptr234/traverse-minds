@@ -44,10 +44,10 @@ const wordVariants: Record<string, Variants> = {
     },
   },
   "clip-up": {
-    hidden: { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
-      clipPath: "inset(0% 0% 0% 0%)",
       opacity: 1,
+      y: 0,
       transition: { duration: 0.5, ease },
     },
   },
@@ -61,7 +61,7 @@ export function TextReveal({
   delay = 0,
   staggerSpeed = 0.03,
   once = true,
-  margin = "-80px",
+  margin = "0px 0px -40px 0px",
   variant = "fade-up",
 }: TextRevealProps) {
   const Tag = motion[as] as typeof motion.h2;
@@ -150,7 +150,7 @@ export function LineReveal({
   delay = 0,
   staggerSpeed = 0.1,
   once = true,
-  margin = "-60px",
+  margin = "0px 0px -40px 0px",
 }: LineRevealProps) {
   const container: Variants = {
     hidden: {},
@@ -211,7 +211,7 @@ export function CharReveal({
   delay = 0,
   staggerSpeed = 0.02,
   once = true,
-  margin = "-60px",
+  margin = "0px 0px -40px 0px",
 }: CharRevealProps) {
   const Tag = motion[as] as typeof motion.span;
   
