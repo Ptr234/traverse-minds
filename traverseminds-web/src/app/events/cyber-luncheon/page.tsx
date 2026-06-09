@@ -23,7 +23,7 @@ export default function CyberLuncheonPage() {
       {/* Hero with bg image */}
       <section className="relative min-h-[80vh] overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/imagestouse/Events.jpeg" alt="" fill className="object-cover" />
+          <Image src="https://images.unsplash.com/photo-xZ5XKHJBVus?q=80&w=2070&auto=format&fit=crop" alt="" fill className="object-cover" />
           <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/85 to-white/40" />
           <div className="absolute inset-0 bg-linear-to-b from-light-surface/60 via-transparent to-light-surface/80" />
         </div>
@@ -89,7 +89,7 @@ export default function CyberLuncheonPage() {
           </div>
           <SectionReveal variant="clip-left">
             <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-              <Image src="/imagestouse/Events.jpeg" alt="Professional networking" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src="https://images.unsplash.com/photo-xZ5XKHJBVus?q=80&w=2070&auto=format&fit=crop" alt="Professional networking" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
           </SectionReveal>
         </div>
