@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Download, Calendar, User, FileText, ArrowLeft } from "lucide-react";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
@@ -19,6 +20,7 @@ interface Report {
   abstract: string;
   publicationDate: string;
   authors: { name: string }[];
+  featuredImageUrl: string | null;
   pdfUrl: string;
   topics: string[];
   countryCoverage: string[];
@@ -38,6 +40,7 @@ async function getAllReports(): Promise<Report[]> {
     const query = `*[_type == "report"] | order(publicationDate desc) {
       _id, title, slug, abstract, publicationDate,
       "authors": authors[]->{name},
+      "featuredImageUrl": featuredImage.asset->url,
       "pdfUrl": pdfFile.asset->url,
       topics,
       countryCoverage
@@ -87,9 +90,18 @@ export default async function ArchivePage() {
                     className="group flex flex-col overflow-hidden border bg-white h-full"
                     style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                   >
-                    <div className="relative h-36 w-full flex items-center justify-center" style={{ background: "#f0f1f4" }}>
-                      <FileText className="h-10 w-10" style={{ color: "rgba(0,0,0,0.1)" }} />
-                      <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                    <div className="relative h-36 w-full overflow-hidden flex items-center justify-center" style={{ background: "#f0f1f4" }}>
+                      {report.featuredImageUrl ? (
+                        <Image
+                          src={report.featuredImageUrl}
+                          alt={report.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <FileText className="h-10 w-10" style={{ color: "rgba(0,0,0,0.1)" }} />
+                      )}
+                      <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
                         {report.topics?.slice(0, 2).map((topic) => (
                           <span
                             key={topic}

@@ -1,5 +1,6 @@
 import { sanityClient } from "@/sanity/client";
 import Link from "next/link";
+import Image from "next/image";
 import { Download, Calendar, User, FileText } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -12,7 +13,7 @@ interface Report {
   abstract: string;
   publicationDate: string;
   authors: { name: string }[];
-  featuredImage: unknown;
+  featuredImageUrl: string | null;
   pdfUrl: string;
   topics: string[];
 }
@@ -22,7 +23,7 @@ async function getReports() {
     const query = `*[_type == "report"] | order(publicationDate desc) [0...6] {
       _id, title, slug, abstract, publicationDate,
       "authors": authors[]->{name},
-      featuredImage,
+      "featuredImageUrl": featuredImage.asset->url,
       "pdfUrl": pdfFile.asset->url,
       topics
     }`;
@@ -59,9 +60,18 @@ export async function Publications() {
                 variant="slide-up"
               >
               <div className="group flex flex-col overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                <div className="relative h-44 w-full bg-primary/3 flex items-center justify-center">
-                  <FileText className="h-12 w-12 text-primary/10" />
-                  <div className="absolute top-3 left-3 flex gap-2">
+                <div className="relative h-44 w-full overflow-hidden flex items-center justify-center" style={{ background: "#f0f1f4" }}>
+                  {report.featuredImageUrl ? (
+                    <Image
+                      src={report.featuredImageUrl}
+                      alt={report.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <FileText className="h-12 w-12" style={{ color: "rgba(0,0,0,0.1)" }} />
+                  )}
+                  <div className="absolute top-3 left-3 flex gap-2 z-10">
                     {report.topics?.slice(0, 2).map((topic) => (
                       <span
                         key={topic}
