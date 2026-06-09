@@ -7,9 +7,9 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+  "/imagestouse/div-cybersecurity.jpeg",
+  "/imagestouse/div-whatwedo.jpeg",
   "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?q=80&w=2070&auto=format&fit=crop",
 ];
 

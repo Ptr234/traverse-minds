@@ -7,10 +7,10 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight, Search, MapPin, ChevronDown } from "lucide-react";
 
 const heroImages = [
+  "/imagestouse/div-public-record.jpeg",
   "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2030&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2070&auto=format&fit=crop",
 ];
 
 const jurisdictions = ["All Africa", "Uganda", "Kenya", "Tanzania", "Rwanda", "Burundi", "Nigeria", "South Africa"];

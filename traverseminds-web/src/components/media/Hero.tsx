@@ -7,7 +7,7 @@ import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=2070&auto=format&fit=crop",
+  "/imagestouse/div-media.jpeg",
   "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=2070&auto=format&fit=crop",
