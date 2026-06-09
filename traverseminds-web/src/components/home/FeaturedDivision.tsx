@@ -46,10 +46,9 @@ export function FeaturedDivision() {
               <Link
                 href={div.href}
                 className="group block editorial-card"
-                style={{ minHeight: 528 }}
               >
-                {/* Image — GatesNotes: aspect 380/238, 4px radius */}
-                <div className="relative overflow-hidden" style={{ aspectRatio: "380/238", borderRadius: 4 }}>
+                {/* Image — full-width, clipped by parent card border-radius */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: "380/238" }}>
                   <Image
                     src={div.image}
                     alt={div.name}
@@ -61,7 +60,7 @@ export function FeaturedDivision() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: "24px 0" }}>
+                <div style={{ padding: "20px 20px 24px" }}>
                   <p className="eyebrow" style={{ color: "#000", marginBottom: 8 }}>
                     {div.id.replace("-", " ")}
                   </p>

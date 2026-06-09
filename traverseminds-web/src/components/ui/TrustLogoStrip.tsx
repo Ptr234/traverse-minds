@@ -14,13 +14,9 @@ interface TrustLogoStripProps {
 }
 
 const DEFAULT_LOGOS = [
-  { src: "/logo/uganda-investment-authority-uia-logo-png_seeklogo-548098.png", alt: "Uganda Investment Authority" },
-  { src: "/logo/centenary-bank-logo.png", alt: "Centenary Bank" },
-  { src: "/logo/Tilengalogo.png", alt: "Tilenga Project" },
-  { src: "/logo/Appliedprincipleslogo.png", alt: "Applied Principles Consulting" },
-  { src: "/logo/NITA.LOGOS8-07.png", alt: "NITA-U" },
-  { src: "/logo/kikorongologo.png", alt: "Kikorongo Safari Lodge" },
-  { src: "/logo/logo-TMFE-Black.svg", alt: "TMFE Group" },
+  { src: "/logo/ucc-logo.png", alt: "Uganda Communications Commission" },
+  { src: "/logo/safeboda-logo.svg", alt: "SafeBoda" },
+  { src: "/logo/hg-advocates-logo.svg", alt: "H&G Advocates" },
 ];
 
 export function TrustLogoStrip({
@@ -66,7 +62,7 @@ export function TrustLogoStrip({
             key={`${logo.alt}-${i}`}
             className={cn(
               "mx-10 flex h-16 w-48 shrink-0 items-center justify-center transition-all duration-500",
-              "grayscale hover:grayscale-0 opacity-60 hover:opacity-100",
+              "opacity-80 hover:opacity-100",
             )}
           >
             <div className="relative h-12 w-full">
