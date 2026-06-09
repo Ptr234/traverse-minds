@@ -49,8 +49,8 @@ export default function ContactPage() {
       <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
         <div className="container-max relative z-10">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-            <SectionReveal variant="clip-left" className="lg:col-span-2">
-              <div className="border bg-white p-8 md:p-10" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+            <SectionReveal variant="fade-up" className="lg:col-span-2">
+              <div className="border bg-white p-8 pb-12 md:p-10" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                 <h2 className="font-display text-2xl font-bold tracking-tight" style={{ color: "#000" }}>
                   Send Us a Message
                 </h2>
