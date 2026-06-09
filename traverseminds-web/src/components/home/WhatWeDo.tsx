@@ -87,7 +87,7 @@ export function WhatWeDo() {
           <SectionReveal variant="clip-inset" delay={0.2}>
             <div className="relative overflow-hidden" style={{ aspectRatio: "380/500", borderRadius: 8 }}>
               <Image
-                src="/imagestouse/vde.jpeg"
+                src="/imagestouse/bfe.jpeg"
                 alt="A solutions centre for Africa's most complex challenges"
                 fill
                 className="object-cover"
