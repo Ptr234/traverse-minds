@@ -469,7 +469,7 @@ export default function MeetChristinePage() {
                 
                 <div className="space-y-6 pt-8 border-t border-border-light">
                   {[
-                    { label: "Recognition", val: "Africa's Top 50 Women in Cyber" },
+                    { label: "Recognition", val: "Ascent Top 100 Career Women in Africa 2026" },
                     { label: "Leadership", val: "President, Women in Design UG" },
                     { label: "Community", val: "Founder, CyberLuncheon" },
                     { label: "Impact", val: "$2M+ Asset Recovery in Forensics" }
@@ -694,17 +694,37 @@ export default function MeetChristinePage() {
               <SectionLabel>Accolades</SectionLabel>
               <SectionHeading light>Thought Leadership & <span className="text-accent">Recognition</span>.</SectionHeading>
               
-              <div className="editorial-card-dark bg-accent p-12 mb-12 border-none text-white relative overflow-hidden">
+              {/* 2026 Ascent Recognition — primary */}
+              <a
+                href="https://ascentclubglobal.com/ascent-top-100/christine-masiika-thembo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block editorial-card-dark bg-accent p-12 mb-6 border-none text-white relative overflow-hidden group"
+              >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -mr-32 -mt-32" />
                 <Award className="w-16 h-16 mb-8 text-white/40" />
-                <h3 className="text-3xl font-display font-bold mb-4 uppercase tracking-tight">Africa&rsquo;s Top 50</h3>
+                <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60 mb-3">Ascent Club Global · 2026</p>
+                <h3 className="text-3xl font-display font-bold mb-4 uppercase tracking-tight">Top 100 Career Women in Africa</h3>
                 <p className="text-xl font-light leading-relaxed mb-8 text-white/90 italic">
-                  &ldquo;Recognized for demonstrated mastery in policy development, institutional strengthening, and multi-stakeholder partnerships in the African Women in Cybersecurity Book 2020.&rdquo;
+                  &ldquo;Power, Presence &amp; Prestige — recognised among Africa&rsquo;s most influential women shaping the continent&rsquo;s future.&rdquo;
                 </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-px bg-white/40" />
-                  <p className="text-[10px] font-bold tracking-[0.3em] uppercase">Featured Professional</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-px bg-white/40" />
+                    <p className="text-[10px] font-bold tracking-[0.3em] uppercase">View Profile</p>
+                  </div>
+                  <ArrowRight size={16} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                 </div>
+              </a>
+
+              {/* Africa's Top 50 Women in Cyber 2020 */}
+              <div className="bg-white/5 border border-white/10 p-8 mb-12">
+                <Award className="w-8 h-8 mb-4 text-accent" />
+                <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 mb-2">African Women in Cybersecurity · 2020</p>
+                <h3 className="text-xl font-display font-bold mb-3">Africa&rsquo;s Top 50 Women in Cyber</h3>
+                <p className="text-sm font-light leading-relaxed text-white/60 italic">
+                  &ldquo;Recognized for demonstrated mastery in policy development, institutional strengthening, and multi-stakeholder partnerships.&rdquo;
+                </p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-8">
