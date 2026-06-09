@@ -2,7 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
-const FROM = process.env.EMAIL_FROM || "hello@traverseminds.ug";
+const FROM = process.env.EMAIL_FROM || "hello@traverseminds.com";
 const NOTIFY_TO = process.env.EMAIL_NOTIFY || "traversemindsug@gmail.com";
 const LOGO_URL = "https://traverseminds.ug/icons/email-logo.png";
 const SITE_URL = "https://traverseminds.ug";
