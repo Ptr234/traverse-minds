@@ -266,6 +266,103 @@ export function buildRsvpConfirmationHtml(name: string, eventTitle: string): str
 }
 
 /* ──────────────────────────────────────────
+   Pricing enquiry: user confirmation
+────────────────────────────────────────── */
+export function buildPricingEnquiryConfirmationHtml(fields: {
+  name: string;
+  planName: string;
+  planPrice: string;
+  planFeatures: string[];
+  billing: string;
+}): string {
+  const isEnterprise = fields.planName === "Enterprise";
+  const featureItems = fields.planFeatures
+    .map(
+      (f) =>
+        `<tr><td style="padding:6px 0;vertical-align:top;">
+           <span style="display:inline-block;width:8px;height:8px;background:#ff4c00;border-radius:50%;margin-right:10px;vertical-align:middle;"></span>
+           <span style="font-size:14px;color:#333;font-family:Arial,Helvetica,sans-serif;">${f}</span>
+         </td></tr>`
+    )
+    .join("");
+
+  const content = `
+    <h1 style="margin:0 0 8px;font-size:26px;font-weight:700;color:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">
+      ${isEnterprise ? `Thanks, ${fields.name}.` : `You're on the list, ${fields.name}.`}
+    </h1>
+    <p style="margin:0 0 28px;font-size:14px;color:#888;font-family:Arial,Helvetica,sans-serif;">
+      Public Record Africa &mdash; ${fields.planName} Plan
+    </p>
+
+    <div style="border:1px solid rgba(0,0,0,0.08);border-radius:12px;overflow:hidden;margin-bottom:28px;">
+      <div style="background:#0a0a0a;padding:20px 24px;">
+        <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">
+          ${fields.billing === "annual" ? "Annual" : "Monthly"} Plan
+        </p>
+        <p style="margin:6px 0 0;font-size:28px;font-weight:700;color:#ff4c00;font-family:Arial,Helvetica,sans-serif;">
+          ${fields.planName}
+          <span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.5);margin-left:8px;">${fields.planPrice}</span>
+        </p>
+      </div>
+      <div style="background:#fff;padding:20px 24px;">
+        <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.08em;font-family:Arial,Helvetica,sans-serif;">What&apos;s included</p>
+        <table width="100%" cellpadding="0" cellspacing="0">${featureItems}</table>
+      </div>
+    </div>
+
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#333;font-family:Arial,Helvetica,sans-serif;">
+      ${isEnterprise
+        ? "Our sales team will review your request and reach out within <strong>1 business day</strong> to discuss your team&apos;s specific requirements and arrange a demo."
+        : "We are currently onboarding users in small batches to ensure the highest data integrity and personalised support. You will receive a direct invitation as soon as your cohort opens."}
+    </p>
+
+    <div style="background:#fff8f6;border-left:3px solid #ff4c00;padding:16px 20px;margin-bottom:28px;border-radius:0 8px 8px 0;">
+      <p style="margin:0;font-size:13px;font-weight:700;color:#ff4c00;font-family:Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:0.06em;">What happens next</p>
+      <p style="margin:8px 0 0;font-size:13px;line-height:1.6;color:#555;font-family:Arial,Helvetica,sans-serif;">
+        ${isEnterprise
+          ? "A member of the Traverse Minds team will contact you with tailored pricing, an onboarding plan, and API documentation."
+          : "We will send you an activation link to your inbox when your early access slot opens. No credit card is required until then."}
+      </p>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding-bottom:28px;">
+      <a href="${SITE_URL}/public-record" style="display:inline-block;background:#ff4c00;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">
+        Explore Public Record Africa
+      </a>
+    </td></tr></table>
+
+    ${dividerHtml()}
+    <p style="margin:0;font-size:13px;color:#aaa;font-family:Arial,Helvetica,sans-serif;">
+      Follow our progress on <a href="https://linkedin.com/company/traverseminds" style="color:#ff4c00;">LinkedIn</a>.
+      This email was sent to you because you expressed interest in a Public Record Africa plan.
+    </p>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
+   Pricing enquiry: internal notification
+────────────────────────────────────────── */
+export function buildPricingEnquiryNotificationHtml(fields: {
+  name: string;
+  email: string;
+  planName: string;
+  planPrice: string;
+  billing: string;
+}): string {
+  const content = `
+    ${accentBar(`New ${fields.planName} Plan Enquiry`)}
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${fieldRow("Name", fields.name)}
+      ${fieldRow("Email", `<a href="mailto:${fields.email}" style="color:#ff4c00;">${fields.email}</a>`)}
+      ${fieldRow("Plan", `${fields.planName} (${fields.planPrice})`)}
+      ${fieldRow("Billing", fields.billing === "annual" ? "Annual" : "Monthly")}
+    </table>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
    Report download: user confirmation
 ────────────────────────────────────────── */
 export function buildReportDownloadConfirmationHtml(downloadUrl: string, reportTitle: string): string {

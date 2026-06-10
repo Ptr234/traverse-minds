@@ -11,6 +11,8 @@ import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { Scale, Search, BookOpen, Building2, ShieldCheck } from "lucide-react";
+import { PricingModal } from "@/components/public-record/PricingModal";
+import type { PricingPlan } from "@/components/public-record/PricingModal";
 
 const audiences = [
   {
@@ -50,6 +52,7 @@ const pricingPlans = {
 
 export default function PublicRecordPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [activePlan, setActivePlan] = useState<PricingPlan | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchJurisdiction, setSearchJurisdiction] = useState("All Africa");
@@ -223,7 +226,7 @@ export default function PublicRecordPage() {
                     <Button
                       variant={plan.featured ? "primary" : "outline"}
                       className="w-full"
-                      href="#waitlist"
+                      onClick={() => setActivePlan(plan)}
                     >
                       {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
                     </Button>
@@ -236,6 +239,12 @@ export default function PublicRecordPage() {
       </section>
 
       <WaitlistForm />
+
+      <PricingModal
+        plan={activePlan}
+        billing={billing}
+        onClose={() => setActivePlan(null)}
+      />
       </PageTransition>
     </div>
   );
