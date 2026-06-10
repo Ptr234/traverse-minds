@@ -15,11 +15,18 @@ export interface SanityEvent {
   date: string;
   location?: string;
   isFeatured?: boolean;
-  isPast?: boolean;
   thumbnailUrl?: string;
   tagline?: string;
   price?: string;
   capacity?: number;
+}
+
+function todayStr(): string {
+  return new Date().toISOString().split("T")[0];
+}
+
+function isEventPast(date: string): boolean {
+  return date.slice(0, 10) < todayStr();
 }
 
 const eventTypes = ["All", "Conference", "Luncheon", "Hackathon", "Workshop"] as const;
@@ -145,8 +152,13 @@ function EventCard({ ev }: { ev: SanityEvent }) {
 export function EventsGrid({ events }: { events: SanityEvent[] }) {
   const [activeType, setActiveType] = useState<string>("All");
 
-  const upcoming = events.filter((e) => !e.isPast);
-  const past = events.filter((e) => e.isPast);
+  const upcoming = events
+    .filter((e) => !isEventPast(e.date))
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const past = events
+    .filter((e) => isEventPast(e.date))
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   const featured = upcoming.find((e) => e.isFeatured);
   const nonFeaturedUpcoming = upcoming.filter((e) => !e.isFeatured);

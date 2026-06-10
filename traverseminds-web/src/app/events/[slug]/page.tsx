@@ -26,7 +26,6 @@ interface EventDetail {
   price?: string;
   galleryUrls?: string[];
   isFeatured?: boolean;
-  isPast?: boolean;
 }
 
 async function getEvent(slug: string): Promise<EventDetail | null> {
@@ -34,7 +33,7 @@ async function getEvent(slug: string): Promise<EventDetail | null> {
     return await sanityClient.fetch(
       `*[_type == "event" && slug.current == $slug][0]{
         _id, title, "slug": slug.current, type, date, endDate, location,
-        description, capacity, tagline, price, isFeatured, isPast,
+        description, capacity, tagline, price, isFeatured,
         "thumbnailUrl": thumbnail.asset->url,
         "galleryUrls": galleryImages[].asset->url
       }`,
@@ -86,6 +85,8 @@ export default async function EventPage({
   const event = await getEvent(slug);
   if (!event) notFound();
 
+  const isPast = event.date.slice(0, 10) < new Date().toISOString().split("T")[0];
+
   const details = [
     { icon: Calendar, label: "Date", val: new Date(event.date).toLocaleDateString("en-UG", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) + (event.date.includes("T") ? `, ${new Date(event.date).toLocaleTimeString("en-UG", { hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}` : "") },
     event.location ? { icon: MapPin, label: "Venue", val: event.location } : null,
@@ -131,8 +132,16 @@ export default async function EventPage({
               </SectionReveal>
             )}
             <SectionReveal variant="scale-fade" delay={0.3}>
-              <div className="mt-8"><CountdownTimer targetDate={event.date} /></div>
-              {!event.isPast && (
+              <div className="mt-8">
+                {isPast ? (
+                  <p className="font-display text-base font-semibold uppercase tracking-widest" style={{ color: "#919499" }}>
+                    This event has concluded
+                  </p>
+                ) : (
+                  <CountdownTimer targetDate={event.date} />
+                )}
+              </div>
+              {!isPast && (
                 <div className="mt-8"><Button variant="primary" size="lg" href="#rsvp">Reserve Your Seat</Button></div>
               )}
             </SectionReveal>
@@ -203,7 +212,7 @@ export default async function EventPage({
       )}
 
       {/* RSVP */}
-      {!event.isPast && (
+      {!isPast && (
         <section id="rsvp" className="bg-light-bg px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-xl text-center">
             <SectionReveal variant="slide-up">

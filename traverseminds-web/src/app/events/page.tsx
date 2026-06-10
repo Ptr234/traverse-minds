@@ -20,7 +20,7 @@ async function getEvents(): Promise<SanityEvent[]> {
     return await sanityClient.fetch(
       `*[_type == "event"] | order(date asc) {
         _id, title, "slug": slug.current, type, date, location,
-        isFeatured, isPast, tagline, price, capacity,
+        isFeatured, tagline, price, capacity,
         "thumbnailUrl": thumbnail.asset->url
       }`
     );
