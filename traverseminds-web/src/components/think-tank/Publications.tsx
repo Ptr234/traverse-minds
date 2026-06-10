@@ -38,7 +38,7 @@ export async function Publications() {
 
   return (
     <section id="publications" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-      <div className="container-max relative z-10">
+      <div className="container-max relative z-10 px-6 lg:px-8">
         <SectionReveal variant="clip-left" className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between mb-14">
           <div className="max-w-2xl">
             <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Research</p>
@@ -67,6 +67,7 @@ export async function Publications() {
                       src={report.featuredImageUrl}
                       alt={report.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       className="object-cover"
                     />
                   ) : (
@@ -89,7 +90,9 @@ export async function Publications() {
                   <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      {new Date(report.publicationDate).toLocaleDateString()}
+                      {report.publicationDate
+                        ? new Date(report.publicationDate).toLocaleDateString()
+                        : "—"}
                     </span>
                     {report.authors?.[0] && (
                       <span className="flex items-center gap-1">
@@ -103,7 +106,7 @@ export async function Publications() {
                     {report.title}
                   </h3>
                   <p className="mt-2 text-sm line-clamp-3 leading-relaxed" style={{ color: "#515459" }}>
-                    {report.abstract}
+                    {(report.abstract?.split(/\n\n+/)[0] ?? "").trim()}
                   </p>
 
                   <div className="mt-auto pt-5 flex items-center justify-between" style={{ borderTop: "1px solid rgba(0,0,0,0.1)" }}>
@@ -119,8 +122,8 @@ export async function Publications() {
                     {report.pdfUrl && (
                       <a
                         href={`${report.pdfUrl}?dl=${encodeURIComponent(`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`)}`}
-                        className="flex items-center gap-1.5 bg-primary/5 px-3 py-1.5 text-xs font-semibold"
-                        style={{ borderRadius: 8, color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold"
+                        style={{ borderRadius: 8, color: "#000", background: "rgba(33,36,41,0.06)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       >
                         <Download className="h-3 w-3" /> PDF
                       </a>

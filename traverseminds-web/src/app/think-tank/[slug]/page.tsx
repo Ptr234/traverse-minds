@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Tag, Download } from "lucide-react";
+import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import { PortableText } from "next-sanity";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/Button";
+import { PdfViewer } from "@/components/think-tank/PdfViewer";
 
 interface Author {
   name: string;
@@ -149,35 +150,22 @@ export default async function ReportPage({
           {/* Abstract */}
           <div className="mb-10 p-8" style={{ background: "#f0f1f4", borderRadius: 8, borderLeft: "4px solid #ff4c00" }}>
             <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#ff4c00" }}>Abstract</p>
-            <p className="text-base leading-relaxed" style={{ color: "#333" }}>{report.abstract}</p>
+            <div className="flex flex-col gap-3">
+              {report.abstract.split(/\n\n+/).map((para, i) => (
+                <p key={i} className="text-base leading-relaxed" style={{ color: "#333" }}>
+                  {para.trim()}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Inline PDF Viewer */}
           {report.pdfUrl && (
-            <div className="mb-10">
-              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
-              <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)" }}>
-                <iframe
-                  src={report.pdfUrl}
-                  title={report.title}
-                  width="100%"
-                  style={{ height: "80vh", minHeight: 520, display: "block", background: "#f0f1f4" }}
-                />
-              </div>
-              <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <p className="text-sm" style={{ color: "#919499" }}>
-                  PDF not displaying? Try the download below.
-                </p>
-                <a
-                  href={`${report.pdfUrl}?dl=${encodeURIComponent(pdfFilename)}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white shrink-0"
-                  style={{ background: "#ff4c00", borderRadius: 6 }}
-                >
-                  <Download className="h-4 w-4" />
-                  Download PDF
-                </a>
-              </div>
-            </div>
+            <PdfViewer
+              pdfUrl={report.pdfUrl}
+              title={report.title}
+              filename={pdfFilename}
+            />
           )}
 
           {/* Report Body */}
