@@ -124,28 +124,30 @@ input, select, textarea {
    TYPOGRAPHY — GatesNotes Exact Values
 ═══════════════════════════════════════════════════ */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  text-wrap: balance;
-  font-weight: 700;
-}
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    font-weight: 700;
+  }
 
-h1 { font-size: 68px; line-height: 100%; letter-spacing: -1.12px; }
-h2 { font-size: 40px; line-height: 100%; letter-spacing: -0.8px; font-weight: 500; }
-h3 { font-size: 32px; line-height: 125%; letter-spacing: -0.64px; font-weight: 500; }
-h4 { font-size: 16px; line-height: 125%; letter-spacing: 0; font-weight: 400; }
+  h1 { font-size: 68px; line-height: 100%; letter-spacing: -1.12px; }
+  h2 { font-size: 40px; line-height: 100%; letter-spacing: -0.8px; font-weight: 500; }
+  h3 { font-size: 32px; line-height: 125%; letter-spacing: -0.64px; font-weight: 500; }
+  h4 { font-size: 16px; line-height: 125%; letter-spacing: 0; font-weight: 400; }
 
-@media (max-width: 640px) {
-  h1 { font-size: clamp(1.75rem, 8vw, 2.5rem); line-height: 110%; }
-  h2 { font-size: clamp(1.375rem, 6vw, 2rem); line-height: 115%; }
-  h3 { font-size: clamp(1.125rem, 5vw, 1.5rem); line-height: 130%; }
-}
+  @media (max-width: 640px) {
+    h1 { font-size: clamp(1.75rem, 8vw, 2.5rem); line-height: 110%; }
+    h2 { font-size: clamp(1.375rem, 6vw, 2rem); line-height: 115%; }
+    h3 { font-size: clamp(1.125rem, 5vw, 1.5rem); line-height: 130%; }
+  }
 
-p {
-  text-wrap: pretty;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 125%;
+  p {
+    text-wrap: pretty;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 125%;
+  }
 }
 
 /* Eyebrow labels — GatesNotes: 12px/700/0.6px tracking */
@@ -389,8 +391,10 @@ p {
    LINK HOVER — GatesNotes Pattern
 ═══════════════════════════════════════════════════ */
 
-a {
-  transition: color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+@layer base {
+  a {
+    transition: color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 }
 
 /* ═══════════════════════════════════════════════════
