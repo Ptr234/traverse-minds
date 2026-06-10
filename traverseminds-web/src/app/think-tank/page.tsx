@@ -7,13 +7,38 @@ import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight, FileText, Filter } from "lucide-react";
+import { ReportDownloadForm } from "@/components/think-tank/ReportDownloadForm";
+import { sanityClient } from "@/sanity/client";
 
 export const metadata: Metadata = {
   title: "Think Tank | Evidence-Driven Digital Policy Research in Africa",
   description: "Bridging the gap between technology and policy. We provide independent research on data protection, AI governance, and digital rights.",
 };
 
-export default function ThinkTankPage() {
+const FALLBACK_REPORTS = [
+  {
+    id: "article-1",
+    title: "Government Documents in the Dark",
+    pdfUrl: "/PublicDocuments/Government%20Documents%20in%20the%20Dark%20-%20Traverse%20Think%20Tank%20-%20Article%201.pdf",
+  },
+];
+
+async function getDownloadableReports() {
+  try {
+    const query = `*[_type == "report" && defined(pdfFile)] | order(publicationDate desc) {
+      "id": _id,
+      title,
+      "pdfUrl": pdfFile.asset->url
+    }`;
+    const results = await sanityClient.fetch(query);
+    return results?.length > 0 ? results : FALLBACK_REPORTS;
+  } catch {
+    return FALLBACK_REPORTS;
+  }
+}
+
+export default async function ThinkTankPage() {
+  const reports = await getDownloadableReports();
   return (
     <div className="flex flex-col">
       <PageTransition>
@@ -59,25 +84,7 @@ export default function ThinkTankPage() {
             </SectionReveal>
 
             <SectionReveal variant="slide-up" delay={0.2} className="w-full max-w-sm">
-              <div className="border border-white/6 bg-surface-dark-elevated p-8" style={{ borderRadius: 16 }}>
-                <h3 className="font-display text-lg font-bold text-white">Download the Report</h3>
-                <form className="mt-6 space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Your work email"
-                    className="w-full border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none"
-                    style={{ borderRadius: 8, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                    required
-                  />
-                  <Button variant="primary" className="w-full">
-                    Send me the PDF
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <p className="text-[11px] text-center text-white/20">
-                    By downloading, you agree to join our research mailing list.
-                  </p>
-                </form>
-              </div>
+              <ReportDownloadForm reports={reports} />
             </SectionReveal>
           </div>
         </div>

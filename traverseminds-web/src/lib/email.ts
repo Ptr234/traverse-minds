@@ -7,20 +7,27 @@ const NOTIFY_TO = process.env.EMAIL_NOTIFY || "traversemindsug@gmail.com";
 const LOGO_URL = "https://traverseminds.ug/icons/email-logo.png";
 const SITE_URL = "https://traverseminds.ug";
 
+interface Attachment {
+  filename: string;
+  content: Buffer;
+}
+
 interface SendEmailParams {
   to: string;
   subject: string;
   html: string;
   replyTo?: string;
+  attachments?: Attachment[];
 }
 
-export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
+export async function sendEmail({ to, subject, html, replyTo, attachments }: SendEmailParams) {
   const { data, error } = await resend.emails.send({
     from: `Traverse Minds Africa <${FROM}>`,
     to,
     subject,
     html,
     replyTo: replyTo || FROM,
+    attachments,
   });
 
   if (error) {
@@ -47,7 +54,7 @@ function emailShell(content: string): string {
           <!-- Header -->
           <tr>
             <td style="background:#0a0a0a;padding:32px 40px;text-align:center;">
-              <img src="${LOGO_URL}" width="56" height="56" alt="Traverse Minds Africa" style="display:inline-block;" />
+              <img src="${LOGO_URL}" width="56" height="56" alt="Traverse Minds Africa" style="display:inline-block;width:56px;height:56px;" />
               <p style="margin:12px 0 0;color:#ffffff;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Traverse Minds Africa</p>
             </td>
           </tr>
@@ -254,6 +261,42 @@ export function buildRsvpConfirmationHtml(name: string, eventTitle: string): str
     <p style="margin:0;font-size:13px;color:#aaa;font-family:Arial,Helvetica,sans-serif;">
       This confirmation was sent to you because you registered for a Traverse Minds Africa event.
     </p>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
+   Report download: user confirmation
+────────────────────────────────────────── */
+export function buildReportDownloadConfirmationHtml(downloadUrl: string, reportTitle: string): string {
+  const content = `
+    <h1 style="margin:0 0 8px;font-size:26px;font-weight:700;color:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">Your report is attached.</h1>
+    <p style="margin:0 0 24px;font-size:14px;color:#888;font-family:Arial,Helvetica,sans-serif;">${reportTitle} — Traverse Think Tank</p>
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#333;font-family:Arial,Helvetica,sans-serif;">
+      Thank you for your interest in our research. You will find the PDF attached to this email.
+      If you have trouble opening the attachment, you can also download it using the button below.
+    </p>
+    <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding-bottom:28px;">
+      <a href="${downloadUrl}" style="display:inline-block;background:#ff4c00;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">Download the Report</a>
+    </td></tr></table>
+    ${dividerHtml()}
+    <p style="margin:0;font-size:13px;color:#aaa;font-family:Arial,Helvetica,sans-serif;">
+      You have been added to our research mailing list. Follow our work on <a href="https://linkedin.com/company/traverseminds" style="color:#ff4c00;">LinkedIn</a>.
+    </p>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
+   Report download: internal notification
+────────────────────────────────────────── */
+export function buildReportDownloadNotificationHtml(email: string, reportTitle: string): string {
+  const content = `
+    ${accentBar("New Report Download Request")}
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${fieldRow("Email", `<a href="mailto:${email}" style="color:#ff4c00;">${email}</a>`)}
+      ${fieldRow("Report", reportTitle)}
+    </table>
   `;
   return emailShell(content);
 }
