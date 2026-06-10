@@ -8,12 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
-const programmes = [
-  { id: 1, title: "CyberSafe Schools", audience: "students", duration: "4 Weeks", format: "In-person Workshops", description: "Equipping students with the skills to identify online grooming, cyberbullying, and misinformation.", topics: ["Password Safety", "Privacy Settings", "Digital Footprint"], image: "/imagestouse/div-literacy.jpeg" },
-  { id: 2, title: "SME Security Essentials", audience: "business", duration: "2 Days", format: "Intensive Boot Camp", description: "Practical security training for business owners and employees. From phishing to basic encryption.", topics: ["Phishing Awareness", "Device Security", "Data Backups"], image: "https://images.unsplash.com/photo-1600880212340-85d770eaa65a?q=80&w=2070&auto=format&fit=crop" },
-  { id: 3, title: "Digital Safety for Educators", audience: "teachers", duration: "1 Week", format: "Hybrid (Online + In-person)", description: "Training teachers to integrate digital citizenship and online safety into their daily curriculum.", topics: ["Classroom Policy", "Online Resources", "Parent Engagement"], image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" },
-  { id: 4, title: "Public Sector Cyber Literacy", audience: "government", duration: "3 Days", format: "Closed Workshop", description: "Critical security awareness for government staff handling sensitive citizen data and public services.", topics: ["Information Handling", "Social Engineering", "Compliance"], image: "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?q=80&w=2070&auto=format&fit=crop" },
-];
+import { programmes } from "@/lib/programmes";
 
 const filters = [
   { label: "All", value: "all" },
@@ -103,7 +98,7 @@ export function ProgrammeListing() {
                     <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
                       <BookOpen className="h-3.5 w-3.5" /> {p.format}
                     </div>
-                    <Button variant="outline-dark" size="sm">
+                    <Button variant="outline-dark" size="sm" href={`/literacy/${p.slug}`}>
                       Learn More <ArrowRight className="h-3 w-3" />
                     </Button>
                   </div>

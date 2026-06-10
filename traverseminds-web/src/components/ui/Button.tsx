@@ -21,6 +21,8 @@ const buttonVariants = cva(
           "bg-[#313439] text-white rounded-sm hover:bg-[#000000]",
         secondary:
           "bg-[#212429] text-white rounded-sm hover:bg-[#000000]",
+        accent:
+          "bg-accent text-white rounded-sm hover:bg-accent-hover",
         outline:
           "border border-[rgba(81,84,89,0.64)] bg-white text-[#000000] rounded-sm hover:bg-[#000000] hover:text-white",
         ghost:
