@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 interface CountryData {
   name: string;
   data: string;
+  status?: "active" | "pipeline";
 }
 
 interface AfricaMapProps {
@@ -37,6 +38,14 @@ const COUNTRY_COORDS: Record<string, [number, number]> = {
   Egypt: [26.8206, 30.8025],
   Senegal: [14.4974, -14.4524],
   Ethiopia: [9.1450, 40.4897],
+  Ghana: [7.9465, -1.0232],
+  "Ivory Coast": [7.5400, -5.5471],
+  Zambia: [-13.1339, 27.8493],
+  Botswana: [-22.3285, 24.6849],
+  Namibia: [-22.9576, 18.4904],
+  DRC: [-4.0383, 21.7587],
+  Cameroon: [3.8480, 11.5021],
+  Gabon: [-0.8037, 11.6094],
 };
 
 function MapInner({
@@ -92,44 +101,53 @@ function MapInner({
             const coords = COUNTRY_COORDS[country.name];
             if (!coords) return null;
 
+            const isPipeline = country.status === "pipeline";
+            const baseColor = isPipeline ? "#919499" : "#ff4c00";
+            const hoverColor = isPipeline ? "#515459" : "#ff4c00";
+
             return (
               <CircleMarker
                 key={country.name}
                 center={coords}
-                radius={10}
+                radius={isPipeline ? 7 : 10}
                 pathOptions={{
-                  color: "#F97316",
-                  fillColor: "#F97316",
-                  fillOpacity: 0.25,
+                  color: baseColor,
+                  fillColor: baseColor,
+                  fillOpacity: isPipeline ? 0.2 : 0.3,
                   weight: 2,
                 }}
                 eventHandlers={{
                   mouseover: (e: L.LeafletMouseEvent) => {
                     const marker = e.target as L.CircleMarker;
                     marker.setStyle({
-                      fillOpacity: 0.6,
+                      color: hoverColor,
+                      fillColor: hoverColor,
+                      fillOpacity: isPipeline ? 0.45 : 0.65,
                       weight: 3,
-                      radius: 14,
                     });
                     marker.openTooltip();
                   },
                   mouseout: (e: L.LeafletMouseEvent) => {
                     const marker = e.target as L.CircleMarker;
                     marker.setStyle({
-                      fillOpacity: 0.25,
+                      color: baseColor,
+                      fillColor: baseColor,
+                      fillOpacity: isPipeline ? 0.2 : 0.3,
                       weight: 2,
-                      radius: 10,
                     });
                     marker.closeTooltip();
                   },
                 }}
               >
-                <Tooltip direction="top" offset={[0, -10]} opacity={0.95}>
-                  <div className="text-center">
-                    <p className="font-bold text-sm text-primary">
+                <Tooltip direction="top" offset={[0, -10]} opacity={0.97}>
+                  <div className="text-center" style={{ minWidth: 110 }}>
+                    <p className="font-bold text-sm" style={{ color: isPipeline ? "#515459" : "#ff4c00" }}>
                       {country.name}
                     </p>
-                    <p className="text-xs text-brand-medium">{country.data}</p>
+                    <p className="text-xs" style={{ color: "#515459" }}>{country.data}</p>
+                    {isPipeline && (
+                      <p className="text-[10px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#919499" }}>Coming Soon</p>
+                    )}
                   </div>
                 </Tooltip>
               </CircleMarker>

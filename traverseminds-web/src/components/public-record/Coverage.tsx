@@ -1,157 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
+import { AfricaMap } from "@/components/ui/AfricaMap";
+import type { CountryData } from "@/components/ui/AfricaMap";
 
-const regions = [
-  {
-    id: "ea",
-    name: "East Africa",
-    countries: [
-      { name: "Uganda", code: "UG", records: "15,000+", flag: "https://flagcdn.com/ug.svg" },
-      { name: "Kenya", code: "KE", records: "22,000+", flag: "https://flagcdn.com/ke.svg" },
-      { name: "Tanzania", code: "TZ", records: "12,000+", flag: "https://flagcdn.com/tz.svg" },
-      { name: "Rwanda", code: "RW", records: "8,000+", flag: "https://flagcdn.com/rw.svg" },
-      { name: "Burundi", code: "BI", records: "4,500+", flag: "https://flagcdn.com/bi.svg" },
-      { name: "Ethiopia", code: "ET", records: "3,200+", flag: "https://flagcdn.com/et.svg" },
-    ],
-  },
-  {
-    id: "wa",
-    name: "West Africa",
-    countries: [
-      { name: "Nigeria", code: "NG", records: "Pipeline", flag: "https://flagcdn.com/ng.svg" },
-      { name: "Ghana", code: "GH", records: "Pipeline", flag: "https://flagcdn.com/gh.svg" },
-      { name: "Senegal", code: "SN", records: "Pipeline", flag: "https://flagcdn.com/sn.svg" },
-      { name: "Ivory Coast", code: "CI", records: "Pipeline", flag: "https://flagcdn.com/ci.svg" },
-    ],
-  },
-  {
-    id: "sa",
-    name: "Southern Africa",
-    countries: [
-      { name: "South Africa", code: "ZA", records: "Pipeline", flag: "https://flagcdn.com/za.svg" },
-      { name: "Zambia", code: "ZM", records: "Pipeline", flag: "https://flagcdn.com/zm.svg" },
-      { name: "Botswana", code: "BW", records: "Pipeline", flag: "https://flagcdn.com/bw.svg" },
-      { name: "Namibia", code: "NA", records: "Pipeline", flag: "https://flagcdn.com/na.svg" },
-    ],
-  },
-  {
-    id: "ca",
-    name: "Central Africa",
-    countries: [
-      { name: "DRC", code: "CD", records: "Pipeline", flag: "https://flagcdn.com/cd.svg" },
-      { name: "Cameroon", code: "CM", records: "Pipeline", flag: "https://flagcdn.com/cm.svg" },
-      { name: "Gabon", code: "GA", records: "Pipeline", flag: "https://flagcdn.com/ga.svg" },
-    ],
-  },
+const coverageCountries: CountryData[] = [
+  { name: "Uganda",       data: "15,000+ records",  status: "active" },
+  { name: "Kenya",        data: "22,000+ records",  status: "active" },
+  { name: "Tanzania",     data: "12,000+ records",  status: "active" },
+  { name: "Rwanda",       data: "8,000+ records",   status: "active" },
+  { name: "Burundi",      data: "4,500+ records",   status: "active" },
+  { name: "Ethiopia",     data: "3,200+ records",   status: "active" },
+  { name: "Nigeria",      data: "Pipeline",         status: "pipeline" },
+  { name: "Ghana",        data: "Pipeline",         status: "pipeline" },
+  { name: "Senegal",      data: "Pipeline",         status: "pipeline" },
+  { name: "Ivory Coast",  data: "Pipeline",         status: "pipeline" },
+  { name: "South Africa", data: "Pipeline",         status: "pipeline" },
+  { name: "Zambia",       data: "Pipeline",         status: "pipeline" },
+  { name: "Botswana",     data: "Pipeline",         status: "pipeline" },
+  { name: "Namibia",      data: "Pipeline",         status: "pipeline" },
+  { name: "DRC",          data: "Pipeline",         status: "pipeline" },
+  { name: "Cameroon",     data: "Pipeline",         status: "pipeline" },
+  { name: "Gabon",        data: "Pipeline",         status: "pipeline" },
+];
+
+const stats = [
+  { value: "65k+", label: "Indexed Records" },
+  { value: "6",    label: "Active Countries" },
+  { value: "17",   label: "Countries Total" },
+  { value: "24h",  label: "Update Cycle" },
 ];
 
 export function Coverage() {
-  const [activeRegion, setActiveRegion] = useState(regions[0].id);
-
   return (
-    <section style={{ background: "#f0f1f4", paddingTop: 80, paddingBottom: 80 }} className="relative overflow-hidden">
+    <section
+      style={{ background: "#f0f1f4", paddingTop: 80, paddingBottom: 80 }}
+      className="relative overflow-hidden"
+    >
       <div className="container-max relative z-10">
         <div className="flex flex-col gap-12">
+
+          {/* Header */}
           <div className="max-w-2xl">
             <SectionReveal variant="clip-left">
               <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Coverage</p>
             </SectionReveal>
-            
             <TextReveal variant="fade-up" className="font-display text-3xl md:text-5xl font-bold tracking-tight" style={{ color: "#000" }}>
               Unrivalled access across the continent
             </TextReveal>
-
             <SectionReveal variant="fade-up" delay={0.2}>
               <p className="mt-5 text-lg leading-relaxed" style={{ color: "#515459" }}>
-                We are building the most comprehensive digital archive of public records
-                in Africa. Segmented by region, our data engine continuously crawls 
-                official gazettes, court registries, and parliament archives.
+                Building the most comprehensive digital archive of public records in Africa —
+                from official gazettes and court registries to parliament archives, continuously indexed.
               </p>
             </SectionReveal>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-12">
-            {/* Region Selector */}
-            <div className="lg:w-1/3">
-              <div className="flex flex-col gap-2">
-                {regions.map((region) => (
-                  <button
-                    key={region.id}
-                    onClick={() => setActiveRegion(region.id)}
-                    className={`group flex items-center justify-between p-4 transition-all duration-300 ${
-                      activeRegion === region.id 
-                        ? "bg-white shadow-md translate-x-2" 
-                        : "hover:bg-white/50"
-                    }`}
-                    style={{ 
-                      borderRadius: 8,
-                      border: activeRegion === region.id ? "1px solid rgba(255,76,0,0.2)" : "1px solid transparent"
-                    }}
-                  >
-                    <span className={`font-display text-lg font-bold ${
-                      activeRegion === region.id ? "text-accent" : "text-[#515459]"
-                    }`}>
-                      {region.name}
-                    </span>
-                    <div className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                      activeRegion === region.id ? "bg-accent scale-125" : "bg-black/10"
-                    }`} />
-                  </button>
-                ))}
+          {/* Stats row */}
+          <SectionReveal variant="fade-up" staggerChildren={0.08} className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="bg-white p-5 text-center border"
+                style={{ borderRadius: 12, borderColor: "rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+              >
+                <p className="font-display text-3xl font-bold" style={{ color: "#ff4c00" }}>{s.value}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "#919499" }}>{s.label}</p>
+              </div>
+            ))}
+          </SectionReveal>
+
+          {/* Map + legend */}
+          <SectionReveal variant="clip-inset">
+            <div className="bg-white border overflow-hidden" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.08)", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
+              {/* Legend */}
+              <div className="flex flex-wrap items-center gap-6 px-6 py-4 border-b" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#000" }}>Coverage</span>
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-full" style={{ background: "#ff4c00" }} />
+                  <span className="text-xs" style={{ color: "#515459" }}>Live — records indexed</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-full" style={{ background: "#919499" }} />
+                  <span className="text-xs" style={{ color: "#515459" }}>Pipeline — coming soon</span>
+                </div>
+                <span className="ml-auto text-xs italic" style={{ color: "#c5c7cc" }}>Hover a marker for details</span>
               </div>
 
-              <div className="mt-8 p-6 bg-primary text-white" style={{ borderRadius: 12 }}>
-                <span className="font-display text-4xl font-bold text-accent">65k+</span>
-                <p className="mt-2 text-sm font-medium text-white/70 uppercase tracking-widest">Total Indexed Records</p>
-                <div className="mt-4 h-px bg-white/10" />
-                <p className="mt-4 text-xs text-white/40 italic">Updated every 24 hours</p>
-              </div>
+              {/* Map */}
+              <AfricaMap
+                countries={coverageCountries}
+                className="rounded-none! border-0! h-120"
+              />
             </div>
+          </SectionReveal>
 
-            {/* Country Grid */}
-            <div className="lg:w-2/3 min-h-[400px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeRegion}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                >
-                  {regions.find(r => r.id === activeRegion)?.countries.map((country) => (
-                    <div 
-                      key={country.code} 
-                      className="bg-white p-6 border border-black/5 flex flex-col justify-between"
-                      style={{ borderRadius: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="relative h-4 w-6 overflow-hidden rounded-sm shadow-sm">
-                          <Image src={country.flag} alt={country.name} fill className="object-cover" />
-                        </div>
-                        <span className="text-sm font-bold tracking-tight text-[#000]">{country.name}</span>
-                      </div>
-                      <div className="mt-6">
-                        <span className={`font-display text-2xl font-bold ${
-                          country.records === "Pipeline" ? "text-black/20" : "text-accent"
-                        }`}>
-                          {country.records}
-                        </span>
-                        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#919499] mt-1">
-                          {country.records === "Pipeline" ? "Coming Soon" : "Records Indexed"}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
         </div>
       </div>
     </section>
