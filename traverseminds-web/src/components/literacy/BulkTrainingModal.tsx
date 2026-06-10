@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { X, CheckCircle2, ArrowRight, Loader2, Users, ShieldCheck, Trophy, Headphones } from "lucide-react";
@@ -91,7 +92,9 @@ export function BulkTrainingModal({ open, onClose }: Props) {
     }
   };
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <>
@@ -392,6 +395,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
