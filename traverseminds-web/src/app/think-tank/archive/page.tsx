@@ -58,7 +58,7 @@ export default async function ArchivePage() {
     <PageTransition>
       {/* Header */}
       <section style={{ background: "#0a0a0a", paddingTop: 120, paddingBottom: 64 }}>
-        <div className="container-max">
+        <div className="container-max px-6 lg:px-8">
           <Link
             href="/think-tank"
             className="inline-flex items-center gap-2 text-sm mb-8"
@@ -81,7 +81,7 @@ export default async function ArchivePage() {
 
       {/* Archive Grid */}
       <section style={{ background: "#ffffff", paddingTop: 56, paddingBottom: 80 }}>
-        <div className="container-max">
+        <div className="container-max px-6 lg:px-8">
           {reports.length > 0 ? (
             <SectionReveal variant="fade-up" staggerChildren={0.08} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {reports.map((report) => (
@@ -118,7 +118,7 @@ export default async function ArchivePage() {
                       <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
-                          {new Date(report.publicationDate).toLocaleDateString("en-UG", { year: "numeric", month: "short", day: "numeric" })}
+                          {report.publicationDate ? new Date(report.publicationDate).toLocaleDateString("en-UG", { year: "numeric", month: "short", day: "numeric" }) : "—"}
                         </span>
                         {report.authors?.[0] && (
                           <span className="flex items-center gap-1">

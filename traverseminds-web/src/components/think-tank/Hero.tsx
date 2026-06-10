@@ -37,7 +37,7 @@ export function Hero() {
             as="h1"
             variant="clip-up"
             delay={0.3}
-            className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] font-bold text-white tracking-tight"
+            className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight md:leading-[0.95] font-bold text-white tracking-tight"
           >
             Independent policy intelligence for Africa&apos;s digital future
           </TextReveal>

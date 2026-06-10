@@ -37,7 +37,7 @@ export function Hero() {
             <TextReveal
               as="h1"
               variant="slide-up"
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight"
             >
               Digital safety for every Ugandan
             </TextReveal>

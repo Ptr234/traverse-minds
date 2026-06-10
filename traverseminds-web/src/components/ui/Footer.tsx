@@ -43,14 +43,14 @@ export function Footer() {
         {/* Top — Large section links + social */}
         <div className="mx-auto flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12" style={{ maxWidth: 1240, padding: "0 24px" }}>
           {/* Section Links — GatesNotes: 40px, weight 500 */}
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap gap-5 sm:gap-8">
             {sectionLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 className="text-white hover:text-accent transition-colors duration-350"
                 style={{
-                  fontSize: 40,
+                  fontSize: "clamp(1.5rem, 6vw, 2.5rem)",
                   fontWeight: 500,
                   lineHeight: "125%",
                   letterSpacing: "-0.8px",

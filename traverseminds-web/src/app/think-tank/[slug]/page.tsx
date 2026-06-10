@@ -95,7 +95,7 @@ export default async function ReportPage({
     <PageTransition>
       {/* Header */}
       <section style={{ background: "#0a0a0a", paddingTop: 120, paddingBottom: 64 }}>
-        <div className="container-max max-w-4xl">
+        <div className="container-max max-w-4xl px-6 lg:px-8">
           <Link
             href="/think-tank"
             className="inline-flex items-center gap-2 text-sm mb-8"
@@ -145,7 +145,7 @@ export default async function ReportPage({
 
       {/* Content */}
       <section style={{ background: "#ffffff", paddingTop: 56, paddingBottom: 80 }}>
-        <div className="container-max max-w-4xl">
+        <div className="container-max max-w-4xl px-6 lg:px-8">
 
           {/* Abstract */}
           <div className="mb-10 p-8" style={{ background: "#f0f1f4", borderRadius: 8, borderLeft: "4px solid #ff4c00" }}>

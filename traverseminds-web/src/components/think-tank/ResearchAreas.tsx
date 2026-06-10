@@ -18,7 +18,7 @@ const areas = [
 export function ResearchAreas() {
   return (
     <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-      <div className="container-max relative z-10">
+      <div className="container-max relative z-10 px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}

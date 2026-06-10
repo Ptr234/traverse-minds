@@ -37,7 +37,7 @@ export function TrustLogoStrip({
       {/* Fade edges */}
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 w-32",
+          "pointer-events-none absolute inset-y-0 left-0 z-10 w-12 md:w-32",
           isDark
             ? "bg-linear-to-r from-primary to-transparent"
             : "bg-linear-to-r from-bg-light to-transparent",
@@ -45,7 +45,7 @@ export function TrustLogoStrip({
       />
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 w-32",
+          "pointer-events-none absolute inset-y-0 right-0 z-10 w-12 md:w-32",
           isDark
             ? "bg-linear-to-l from-primary to-transparent"
             : "bg-linear-to-l from-bg-light to-transparent",

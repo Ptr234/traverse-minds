@@ -29,7 +29,7 @@ export function MissionStatement() {
               as="h1"
               variant="slide-up"
               staggerSpeed={0.05}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
+              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
             >
               A digitally secure Africa
             </TextReveal>

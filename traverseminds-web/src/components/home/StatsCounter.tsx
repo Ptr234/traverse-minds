@@ -37,7 +37,7 @@ export function StatsCounter() {
   return (
     <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px 56px" }}>
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-2 lg:grid-cols-4">
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
             <RevealItem key={stat.label} variant="fade-up">
               <div
@@ -47,7 +47,7 @@ export function StatsCounter() {
                   borderColor: "rgba(0,0,0,0.1)",
                 }}
               >
-                <p className="font-display" style={{ fontSize: 48, fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
+                <p className="font-display" style={{ fontSize: "clamp(2rem, 8vw, 3rem)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
                   <AnimatedNumber value={stat.value} />
                 </p>
                 <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 500, color: "#212429" }}>{stat.label}</h3>
