@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
+import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 
 interface PdfViewerProps {
   pdfUrl: string;
@@ -20,8 +21,6 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const downloadHref = `${pdfUrl}?dl=${encodeURIComponent(filename)}`;
-
   if (isMobile) {
     return (
       <div className="mb-10">
@@ -34,14 +33,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
           <p className="text-sm" style={{ color: "#515459" }}>
             Inline PDF viewing is not supported on mobile. Download the report to read it.
           </p>
-          <a
-            href={downloadHref}
-            className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white"
-            style={{ background: "#ff4c00", borderRadius: 6 }}
-          >
-            <Download className="h-4 w-4" />
-            Download PDF
-          </a>
+          <PdfDownloadButton pdfUrl={pdfUrl} filename={filename} variant="prominent" />
         </div>
       </div>
     );
@@ -62,14 +54,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
         <p className="text-sm" style={{ color: "#919499" }}>
           PDF not displaying? Try the download below.
         </p>
-        <a
-          href={downloadHref}
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white shrink-0"
-          style={{ background: "#ff4c00", borderRadius: 6 }}
-        >
-          <Download className="h-4 w-4" />
-          Download PDF
-        </a>
+        <PdfDownloadButton pdfUrl={pdfUrl} filename={filename} variant="prominent" />
       </div>
     </div>
   );

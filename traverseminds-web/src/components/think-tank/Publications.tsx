@@ -1,7 +1,8 @@
 import { sanityClient } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
-import { Download, Calendar, User, FileText } from "lucide-react";
+import { Calendar, User, FileText } from "lucide-react";
+import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 import { Button } from "@/components/ui/Button";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
@@ -120,13 +121,11 @@ export async function Publications() {
                       </Link>
                     )}
                     {report.pdfUrl && (
-                      <a
-                        href={`${report.pdfUrl}?dl=${encodeURIComponent(`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`)}`}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold"
-                        style={{ borderRadius: 8, color: "#000", background: "rgba(33,36,41,0.06)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                      >
-                        <Download className="h-3 w-3" /> PDF
-                      </a>
+                      <PdfDownloadButton
+                        pdfUrl={report.pdfUrl}
+                        filename={`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`}
+                        variant="card"
+                      />
                     )}
                   </div>
                 </div>

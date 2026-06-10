@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Download, Calendar, User, FileText, ArrowLeft } from "lucide-react";
+import { Calendar, User, FileText, ArrowLeft } from "lucide-react";
+import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -144,13 +145,11 @@ export default async function ArchivePage() {
                           Read Online
                         </Link>
                         {report.pdfUrl && (
-                          <a
-                            href={`${report.pdfUrl}?dl=${encodeURIComponent(`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`)}`}
-                            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold"
-                            style={{ borderRadius: 8, background: "rgba(0,0,0,0.04)", color: "#000" }}
-                          >
-                            <Download className="h-3 w-3" /> PDF
-                          </a>
+                          <PdfDownloadButton
+                            pdfUrl={report.pdfUrl}
+                            filename={`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`}
+                            variant="card"
+                          />
                         )}
                       </div>
                     </div>
