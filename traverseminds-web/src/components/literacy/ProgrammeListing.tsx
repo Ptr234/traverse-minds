@@ -23,7 +23,7 @@ export function ProgrammeListing() {
   const filtered = filter === "all" ? programmes : programmes.filter((p) => p.audience === filter);
 
   return (
-    <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
+    <section id="programmes" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
         <div className="text-center mb-12">
           <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Programmes</p>

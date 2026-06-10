@@ -49,11 +49,11 @@ export function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button variant="primary" size="lg">
+              <Button variant="primary" size="lg" href="#programmes">
                 Explore Programmes
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button variant="outline-dark" size="lg" href="/contact">
+              <Button variant="outline-dark" size="lg" href="#booking">
                 Book for your Organisation
               </Button>
             </div>

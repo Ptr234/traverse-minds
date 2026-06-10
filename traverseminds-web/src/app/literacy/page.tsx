@@ -137,7 +137,7 @@ export default function LiteracyPage() {
         </section>
 
         {/* Organisation Booking */}
-        <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
+        <section id="booking" style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
           <div className="container-max relative z-10">
             <div className="max-w-2xl">
               <TextReveal
