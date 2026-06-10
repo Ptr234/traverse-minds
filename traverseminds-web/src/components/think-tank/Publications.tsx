@@ -58,8 +58,9 @@ export async function Publications() {
               <RevealItem
                 key={report._id}
                 variant="slide-up"
+                className="h-full"
               >
-              <div className="group flex flex-col overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+              <div className="group h-full flex flex-col overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                 <div className="relative h-44 w-full overflow-hidden flex items-center justify-center" style={{ background: "#f0f1f4" }}>
                   {report.featuredImageUrl ? (
                     <Image
@@ -106,13 +107,15 @@ export async function Publications() {
                   </p>
 
                   <div className="mt-auto pt-5 flex items-center justify-between" style={{ borderTop: "1px solid rgba(0,0,0,0.1)" }}>
-                    <Link
-                      href={`/think-tank/${report.slug.current}`}
-                      className="text-sm font-semibold text-accent"
-                      style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                    >
-                      Read Online
-                    </Link>
+                    {report.slug?.current && (
+                      <Link
+                        href={`/think-tank/${report.slug.current}`}
+                        className="text-sm font-semibold"
+                        style={{ color: "#ff4c00", transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      >
+                        Read Online
+                      </Link>
+                    )}
                     {report.pdfUrl && (
                       <a
                         href={`${report.pdfUrl}?dl=${encodeURIComponent(`${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`)}`}
