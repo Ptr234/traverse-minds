@@ -14,6 +14,7 @@ import {
   BookOpen,
   Mic,
   Brain,
+  ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -244,97 +245,101 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* ======== Desktop Mega-Menu (Enhanced) ======== */}
+        {/* ======== Desktop Mega-Menu (Enhanced Card Design) ======== */}
         <AnimatePresence>
           {isMegaOpen && (
             <motion.div
               ref={megaRef}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.4, ease }}
-              className="hidden md:block"
+              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-full max-w-[1240px] px-6"
               style={{
                 pointerEvents: "auto",
-                background: "#ffffff",
-                borderBottom: "1px solid #d1d4d9",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.1)",
                 marginTop: 8,
               }}
               onMouseEnter={openMega}
               onMouseLeave={scheduleMegaClose}
             >
-              <div className="container-max grid grid-cols-12 gap-12 py-16">
-                {/* Left Sidebar Info */}
-                <div className="col-span-3 border-r border-gn-700/50 pr-8">
-                  <p className="eyebrow-muted mb-6">Our Ecosystem</p>
-                  <h3 className="text-2xl font-medium leading-tight mb-4 tracking-tight">
-                    Integrated solutions for a <span className="text-accent">digital-first</span> Africa.
-                  </h3>
-                  <p className="text-gn-400 text-sm leading-relaxed mb-8">
-                    Six specialized divisions working in synergy to secure, inform, and empower the African region.
-                  </p>
-                  <Link 
-                    href="/about" 
-                    onClick={() => setIsMegaOpen(false)}
-                    className="group inline-flex items-center gap-2 text-sm font-semibold text-gn-100 hover:text-accent transition-colors"
-                  >
-                    The Traverse Model
-                    <div className="w-5 h-px bg-gn-100 group-hover:bg-accent group-hover:w-8 transition-all duration-300" />
-                  </Link>
-                </div>
+              <div 
+                className="overflow-hidden bg-white border border-black/5 shadow-2xl"
+                style={{ borderRadius: 24 }}
+              >
+                <div className="grid grid-cols-12 gap-0">
+                  {/* Left Sidebar Info */}
+                  <div className="col-span-3 bg-gn-900/30 p-12 border-r border-black/5">
+                    <p className="eyebrow-muted mb-6">Our Ecosystem</p>
+                    <h3 className="text-2xl font-medium leading-tight mb-4 tracking-tight text-primary">
+                      Integrated solutions for a <span className="text-accent">digital-first</span> Africa.
+                    </h3>
+                    <p className="text-gn-400 text-sm leading-relaxed mb-8">
+                      Six specialized divisions working in synergy to secure, inform, and empower the African region.
+                    </p>
+                    <Link 
+                      href="/about" 
+                      onClick={() => setIsMegaOpen(false)}
+                      className="group inline-flex items-center gap-2 text-sm font-semibold text-gn-100 hover:text-accent transition-colors"
+                    >
+                      The Traverse Model
+                      <div className="w-5 h-px bg-gn-100 group-hover:bg-accent group-hover:w-8 transition-all duration-300" />
+                    </Link>
+                  </div>
 
-                {/* Main Divisions Grid */}
-                <div className="col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-                  {divisions.map((div) => {
-                    const Icon = div.icon;
-                    const isActive = pathname === div.href;
-                    return (
-                      <Link
-                        key={div.href}
-                        href={div.href}
-                        onClick={() => setIsMegaOpen(false)}
-                        className="group flex flex-col items-start"
-                      >
-                        <div className="mb-4 flex items-center justify-center w-10 h-10 rounded-lg bg-gn-900 group-hover:bg-accent-muted transition-colors duration-300">
-                          <Icon 
-                            className="transition-all duration-300 group-hover:scale-110" 
-                            style={{ 
-                              height: 20, 
-                              width: 20, 
-                              color: isActive ? "#ff4c00" : "#515459",
-                              opacity: isActive ? 1 : 0.8
-                            }} 
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-lg font-bold tracking-tight text-gn-100 group-hover:text-accent transition-colors">
-                              {div.label}
-                            </span>
-                          </div>
-                          <span className="block text-sm text-gn-500 leading-snug group-hover:text-gn-400 transition-colors">
-                            {div.description}
-                          </span>
-                          <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-gn-600 mt-2 opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                            {div.tagline} &rarr;
-                          </span>
-                        </div>
-                      </Link>
-                    );
-                  })}
+                  {/* Main Divisions Grid */}
+                  <div className="col-span-9 p-12 bg-white">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
+                      {divisions.map((div) => {
+                        const Icon = div.icon;
+                        const isActive = pathname === div.href;
+                        return (
+                          <Link
+                            key={div.href}
+                            href={div.href}
+                            onClick={() => setIsMegaOpen(false)}
+                            className="group flex flex-col items-start"
+                          >
+                            <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-xl bg-gn-900 group-hover:bg-accent/10 transition-all duration-300 group-hover:scale-110">
+                              <Icon 
+                                className="transition-colors duration-300" 
+                                style={{ 
+                                  height: 22, 
+                                  width: 22, 
+                                  color: isActive ? "#ff4c00" : "#515459",
+                                }} 
+                              />
+                            </div>
+                            <div className="space-y-1.5">
+                              <div className="flex items-center gap-2">
+                                <span className="text-lg font-bold tracking-tight text-gn-100 group-hover:text-accent transition-colors">
+                                  {div.label}
+                                </span>
+                              </div>
+                              <span className="block text-sm text-gn-500 leading-snug group-hover:text-gn-400 transition-colors line-clamp-2">
+                                {div.description}
+                              </span>
+                              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-accent mt-2 opacity-0 group-hover:opacity-100 transform translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
+                                {div.tagline} <ArrowRight className="w-3 h-3" />
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              
-              {/* Bottom Strip */}
-              <div className="bg-gn-900/50 border-t border-gn-700/30 py-4">
-                <div className="container-max flex items-center justify-between">
-                  <span className="text-xs text-gn-500 font-medium italic">
-                    Supporting Africa digital transformation since 2024.
-                  </span>
-                  <div className="flex gap-6">
-                    <Link href="/careers" className="text-xs font-bold uppercase tracking-wider text-gn-400 hover:text-gn-100 transition-colors">Careers</Link>
-                    <Link href="/contact" className="text-xs font-bold uppercase tracking-wider text-gn-400 hover:text-gn-100 transition-colors">Consultancy</Link>
+                
+                {/* Bottom Strip */}
+                <div className="bg-gn-900/50 border-t border-black/5 py-4 px-12">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gn-500 font-medium italic">
+                      Supporting Africa&apos;s digital transformation since 2024.
+                    </span>
+                    <div className="flex gap-8">
+                      <Link href="/careers" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Careers</Link>
+                      <Link href="/contact" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Consultancy</Link>
+                      <Link href="/privacy" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Legal</Link>
+                    </div>
                   </div>
                 </div>
               </div>
