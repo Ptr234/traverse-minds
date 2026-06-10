@@ -152,34 +152,39 @@ export default async function ReportPage({
             <p className="text-base leading-relaxed" style={{ color: "#333" }}>{report.abstract}</p>
           </div>
 
+          {/* Inline PDF Viewer */}
+          {report.pdfUrl && (
+            <div className="mb-10">
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
+              <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)" }}>
+                <iframe
+                  src={report.pdfUrl}
+                  title={report.title}
+                  width="100%"
+                  style={{ height: "80vh", minHeight: 520, display: "block", background: "#f0f1f4" }}
+                />
+              </div>
+              <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <p className="text-sm" style={{ color: "#919499" }}>
+                  PDF not displaying? Try the download below.
+                </p>
+                <a
+                  href={`${report.pdfUrl}?dl=${encodeURIComponent(pdfFilename)}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white shrink-0"
+                  style={{ background: "#ff4c00", borderRadius: 6 }}
+                >
+                  <Download className="h-4 w-4" />
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Report Body */}
           {report.body && report.body.length > 0 && (
             <article className="mb-10 prose max-w-none prose-headings:font-display prose-headings:text-[#000] prose-p:text-[#333] prose-p:leading-relaxed prose-a:text-[#ff4c00] prose-a:no-underline hover:prose-a:underline prose-strong:text-black prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-blockquote:border-l-[#ff4c00] prose-blockquote:text-[#515459]">
               <PortableText value={report.body as Parameters<typeof PortableText>[0]["value"]} />
             </article>
-          )}
-
-          {/* Download CTA */}
-          {report.pdfUrl && (
-            <div
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 p-6"
-              style={{ background: "#0a0a0a", borderRadius: 8 }}
-            >
-              <div>
-                <p className="font-semibold text-white">Download Full Report</p>
-                <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>
-                  PDF — available for free
-                </p>
-              </div>
-              <a
-                href={`${report.pdfUrl}?dl=${encodeURIComponent(pdfFilename)}`}
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white"
-                style={{ background: "#ff4c00", borderRadius: 6 }}
-              >
-                <Download className="h-4 w-4" />
-                Download PDF
-              </a>
-            </div>
           )}
 
           {/* Author cards */}
