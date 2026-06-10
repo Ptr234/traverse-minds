@@ -93,8 +93,9 @@ function MapInner({
           style={{ height: "100%", width: "100%", borderRadius: "inherit" }}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='Tiles &copy; <a href="https://www.esri.com">Esri</a> &mdash; Source: Esri, Maxar, Earthstar Geographics'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            maxZoom={19}
           />
 
           {countries.map((country) => {
@@ -102,27 +103,27 @@ function MapInner({
             if (!coords) return null;
 
             const isPipeline = country.status === "pipeline";
-            const baseColor = isPipeline ? "#919499" : "#ff4c00";
-            const hoverColor = isPipeline ? "#515459" : "#ff4c00";
+            const fillColor  = isPipeline ? "#94a3b8" : "#ff4c00";
+            const ringColor  = isPipeline ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.9)";
 
             return (
               <CircleMarker
                 key={country.name}
                 center={coords}
-                radius={isPipeline ? 7 : 10}
+                radius={isPipeline ? 6 : 10}
                 pathOptions={{
-                  color: baseColor,
-                  fillColor: baseColor,
-                  fillOpacity: isPipeline ? 0.2 : 0.3,
-                  weight: 2,
+                  color: ringColor,
+                  fillColor,
+                  fillOpacity: isPipeline ? 0.55 : 0.85,
+                  weight: isPipeline ? 1.5 : 2.5,
                 }}
                 eventHandlers={{
                   mouseover: (e: L.LeafletMouseEvent) => {
                     const marker = e.target as L.CircleMarker;
                     marker.setStyle({
-                      color: hoverColor,
-                      fillColor: hoverColor,
-                      fillOpacity: isPipeline ? 0.45 : 0.65,
+                      color: "#ffffff",
+                      fillColor: isPipeline ? "#64748b" : "#ff4c00",
+                      fillOpacity: 1,
                       weight: 3,
                     });
                     marker.openTooltip();
@@ -130,24 +131,23 @@ function MapInner({
                   mouseout: (e: L.LeafletMouseEvent) => {
                     const marker = e.target as L.CircleMarker;
                     marker.setStyle({
-                      color: baseColor,
-                      fillColor: baseColor,
-                      fillOpacity: isPipeline ? 0.2 : 0.3,
-                      weight: 2,
+                      color: ringColor,
+                      fillColor,
+                      fillOpacity: isPipeline ? 0.55 : 0.85,
+                      weight: isPipeline ? 1.5 : 2.5,
                     });
                     marker.closeTooltip();
                   },
                 }}
               >
-                <Tooltip direction="top" offset={[0, -10]} opacity={0.97}>
-                  <div className="text-center" style={{ minWidth: 110 }}>
-                    <p className="font-bold text-sm" style={{ color: isPipeline ? "#515459" : "#ff4c00" }}>
+                <Tooltip direction="top" offset={[0, -12]} opacity={1}>
+                  <div style={{ minWidth: 120, padding: "2px 0" }}>
+                    <p style={{ margin: 0, fontWeight: 700, fontSize: 13, color: isPipeline ? "#515459" : "#ff4c00", fontFamily: "Arial,sans-serif" }}>
                       {country.name}
                     </p>
-                    <p className="text-xs" style={{ color: "#515459" }}>{country.data}</p>
-                    {isPipeline && (
-                      <p className="text-[10px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#919499" }}>Coming Soon</p>
-                    )}
+                    <p style={{ margin: "3px 0 0", fontSize: 12, color: "#333", fontFamily: "Arial,sans-serif" }}>
+                      {isPipeline ? "Coming soon" : country.data}
+                    </p>
                   </div>
                 </Tooltip>
               </CircleMarker>
