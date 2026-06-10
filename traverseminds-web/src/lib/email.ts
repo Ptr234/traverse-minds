@@ -266,6 +266,98 @@ export function buildRsvpConfirmationHtml(name: string, eventTitle: string): str
 }
 
 /* ──────────────────────────────────────────
+   Bulk training quote: user confirmation
+────────────────────────────────────────── */
+export function buildBulkTrainingConfirmationHtml(fields: {
+  name: string;
+  organisation: string;
+  teamSize: string;
+  sector: string;
+  deliveryFormat: string;
+  timeline?: string;
+}): string {
+  const content = `
+    <h1 style="margin:0 0 8px;font-size:26px;font-weight:700;color:#0a0a0a;font-family:Arial,Helvetica,sans-serif;">
+      Quote request received, ${fields.name}.
+    </h1>
+    <p style="margin:0 0 28px;font-size:14px;color:#888;font-family:Arial,Helvetica,sans-serif;">
+      Digital Literacy &amp; Cybersecurity Training &mdash; Traverse Minds Africa
+    </p>
+
+    <div style="border:1px solid rgba(0,0,0,0.08);border-radius:12px;overflow:hidden;margin-bottom:28px;">
+      <div style="background:#0a0a0a;padding:20px 24px;">
+        <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Your Request Summary</p>
+        <p style="margin:6px 0 0;font-size:22px;font-weight:700;color:#ffffff;font-family:Arial,Helvetica,sans-serif;">${fields.organisation}</p>
+      </div>
+      <div style="background:#fff;padding:20px 24px;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          ${fieldRow("Team size", fields.teamSize + " participants")}
+          ${fieldRow("Sector", fields.sector)}
+          ${fieldRow("Delivery", fields.deliveryFormat)}
+          ${fields.timeline ? fieldRow("Timeline", fields.timeline) : ""}
+        </table>
+      </div>
+    </div>
+
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#333;font-family:Arial,Helvetica,sans-serif;">
+      Thank you for reaching out. A member of our training team will review your requirements and send you a <strong>tailored proposal</strong> within <strong>1 business day</strong>.
+    </p>
+
+    <div style="background:#fff8f6;border-left:3px solid #ff4c00;padding:16px 20px;margin-bottom:28px;border-radius:0 8px 8px 0;">
+      <p style="margin:0;font-size:13px;font-weight:700;color:#ff4c00;font-family:Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:0.06em;">What happens next</p>
+      <p style="margin:8px 0 0;font-size:13px;line-height:1.7;color:#555;font-family:Arial,Helvetica,sans-serif;">
+        Our trainer will contact you to discuss your team&apos;s specific threats, preferred schedule, and learning objectives before sending a formal proposal and pricing.
+      </p>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding-bottom:28px;">
+      <a href="${SITE_URL}/literacy" style="display:inline-block;background:#ff4c00;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">
+        View Training Programmes
+      </a>
+    </td></tr></table>
+
+    ${dividerHtml()}
+    <p style="margin:0;font-size:13px;color:#aaa;font-family:Arial,Helvetica,sans-serif;">
+      If you have urgent questions, reply to this email or reach us directly at <a href="mailto:${FROM}" style="color:#ff4c00;">${FROM}</a>.
+    </p>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
+   Bulk training quote: internal notification
+────────────────────────────────────────── */
+export function buildBulkTrainingNotificationHtml(fields: {
+  name: string;
+  organisation: string;
+  email: string;
+  phone?: string;
+  teamSize: string;
+  sector: string;
+  deliveryFormat: string;
+  timeline?: string;
+  message: string;
+}): string {
+  const content = `
+    ${accentBar("New Bulk Training Quote Request")}
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${fieldRow("Name", fields.name)}
+      ${fieldRow("Organisation", fields.organisation)}
+      ${fieldRow("Email", `<a href="mailto:${fields.email}" style="color:#ff4c00;">${fields.email}</a>`)}
+      ${fields.phone ? fieldRow("Phone", fields.phone) : ""}
+      ${fieldRow("Team Size", fields.teamSize + " participants")}
+      ${fieldRow("Sector", fields.sector)}
+      ${fieldRow("Delivery", fields.deliveryFormat)}
+      ${fields.timeline ? fieldRow("Timeline", fields.timeline) : ""}
+    </table>
+    ${dividerHtml()}
+    <p style="margin:0 0 8px;font-size:13px;font-weight:bold;color:#555;text-transform:uppercase;letter-spacing:0.05em;font-family:Arial,Helvetica,sans-serif;">Notes / Specific Needs</p>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#222;white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif;">${fields.message}</p>
+  `;
+  return emailShell(content);
+}
+
+/* ──────────────────────────────────────────
    Pricing enquiry: user confirmation
 ────────────────────────────────────────── */
 export function buildPricingEnquiryConfirmationHtml(fields: {

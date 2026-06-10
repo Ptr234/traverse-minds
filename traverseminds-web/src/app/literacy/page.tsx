@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { Hero } from "@/components/literacy/Hero";
 import { ProgrammeListing } from "@/components/literacy/ProgrammeListing";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, MapPin, Monitor, Layers, Building, ShieldCheck, Smartphone, FileText, AlertTriangle } from "lucide-react";
+import { MapPin, Monitor, Layers, Building, ShieldCheck, Smartphone, FileText, AlertTriangle } from "lucide-react";
+import { BulkTrainingQuoteButton } from "@/components/literacy/BulkTrainingQuoteButton";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
@@ -153,10 +154,7 @@ export default function LiteracyPage() {
               </p>
               <SectionReveal variant="slide-up" delay={0.2}>
                 <div className="mt-10">
-                  <Button variant="primary" size="lg" href="/contact?subject=literacy-org">
-                    Request Bulk Training Quote
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  <BulkTrainingQuoteButton />
                 </div>
               </SectionReveal>
             </div>
