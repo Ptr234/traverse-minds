@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Tag, Download } from "lucide-react";
+import { PortableText } from "next-sanity";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/Button";
@@ -22,6 +23,7 @@ interface Report {
   publicationDate: string;
   authors: Author[];
   pdfUrl: string;
+  body?: unknown[];
   topics: string[];
   countryCoverage: string[];
 }
@@ -41,6 +43,7 @@ async function getReport(slug: string): Promise<Report | null> {
       _id, title, slug, abstract, publicationDate,
       "authors": authors[]->{name, role, bio, "photoUrl": photo.asset->url},
       "pdfUrl": pdfFile.asset->url,
+      body,
       topics,
       countryCoverage
     }`;
@@ -148,6 +151,13 @@ export default async function ReportPage({
             <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#ff4c00" }}>Abstract</p>
             <p className="text-base leading-relaxed" style={{ color: "#333" }}>{report.abstract}</p>
           </div>
+
+          {/* Report Body */}
+          {report.body && report.body.length > 0 && (
+            <article className="mb-10 prose max-w-none prose-headings:font-display prose-headings:text-[#000] prose-p:text-[#333] prose-p:leading-relaxed prose-a:text-[#ff4c00] prose-a:no-underline hover:prose-a:underline prose-strong:text-black prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-blockquote:border-l-[#ff4c00] prose-blockquote:text-[#515459]">
+              <PortableText value={report.body as Parameters<typeof PortableText>[0]["value"]} />
+            </article>
+          )}
 
           {/* Download CTA */}
           {report.pdfUrl && (

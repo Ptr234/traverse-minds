@@ -28,6 +28,20 @@ export const report = defineType({
     }),
     defineField({ name: "pdfFile", title: "PDF Report", type: "file", options: { accept: ".pdf" } }),
     defineField({
+      name: "body",
+      title: "Report Body (Read Online)",
+      type: "array",
+      of: [
+        { type: "block" },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [defineField({ name: "alt", title: "Alt Text", type: "string" })],
+        },
+      ],
+      description: "Full report content for reading online. Leave empty to show abstract only.",
+    }),
+    defineField({
       name: "countryCoverage", title: "Country Coverage", type: "array", of: [{ type: "string" }],
       options: { list: [
         { title: "Uganda", value: "uganda" },
