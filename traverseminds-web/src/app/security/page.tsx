@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Cybersecurity services for African institutions. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
 };
 
-const WHATSAPP_NUMBER = "256700000000";
+const WHATSAPP_NUMBER = "+256775692334";
 const WHATSAPP_MESSAGE = "Hello Traverse Security, I'd like to enquire about your cybersecurity services.";
 
 export default function SecurityPage() {
