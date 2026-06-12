@@ -310,7 +310,7 @@ export default function MeetChristinePage() {
       {/* ── HERO SECTION ── */}
       <section className="relative min-h-screen grid lg:grid-cols-[1fr_1fr] items-stretch overflow-hidden bg-bg-dark">
         {/* Left Side: Image */}
-        <div className="relative h-[60vh] lg:h-auto overflow-hidden group">
+        <div className="relative h-[50vh] sm:h-[60vh] lg:h-auto overflow-hidden group">
           <Image
             src={`${basePath}/christine.jpg`}
             alt="Masiika Christine Thembo"
@@ -319,12 +319,12 @@ export default function MeetChristinePage() {
             className="object-cover object-[50%_15%] transition-transform duration-1000 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-linear-to-r from-bg-dark/20 to-bg-dark/80 lg:to-bg-dark/40" />
-          <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-16 gradient-mask-t">
-            <motion.div 
+          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-16 gradient-mask-t">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="flex gap-12"
+              className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-12"
             >
               {[
                 { label: "Location", val: "Kampala, UG" },
@@ -341,7 +341,7 @@ export default function MeetChristinePage() {
         </div>
 
         {/* Right Side: Content */}
-        <div className="flex flex-col justify-center p-8 lg:p-24 bg-bg-dark text-white relative">
+        <div className="flex flex-col justify-center px-6 py-12 sm:p-12 lg:p-24 bg-bg-dark text-white relative">
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[100px] -mr-48 -mt-48" />
           
           <motion.div
@@ -349,20 +349,20 @@ export default function MeetChristinePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-accent text-[12px] font-bold tracking-[0.4em] uppercase mb-8 flex items-center gap-4">
+            <p className="eyebrow-accent mb-6 sm:mb-8 flex items-center gap-4">
               <span className="w-10 h-px bg-accent/40" />
               Senior Cybersecurity Specialist
             </p>
-            <h1 className="font-display text-[clamp(48px,8vw,100px)] font-bold leading-[0.9] tracking-tighter mb-10 uppercase">
+            <h1 className="font-display text-[clamp(2.5rem,9vw,4.5rem)] font-bold leading-[0.95] tracking-tight mb-6 sm:mb-8 uppercase">
               Masiika<br />
               <span className="text-white/40">Christine</span><br />
               Thembo
             </h1>
-            <p className="text-lg lg:text-xl font-light leading-relaxed text-gn-600 max-w-lg mb-12">
+            <p className="text-base sm:text-lg lg:text-xl font-light leading-relaxed text-gn-600 max-w-lg mb-10 sm:mb-12">
               Architecting secure digital futures. 8+ years experience bridging technology, national policy, and inclusive growth across Africa.
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-12 sm:mb-16">
               <Button onClick={() => scrollTo("connect")} variant="primary" size="xl" className="px-10 rounded-none uppercase tracking-widest bg-accent hover:bg-white hover:text-bg-dark border-none">
                 Get in Touch
               </Button>
@@ -371,14 +371,14 @@ export default function MeetChristinePage() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-10 sm:pt-12 border-t border-white/10">
               {[
                 { val: "Top 50", label: "Women in Cyber" },
                 { val: "300+", label: "Personnel Trained" },
                 { val: "60%", label: "Risk Reduction" }
               ].map(item => (
                 <div key={item.label}>
-                  <p className="text-3xl font-display font-bold mb-1">{item.val}</p>
+                  <p className="text-2xl sm:text-3xl font-display font-bold mb-1">{item.val}</p>
                   <p className="text-[9px] font-bold tracking-widest text-white/40 uppercase leading-tight">{item.label}</p>
                 </div>
               ))}
@@ -392,11 +392,11 @@ export default function MeetChristinePage() {
       {/* ══ SECTION: ABOUT ══ */}
       <section id="about" className="section-padding overflow-hidden relative">
         {/* Background Watermark */}
-        <div className="absolute top-40 -left-20 pointer-events-none select-none opacity-[0.03] font-display text-[240px] font-bold leading-none -rotate-12 whitespace-nowrap">
+        <div className="absolute top-40 -left-20 pointer-events-none select-none opacity-[0.03] font-display text-[120px] sm:text-[180px] lg:text-[240px] font-bold leading-none -rotate-12 whitespace-nowrap">
           RESILIENCE
         </div>
 
-        <div className="container-max grid lg:grid-cols-[1.2fr_0.8fr] gap-20 items-start relative z-10">
+        <div className="container-max grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-start relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -440,7 +440,7 @@ export default function MeetChristinePage() {
               </div>
             </div>
 
-            <div className="mt-16 flex items-center gap-8">
+            <div className="mt-12 sm:mt-16 flex items-center gap-6 sm:gap-8">
               <div className="flex gap-3">
                 {[
                   { Icon: Linkedin, href: "https://linkedin.com/in/christinemasika" },
@@ -492,11 +492,11 @@ export default function MeetChristinePage() {
       </section>
 
       {/* ══ SECTION: COMPETENCIES ══ */}
-      <section id="competencies" className="bg-bg-dark py-32 text-white relative overflow-hidden">
+      <section id="competencies" className="bg-bg-dark py-20 lg:py-32 text-white relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,76,0,0.05)_0%,transparent_70%)]" />
         
         <div className="container-max relative z-10">
-          <div className="max-w-3xl mb-24">
+          <div className="max-w-3xl mb-16 lg:mb-24">
             <SectionLabel className="mb-8">Technical Authority</SectionLabel>
             <SectionHeading light>Expertise across the <span className="text-accent">digital security</span> spectrum.</SectionHeading>
             <p className="text-xl text-white/50 font-light leading-relaxed">
@@ -532,8 +532,8 @@ export default function MeetChristinePage() {
             ))}
           </div>
 
-          <div className="mt-32 grid lg:grid-cols-[1fr_400px] gap-20 items-center">
-            <div className="editorial-card-dark border-white/5 bg-white/2 p-12 relative overflow-hidden">
+          <div className="mt-20 lg:mt-32 grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-20 items-center">
+            <div className="editorial-card-dark border-white/5 bg-white/2 p-8 lg:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px] -mr-32 -mt-32" />
               <div className="grid sm:grid-cols-2 gap-12 relative z-10">
                 <div>
@@ -619,7 +619,7 @@ export default function MeetChristinePage() {
       {/* ══ SECTION: EXPERIENCE ══ */}
       <section id="experience" className="section-padding bg-white">
         <div className="container-max">
-          <div className="grid lg:grid-cols-[400px_1fr] gap-20">
+          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:gap-20">
             <div>
               <div className="sticky top-32">
                 <SectionLabel>The Journey</SectionLabel>
@@ -689,7 +689,7 @@ export default function MeetChristinePage() {
       {/* ══ SECTION: RECOGNITION ══ */}
       <section id="recognition" className="section-padding bg-bg-dark text-white relative overflow-hidden">
         <div className="container-max relative z-10">
-          <div className="grid lg:grid-cols-[1fr_500px] gap-20 items-center">
+          <div className="grid lg:grid-cols-[1fr_500px] gap-12 lg:gap-20 items-center">
             <div>
               <SectionLabel>Accolades</SectionLabel>
               <SectionHeading light>Thought Leadership & <span className="text-accent">Recognition</span>.</SectionHeading>
@@ -699,7 +699,7 @@ export default function MeetChristinePage() {
                 href="https://ascentclubglobal.com/ascent-top-100/christine-masiika-thembo/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block editorial-card-dark bg-accent p-12 mb-6 border-none text-white relative overflow-hidden group"
+                className="block editorial-card-dark bg-accent p-8 lg:p-12 mb-6 border-none text-white relative overflow-hidden group"
               >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -mr-32 -mt-32" />
                 <Award className="w-16 h-16 mb-8 text-white/40" />
@@ -770,43 +770,43 @@ export default function MeetChristinePage() {
       {/* ══ SECTION: CONNECT ══ */}
       <section id="connect" className="section-padding bg-white relative overflow-hidden">
         <div className="container-max relative z-10">
-          <div className="grid lg:grid-cols-2 gap-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-32">
             <div>
               <SectionLabel>Contact</SectionLabel>
               <SectionHeading>Let&rsquo;s start a <span className="text-accent">Conversation</span>.</SectionHeading>
-              <p className="text-xl text-gn-400 font-light mb-16 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gn-400 font-light mb-12 sm:mb-16 leading-relaxed">
                 Available for national strategy development, security assessments, speaking engagements, or academic research collaborations.
               </p>
 
-              <div className="space-y-12">
-                <div className="flex items-start gap-8">
-                  <div className="w-16 h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Mail size={24} /></div>
-                  <div>
+              <div className="space-y-10 sm:space-y-12">
+                <div className="flex items-start gap-5 sm:gap-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Mail size={24} /></div>
+                  <div className="min-w-0">
                     <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Direct Email</p>
-                    <a href="mailto:christinethembo@gmail.com" className="text-2xl font-display font-bold text-gn-100 hover:text-accent transition-colors">
+                    <a href="mailto:christinethembo@gmail.com" className="text-lg sm:text-2xl font-display font-bold text-gn-100 hover:text-accent transition-colors wrap-break-word">
                       christinethembo@gmail.com
                     </a>
                   </div>
                 </div>
-                <div className="flex items-start gap-8">
-                  <div className="w-16 h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Globe size={24} /></div>
-                  <div>
+                <div className="flex items-start gap-5 sm:gap-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Globe size={24} /></div>
+                  <div className="min-w-0">
                     <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Base of Operations</p>
-                    <p className="text-2xl font-display font-bold text-gn-100">Kampala, Uganda</p>
+                    <p className="text-xl sm:text-2xl font-display font-bold text-gn-100">Kampala, Uganda</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-8">
-                  <div className="w-16 h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Linkedin size={24} /></div>
-                  <div>
+                <div className="flex items-start gap-5 sm:gap-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Linkedin size={24} /></div>
+                  <div className="min-w-0">
                     <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Professional Network</p>
-                    <p className="text-2xl font-display font-bold text-gn-100">CyberLuncheon Founder</p>
+                    <p className="text-xl sm:text-2xl font-display font-bold text-gn-100">CyberLuncheon Founder</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="editorial-card-lg p-12 bg-bg-light border-none">
-              <h3 className="text-2xl font-display font-bold mb-10 text-gn-100">Work with Masiika</h3>
+            <div className="editorial-card-lg p-6 sm:p-12 bg-bg-light border-none">
+              <h3 className="text-2xl font-display font-bold mb-8 sm:mb-10 text-gn-100">Work with Masiika</h3>
               <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div className="space-y-3">
