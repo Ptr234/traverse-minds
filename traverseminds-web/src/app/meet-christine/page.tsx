@@ -75,12 +75,19 @@ const ORGANISATIONS = [
     role: "Founder & CEO",
     desc: "Established a luxury eco-tourism venture creating 30+ direct employment opportunities. Designed 15 unique accommodation facilities across 15 hectares, promoting environmental conservation."
   },
-  { 
-    name: "TMFE Group, Sydney", 
-    logo: "/logo/logo-TMFE-Black.svg", 
-    link: "#", 
+  {
+    name: "TMFE Group, Sydney",
+    logo: "/logo/logo-TMFE-Black.svg",
+    link: "#",
     role: "Cyber Security Consultant",
     desc: "Provided strategic cybersecurity guidance for digital transformation initiatives. Authored 6 technical papers on IoT security, ML applications, and threat modeling for C-suite decision-making."
+  },
+  {
+    name: "H&G Advocates",
+    logo: "/logo/hg-advocates-logo.svg",
+    link: "#",
+    role: "Cyber Security Consultant",
+    desc: "Advising the firm on cyber law, data protection, and privacy compliance—bridging legal practice with technical security to guide clients through Uganda's Data Protection and Privacy Act and emerging digital regulations."
   },
 ];
 
