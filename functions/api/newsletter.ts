@@ -11,7 +11,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     await sendEmail(env.RESEND_API_KEY, {
       from: "Traverse Minds <hello@traverseminds.com>",
-      to: "petergra38@gmail.com",
+      to: "traversemindsug@gmail.com",
       subject: `New Newsletter Subscriber — ${email}`,
       html: layout("New Newsletter Subscriber", `
         <p style="margin:0 0 16px;font-size:15px;color:#515459;line-height:1.7;">

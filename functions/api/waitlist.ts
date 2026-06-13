@@ -24,7 +24,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     await sendEmail(env.RESEND_API_KEY, {
       from: "Traverse Minds <hello@traverseminds.com>",
-      to: "petergra38@gmail.com",
+      to: "traversemindsug@gmail.com",
       replyTo: email,
       subject: `New Waitlist — Public Record Africa — ${name}`,
       html: layout("New Public Record Waitlist", `

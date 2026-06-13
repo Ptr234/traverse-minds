@@ -9,7 +9,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     await sendEmail(env.RESEND_API_KEY, {
       from: "Traverse Minds Events <hello@traverseminds.com>",
-      to: "petergra38@gmail.com",
+      to: "traversemindsug@gmail.com",
       replyTo: data.email,
       subject: `New RSVP — ${data.eventTitle} — ${data.name}`,
       html: layout(`New RSVP: ${data.eventTitle}`, `
