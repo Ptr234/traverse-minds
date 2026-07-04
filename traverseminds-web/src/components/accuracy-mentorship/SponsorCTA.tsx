@@ -12,7 +12,6 @@ export function SponsorCTA() {
   const sponsorshipLevels = [
     {
       level: "Partner",
-      amount: "$1,000 - $5,000",
       benefits: [
         "Recognition on website",
         "Logo in program materials",
@@ -21,7 +20,6 @@ export function SponsorCTA() {
     },
     {
       level: "Champion",
-      amount: "$5,000 - $15,000",
       benefits: [
         "All Partner benefits",
         "Guest speaker opportunity",
@@ -31,7 +29,6 @@ export function SponsorCTA() {
     },
     {
       level: "Founder",
-      amount: "$15,000+",
       benefits: [
         "All Champion benefits",
         "Naming rights for program tier",
@@ -88,12 +85,9 @@ export function SponsorCTA() {
                   transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)"
                 }}
               >
-                <h3 className="font-display text-2xl font-bold mb-2" style={{ color: "#000" }}>
+                <h3 className="font-display text-2xl font-bold mb-6" style={{ color: "#000" }}>
                   {level.level}
                 </h3>
-                <p className="text-2xl font-bold mb-6" style={{ color: "#ff4c00" }}>
-                  {level.amount}
-                </p>
 
                 <ul className="space-y-3 mb-8">
                   {level.benefits.map((benefit, idx) => (

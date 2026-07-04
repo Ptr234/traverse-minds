@@ -172,9 +172,9 @@ export function SponsorshipForm() {
             paddingBottom: 12,
           }}
         >
-          <option value="Partner">Partner ($1,000 - $5,000)</option>
-          <option value="Champion">Champion ($5,000 - $15,000)</option>
-          <option value="Founder">Founder ($15,000+)</option>
+          <option value="Partner">Partner</option>
+          <option value="Champion">Champion</option>
+          <option value="Founder">Founder</option>
           <option value="Custom">Custom arrangement</option>
         </select>
       </div>
