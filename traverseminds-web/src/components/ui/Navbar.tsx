@@ -31,6 +31,7 @@ const navLinks = [
   { label: "Events", href: "/events" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
+  { label: "Mentorship", href: "/accuracy-mentorship" },
   { label: "Meet Christine", href: "/meet-christine" },
 ];
 
