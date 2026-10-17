@@ -118,6 +118,11 @@ const COMPETENCIES = [
   },
 ];
 
+const TOOLKIT = [
+  { label: "Security stack", items: ["Nmap / Metasploit", "Burp Suite / OWASP", "EnCase / Axiom / FTK", "Python / SQL / C++"] },
+  { label: "Frameworks", items: ["ISO 27001 / NIST", "COBIT / CIS", "GDPR / AU Data Act", "Agile / Scrum"] },
+];
+
 const EXPERIENCE = [
   {
     company: "Uganda Investment Authority",
@@ -499,80 +504,95 @@ export default function MeetChristinePage() {
       </section>
 
       {/* ══ SECTION: COMPETENCIES ══ */}
-      <section id="competencies" className="bg-bg-dark py-20 lg:py-32 text-white relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,76,0,0.05)_0%,transparent_70%)]" />
-        
+      <section id="competencies" className="relative overflow-hidden bg-bg-dark py-20 text-white lg:py-28">
+        <div className="tech-grid-dark absolute inset-0" aria-hidden />
+
         <div className="container-max relative z-10">
-          <div className="max-w-3xl mb-16 lg:mb-24">
-            <SectionLabel className="mb-8">Technical Authority</SectionLabel>
-            <SectionHeading light>Expertise across the <span className="text-accent">digital security</span> spectrum.</SectionHeading>
-            <p className="text-xl text-white/50 font-light leading-relaxed">
-              Masiika&rsquo;s mastery spans from granular digital forensics and incident response to high-level national policy orchestration and regional governance frameworks.
+          {/* Header: kicker and headline left, dek right */}
+          <div className="grid gap-8 border-t-2 border-white/80 pt-6 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+            <div>
+              <p className="flex items-center gap-2 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-accent">
+                <span className="h-2 w-2 bg-accent" aria-hidden />
+                Technical Authority
+              </p>
+              <h2 className="mt-5 font-serif text-[clamp(32px,4.6vw,54px)] font-semibold leading-[1.08]">
+                Expertise across the <span className="text-accent">digital security</span> spectrum.
+              </h2>
+            </div>
+            <p className="self-end text-[17px] leading-relaxed text-white/60 lg:pb-2">
+              Masiika&rsquo;s work spans granular digital forensics and incident response through to national
+              policy and regional governance frameworks.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
+          {/* Four competencies */}
+          <ol className="mt-14 grid gap-px border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-4">
             {COMPETENCIES.map((c, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
+              <motion.li
+                key={c.title}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-bg-dark p-10 hover:bg-white/2 transition-all duration-500 group"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="group relative flex flex-col bg-bg-dark p-7 transition-colors duration-300 hover:bg-[#2a2d33] lg:p-8"
               >
-                <div className="mb-8 text-accent group-hover:scale-110 transition-transform duration-500 origin-left">
-                  {c.icon}
+                <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" aria-hidden />
+                <div className="flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center border border-white/15 text-accent transition-colors group-hover:border-accent">
+                    {c.icon}
+                  </span>
+                  <span className="font-mono text-[12px] text-white/35">
+                    {String(i + 1).padStart(2, "0")} / {String(COMPETENCIES.length).padStart(2, "0")}
+                  </span>
                 </div>
-                <h3 className="text-xl font-bold font-display mb-4 text-white group-hover:text-accent transition-colors">{c.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed mb-8 h-20 line-clamp-3">
-                  {c.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {c.items.map(item => (
-                    <span key={item} className="text-[9px] font-bold tracking-widest uppercase py-1.5 px-3 bg-white/5 border border-white/5 text-white/60">
+                <h3 className="mt-7 font-serif text-[22px] font-semibold leading-tight">{c.title}</h3>
+                <p className="mb-7 mt-3 text-[15px] leading-relaxed text-white/60">{c.desc}</p>
+                <ul className="mt-auto space-y-2.5 border-t border-white/10 pt-5 font-mono text-[12px] uppercase tracking-wide text-white/75">
+                  {c.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="mt-[5px] h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
                       {item}
-                    </span>
+                    </li>
                   ))}
-                </div>
-              </motion.div>
+                </ul>
+              </motion.li>
             ))}
-          </div>
+          </ol>
 
-          <div className="mt-20 lg:mt-32 grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-20 items-center">
-            <div className="editorial-card-dark border-white/5 bg-white/2 p-8 lg:p-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px] -mr-32 -mt-32" />
-              <div className="grid sm:grid-cols-2 gap-12 relative z-10">
-                <div>
-                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent mb-6">Security Stack</p>
-                  <ul className="space-y-4 font-mono text-sm text-white/60 list-none p-0 m-0">
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> Nmap / Metasploit</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> Burp Suite / OWASP</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> EnCase / Axiom / FTK</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> Python / SQL / C++</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent mb-6">Framework Mastery</p>
-                  <ul className="space-y-4 font-mono text-sm text-white/60 list-none p-0 m-0">
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> ISO 27001 / NIST</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> COBIT / CIS</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> GDPR / AU Data Act</li>
-                    <li className="flex items-center gap-3"><div className="w-1 h-1 bg-accent" /> Agile / Scrum</li>
-                  </ul>
-                </div>
+          {/* Toolkit and philosophy */}
+          <div className="mt-14 grid gap-px border border-white/10 bg-white/10 lg:grid-cols-[1.3fr_1fr]">
+            <div className="bg-black/40">
+              <div className="flex items-center justify-between border-b border-white/10 px-6 py-3">
+                <span className="font-mono text-[12px] text-white/50">~/masiika/toolkit</span>
+                <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-white/40">
+                  <span className="live-dot" aria-hidden /> In use
+                </span>
+              </div>
+              <div className="grid gap-8 p-6 sm:grid-cols-2 lg:p-8">
+                {TOOLKIT.map((group) => (
+                  <div key={group.label}>
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">{group.label}</p>
+                    <ul className="mt-4 space-y-3 font-mono text-[14px] text-white/75">
+                      {group.items.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span className="text-white/30" aria-hidden>$</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
-            
-            <div className="text-center lg:text-left">
-              <p className="text-3xl font-display font-light italic leading-snug mb-8">
+
+            <figure className="flex flex-col justify-center bg-bg-dark p-8 lg:p-12">
+              <blockquote className="border-l-[3px] border-accent pl-6 font-serif text-[clamp(22px,2.4vw,30px)] font-semibold leading-snug">
                 &ldquo;Technology is the engine of progress, but security is the bridge that makes the journey possible.&rdquo;
-              </p>
-              <div className="flex items-center gap-4 justify-center lg:justify-start">
-                <div className="w-10 h-px bg-accent" />
-                <p className="text-[10px] font-bold tracking-widest uppercase text-accent">Strategic Philosophy</p>
-              </div>
-            </div>
+              </blockquote>
+              <figcaption className="mt-6 pl-7 font-mono text-[11px] uppercase tracking-[0.14em] text-white/45">
+                Masiika Christine Thembo · Strategic philosophy
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
