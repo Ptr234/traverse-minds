@@ -18,7 +18,7 @@ COMMIT=$(git rev-parse --short HEAD)
 echo "Deploying server/ at $COMMIT to $HOST"
 
 # Upload the committed tree (never the local .env or node_modules) and swap it in, keeping .env.production
-git archive --format=tar HEAD server | "$SSH" "$HOST" "
+git -c core.autocrlf=false archive --format=tar HEAD server | "$SSH" "$HOST" "
   set -e
   STAGE=\$(mktemp -d)
   tar -x -C \"\$STAGE\"

@@ -1,0 +1,4 @@
+# The VPS runs Linux: keep Unix line endings for everything deployed there and for all shell scripts,
+# regardless of the Windows checkout's core.autocrlf.
+server/** text=auto eol=lf
+*.sh text eol=lf
