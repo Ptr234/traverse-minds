@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "./Button";
+import { COOKIE_CONSENT_KEY, updateAnalyticsConsent } from "@/components/seo/GoogleAnalytics";
 
-const COOKIE_CONSENT_KEY = "tm-cookie-consent";
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,7 +14,11 @@ export function CookieBanner() {
     }, 0);
     return () => clearTimeout(handle);
   }, []);
-  const handle = (v: string) => { localStorage.setItem(COOKIE_CONSENT_KEY, v); setIsVisible(false); };
+  const handle = (v: "accepted" | "declined") => {
+    localStorage.setItem(COOKIE_CONSENT_KEY, v);
+    updateAnalyticsConsent(v);
+    setIsVisible(false);
+  };
   if (!isVisible) return null;
 
   return (

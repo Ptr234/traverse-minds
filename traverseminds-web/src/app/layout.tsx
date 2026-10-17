@@ -6,6 +6,7 @@ import { Footer } from "@/components/ui/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { AssistantWidget } from "@/components/ui/AssistantWidget";
+import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { StructuredData } from "@/components/seo/StructuredData";
 import "./globals.css";
@@ -63,6 +64,7 @@ export default function RootLayout({
         <AssistantWidget />
         <FloatingWhatsApp />
         <CookieBanner />
+        <GoogleAnalytics />
       </body>
     </html>
   );
