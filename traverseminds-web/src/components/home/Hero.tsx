@@ -35,7 +35,7 @@ export function Hero() {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 50%, #f0f1f4 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 50%, var(--color-bg-light) 100%)",
           }}
         />
       </div>

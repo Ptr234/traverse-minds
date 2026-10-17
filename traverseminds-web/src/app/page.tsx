@@ -1,3 +1,4 @@
+import { Hero } from "@/components/home/Hero";
 import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
@@ -34,7 +35,8 @@ export default async function HomePage() {
 
   return (
     <PageTransition>
-      <SectionBar />
+      <Hero />
+      <SectionBar belowHero />
       {lead && <LeadStory lead={lead} latest={latest} />}
       <Briefing items={briefing} />
       <StorySection title="Research" href="/think-tank" stories={content.reports} layout="feature" />
