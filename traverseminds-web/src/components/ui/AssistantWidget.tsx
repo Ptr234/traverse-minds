@@ -81,6 +81,43 @@ export function AssistantWidget() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Typewriter: the stream fills `full`; a timer reveals it a few characters at a time
+  const typingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (typingTimer.current) clearTimeout(typingTimer.current);
+  }, []);
+
+  /**
+   * Reveals `full.text` into the last message at a reading pace. Resolves once the stream has
+   * finished (`full.done`) and everything is shown. Reduced-motion users see text immediately.
+   */
+  function typeOut(history: Msg[], full: { text: string; done: boolean }) {
+    const instant = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    let shown = 0;
+    return new Promise<void>((resolve) => {
+      const tick = () => {
+        const backlog = full.text.length - shown;
+        if (backlog > 0) {
+          // ~100 characters a second, a little faster on long answers so nobody waits too long
+          const step = instant ? backlog : backlog > 600 ? 5 : backlog > 250 ? 3 : 2;
+          shown += Math.min(step, backlog);
+          // Finish on a whole word so half-typed links never render as broken anchors for long
+          const next = full.text.indexOf(" ", shown);
+          const cut = next !== -1 && next - shown < 12 && !instant ? next : shown;
+          setMessages([...history, { role: "assistant", content: full.text.slice(0, cut) }]);
+          shown = cut;
+        }
+        if (full.done && shown >= full.text.length) {
+          typingTimer.current = null;
+          resolve();
+          return;
+        }
+        typingTimer.current = setTimeout(tick, 18);
+      };
+      tick();
+    });
+  }
+
   async function send(text: string) {
     const content = text.trim();
     if (!content || busy) return;
@@ -89,6 +126,8 @@ export function AssistantWidget() {
     setInput("");
     setError("");
     setBusy(true);
+    const full = { text: "", done: false };
+    let typing: Promise<void> | null = null;
     try {
       const res = await fetch(`${API}/assistant/chat`, {
         method: "POST",
@@ -101,15 +140,18 @@ export function AssistantWidget() {
       }
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let answer = "";
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        answer += decoder.decode(value, { stream: true });
-        setMessages([...history, { role: "assistant", content: answer }]);
+        full.text += decoder.decode(value, { stream: true });
+        typing ??= typeOut(history, full);
       }
-      if (!answer) throw new Error("No answer came back. Please try again.");
+      full.done = true;
+      if (!full.text) throw new Error("No answer came back. Please try again.");
+      await typing;
     } catch (err) {
+      full.done = true;
+      if (typingTimer.current) clearTimeout(typingTimer.current);
       setMessages(history);
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -179,7 +221,19 @@ export function AssistantWidget() {
                       : "max-w-[95%] whitespace-pre-wrap text-[15px] leading-relaxed text-gn-200"
                   }
                 >
-                  {m.content ? <Linkified text={m.content} /> : <span className="text-gn-500">Thinking…</span>}
+                  {m.content ? (
+                    <Linkified text={m.content} />
+                  ) : (
+                    <span className="inline-flex items-center gap-1 py-1.5" role="status" aria-label="Traverse AI is typing">
+                      {[0, 150, 300].map((delay) => (
+                        <span
+                          key={delay}
+                          className="h-1.5 w-1.5 animate-bounce rounded-full bg-gn-500 motion-reduce:animate-none"
+                          style={{ animationDelay: `${delay}ms` }}
+                        />
+                      ))}
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
