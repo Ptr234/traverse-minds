@@ -31,7 +31,7 @@ export default function MediaPage() {
           <div className="container-max relative z-10">
             <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
               <SectionReveal variant="clip-inset" className="order-2 lg:order-1">
-                <div className="relative aspect-4/5 overflow-hidden" style={{ borderRadius: 16, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+                <div className="relative aspect-4/5 overflow-hidden" style={{ borderRadius: 0, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                   <Image
                     src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=2070&auto=format&fit=crop"
                     alt="Newsroom and digital media"
@@ -64,7 +64,7 @@ export default function MediaPage() {
                     { icon: MessageSquare, title: "Podcast & Video", desc: "Long-form conversations with Africa's cybersecurity leaders, policy-makers, and civic-tech practitioners." },
                   ].map((item) => (
                     <div key={item.title} className="group flex flex-col gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center bg-primary/5" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                      <div className="flex h-11 w-11 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                         <item.icon className="h-5 w-5" style={{ color: "#000" }} />
                       </div>
                       <h3 className="font-display text-base font-bold" style={{ color: "#000" }}>{item.title}</h3>
@@ -108,7 +108,7 @@ export default function MediaPage() {
                       <a
                         href={platform.href}
                         className={`inline-flex w-full items-center justify-center gap-2.5 px-6 py-3.5 min-h-11 text-sm font-semibold text-white active:scale-[0.98] ${platform.color}`}
-                        style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                        style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       >
                         {platform.name === "RSS Feed" ? (
                           <Rss className="h-4 w-4" />
@@ -182,7 +182,7 @@ export default function MediaPage() {
               </SectionReveal>
 
               <SectionReveal variant="slide-up" delay={0.2}>
-                <div className="w-full max-w-sm border border-white/6 bg-surface-dark-elevated p-7" style={{ borderRadius: 8 }}>
+                <div className="w-full max-w-sm border border-white/6 bg-surface-dark-elevated p-7" style={{ borderRadius: 0 }}>
                   <h3 className="font-display text-lg font-bold text-white mb-5">Press Kit Includes</h3>
                   <div className="space-y-5">
                     {[

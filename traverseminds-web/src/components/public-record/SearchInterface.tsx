@@ -113,7 +113,7 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(activeQuery)}
               placeholder="Search court records, gazettes, or filings..."
               className="w-full pl-12 pr-4 py-3 bg-[#f0f1f4] text-black outline-none font-medium placeholder:text-black/30"
-              style={{ borderRadius: 8 }}
+              style={{ borderRadius: 0 }}
             />
           </div>
           
@@ -148,7 +148,7 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
                         ? "bg-accent text-white font-bold" 
                         : "text-black/60 hover:bg-black/5"
                     }`}
-                    style={{ borderRadius: 6 }}
+                    style={{ borderRadius: 0 }}
                   >
                     {j}
                     {selectedJurisdiction === j && <ChevronRight className="h-3 w-3" />}
@@ -172,7 +172,7 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
                         ? "bg-accent text-white font-bold" 
                         : "text-black/60 hover:bg-black/5"
                     }`}
-                    style={{ borderRadius: 6 }}
+                    style={{ borderRadius: 0 }}
                   >
                     {c}
                   </button>
@@ -212,7 +212,7 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
                   <Filter className="h-3.5 w-3.5 mr-1.5" />
                   Filters
                 </Button>
-                <select className="bg-transparent border border-black/10 text-xs font-bold px-3 py-1.5 outline-none" style={{ borderRadius: 6 }}>
+                <select className="bg-transparent border border-black/10 text-xs font-bold px-3 py-1.5 outline-none" style={{ borderRadius: 0 }}>
                   <option>Sort by: Most Relevant</option>
                   <option>Sort by: Newest First</option>
                   <option>Sort by: Oldest First</option>
@@ -234,7 +234,7 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     className="group border border-black/10 p-6 hover:border-accent/30 hover:shadow-lg transition-all"
-                    style={{ borderRadius: 12 }}
+                    style={{ borderRadius: 0 }}
                   >
                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                       <div className="flex-grow">
@@ -307,10 +307,10 @@ export function SearchInterface({ query, initialJurisdiction = "All Africa", onC
             
             {/* AI Insights Sidebar Teaser (only visible when results exist) */}
             {!isLoading && filteredResults.length > 0 && (
-              <div className="mt-16 bg-[#212429] p-8 relative overflow-hidden" style={{ borderRadius: 16 }}>
+              <div className="mt-16 bg-[#212429] p-8 relative overflow-hidden" style={{ borderRadius: 0 }}>
                 <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 blur-[100px]" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                  <div className="shrink-0 h-16 w-16 bg-accent flex items-center justify-center" style={{ borderRadius: 12 }}>
+                  <div className="shrink-0 h-16 w-16 bg-accent flex items-center justify-center" style={{ borderRadius: 0 }}>
                     <FileText className="h-8 w-8 text-white" />
                   </div>
                   <div className="flex-grow text-center md:text-left">

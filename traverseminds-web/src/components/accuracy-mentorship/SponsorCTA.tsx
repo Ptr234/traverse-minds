@@ -81,7 +81,7 @@ export function SponsorCTA() {
               <div
                 className="bg-white p-8"
                 style={{
-                  borderRadius: 8,
+                  borderRadius: 0,
                   transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)"
                 }}
               >
@@ -119,7 +119,7 @@ export function SponsorCTA() {
         </SectionReveal>
 
         {!showForm && (
-          <div className="border p-8 text-center" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", borderRadius: 8 }}>
+          <div className="border p-8 text-center" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", borderRadius: 0 }}>
             <div className="h-8 w-8 flex items-center justify-center mx-auto mb-4" style={{ background: "#ff4c00", borderRadius: 4 }}>
               <Heart className="h-5 w-5 text-white" />
             </div>
@@ -140,7 +140,7 @@ export function SponsorCTA() {
         )}
 
         {showForm && (
-          <div className="max-w-2xl mx-auto bg-white p-8" style={{ borderRadius: 8 }}>
+          <div className="max-w-2xl mx-auto bg-white p-8" style={{ borderRadius: 0 }}>
             <div className="mb-6">
               <h3 className="font-display text-2xl font-bold mb-2" style={{ color: "#000" }}>
                 Sponsorship Inquiry Form

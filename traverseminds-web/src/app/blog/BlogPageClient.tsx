@@ -74,7 +74,7 @@ export function BlogPageClient({ initialPosts }: { initialPosts: Post[] }) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full border bg-white py-3 pl-11 pr-4 text-sm outline-none"
-                  style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
+                  style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
                 />
               </div>
             </div>
@@ -96,7 +96,7 @@ export function BlogPageClient({ initialPosts }: { initialPosts: Post[] }) {
             </motion.div>
 
             {filtered.length === 0 && (
-              <div className="border-2 border-dashed py-20 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+              <div className="border-2 border-dashed py-20 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
                 <p className="text-lg font-semibold" style={{ color: "#000" }}>
                   {initialPosts.length === 0 ? "Coming soon" : "No results found"}
                 </p>

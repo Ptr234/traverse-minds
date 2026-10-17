@@ -58,7 +58,7 @@ export function ServiceCards() {
         <SectionReveal
           variant="fade-up"
           staggerChildren={0.1}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
           margin="-50px"
         >
           {services.map((svc) => {
@@ -68,28 +68,22 @@ export function ServiceCards() {
                 key={svc.title}
                 variant="scale-fade"
               >
-                <Link
-                  href={`/security/${svc.slug}`}
-                  className="group relative overflow-hidden min-h-70 flex flex-col"
-                  style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                >
-                  <Image src={svc.image} alt={svc.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                  <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/70 to-primary/40" style={{ transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
+                <Link href={`/security/${svc.slug}`} className="group flex h-full flex-col">
+                  <div className="relative overflow-hidden h-56" style={{ borderRadius: 0 }}>
+                    <Image src={svc.image} alt={svc.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                  </div>
 
-                  <div className="relative z-10 flex flex-col flex-1 p-7">
-                    <div className="flex h-12 w-12 items-center justify-center bg-white/10 text-accent" style={{ borderRadius: 8 }}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-
-                    <h3 className="mt-5 font-display text-lg font-bold text-white" style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                  <div className="mt-5 flex items-center gap-3">
+                    <Icon className="h-5 w-5 shrink-0 text-accent" />
+                    <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>
                       {svc.title}
                     </h3>
-                    <p className="mt-2 text-sm text-white/45 leading-relaxed flex-1">{svc.description}</p>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed flex-1" style={{ color: "#515459" }}>{svc.description}</p>
 
-                    <div className="mt-5 flex items-center gap-2 text-xs font-semibold" style={{ color: "rgba(255,255,255,0.5)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                      <span className="group-hover:text-white transition-colors">Learn more</span>
-                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                  <div className="mt-3 flex items-center gap-2 text-xs font-semibold" style={{ color: "#212429" }}>
+                    <span className="group-hover:text-accent transition-colors">Learn more</span>
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>
               </RevealItem>

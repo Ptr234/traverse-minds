@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             post.excerpt && <p className="text-lg leading-relaxed" style={{ color: "#444441" }}>{post.excerpt}</p>
           )}
 
-          <div className="mt-16 py-8 px-8 text-center" style={{ background: "#fff", borderRadius: 8, border: "1px solid rgba(0,0,0,0.1)" }}>
+          <div className="mt-16 py-8 px-8 text-center" style={{ background: "#fff", borderRadius: 0, border: "1px solid rgba(0,0,0,0.1)" }}>
             <h3 className="font-display text-xl" style={{ color: "#000" }}>Need a security assessment?</h3>
             <p className="mt-2" style={{ color: "#515459" }}>Our team evaluates your organisation&apos;s cybersecurity posture.</p>
             <div className="mt-6">

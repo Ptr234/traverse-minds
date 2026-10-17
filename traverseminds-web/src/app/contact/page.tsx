@@ -50,7 +50,7 @@ export default function ContactPage() {
         <div className="container-max relative z-10">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
             <SectionReveal variant="fade-up" className="lg:col-span-2">
-              <div className="border bg-white p-8 pb-12 md:p-10" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+              <div className="border bg-white p-8 pb-12 md:p-10" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                 <h2 className="font-display text-2xl font-bold tracking-tight" style={{ color: "#000" }}>
                   Send Us a Message
                 </h2>
@@ -67,7 +67,7 @@ export default function ContactPage() {
               <div className="space-y-5">
                 {/* WhatsApp Card */}
                 <RevealItem variant="slide-up">
-                  <div className="group overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                  <div className="group overflow-hidden border bg-white" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <div className="p-6">
                       <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>Prefer WhatsApp?</h3>
                       <p className="mt-2 text-sm" style={{ color: "#515459" }}>
@@ -82,9 +82,9 @@ export default function ContactPage() {
 
                 {/* Email Card */}
                 <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
                         <Mail className="h-5 w-5 text-accent" />
                       </div>
                       <div>
@@ -104,9 +104,9 @@ export default function ContactPage() {
 
                 {/* Location Card */}
                 <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
                         <MapPin className="h-5 w-5 text-accent" />
                       </div>
                       <div>
@@ -120,9 +120,9 @@ export default function ContactPage() {
 
                 {/* Response Time Card */}
                 <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                     <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-emerald/10" style={{ borderRadius: 8 }}>
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-emerald/10" style={{ borderRadius: 0 }}>
                         <Clock className="h-5 w-5 text-emerald" />
                       </div>
                       <div>
@@ -166,7 +166,7 @@ export default function ContactPage() {
         <div className="container-max relative z-10">
           <div className="mx-auto max-w-2xl">
             <SectionReveal variant="scale-fade">
-              <div className="border bg-white p-8 md:p-12 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+              <div className="border bg-white p-8 md:p-12 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                 <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Press</p>
 
                 <TextReveal
@@ -178,7 +178,7 @@ export default function ContactPage() {
                 </TextReveal>
 
                 <div className="mt-6 flex justify-center">
-                  <div className="flex h-14 w-14 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
+                  <div className="flex h-14 w-14 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
                     <Newspaper className="h-7 w-7 text-accent" />
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function ContactPage() {
                   <a
                     href="mailto:traversemindsug@gmail.com"
                     className="inline-flex items-center gap-2 border border-accent/20 bg-accent/5 px-6 py-3.5 text-base font-semibold text-accent"
-                    style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                    style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                   >
                     <Mail className="h-4 w-4" />
                     traversemindsug@gmail.com

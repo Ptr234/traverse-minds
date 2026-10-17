@@ -41,7 +41,7 @@ export function PdfDownloadButton({ pdfUrl, filename, variant = "card" }: PdfDow
         onClick={handleDownload}
         disabled={loading}
         className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white shrink-0"
-        style={{ background: "#ff4c00", borderRadius: 6, cursor: loading ? "wait" : "pointer", border: "none" }}
+        style={{ background: "#ff4c00", borderRadius: 0, cursor: loading ? "wait" : "pointer", border: "none" }}
       >
         <Download className="h-4 w-4" />
         {loading ? "Downloading…" : "Download PDF"}
@@ -56,7 +56,7 @@ export function PdfDownloadButton({ pdfUrl, filename, variant = "card" }: PdfDow
       disabled={loading}
       className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold"
       style={{
-        borderRadius: 8,
+        borderRadius: 0,
         color: "#000",
         background: "rgba(33,36,41,0.06)",
         transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",

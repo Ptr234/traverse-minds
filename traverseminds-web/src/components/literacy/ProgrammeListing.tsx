@@ -54,7 +54,7 @@ export function ProgrammeListing() {
         </div>
 
         <SectionReveal variant="fade-up">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
               <motion.div
@@ -64,41 +64,41 @@ export function ProgrammeListing() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-                className="group relative overflow-hidden"
-                style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                className="group flex flex-col"
               >
-                <Image src={p.image} alt={p.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                <div className="absolute inset-0 bg-primary/85" style={{ transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
+                <div className="relative overflow-hidden h-64" style={{ borderRadius: 0 }}>
+                  <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
 
-                <div className="relative z-10 p-7 flex flex-col">
+                <div className="mt-5 flex flex-col flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-accent/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent">
                       {p.audience}
                     </span>
-                    <div className="flex items-center gap-1.5 text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    <div className="flex items-center gap-1.5 text-xs" style={{ color: "#919499" }}>
                       <Clock className="h-3 w-3" /> {p.duration}
                     </div>
                   </div>
 
-                  <h3 className="mt-4 font-display text-xl font-bold text-white" style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>{p.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{p.description}</p>
+                  <h3 className="mt-4 font-display text-xl font-bold" style={{ color: "#000" }}>{p.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed" style={{ color: "#515459" }}>{p.description}</p>
 
                   <div className="mt-5">
-                    <h4 className="text-[10px] font-semibold uppercase tracking-wider text-white/25">What you&apos;ll cover:</h4>
+                    <h4 className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#919499" }}>What you&apos;ll cover:</h4>
                     <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                       {p.topics.map((t) => (
-                        <li key={t} className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                        <li key={t} className="flex items-center gap-2 text-sm" style={{ color: "#515459" }}>
                           <div className="h-1 w-1 rounded-full bg-accent" /> {t}
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-6 pt-5 flex items-center justify-between border-t border-white/8">
-                    <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  <div className="mt-auto pt-5 flex items-center justify-between border-t" style={{ borderColor: "rgba(0,0,0,0.1)", marginTop: 24 }}>
+                    <div className="flex items-center gap-2 text-xs" style={{ color: "#515459" }}>
                       <BookOpen className="h-3.5 w-3.5" /> {p.format}
                     </div>
-                    <Button variant="outline-dark" size="sm" href={`/literacy/${p.slug}`}>
+                    <Button variant="outline" size="sm" href={`/literacy/${p.slug}`}>
                       Learn More <ArrowRight className="h-3 w-3" />
                     </Button>
                   </div>

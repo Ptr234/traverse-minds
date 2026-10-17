@@ -71,7 +71,7 @@ export function Hero({ onSearch }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <div className="relative flex flex-col sm:flex-row items-stretch gap-2 bg-white p-2" style={{ borderRadius: 12, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+            <div className="relative flex flex-col sm:flex-row items-stretch gap-2 bg-white p-2" style={{ borderRadius: 0, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
               {/* Jurisdiction Selector */}
               <div className="relative shrink-0">
                 <button 
@@ -85,7 +85,7 @@ export function Hero({ onSearch }: HeroProps) {
                 </button>
                 
                 {isDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-black/10 shadow-xl z-50 overflow-hidden" style={{ borderRadius: 8 }}>
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-black/10 shadow-xl z-50 overflow-hidden" style={{ borderRadius: 0 }}>
                     {jurisdictions.map((j) => (
                       <button
                         key={j}
@@ -119,7 +119,7 @@ export function Hero({ onSearch }: HeroProps) {
               <button 
                 onClick={handleSearch}
                 className="bg-accent text-white px-8 py-4 font-bold flex items-center justify-center gap-2 hover:bg-accent/90 transition-all active:scale-95"
-                style={{ borderRadius: 8 }}
+                style={{ borderRadius: 0 }}
               >
                 Search
                 <ArrowRight className="h-4 w-4" />

@@ -9,6 +9,8 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { ArrowRight, FileText, Filter } from "lucide-react";
 import { ReportDownloadForm } from "@/components/think-tank/ReportDownloadForm";
 import { sanityClient } from "@/sanity/client";
+import { DigitalSnapshot } from "@/components/think-tank/DigitalSnapshot";
+import { getDigitalSnapshot, getIndicatorTrend } from "@/lib/worldbank";
 
 export const metadata: Metadata = {
   title: "Think Tank | Evidence-Driven Digital Policy Research in Africa",
@@ -38,12 +40,17 @@ async function getDownloadableReports() {
 }
 
 export default async function ThinkTankPage() {
-  const reports = await getDownloadableReports();
+  const [reports, snapshot, internetTrend] = await Promise.all([
+    getDownloadableReports(),
+    getDigitalSnapshot(),
+    getIndicatorTrend("IT.NET.USER.ZS"),
+  ]);
   return (
     <div className="flex flex-col">
       <PageTransition>
       <Hero />
       <ResearchAreas />
+      {snapshot && <DigitalSnapshot data={snapshot} internetTrend={internetTrend} />}
       <Publications />
 
       {/* Evidence Briefs */}
@@ -58,7 +65,7 @@ export default async function ThinkTankPage() {
           </TextReveal>
 
           <SectionReveal variant="scale-fade" delay={0.15}>
-            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
               <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
@@ -124,7 +131,7 @@ export default async function ThinkTankPage() {
           </TextReveal>
 
           <SectionReveal variant="clip-inset" delay={0.15}>
-            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <Filter className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
               <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>

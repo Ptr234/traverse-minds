@@ -12,6 +12,8 @@ import { Check, ArrowRight, Award, MessageCircle } from "lucide-react";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
+import { ThreatWatch } from "@/components/security/ThreatWatch";
+import { getThreatWatch } from "@/lib/cisa";
 
 export const metadata: Metadata = {
   title: "Traverse Security -- Cybersecurity for Banks & Government",
@@ -22,7 +24,8 @@ export const metadata: Metadata = {
 const WHATSAPP_NUMBER = "+256775692334";
 const WHATSAPP_MESSAGE = "Hello Traverse Security, I'd like to enquire about your cybersecurity services.";
 
-export default function SecurityPage() {
+export default async function SecurityPage() {
+  const threatWatch = await getThreatWatch();
   return (
     <PageTransition>
       <SecurityHero />
@@ -85,7 +88,7 @@ export default function SecurityPage() {
             </SectionReveal>
 
             <SectionReveal variant="clip-inset" delay={0.2}>
-              <div className="relative aspect-4/3 min-h-80 overflow-hidden" style={{ borderRadius: 16 }}>
+              <div className="relative aspect-4/3 min-h-80 overflow-hidden" style={{ borderRadius: 0 }}>
                 <Image
                   src="/imagestouse/eventslide/stud (3).jpg"
                   alt="Traverse Minds team"
@@ -102,6 +105,7 @@ export default function SecurityPage() {
 
       <EngagementProcess />
       <ComplianceFrameworks />
+      {threatWatch && <ThreatWatch data={threatWatch} />}
 
       {/* Self Assessment */}
       <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
@@ -144,7 +148,7 @@ export default function SecurityPage() {
           </TextReveal>
 
           <SectionReveal variant="scale-fade" delay={0.15}>
-            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <Award className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
               <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
@@ -184,7 +188,7 @@ export default function SecurityPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 bg-[#25D366] px-8 py-4 text-base font-semibold text-white active:scale-[0.98]"
-                    style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                    style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                   >
                     <MessageCircle className="h-5 w-5" />
                     Chat on WhatsApp

@@ -69,7 +69,7 @@ export function Hero() {
               <div
                 key={item.label}
                 className="border border-white/10 bg-white/5 p-6"
-                style={{ borderRadius: 8 }}
+                style={{ borderRadius: 0 }}
               >
                 <div className="font-display text-lg font-bold text-white md:text-xl">{item.value}</div>
                 <div className="mt-1 text-[11px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>{item.label}</div>

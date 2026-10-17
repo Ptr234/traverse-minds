@@ -57,7 +57,7 @@ export default function AboutPage() {
             {/* Image */}
             <SectionReveal variant="clip-inset">
               <div className="relative">
-                <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 16 }}>
+                <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 0 }}>
                   <Image
                     src="/imagestouse/tec (2).jpg"
                     alt="Traverse Minds team"
@@ -68,7 +68,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-linear-to-tr from-primary/70 via-primary/10 to-transparent" />
                 </div>
                 {/* Floating badge */}
-                <div className="absolute -bottom-5 -right-3 border border-white/10 bg-white p-5 md:-right-6" style={{ borderRadius: 8, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+                <div className="absolute -bottom-5 -right-3 border border-white/10 bg-white p-5 md:-right-6" style={{ borderRadius: 0, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
                   <p className="font-display text-4xl font-bold" style={{ color: "#ff4c00" }}>6</p>
                   <p className="text-xs mt-0.5" style={{ color: "#515459" }}>
                     Integrated<br />Divisions
@@ -102,7 +102,7 @@ export default function AboutPage() {
                     <RevealItem key={d.name} variant="scale-fade">
                       <div
                         className="flex items-start gap-3 border border-white/6 bg-white/3 p-4"
-                        style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                        style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       >
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         <div>
@@ -173,7 +173,7 @@ export default function AboutPage() {
           </TextReveal>
 
           <SectionReveal variant="clip-inset" className="mt-10">
-            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <Handshake className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
               <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
@@ -208,7 +208,7 @@ export default function AboutPage() {
                 <RevealItem key={item.label} variant="slide-up">
                   <div
                     className="border px-6 py-4"
-                    style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
+                    style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
                   >
                     <p className="text-xs" style={{ color: "#919499" }}>{item.label}</p>
                     <p className="mt-1 text-sm font-semibold" style={{ color: "#000" }}>{item.value}</p>

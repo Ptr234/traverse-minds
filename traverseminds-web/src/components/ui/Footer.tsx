@@ -35,7 +35,7 @@ export function Footer() {
           color: "hsla(0,0%,100%,0.8)",
           paddingTop: 96,
           paddingBottom: 40,
-          borderRadius: "0 0 16px 16px",
+          borderRadius: 0,
           boxShadow: "0 2.5px 2px rgba(0,0,0,0.06), 0 1px 0 rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.1)",
           backdropFilter: "blur(60px)",
         }}

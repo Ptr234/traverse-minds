@@ -119,7 +119,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
           >
             <div
               className="relative flex w-full max-w-3xl overflow-hidden bg-white"
-              style={{ borderRadius: 20, maxHeight: "92vh", boxShadow: "0 32px 64px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1)" }}
+              style={{ borderRadius: 0, maxHeight: "92vh", boxShadow: "0 32px 64px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1)" }}
             >
               {/* Close */}
               <button
@@ -136,7 +136,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                 className="hidden lg:flex lg:w-72 xl:w-80 shrink-0 flex-col justify-between p-8"
                 style={{
                   background: "linear-gradient(160deg, #0a0a0a 0%, #212429 100%)",
-                  borderRadius: "20px 0 0 20px",
+                  borderRadius: 0,
                 }}
               >
                 <div>
@@ -159,7 +159,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                     <div key={text} className="flex items-start gap-3">
                       <div
                         className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center"
-                        style={{ background: "rgba(255,76,0,0.12)", borderRadius: 8 }}
+                        style={{ background: "rgba(255,76,0,0.12)", borderRadius: 0 }}
                       >
                         <Icon className="h-4 w-4" style={{ color: "#ff4c00" }} />
                       </div>
@@ -225,7 +225,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           autoComplete="name"
                           placeholder="Jane Nakato"
                           className={inputCls(!!errors.name)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("name", { required: "Required", minLength: { value: 2, message: "Required" } })}
                         />
                         {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
@@ -237,7 +237,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           autoComplete="organization"
                           placeholder="Ministry / Company name"
                           className={inputCls(!!errors.organisation)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("organisation", { required: "Required" })}
                         />
                         {errors.organisation && <p className="mt-1 text-xs text-red-500">{errors.organisation.message}</p>}
@@ -253,7 +253,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           autoComplete="email"
                           placeholder="jane@organisation.com"
                           className={inputCls(!!errors.email)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("email", {
                             required: "Required",
                             pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" },
@@ -270,7 +270,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           autoComplete="tel"
                           placeholder="+256 700 000 000"
                           className={inputCls(false)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("phone")}
                         />
                       </div>
@@ -282,7 +282,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#000" }}>Team Size *</label>
                         <select
                           className={inputCls(!!errors.teamSize)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("teamSize", { required: "Required" })}
                         >
                           <option value="">Select size...</option>
@@ -294,7 +294,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#000" }}>Sector *</label>
                         <select
                           className={inputCls(!!errors.sector)}
-                          style={{ borderRadius: 8 }}
+                          style={{ borderRadius: 0 }}
                           {...register("sector", { required: "Required" })}
                         >
                           <option value="">Select sector...</option>
@@ -312,7 +312,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           <label
                             key={f}
                             className="relative flex cursor-pointer items-center gap-2 border px-4 py-2 text-sm font-medium transition-colors"
-                            style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)" }}
+                            style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}
                           >
                             <input
                               type="radio"
@@ -321,7 +321,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                               {...register("deliveryFormat", { required: "Select a format" })}
                             />
                             <span className="peer-checked:text-accent transition-colors">{f}</span>
-                            <div className="absolute inset-0 border border-accent opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" style={{ borderRadius: 8 }} />
+                            <div className="absolute inset-0 border border-accent opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" style={{ borderRadius: 0 }} />
                           </label>
                         ))}
                       </div>
@@ -337,7 +337,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         type="text"
                         placeholder="e.g. Q3 2025, within 3 months, flexible..."
                         className={inputCls(false)}
-                        style={{ borderRadius: 8 }}
+                        style={{ borderRadius: 0 }}
                         {...register("timeline")}
                       />
                     </div>
@@ -349,7 +349,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         rows={3}
                         placeholder="Describe your training goals, any specific threats your team faces, languages needed, etc."
                         className={cn(inputCls(!!errors.message), "h-auto py-3")}
-                        style={{ borderRadius: 8 }}
+                        style={{ borderRadius: 0 }}
                         {...register("message", { required: "Required", minLength: { value: 10, message: "Please add more detail" } })}
                       />
                       {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
@@ -372,7 +372,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                     {errors.consent && <p className="text-xs text-red-500">{errors.consent.message}</p>}
 
                     {serverErr && (
-                      <div className="border border-red-200 bg-red-50 p-3 text-sm text-red-600" style={{ borderRadius: 8 }}>
+                      <div className="border border-red-200 bg-red-50 p-3 text-sm text-red-600" style={{ borderRadius: 0 }}>
                         {serverErr}
                       </div>
                     )}

@@ -40,9 +40,9 @@ export function LearningOutcomes({ outcomes, programmeTitle, audience }: Props) 
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
               className="group relative flex items-start gap-6 p-6 bg-white border border-black/5 hover:border-accent/20 transition-all duration-300"
-              style={{ borderRadius: 16, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}
+              style={{ borderRadius: 0, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}
             >
-              <div className="absolute top-0 left-0 w-1 h-full bg-accent scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" style={{ borderRadius: "16px 0 0 16px" }} />
+              <div className="absolute top-0 left-0 w-1 h-full bg-accent scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" style={{ borderRadius: 0 }} />
               
               <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-colors duration-300">
                 <Icon className="h-6 w-6" />

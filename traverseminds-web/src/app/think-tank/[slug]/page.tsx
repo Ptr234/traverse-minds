@@ -148,7 +148,7 @@ export default async function ReportPage({
         <div className="container-max max-w-4xl px-6 lg:px-8">
 
           {/* Abstract */}
-          <div className="mb-10 p-8" style={{ background: "#f0f1f4", borderRadius: 8, borderLeft: "4px solid #ff4c00" }}>
+          <div className="mb-10 p-8" style={{ background: "#f0f1f4", borderRadius: 0, borderLeft: "4px solid #ff4c00" }}>
             <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#ff4c00" }}>Abstract</p>
             <div className="flex flex-col gap-3">
               {report.abstract.split(/\n\n+/).map((para, i) => (
@@ -186,7 +186,7 @@ export default async function ReportPage({
                   <div
                     key={author.name}
                     className="flex items-start gap-4 p-5"
-                    style={{ background: "#f0f1f4", borderRadius: 8 }}
+                    style={{ background: "#f0f1f4", borderRadius: 0 }}
                   >
                     {author.photoUrl ? (
                       <Image

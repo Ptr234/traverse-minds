@@ -27,7 +27,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
         <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
         <div
           className="flex flex-col items-center text-center gap-4 p-8"
-          style={{ borderRadius: 8, border: "1px solid rgba(0,0,0,0.12)", background: "#f0f1f4" }}
+          style={{ borderRadius: 0, border: "1px solid rgba(0,0,0,0.12)", background: "#f0f1f4" }}
         >
           <FileText className="h-12 w-12" style={{ color: "#919499" }} />
           <p className="text-sm" style={{ color: "#515459" }}>
@@ -42,7 +42,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
   return (
     <div className="mb-10">
       <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
-      <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)" }}>
+      <div style={{ borderRadius: 0, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)" }}>
         <iframe
           src={pdfUrl}
           title={title}

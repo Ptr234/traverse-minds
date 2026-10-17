@@ -56,7 +56,7 @@ export function ReportDownloadForm({ reports }: Props) {
 
   if (status === "success") {
     return (
-      <div className="border border-white/6 bg-surface-dark-elevated p-8 text-center" style={{ borderRadius: 16 }}>
+      <div className="border border-white/6 bg-surface-dark-elevated p-8 text-center" style={{ borderRadius: 0 }}>
         <CheckCircle2 className="mx-auto mb-4 h-10 w-10" style={{ color: "#ff4c00" }} />
         <h3 className="font-display text-lg font-bold text-white">Check your inbox.</h3>
         <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
@@ -68,7 +68,7 @@ export function ReportDownloadForm({ reports }: Props) {
   }
 
   return (
-    <div className="border border-white/6 bg-surface-dark-elevated p-8" style={{ borderRadius: 16 }}>
+    <div className="border border-white/6 bg-surface-dark-elevated p-8" style={{ borderRadius: 0 }}>
       <h3 className="font-display text-lg font-bold text-white">Download the Report</h3>
       <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
         {reports.length > 1 && (
@@ -78,7 +78,7 @@ export function ReportDownloadForm({ reports }: Props) {
               onChange={(e) => setSelectedId(e.target.value)}
               disabled={status === "loading"}
               className="w-full appearance-none border border-white/8 bg-white/4 px-4 py-3 pr-10 text-sm text-white outline-none"
-              style={{ borderRadius: 8, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              style={{ borderRadius: 0, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
             >
               {reports.map((r) => (
                 <option key={r.id} value={r.id} style={{ background: "#212429", color: "#fff" }}>
@@ -99,7 +99,7 @@ export function ReportDownloadForm({ reports }: Props) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full border border-white/8 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none"
-          style={{ borderRadius: 8, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+          style={{ borderRadius: 0, transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
           required
           disabled={status === "loading"}
         />

@@ -63,7 +63,7 @@ export function Coverage() {
               <div
                 key={s.label}
                 className="bg-white p-5 text-center border"
-                style={{ borderRadius: 12, borderColor: "rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+                style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
               >
                 <p className="font-display text-3xl font-bold" style={{ color: "#ff4c00" }}>{s.value}</p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "#919499" }}>{s.label}</p>
@@ -73,7 +73,7 @@ export function Coverage() {
 
           {/* Map + legend */}
           <SectionReveal variant="clip-inset">
-            <div className="bg-white border overflow-hidden" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.08)", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
+            <div className="bg-white border overflow-hidden" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.08)", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
               {/* Legend */}
               <div className="flex flex-wrap items-center gap-6 px-6 py-4 border-b" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
                 <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#000" }}>Coverage</span>

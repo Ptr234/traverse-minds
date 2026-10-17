@@ -116,7 +116,7 @@ export function ProgrammeInquiryModal({ open, onClose, programmeTitle, audience 
           >
             <div
               className="relative w-full max-w-lg overflow-hidden bg-white shadow-2xl pointer-events-auto"
-              style={{ borderRadius: 24 }}
+              style={{ borderRadius: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -170,7 +170,7 @@ export function ProgrammeInquiryModal({ open, onClose, programmeTitle, audience 
                           type="text"
                           placeholder="Your Name"
                           className={inputCls(!!errors.name)}
-                          style={{ borderRadius: 12 }}
+                          style={{ borderRadius: 0 }}
                           {...register("name", { required: "Name is required" })}
                         />
                       </div>
@@ -181,7 +181,7 @@ export function ProgrammeInquiryModal({ open, onClose, programmeTitle, audience 
                           type="email"
                           placeholder="email@organisation.com"
                           className={inputCls(!!errors.email)}
-                          style={{ borderRadius: 12 }}
+                          style={{ borderRadius: 0 }}
                           {...register("email", { 
                             required: "Email is required",
                             pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" }
@@ -195,7 +195,7 @@ export function ProgrammeInquiryModal({ open, onClose, programmeTitle, audience 
                           rows={3}
                           placeholder="Any specific questions or requirements?"
                           className={cn(inputCls(false), "h-auto py-3")}
-                          style={{ borderRadius: 12 }}
+                          style={{ borderRadius: 0 }}
                           {...register("message")}
                         />
                       </div>

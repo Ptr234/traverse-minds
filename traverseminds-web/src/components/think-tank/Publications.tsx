@@ -61,33 +61,35 @@ export async function Publications() {
                 variant="slide-up"
                 className="h-full"
               >
-              <div className="group h-full flex flex-col overflow-hidden border bg-white" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                <div className="relative h-44 w-full overflow-hidden flex items-center justify-center" style={{ background: "#f0f1f4" }}>
+              <div className="group h-full flex flex-col">
+                <div className="relative h-48 w-full overflow-hidden flex items-center justify-center" style={{ background: "#e1e4e9" }}>
                   {report.featuredImageUrl ? (
                     <Image
                       src={report.featuredImageUrl}
                       alt={report.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <FileText className="h-12 w-12" style={{ color: "rgba(0,0,0,0.1)" }} />
+                    <FileText className="h-12 w-12" style={{ color: "rgba(0,0,0,0.15)" }} />
                   )}
-                  <div className="absolute top-3 left-3 flex gap-2 z-10">
-                    {report.topics?.slice(0, 2).map((topic) => (
-                      <span
-                        key={topic}
-                        className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-                        style={{ borderRadius: 999 }}
-                      >
-                        {topic.replace("-", " ")}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col pt-5">
+                  {report.topics && report.topics.length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {report.topics.slice(0, 2).map((topic) => (
+                        <span
+                          key={topic}
+                          className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
+                          style={{ borderRadius: 999 }}
+                        >
+                          {topic.replace("-", " ")}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
@@ -134,7 +136,7 @@ export async function Publications() {
             ))
           ) : (
             <RevealItem variant="fade-blur" className="col-span-full">
-              <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)" }}>
+              <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
                 <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
                 <p style={{ color: "#919499" }}>No reports published yet. Check back soon.</p>
               </div>

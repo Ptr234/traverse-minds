@@ -87,35 +87,34 @@ export default async function ArchivePage() {
             <SectionReveal variant="fade-up" staggerChildren={0.08} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {reports.map((report) => (
                 <RevealItem key={report._id} variant="slide-up">
-                  <div
-                    className="group flex flex-col overflow-hidden border bg-white h-full"
-                    style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                  >
-                    <div className="relative h-36 w-full overflow-hidden flex items-center justify-center" style={{ background: "#f0f1f4" }}>
+                  <div className="group flex flex-col h-full">
+                    <div className="relative h-44 w-full overflow-hidden flex items-center justify-center" style={{ background: "#e1e4e9" }}>
                       {report.featuredImageUrl ? (
                         <Image
                           src={report.featuredImageUrl}
                           alt={report.title}
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <FileText className="h-10 w-10" style={{ color: "rgba(0,0,0,0.1)" }} />
+                        <FileText className="h-10 w-10" style={{ color: "rgba(0,0,0,0.15)" }} />
                       )}
-                      <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
-                        {report.topics?.slice(0, 2).map((topic) => (
-                          <span
-                            key={topic}
-                            className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-                            style={{ borderRadius: 999 }}
-                          >
-                            {TOPIC_LABELS[topic] ?? topic}
-                          </span>
-                        ))}
-                      </div>
                     </div>
 
-                    <div className="flex flex-1 flex-col p-6">
+                    <div className="flex flex-1 flex-col pt-5">
+                      {report.topics && report.topics.length > 0 && (
+                        <div className="mb-3 flex flex-wrap gap-2">
+                          {report.topics.slice(0, 2).map((topic) => (
+                            <span
+                              key={topic}
+                              className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
+                              style={{ borderRadius: 999 }}
+                            >
+                              {TOPIC_LABELS[topic] ?? topic}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
@@ -158,7 +157,7 @@ export default async function ArchivePage() {
               ))}
             </SectionReveal>
           ) : (
-            <div className="py-24 text-center border-2 border-dashed" style={{ borderRadius: 12, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="py-24 text-center border-2 border-dashed" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <FileText className="mx-auto h-12 w-12 mb-4" style={{ color: "#d1d1d1" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>No publications yet</p>
               <p className="mt-2 max-w-sm mx-auto text-sm" style={{ color: "#919499" }}>

@@ -45,11 +45,11 @@ export function CapabilityDownload() {
     <section id="capability" style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
         <SectionReveal variant="clip-inset">
-          <div className="border border-white/6 bg-surface-dark-elevated p-8 md:p-12" style={{ borderRadius: 16 }}>
+          <div className="border border-white/6 bg-surface-dark-elevated p-8 md:p-12" style={{ borderRadius: 0 }}>
             <div className="flex flex-col items-start gap-10 md:flex-row md:items-center">
               <div className="flex-1">
                 <SectionReveal variant="fade-up" delay={0.1}>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
                     <FileDown className="h-6 w-6 text-accent" />
                   </div>
                 </SectionReveal>
@@ -89,7 +89,7 @@ export function CapabilityDownload() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center border border-emerald/20 bg-emerald/10 p-8 text-center"
-                    style={{ borderRadius: 8 }}
+                    style={{ borderRadius: 0 }}
                   >
                     <CheckCircle2 className="h-10 w-10 text-emerald" />
                     <p className="mt-3 font-semibold text-white">Download ready</p>
@@ -99,11 +99,11 @@ export function CapabilityDownload() {
                     </Button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border border-white/6 bg-white/3 p-6" style={{ borderRadius: 8 }} noValidate>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border border-white/6 bg-white/3 p-6" style={{ borderRadius: 0 }} noValidate>
                     <p className="text-sm font-medium text-white/60">Enter your details to download:</p>
-                    <input type="text" placeholder="Full Name" autoComplete="name" className={inputCls(!!errors.name)} style={{ borderRadius: 8, borderColor: errors.name ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("name", { required: "Required" })} />
-                    <input type="email" placeholder="Work Email" autoComplete="email" className={inputCls(!!errors.email)} style={{ borderRadius: 8, borderColor: errors.email ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid" } })} />
-                    <input type="text" placeholder="Organisation" autoComplete="organization" className={inputCls(!!errors.organisation)} style={{ borderRadius: 8, borderColor: errors.organisation ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("organisation", { required: "Required" })} />
+                    <input type="text" placeholder="Full Name" autoComplete="name" className={inputCls(!!errors.name)} style={{ borderRadius: 0, borderColor: errors.name ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("name", { required: "Required" })} />
+                    <input type="email" placeholder="Work Email" autoComplete="email" className={inputCls(!!errors.email)} style={{ borderRadius: 0, borderColor: errors.email ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid" } })} />
+                    <input type="text" placeholder="Organisation" autoComplete="organization" className={inputCls(!!errors.organisation)} style={{ borderRadius: 0, borderColor: errors.organisation ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("organisation", { required: "Required" })} />
                     {serverError && <p className="text-sm text-red-400">{serverError}</p>}
                     <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
                       {isSubmitting ? "Processing..." : "Unlock Download"}

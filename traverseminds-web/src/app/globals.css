@@ -61,10 +61,11 @@
 
   /* Radius — GatesNotes Scale: 4px / 8px / 16px */
   --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-xl: 16px;
-  --radius-2xl: 16px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
   --radius-pill: 1000px;
 
   /* Shadows — GatesNotes Triple Shadow */
@@ -234,7 +235,7 @@ input, select, textarea {
   position: relative;
   overflow: hidden;
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
   transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -244,7 +245,7 @@ input, select, textarea {
   position: relative;
   overflow: hidden;
   background: #f1f4f9;
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
   transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -254,7 +255,7 @@ input, select, textarea {
   position: relative;
   overflow: hidden;
   background: #212429;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
   transition: all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -277,14 +278,14 @@ input, select, textarea {
 /* Card edge separators — GatesNotes paper stack effect */
 .card-edge-top {
   height: 16px;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0;
   background: #ffffff;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.125);
 }
 
 .card-edge-bottom {
   height: 16px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 0;
   background: #ffffff;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.125);
 }
@@ -371,9 +372,17 @@ input, select, textarea {
   @apply px-6 py-10 lg:px-8 lg:py-12;
 }
 
+/* Side gutter matches the px-6 lg:px-8 used across sections, so content never touches the screen edge */
 .container-max {
   @apply mx-auto;
   max-width: 1240px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 1024px) {
+  .container-max {
+    padding-inline: 32px;
+  }
 }
 
 .container-narrow {

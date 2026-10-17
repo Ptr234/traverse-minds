@@ -57,7 +57,7 @@ export function EnquiryForm() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="flex flex-col items-center justify-center border border-emerald/15 bg-emerald/5 px-8 py-20 text-center"
-        style={{ borderRadius: 16 }}
+        style={{ borderRadius: 0 }}
       >
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald text-white mb-5">
           <CheckCircle2 className="h-7 w-7" />
@@ -72,7 +72,7 @@ export function EnquiryForm() {
 
   return (
     <SectionReveal variant="scale-fade" delay={0.15}>
-      <div className="border bg-white p-8 md:p-10" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+      <div className="border bg-white p-8 md:p-10" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
           <div className="sr-only" aria-hidden="true">
             <input tabIndex={-1} autoComplete="off" {...register("honeypot")} />
@@ -81,7 +81,7 @@ export function EnquiryForm() {
           <div>
             <label htmlFor="name" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Full Name *</label>
             <input id="name" type="text" autoComplete="name" placeholder="John Doe" className={inputClasses(!!errors.name)}
-              style={{ borderRadius: 8, borderColor: errors.name ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              style={{ borderRadius: 0, borderColor: errors.name ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
               {...register("name", { required: "Required", minLength: { value: 2, message: "Required" } })} />
             {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
           </div>
@@ -89,7 +89,7 @@ export function EnquiryForm() {
           <div>
             <label htmlFor="organisation" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Organisation *</label>
             <input id="organisation" type="text" autoComplete="organization" placeholder="Acme Corp" className={inputClasses(!!errors.organisation)}
-              style={{ borderRadius: 8, borderColor: errors.organisation ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              style={{ borderRadius: 0, borderColor: errors.organisation ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
               {...register("organisation", { required: "Required" })} />
             {errors.organisation && <p className="mt-1 text-sm text-red-500">{errors.organisation.message}</p>}
           </div>
@@ -98,14 +98,14 @@ export function EnquiryForm() {
             <div>
               <label htmlFor="email" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Email *</label>
               <input id="email" type="email" autoComplete="email" placeholder="john@acme.com" className={inputClasses(!!errors.email)}
-                style={{ borderRadius: 8, borderColor: errors.email ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                style={{ borderRadius: 0, borderColor: errors.email ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                 {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" } })} />
               {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
             </div>
             <div>
               <label htmlFor="phone" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Phone <span style={{ color: "#919499" }}>(optional)</span></label>
               <input id="phone" type="tel" autoComplete="tel" placeholder="+256 700 000 000" className={inputClasses(false)}
-                style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                 {...register("phone")} />
             </div>
           </div>
@@ -113,7 +113,7 @@ export function EnquiryForm() {
           <div>
             <label htmlFor="serviceType" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Service Required *</label>
             <select id="serviceType" className={inputClasses(!!errors.serviceType)}
-              style={{ borderRadius: 8, borderColor: errors.serviceType ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              style={{ borderRadius: 0, borderColor: errors.serviceType ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
               {...register("serviceType", { required: "Select a service" })}>
               <option value="">Select a service...</option>
               {serviceOptions.map((opt) => (<option key={opt} value={opt}>{opt}</option>))}
@@ -125,7 +125,7 @@ export function EnquiryForm() {
             <label htmlFor="message" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Tell us about your needs *</label>
             <textarea id="message" rows={4} placeholder="Describe your security requirements..."
               className={cn(inputClasses(!!errors.message), "h-auto py-4")}
-              style={{ borderRadius: 8, borderColor: errors.message ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+              style={{ borderRadius: 0, borderColor: errors.message ? undefined : "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
               {...register("message", { required: "Required", minLength: { value: 20, message: "At least 20 characters" } })} />
             {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
           </div>
@@ -140,7 +140,7 @@ export function EnquiryForm() {
           {errors.consent && <p className="text-sm text-red-500">{errors.consent.message}</p>}
 
           {serverError && (
-            <div className="border border-red-200 bg-red-50 p-4 text-sm text-red-600" style={{ borderRadius: 8 }}>{serverError}</div>
+            <div className="border border-red-200 bg-red-50 p-4 text-sm text-red-600" style={{ borderRadius: 0 }}>{serverError}</div>
           )}
 
           <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>

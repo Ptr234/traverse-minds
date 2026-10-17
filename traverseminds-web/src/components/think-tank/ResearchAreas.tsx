@@ -42,23 +42,21 @@ export function ResearchAreas() {
           </motion.p>
         </div>
 
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => (
             <RevealItem
               key={area.title}
               variant="scale-fade"
             >
-              <div className="group relative overflow-hidden min-h-56" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                <Image src={area.image} alt={area.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                <div className="absolute inset-0 bg-primary/80" style={{ transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
-
-                <div className="relative z-10 p-7">
-                  <div className="flex h-12 w-12 items-center justify-center bg-white/10 text-accent" style={{ borderRadius: 8 }}>
-                    <area.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-5 font-display text-lg font-bold text-white">{area.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{area.description}</p>
+              <div className="group">
+                <div className="relative overflow-hidden h-56" style={{ borderRadius: 0 }}>
+                  <Image src={area.image} alt={area.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                 </div>
+                <div className="mt-5 flex items-center gap-3">
+                  <area.icon className="h-5 w-5 shrink-0 text-accent" />
+                  <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{area.title}</h3>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{area.description}</p>
               </div>
             </RevealItem>
           ))}

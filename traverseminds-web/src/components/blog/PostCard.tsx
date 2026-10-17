@@ -35,8 +35,7 @@ export function PostCard({ title, slug, excerpt, division, date, readTime, image
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group flex flex-col overflow-hidden border bg-white"
-      style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
+      className="group flex flex-col"
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
@@ -47,22 +46,15 @@ export function PostCard({ title, slug, excerpt, division, date, readTime, image
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-white/80 to-transparent" />
-
-        {/* Division pill */}
-        <span className={`absolute left-4 top-4 px-3 py-1 text-xs font-semibold text-white ${divisionColors[division] || "bg-accent"}`} style={{ borderRadius: 999 }}>
-          {divisionLabels[division] || division}
-        </span>
-
-        {/* Title overlay at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <h3 className="font-display text-lg leading-snug md:text-xl" style={{ color: "#000" }}>{title}</h3>
-        </div>
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col bg-white p-5">
-        <p className="line-clamp-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{excerpt}</p>
+      <div className="flex flex-1 flex-col pt-4">
+        <span className={`self-start px-3 py-1 text-xs font-semibold text-white ${divisionColors[division] || "bg-accent"}`} style={{ borderRadius: 999 }}>
+          {divisionLabels[division] || division}
+        </span>
+        <h3 className="mt-3 font-display text-lg leading-snug md:text-xl" style={{ color: "#000" }}>{title}</h3>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{excerpt}</p>
 
         {/* Author + meta */}
         <div className="mt-auto flex items-center justify-between pt-4">

@@ -87,8 +87,8 @@ export default function LiteracyPage() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
                 {deliveryFormats.map((format) => (
                   <RevealItem key={format.title} variant="scale-fade">
-                    <div className="group flex flex-col items-center text-center border bg-white p-8" style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                      <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                    <div className="group flex flex-col items-center text-center border bg-white p-8" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+                      <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                         <format.icon className="h-6 w-6" style={{ color: "#000" }} />
                       </div>
                       <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{format.title}</h3>
@@ -122,8 +122,8 @@ export default function LiteracyPage() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
                 {learningOutcomes.map((outcome) => (
                   <RevealItem key={outcome.title} variant="slide-up">
-                    <div className="border border-white/6 bg-white/3 p-7" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center bg-white/6" style={{ borderRadius: 8 }}>
+                    <div className="border border-white/6 bg-white/3 p-7" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                      <div className="mb-4 flex h-12 w-12 items-center justify-center bg-white/6" style={{ borderRadius: 0 }}>
                         <outcome.icon className="h-6 w-6 text-accent" />
                       </div>
                       <h3 className="font-display text-base font-bold text-white">{outcome.title}</h3>

@@ -89,7 +89,7 @@ export function Timeline() {
                           : "md:ml-auto md:pl-8"
                       }`}
                     >
-                      <div className="border border-white/10 bg-white/5 p-6" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                      <div className="border border-white/10 bg-white/5 p-6" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                         <span className="inline-block rounded-full bg-accent/20 px-3 py-1 text-xs font-bold text-accent">
                           {m.year}
                         </span>

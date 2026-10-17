@@ -45,22 +45,21 @@ export function FeaturedDivision() {
             <RevealItem key={div.id} variant="fade-up">
               <Link
                 href={div.href}
-                className="group block editorial-card"
+                className="group block"
               >
-                {/* Image — full-width, clipped by parent card border-radius */}
+                {/* Image */}
                 <div className="relative overflow-hidden" style={{ aspectRatio: "380/238" }}>
                   <Image
                     src={div.image}
                     alt={div.name}
                     fill
-                    className="object-cover"
-                    style={{ transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                   />
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: "20px 20px 24px" }}>
+                <div style={{ paddingTop: 20 }}>
                   <p className="eyebrow" style={{ color: "#000", marginBottom: 8 }}>
                     {div.id.replace("-", " ")}
                   </p>

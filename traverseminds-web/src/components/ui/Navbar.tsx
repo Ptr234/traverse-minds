@@ -122,7 +122,7 @@ export function Navbar() {
 
           {/* ── CENTER SEGMENT: Nav links ── */}
           <div
-            className="hidden md:flex items-center justify-center flex-1"
+            className="hidden lg:flex items-center justify-center flex-1"
             style={{ ...glassStyle, height: 56, pointerEvents: "auto" }}
           >
             {navLinks.map((link) => {
@@ -194,7 +194,7 @@ export function Navbar() {
 
           {/* ── MOBILE: Center logo bar ── */}
           <div
-            className="md:hidden flex items-center justify-center flex-1"
+            className="lg:hidden flex items-center justify-center flex-1"
             style={{
               ...glassStyle,
               height: 48,
@@ -208,12 +208,12 @@ export function Navbar() {
           </div>
 
           {/* 2px gap */}
-          <div style={{ width: 2, flexShrink: 0 }} className="hidden md:block" />
+          <div style={{ width: 2, flexShrink: 0 }} className="hidden lg:block" />
 
           {/* ── RIGHT SEGMENT: Search/CTA button (64x56) ── */}
           <Link
             href="/contact"
-            className="hidden md:flex shrink-0 items-center justify-center hover:bg-[rgba(0,0,0,0.6)]!"
+            className="hidden lg:flex shrink-0 items-center justify-center hover:bg-[rgba(0,0,0,0.6)]!"
             style={{ ...glassStyle, width: 64, height: 56, pointerEvents: "auto" }}
           >
             <Search style={{ height: 20, width: 20, color: "#fff" }} />
@@ -221,7 +221,7 @@ export function Navbar() {
 
           {/* ── MOBILE: Hamburger (right segment) ── */}
           <button
-            className="md:hidden shrink-0 flex items-center justify-center"
+            className="lg:hidden shrink-0 flex items-center justify-center"
             style={{
               ...glassStyle,
               width: 58,
@@ -255,7 +255,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.4, ease }}
-              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-full max-w-[1240px] px-6"
+              className="hidden lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[1240px] px-6"
               style={{
                 pointerEvents: "auto",
                 marginTop: 8,
@@ -265,7 +265,7 @@ export function Navbar() {
             >
               <div 
                 className="overflow-hidden bg-white border border-black/5 shadow-2xl"
-                style={{ borderRadius: 24 }}
+                style={{ borderRadius: 0 }}
               >
                 <div className="grid grid-cols-12 gap-0">
                   {/* Left Sidebar Info */}

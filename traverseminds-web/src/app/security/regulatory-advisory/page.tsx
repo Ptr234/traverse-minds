@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { ServiceDetailLayout } from "@/components/security/ServiceDetailLayout";
+import { LegalReference } from "@/components/security/LegalReference";
+import { DATA_LAW_CASES, DATA_LAW_TOPICS, getCaseSummaries, getLegislationAnswers } from "@/lib/lawsafrica";
 
 export const metadata: Metadata = {
   title: "Regulatory Advisory | Traverse Security",
@@ -39,6 +41,14 @@ const serviceData = {
   }
 };
 
-export default function RegulatoryAdvisoryPage() {
-  return <ServiceDetailLayout {...serviceData} />;
+export default async function RegulatoryAdvisoryPage() {
+  const [answers, cases] = await Promise.all([
+    getLegislationAnswers(DATA_LAW_TOPICS),
+    getCaseSummaries(DATA_LAW_CASES),
+  ]);
+  return (
+    <ServiceDetailLayout {...serviceData}>
+      <LegalReference answers={answers} cases={cases} />
+    </ServiceDetailLayout>
+  );
 }

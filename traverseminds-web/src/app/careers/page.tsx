@@ -112,9 +112,9 @@ export default function CareersPage() {
                 <RevealItem key={benefit.title} variant="scale-fade">
                   <div
                     className="group flex flex-col items-center text-center border bg-white p-8"
-                    style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
+                    style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
                   >
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
                       <benefit.icon className="h-6 w-6" style={{ color: "#000" }} />
                     </div>
                     <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{benefit.title}</h3>
@@ -159,7 +159,7 @@ export default function CareersPage() {
                     <div
                       key={job.title}
                       className="group relative overflow-hidden border bg-white p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                      style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     >
                       <div className="absolute inset-0 bg-linear-to-r from-accent/3 to-transparent opacity-0 group-hover:opacity-100" style={{ transition: "opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
                       <div className="relative z-10">
@@ -185,7 +185,7 @@ export default function CareersPage() {
                   ))}
                 </div>
               ) : (
-                <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+                <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
                   <Briefcase className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
                   <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>No current openings</h3>
                   <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
@@ -221,7 +221,7 @@ export default function CareersPage() {
 
               <SectionReveal variant="scale-fade" delay={0.1}>
                 <div className="mt-8 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center bg-white/10" style={{ borderRadius: 8 }}>
+                  <div className="flex h-16 w-16 items-center justify-center bg-white/10" style={{ borderRadius: 0 }}>
                     <GraduationCap className="h-8 w-8 text-accent" />
                   </div>
                 </div>
@@ -276,7 +276,7 @@ export default function CareersPage() {
 
             <SectionReveal variant="slide-up" delay={0.15}>
               {formStatus === "success" ? (
-                <div className="border p-10 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}>
+                <div className="border p-10 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}>
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald/10 text-emerald">
                     <CheckCircle className="h-10 w-10" />
                   </div>
@@ -294,7 +294,7 @@ export default function CareersPage() {
                 <form
                   onSubmit={handleApplicationSubmit}
                   className="border p-8 md:p-10 space-y-6"
-                  style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
+                  style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
                 >
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div className="space-y-2">
@@ -307,7 +307,7 @@ export default function CareersPage() {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Jane Nakamya"
                         className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                        style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                        style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       />
                     </div>
 
@@ -321,7 +321,7 @@ export default function CareersPage() {
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="jane@example.com"
                         className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                        style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                        style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                       />
                     </div>
                   </div>
@@ -336,7 +336,7 @@ export default function CareersPage() {
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+256 700 000 000"
                       className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                      style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     />
                   </div>
 
@@ -350,7 +350,7 @@ export default function CareersPage() {
                       onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
                       placeholder="Tell us about yourself, your experience, and why you want to join Traverse Minds Africa..."
                       className="w-full border bg-white px-4 py-3 text-sm outline-none resize-none"
-                      style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     />
                   </div>
 
@@ -362,7 +362,7 @@ export default function CareersPage() {
                       required
                       accept=".pdf,.doc,.docx"
                       className="w-full min-h-11 border bg-white px-4 py-3 text-sm file:mr-4 file:border-0 file:bg-accent/10 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-accent cursor-pointer"
-                      style={{ borderRadius: 8, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
+                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
                     />
                     <p className="text-xs" style={{ color: "#919499" }}>Accepted formats: PDF, DOC, DOCX (max 5MB)</p>
                   </div>

@@ -111,7 +111,7 @@ export function ModulesShowcase() {
                 className="h-full border bg-white p-6 flex flex-col"
                 style={{
                   borderColor: "rgba(0,0,0,0.1)",
-                  borderRadius: 8,
+                  borderRadius: 0,
                   transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)"
                 }}
               >
@@ -144,7 +144,7 @@ export function ModulesShowcase() {
           ))}
         </SectionReveal>
 
-        <div className="mt-16 border bg-white p-8" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 8 }}>
+        <div className="mt-16 border bg-white p-8" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 0 }}>
           <TextReveal
             as="h3"
             variant="fade-up"

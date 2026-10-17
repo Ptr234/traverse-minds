@@ -37,7 +37,7 @@ export function EngagementProcess() {
         <SectionReveal
           variant="fade-up"
           staggerChildren={0.12}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2"
+          className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2"
           margin="-40px"
         >
           {steps.map((item) => (
@@ -45,18 +45,18 @@ export function EngagementProcess() {
               key={item.step}
               variant="slide-up"
             >
-              <div className="group relative overflow-hidden min-h-52" style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                <div className="absolute inset-0 bg-primary/80" style={{ transition: "background 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
-
-                <div className="relative z-10 p-7 flex items-start gap-5">
-                  <div className="shrink-0 flex h-12 w-12 items-center justify-center bg-white/10 text-accent" style={{ borderRadius: 8 }}>
-                    <item.icon className="h-5 w-5" />
-                  </div>
+              <div className="group">
+                <div className="relative overflow-hidden h-56" style={{ borderRadius: 0 }}>
+                  <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
+                <div className="mt-5 flex items-start gap-4">
+                  <span className="font-display text-2xl font-bold text-accent leading-none">{item.step}</span>
                   <div>
-                    <span className="font-display text-2xl font-bold text-accent/40" style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>{item.step}</span>
-                    <h3 className="mt-1 font-display text-lg font-bold text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{item.description}</p>
+                    <div className="flex items-center gap-3">
+                      <item.icon className="h-5 w-5 shrink-0 text-accent" />
+                      <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{item.title}</h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{item.description}</p>
                   </div>
                 </div>
               </div>

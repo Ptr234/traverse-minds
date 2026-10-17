@@ -52,7 +52,7 @@ export function RegistrationSections() {
         {/* Info Cards */}
         <SectionReveal variant="fade-up" staggerChildren={0.1} className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <RevealItem variant="scale-fade">
-            <div className="bg-white p-8 border" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 8 }}>
+            <div className="bg-white p-8 border" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 0 }}>
               <div className="h-10 w-10 flex items-center justify-center mb-4" style={{ background: "#ff4c00", borderRadius: 4 }}>
                 <Users className="h-6 w-6 text-white" />
               </div>
@@ -72,7 +72,7 @@ export function RegistrationSections() {
           </RevealItem>
 
           <RevealItem variant="scale-fade">
-            <div className="bg-white p-8 border" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 8 }}>
+            <div className="bg-white p-8 border" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 0 }}>
               <div className="h-10 w-10 flex items-center justify-center mb-4" style={{ background: "#ff4c00", borderRadius: 4 }}>
                 <Building2 className="h-6 w-6 text-white" />
               </div>

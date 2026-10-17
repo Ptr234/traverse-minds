@@ -110,7 +110,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
             className="fixed inset-0 z-50 flex items-center justify-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full max-w-md bg-white" style={{ borderRadius: 20, boxShadow: "0 32px 64px rgba(0,0,0,0.18), 0 8px 16px rgba(0,0,0,0.08)" }}>
+            <div className="relative w-full max-w-md bg-white" style={{ borderRadius: 0, boxShadow: "0 32px 64px rgba(0,0,0,0.18), 0 8px 16px rgba(0,0,0,0.08)" }}>
 
               {/* Close */}
               <button
@@ -151,7 +151,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                     style={{
                       borderBottom: "1px solid rgba(0,0,0,0.07)",
                       background: plan.featured ? "linear-gradient(135deg, #fff8f6 0%, #fff 100%)" : undefined,
-                      borderRadius: "20px 20px 0 0",
+                      borderRadius: 0,
                     }}
                   >
                     {plan.featured && (
@@ -198,7 +198,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                         required
                         disabled={status === "loading"}
                         className="w-full border border-black/10 bg-transparent px-4 py-3 text-sm text-black placeholder:text-black/25 outline-none transition-colors focus:border-black/30"
-                        style={{ borderRadius: 8 }}
+                        style={{ borderRadius: 0 }}
                       />
                       <input
                         type="email"
@@ -208,7 +208,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                         required
                         disabled={status === "loading"}
                         className="w-full border border-black/10 bg-transparent px-4 py-3 text-sm text-black placeholder:text-black/25 outline-none transition-colors focus:border-black/30"
-                        style={{ borderRadius: 8 }}
+                        style={{ borderRadius: 0 }}
                       />
                     </div>
 

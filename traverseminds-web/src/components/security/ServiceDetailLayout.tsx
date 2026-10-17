@@ -38,6 +38,8 @@ interface ServiceDetailLayoutProps {
     features: { title: string; description: string }[];
     benefits: string[];
   };
+  /** Extra sections rendered between the service content and the enquiry CTA */
+  children?: React.ReactNode;
 }
 
 const WHATSAPP_NUMBER = "+256775692334";
@@ -47,6 +49,7 @@ export function ServiceDetailLayout({
   description,
   image,
   content,
+  children,
 }: ServiceDetailLayoutProps) {
   const WHATSAPP_MESSAGE = `Hello Traverse Security, I'd like to enquire about your ${title} services.`;
   const Icon = ICON_MAP[title] || ShieldCheck;
@@ -75,7 +78,7 @@ export function ServiceDetailLayout({
           
           <div className="max-w-3xl">
             <SectionReveal variant="fade-blur">
-              <div className="flex h-16 w-16 items-center justify-center bg-white/10 text-accent mb-6" style={{ borderRadius: 12 }}>
+              <div className="flex h-16 w-16 items-center justify-center bg-white/10 text-accent mb-6" style={{ borderRadius: 0 }}>
                 <Icon className="h-8 w-8" />
               </div>
             </SectionReveal>
@@ -123,7 +126,7 @@ export function ServiceDetailLayout({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {content.features.map((feature, idx) => (
                     <SectionReveal key={feature.title} variant="fade-up" delay={idx * 0.1}>
-                      <div className="p-6 border border-black/5 bg-black/2" style={{ borderRadius: 12 }}>
+                      <div className="p-6 border border-black/5 bg-black/2" style={{ borderRadius: 0 }}>
                         <h3 className="font-display text-lg font-bold mb-3 text-black">{feature.title}</h3>
                         <p className="text-sm text-black/60 leading-relaxed">{feature.description}</p>
                       </div>
@@ -136,7 +139,7 @@ export function ServiceDetailLayout({
             <div className="lg:col-span-5">
               <div className="sticky top-24">
                 <SectionReveal variant="clip-inset">
-                  <div className="bg-primary p-8 md:p-10 text-white" style={{ borderRadius: 16 }}>
+                  <div className="bg-primary p-8 md:p-10 text-white" style={{ borderRadius: 0 }}>
                     <h3 className="font-display text-2xl font-bold mb-6">Why Traverse?</h3>
                     <ul className="space-y-4">
                       {content.benefits.map((benefit) => (
@@ -156,7 +159,7 @@ export function ServiceDetailLayout({
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-3 bg-[#25D366] px-6 py-4 text-base font-semibold text-white transition-transform active:scale-[0.98]"
-                        style={{ borderRadius: 8 }}
+                        style={{ borderRadius: 0 }}
                       >
                         <MessageCircle className="h-5 w-5" />
                         Chat on WhatsApp
@@ -169,6 +172,8 @@ export function ServiceDetailLayout({
           </div>
         </div>
       </section>
+
+      {children}
 
       {/* CTA Section */}
       <section id="enquiry" className="py-24 bg-[#f0f1f4]">

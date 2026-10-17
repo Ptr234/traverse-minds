@@ -35,11 +35,10 @@ function FeaturedEventCard({ ev }: { ev: SanityEvent }) {
   return (
     <Link
       href={`/events/${ev.slug}`}
-      className="group relative block overflow-hidden"
-      style={{ borderRadius: 20, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(0,0,0,0.12)" }}
+      className="group block"
     >
-      {/* Background image */}
-      <div className="relative min-h-130 md:min-h-150">
+      {/* Image */}
+      <div className="relative overflow-hidden h-80 md:h-120">
         {ev.thumbnailUrl ? (
           <Image
             src={ev.thumbnailUrl}
@@ -52,28 +51,27 @@ function FeaturedEventCard({ ev }: { ev: SanityEvent }) {
         ) : (
           <div className="absolute inset-0" style={{ background: "#212429" }} />
         )}
-        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/10" />
       </div>
 
-      {/* Content overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+      {/* Content */}
+      <div className="flex flex-col pt-6 md:pt-8">
         <div className="flex items-center gap-3 mb-4">
           <span className="bg-accent px-4 py-1.5 text-xs font-bold text-white uppercase tracking-widest" style={{ borderRadius: 999 }}>
             Featured Event
           </span>
           {ev.type && (
-            <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white border border-white/30" style={{ borderRadius: 999 }}>
+            <span className="px-4 py-1.5 text-xs font-semibold uppercase tracking-widest border" style={{ borderRadius: 999, color: "#212429", borderColor: "rgba(0,0,0,0.2)" }}>
               {ev.type}
             </span>
           )}
         </div>
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.05] max-w-3xl">
+        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.05] max-w-3xl" style={{ color: "#000" }}>
           {ev.title}
         </h2>
         {ev.tagline && (
-          <p className="mt-3 max-w-xl text-base md:text-lg" style={{ color: "rgba(255,255,255,0.7)" }}>{ev.tagline}</p>
+          <p className="mt-3 max-w-xl text-base md:text-lg" style={{ color: "#515459" }}>{ev.tagline}</p>
         )}
-        <div className="mt-5 flex flex-wrap gap-5 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+        <div className="mt-5 flex flex-wrap gap-5 text-sm" style={{ color: "#515459" }}>
           <span className="flex items-center gap-2">
             <Calendar className="h-4 w-4" />
             {new Date(ev.date).toLocaleDateString("en-UG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
@@ -97,26 +95,22 @@ function EventCard({ ev }: { ev: SanityEvent }) {
   return (
     <Link
       href={`/events/${ev.slug}`}
-      className="group block overflow-hidden border bg-white"
-      style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
+      className="group flex h-full flex-col"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="relative aspect-video md:aspect-auto md:min-h-72 overflow-hidden">
-          {ev.thumbnailUrl ? (
-            <Image
-              src={ev.thumbnailUrl}
-              alt={ev.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-linear-to-br from-gray-200 to-gray-300" />
-          )}
-          <div className="absolute inset-0 bg-linear-to-r from-transparent to-white/80 hidden md:block" />
-          <div className="absolute inset-0 bg-linear-to-t from-white to-transparent md:hidden" />
-        </div>
-        <div className="flex flex-col justify-center p-8 md:p-12">
+      <div className="relative aspect-video overflow-hidden">
+        {ev.thumbnailUrl ? (
+          <Image
+            src={ev.thumbnailUrl}
+            alt={ev.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-linear-to-br from-gray-200 to-gray-300" />
+        )}
+      </div>
+      <div className="flex flex-1 flex-col pt-5">
           {ev.type && (
             <span className="text-[11px] font-semibold uppercase tracking-widest text-accent">
               {ev.type}
@@ -140,10 +134,9 @@ function EventCard({ ev }: { ev: SanityEvent }) {
               <span className="flex items-center gap-1.5"><Tag className="h-4 w-4" />{ev.price}</span>
             )}
           </div>
-          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent">
+          <div className="mt-auto pt-5 flex items-center gap-2 text-sm font-semibold text-accent">
             View Details & RSVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
-        </div>
       </div>
     </Link>
   );
@@ -223,12 +216,12 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
           </motion.div>
 
           {filteredUpcoming.length === 0 ? (
-            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <p className="text-lg font-semibold" style={{ color: "#000" }}>No upcoming events</p>
               <p className="mt-2" style={{ color: "#515459" }}>Check back soon for new events.</p>
             </div>
           ) : (
-            <div className="flex flex-col gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
               {filteredUpcoming.map((ev) => (
                 <SectionReveal key={ev._id} variant="clip-inset">
                   <EventCard ev={ev} />
@@ -253,7 +246,7 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
 
           {past.length === 0 ? (
             <SectionReveal variant="scale-fade" delay={0.15}>
-              <div className="border-2 border-dashed py-16 max-w-2xl mx-auto text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)" }}>
+              <div className="border-2 border-dashed py-16 max-w-2xl mx-auto text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
                 <Clock className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
                 <p className="text-lg font-semibold" style={{ color: "#000" }}>No past events yet</p>
                 <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
@@ -265,14 +258,14 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {past.map((ev) => (
                 <RevealItem key={ev._id} variant="scale-fade">
-                  <Link href={`/events/${ev.slug}`} className="group block overflow-hidden border bg-white" style={{ borderRadius: 12, borderColor: "rgba(0,0,0,0.1)" }}>
+                  <Link href={`/events/${ev.slug}`} className="group block">
                     <div className="relative aspect-video overflow-hidden">
                       {ev.thumbnailUrl
-                        ? <Image src={ev.thumbnailUrl} alt={ev.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                        ? <Image src={ev.thumbnailUrl} alt={ev.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                         : <div className="absolute inset-0 bg-linear-to-br from-gray-200 to-gray-300" />
                       }
                     </div>
-                    <div className="p-5">
+                    <div className="pt-4">
                       <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#ff4c00" }}>{ev.type}</span>
                       <h3 className="mt-1 font-semibold" style={{ color: "#000" }}>{ev.title}</h3>
                       <p className="mt-2 text-sm flex items-center gap-1.5" style={{ color: "#919499" }}>

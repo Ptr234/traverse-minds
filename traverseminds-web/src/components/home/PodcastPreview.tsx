@@ -74,7 +74,7 @@ export function PodcastPreview() {
           {/* Left — Podcast card */}
           <SectionReveal variant="fade-up" delay={0.2} className="lg:col-span-2">
             <div className="editorial-card-dark flex flex-col items-center justify-center" style={{ padding: 48 }}>
-              <div className="flex items-center justify-center" style={{ height: 96, width: 96, border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, marginBottom: 32 }}>
+              <div className="flex items-center justify-center" style={{ height: 96, width: 96, border: "1px solid rgba(255,255,255,0.1)", borderRadius: 0, marginBottom: 32 }}>
                 <Mic style={{ height: 40, width: 40, color: "#ff4c00" }} />
               </div>
 

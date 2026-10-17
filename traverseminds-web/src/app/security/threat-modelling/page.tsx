@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServiceDetailLayout } from "@/components/security/ServiceDetailLayout";
+import { ThreatLandscape } from "@/components/security/ThreatLandscape";
 
 export const metadata: Metadata = {
   title: "Threat Modelling | Traverse Security",
@@ -40,5 +41,9 @@ const serviceData = {
 };
 
 export default function ThreatModellingPage() {
-  return <ServiceDetailLayout {...serviceData} />;
+  return (
+    <ServiceDetailLayout {...serviceData}>
+      <ThreatLandscape />
+    </ServiceDetailLayout>
+  );
 }

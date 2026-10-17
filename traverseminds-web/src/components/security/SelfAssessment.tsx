@@ -139,11 +139,11 @@ export function SelfAssessment() {
                       ? "border-white/10 bg-white/5"
                       : "border-white/6 bg-white/[0.02]"
                   )}
-                  style={{ borderRadius: 8, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                  style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
-                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center bg-white/6 text-[11px] font-bold text-white/30 font-mono" style={{ borderRadius: 6 }}>
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center bg-white/6 text-[11px] font-bold text-white/30 font-mono" style={{ borderRadius: 0 }}>
                         {idx + 1}
                       </span>
                       <p className="text-sm md:text-base font-medium text-white/80 leading-relaxed">
@@ -220,14 +220,14 @@ export function SelfAssessment() {
                 band.borderClass,
                 band.bgClass
               )}
-              style={{ borderRadius: 16 }}
+              style={{ borderRadius: 0 }}
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="mx-auto mb-6 flex h-20 w-20 items-center justify-center bg-white/10"
-                style={{ borderRadius: 8 }}
+                style={{ borderRadius: 0 }}
               >
                 <BandIcon className={cn("h-10 w-10", band.color)} />
               </motion.div>
@@ -256,7 +256,7 @@ export function SelfAssessment() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
               className="mt-6 border border-white/6 bg-white/[0.02] p-6 md:p-8"
-              style={{ borderRadius: 8 }}
+              style={{ borderRadius: 0 }}
             >
               <h4 className="font-display text-lg font-bold text-white mb-3">
                 Our Recommendation

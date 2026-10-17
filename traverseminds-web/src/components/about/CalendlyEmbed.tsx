@@ -17,8 +17,8 @@ export function CalendlyEmbed() {
           transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
           className="mx-auto max-w-2xl"
         >
-          <div className="border bg-white p-10 md:p-14 text-center" style={{ borderRadius: 16, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center bg-accent/10" style={{ borderRadius: 8 }}>
+          <div className="border bg-white p-10 md:p-14 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
               <Calendar className="h-6 w-6 text-accent" />
             </div>
             <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}>

@@ -53,7 +53,7 @@ export function Hero() {
           style={{
             maxWidth: 520,
             padding: "32px 24px",
-            borderRadius: 8,
+            borderRadius: 0,
             background: "hsla(0,0%,100%,0.8)",
             backdropFilter: "blur(10px)",
           }}

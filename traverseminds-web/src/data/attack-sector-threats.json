@@ -1,0 +1,325 @@
+{
+  "source": "MITRE ATT&CK Enterprise",
+  "attackVersion": "20.0",
+  "generatedAt": "2026-10-17",
+  "totals": {
+    "groups": 178,
+    "sectorGroups": 113,
+    "financial": 47,
+    "government": 77,
+    "africa": 8
+  },
+  "topTechniques": [
+    {
+      "id": "T1204.002",
+      "name": "Malicious File",
+      "url": "https://attack.mitre.org/techniques/T1204/002",
+      "tactics": [
+        "Execution"
+      ],
+      "groupCount": 67,
+      "summary": "An adversary may rely upon a user opening a malicious file in order to gain execution. Users may be subjected to social engineering to get them to open a file that will lead to code execution."
+    },
+    {
+      "id": "T1105",
+      "name": "Ingress Tool Transfer",
+      "url": "https://attack.mitre.org/techniques/T1105",
+      "tactics": [
+        "Command And Control"
+      ],
+      "groupCount": 63,
+      "summary": "Adversaries may transfer tools or other files from an external system into a compromised environment."
+    },
+    {
+      "id": "T1059.001",
+      "name": "PowerShell",
+      "url": "https://attack.mitre.org/techniques/T1059/001",
+      "tactics": [
+        "Execution"
+      ],
+      "groupCount": 63,
+      "summary": "Adversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system."
+    },
+    {
+      "id": "T1566.001",
+      "name": "Spearphishing Attachment",
+      "url": "https://attack.mitre.org/techniques/T1566/001",
+      "tactics": [
+        "Initial Access"
+      ],
+      "groupCount": 62,
+      "summary": "Adversaries may send spearphishing emails with a malicious attachment in an attempt to gain access to victim systems. Spearphishing attachment is a specific variant of spearphishing."
+    },
+    {
+      "id": "T1588.002",
+      "name": "Tool",
+      "url": "https://attack.mitre.org/techniques/T1588/002",
+      "tactics": [
+        "Resource Development"
+      ],
+      "groupCount": 60,
+      "summary": "Adversaries may buy, steal, or download software tools that can be used during targeting. Tools can be open or closed source, free or commercial."
+    },
+    {
+      "id": "T1059.003",
+      "name": "Windows Command Shell",
+      "url": "https://attack.mitre.org/techniques/T1059/003",
+      "tactics": [
+        "Execution"
+      ],
+      "groupCount": 52,
+      "summary": "Adversaries may abuse the Windows command shell for execution. The Windows command shell (cmd) is the primary command prompt on Windows systems."
+    },
+    {
+      "id": "T1036.005",
+      "name": "Match Legitimate Resource Name or Location",
+      "url": "https://attack.mitre.org/techniques/T1036/005",
+      "tactics": [
+        "Stealth"
+      ],
+      "groupCount": 47,
+      "summary": "Adversaries may match or approximate the name or location of legitimate files, Registry keys, or other resources when naming/placing them."
+    },
+    {
+      "id": "T1082",
+      "name": "System Information Discovery",
+      "url": "https://attack.mitre.org/techniques/T1082",
+      "tactics": [
+        "Discovery"
+      ],
+      "groupCount": 45,
+      "summary": "An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture."
+    },
+    {
+      "id": "T1053.005",
+      "name": "Scheduled Task",
+      "url": "https://attack.mitre.org/techniques/T1053/005",
+      "tactics": [
+        "Execution",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "groupCount": 45,
+      "summary": "Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or recurring execution of malicious code. There are multiple ways to access the Task Scheduler in Windows."
+    },
+    {
+      "id": "T1547.001",
+      "name": "Registry Run Keys / Startup Folder",
+      "url": "https://attack.mitre.org/techniques/T1547/001",
+      "tactics": [
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "groupCount": 45,
+      "summary": "Adversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key."
+    },
+    {
+      "id": "T1071.001",
+      "name": "Web Protocols",
+      "url": "https://attack.mitre.org/techniques/T1071/001",
+      "tactics": [
+        "Command And Control"
+      ],
+      "groupCount": 40,
+      "summary": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection/network filtering by blending in with existing traffic."
+    },
+    {
+      "id": "T1083",
+      "name": "File and Directory Discovery",
+      "url": "https://attack.mitre.org/techniques/T1083",
+      "tactics": [
+        "Discovery"
+      ],
+      "groupCount": 39,
+      "summary": "Adversaries may enumerate files and directories or may search in specific locations of a host or network share for certain information within a file system."
+    }
+  ],
+  "groups": [
+    {
+      "id": "G0069",
+      "name": "MuddyWater",
+      "aliases": [
+        "Earth Vetala",
+        "MERCURY",
+        "Static Kitten"
+      ],
+      "url": "https://attack.mitre.org/groups/G0069",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 68,
+      "summary": "MuddyWater is a cyber espionage group assessed to be a subordinate element within Iran's Ministry of Intelligence and Security (MOIS)."
+    },
+    {
+      "id": "G0087",
+      "name": "APT39",
+      "aliases": [
+        "ITG07",
+        "Chafer",
+        "Remix Kitten"
+      ],
+      "url": "https://attack.mitre.org/groups/G0087",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 53,
+      "summary": "APT39 is one of several names for cyber espionage activity conducted by the Iranian Ministry of Intelligence and Security (MOIS) through the front company Rana Intelligence Computing since at least 2014."
+    },
+    {
+      "id": "G1006",
+      "name": "Earth Lusca",
+      "aliases": [
+        "TAG-22",
+        "Charcoal Typhoon",
+        "CHROMIUM"
+      ],
+      "url": "https://attack.mitre.org/groups/G1006",
+      "sectors": [
+        "financial",
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 44,
+      "summary": "Earth Lusca is a suspected China-based cyber espionage group that has been active since at least April 2019."
+    },
+    {
+      "id": "G0117",
+      "name": "Fox Kitten",
+      "aliases": [
+        "UNC757",
+        "Parisite",
+        "Pioneer Kitten"
+      ],
+      "url": "https://attack.mitre.org/groups/G0117",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 41,
+      "summary": "Fox Kitten is threat actor with a suspected nexus to the Iranian government that has been active since at least 2017 against entities in the Middle East, North Africa, Europe, Australia, and North America."
+    },
+    {
+      "id": "G0090",
+      "name": "WIRTE",
+      "aliases": [
+        "Ashen Lepus"
+      ],
+      "url": "https://attack.mitre.org/groups/G0090",
+      "sectors": [
+        "financial",
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 26,
+      "summary": "WIRTE is a cyberespionage actor, believed to be a subgroup of the Hamas-affiliated Gaza Cybergang, that has been active since at least August 2018."
+    },
+    {
+      "id": "G0100",
+      "name": "Inception",
+      "aliases": [
+        "Inception Framework",
+        "Cloud Atlas"
+      ],
+      "url": "https://attack.mitre.org/groups/G0100",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 22,
+      "summary": "Inception is a cyber espionage group active since at least 2014. The group has targeted multiple industries and governmental entities primarily in Russia, but has also been active in the United States and throughout Europe, Asia, Africa, and the Middle East."
+    },
+    {
+      "id": "G1034",
+      "name": "Daggerfly",
+      "aliases": [
+        "Evasive Panda",
+        "BRONZE HIGHLAND"
+      ],
+      "url": "https://attack.mitre.org/groups/G1034",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 17,
+      "summary": "Daggerfly is a People's Republic of China-linked APT entity active since at least 2012. Daggerfly has targeted individuals, government and NGO entities, and telecommunication companies in Asia and Africa."
+    },
+    {
+      "id": "G0135",
+      "name": "BackdoorDiplomacy",
+      "aliases": [],
+      "url": "https://attack.mitre.org/groups/G0135",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": true,
+      "techniqueCount": 15,
+      "summary": "BackdoorDiplomacy is a cyber espionage threat group that has been active since at least 2017. BackdoorDiplomacy has targeted Ministries of Foreign Affairs and telecommunication companies in Africa, Europe, the Middle East, and Asia."
+    },
+    {
+      "id": "G0094",
+      "name": "Kimsuky",
+      "aliases": [
+        "Black Banshee",
+        "Velvet Chollima",
+        "Emerald Sleet"
+      ],
+      "url": "https://attack.mitre.org/groups/G0094",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": false,
+      "techniqueCount": 130,
+      "summary": "Kimsuky is a Democratic People's Republic of Korea (DPRK)-based cyber espionage group that has been active since at least 2012. The group initially targeted South Korean government agencies, think tanks, and subject-matter experts in various fields."
+    },
+    {
+      "id": "G0082",
+      "name": "APT38",
+      "aliases": [
+        "NICKEL GLADSTONE",
+        "BeagleBoyz",
+        "Bluenoroff"
+      ],
+      "url": "https://attack.mitre.org/groups/G0082",
+      "sectors": [
+        "financial"
+      ],
+      "mentionsAfrica": false,
+      "techniqueCount": 115,
+      "summary": "APT38 is a North Korean state-sponsored threat group that specializes in financial cyber operations; it has been attributed to the Reconnaissance General Bureau."
+    },
+    {
+      "id": "G0032",
+      "name": "Lazarus Group",
+      "aliases": [
+        "Labyrinth Chollima",
+        "HIDDEN COBRA",
+        "Guardians of Peace"
+      ],
+      "url": "https://attack.mitre.org/groups/G0032",
+      "sectors": [
+        "financial"
+      ],
+      "mentionsAfrica": false,
+      "techniqueCount": 93,
+      "summary": "Lazarus Group is a North Korean state-sponsored cyber threat group attributed to the Reconnaissance General Bureau (RGB)."
+    },
+    {
+      "id": "G0129",
+      "name": "Mustang Panda",
+      "aliases": [
+        "TA416",
+        "RedDelta",
+        "BRONZE PRESIDENT"
+      ],
+      "url": "https://attack.mitre.org/groups/G0129",
+      "sectors": [
+        "government"
+      ],
+      "mentionsAfrica": false,
+      "techniqueCount": 85,
+      "summary": "Mustang Panda is a China-based cyber espionage threat actor that has been conducting operations since at least 2012. Mustang Panda has been known to use tailored phishing lures and decoy documents to deliver malicious payloads."
+    }
+  ]
+}

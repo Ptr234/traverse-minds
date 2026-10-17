@@ -73,7 +73,7 @@ export function NewsletterSignup() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="flex flex-col items-center gap-4"
-              style={{ padding: 32, borderRadius: 8, background: "rgba(43,146,57,0.08)", border: "1px solid rgba(43,146,57,0.2)" }}
+              style={{ padding: 32, borderRadius: 0, background: "rgba(43,146,57,0.08)", border: "1px solid rgba(43,146,57,0.2)" }}
             >
               <div className="flex items-center justify-center" style={{ height: 48, width: 48, background: "#2b9239", borderRadius: 4 }}>
                 <CheckCircle2 className="h-6 w-6 text-white" />
