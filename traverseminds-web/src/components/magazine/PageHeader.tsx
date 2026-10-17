@@ -17,7 +17,7 @@ export function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <header className="container-max pt-8 pb-10">
+    <header className="container-max w-full pt-8 pb-10">
       <Breadcrumbs items={crumbs} />
       {kicker && <Kicker className="mt-6">{kicker}</Kicker>}
       <h1 className="mt-3 max-w-4xl font-serif text-[40px] font-semibold leading-[1.05] tracking-[-0.01em] text-black md:text-[56px]">

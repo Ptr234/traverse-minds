@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import Image from "next/image";
-import { Calendar, User, FileText, ArrowLeft } from "lucide-react";
+import { Calendar, User, FileText } from "lucide-react";
 import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 import { sanityClient } from "@/sanity/client";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -58,27 +59,13 @@ export default async function ArchivePage() {
   return (
     <PageTransition>
       {/* Header */}
-      <section style={{ background: "#0a0a0a", paddingTop: 120, paddingBottom: 64 }}>
-        <div className="container-max px-6 lg:px-8">
-          <Link
-            href="/think-tank"
-            className="inline-flex items-center gap-2 text-sm mb-8"
-            style={{ color: "rgba(255,255,255,0.4)", transition: "color 0.2s" }}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Think Tank
-          </Link>
-          <SectionReveal variant="clip-left">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Research Archive</p>
-            <TextReveal variant="slide-up" className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white">
-              All Publications
-            </TextReveal>
-            <p className="mt-4 max-w-xl text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-              Independent analysis and policy recommendations for Africa&apos;s digital economy.
-            </p>
-          </SectionReveal>
-        </div>
-      </section>
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Think Tank", href: "/think-tank" }, { name: "Archive", href: "/think-tank/archive" }]}
+        kicker="Research archive"
+        title="All publications"
+        dek="Independent analysis and policy recommendations for Africa's digital economy."
+      />
 
       {/* Archive Grid */}
       <section style={{ background: "#ffffff", paddingTop: 56, paddingBottom: 80 }}>

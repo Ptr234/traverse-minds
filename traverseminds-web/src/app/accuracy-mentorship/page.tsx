@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { AccuracyMentorshipHero } from "@/components/accuracy-mentorship/Hero";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { ModulesShowcase } from "@/components/accuracy-mentorship/ModulesShowcase";
 import { RegistrationSections } from "@/components/accuracy-mentorship/RegistrationSections";
 import { SponsorCTA } from "@/components/accuracy-mentorship/SponsorCTA";
@@ -16,7 +17,13 @@ export const metadata: Metadata = {
 export default function AccuracyMentorshipPage() {
   return (
     <>
-      <AccuracyMentorshipHero />
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Accuracy Mentorship", href: "/accuracy-mentorship" }]}
+        kicker="Accuracy Mentorship Program"
+        title="The quiet discipline of getting it right"
+        dek="Preparing young people to live with vigour, meaning and self-sufficiency in a world that increasingly rewards appearance over substance."
+      />
 
       {/* Why This Program */}
       <section

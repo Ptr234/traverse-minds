@@ -4,46 +4,23 @@
 import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { AfricaMap } from "@/components/ui/AfricaMap";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
-
-const contactHeroImages = [
-  "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2020&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop",
-];
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 
 export default function ContactPage() {
   return (
     <PageTransition>
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36">
-        <ImageSlideshow images={contactHeroImages} overlay="bg-primary/70" />
-
-        <div className="container-max relative z-10 px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <SectionReveal variant="fade-blur">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Contact</p>
-            </SectionReveal>
-            <TextReveal
-              as="h1"
-              variant="slide-up"
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
-            >
-              Get in touch
-            </TextReveal>
-            <SectionReveal variant="fade-up" delay={0.3}>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Whether you need a security assessment, want to attend an event, or have a research partnership in mind.
-              </p>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]}
+        kicker="Contact"
+        title="Get in touch"
+        dek="Whether you need a security assessment, want to attend an event, or have a research partnership in mind."
+      />
 
       {/* Form + Sidebar */}
       <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

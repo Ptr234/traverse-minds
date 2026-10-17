@@ -3,18 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { Briefcase, Users, Zap, Globe, ArrowRight, GraduationCap, Loader2, CheckCircle } from "lucide-react";
-
-const careersHeroImages = [
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2074&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop",
-];
 
 const benefits = [
   { icon: Globe, title: "Regional Impact", desc: "Work on projects that directly influence digital policy and security across Africa." },
@@ -57,52 +51,17 @@ export default function CareersPage() {
   return (
     <main className="flex flex-col">
       <PageTransition>
-        {/* Hero */}
-        <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36 text-white">
-          <ImageSlideshow images={careersHeroImages} overlay="bg-primary/70" />
-
-          <div className="container-max relative z-10 px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-            >
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Careers</p>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
-            >
-              Build the future of{" "}
-              <span style={{ color: "#ff4c00" }}>civic-tech</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
-              className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
-            >
-              We are looking for brilliant minds who want to solve the hardest technical
-              and social challenges in Africa&apos;s digital landscape.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.3, ease: [0.215, 0.61, 0.355, 1] }}
-              className="mt-10"
-            >
-              <Button variant="primary" size="lg" href="#openings">
-                View Open Positions
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </motion.div>
+        <SectionBar />
+        <PageHeader
+          crumbs={[{ name: "Home", href: "/" }, { name: "Careers", href: "/careers" }]}
+          kicker="Careers"
+          title="Build the future of civic tech"
+          dek="We are looking for people who want to solve the hardest technical and social challenges in Africa's digital landscape."
+        >
+          <div className="mt-6">
+            <Button variant="primary" size="lg" href="#openings">View open positions</Button>
           </div>
-        </section>
+        </PageHeader>
 
         {/* Benefits */}
         <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

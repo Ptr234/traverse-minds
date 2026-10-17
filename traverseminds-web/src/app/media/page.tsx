@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { Hero as MediaHero } from "@/components/media/Hero";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { Newspaper, MessageSquare, Download, ArrowRight, Mic, Rss } from "lucide-react";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -24,7 +25,13 @@ export default function MediaPage() {
   return (
     <main className="flex flex-col">
       <PageTransition>
-        <MediaHero />
+        <SectionBar />
+        <PageHeader
+          crumbs={[{ name: "Home", href: "/" }, { name: "Media", href: "/media" }]}
+          kicker="Facts & Figures"
+          title="The Policy Podcast"
+          dek="Unpacking the data, laws and technology shaping Africa."
+        />
 
         {/* Media Philosophy */}
         <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

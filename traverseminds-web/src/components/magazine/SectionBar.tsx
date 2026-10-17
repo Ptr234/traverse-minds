@@ -13,7 +13,7 @@ export function SectionBar() {
   const today = useSyncExternalStore(noSubscribe, todayInBrowser, () => "");
 
   return (
-    <div className="container-max pt-28 lg:pt-32">
+    <div className="container-max w-full pt-28 lg:pt-32">
       <div className="border-t-[3px] border-black">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-black/15 py-3">
           <p className="min-w-[14ch] text-[13px] text-gn-400" suppressHydrationWarning>
