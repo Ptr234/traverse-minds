@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { spaceGrotesk, inter, ibmPlexMono } from "@/lib/fonts";
+import { spaceGrotesk, inter, ibmPlexMono, sourceSerif } from "@/lib/fonts";
 import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} ${sourceSerif.variable}`}
     >
       <head>
         <StructuredData type="organization" />

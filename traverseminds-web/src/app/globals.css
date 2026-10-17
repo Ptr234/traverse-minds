@@ -58,6 +58,7 @@
   --font-sans: var(--font-body), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), "Space Grotesk", sans-serif;
   --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
+  --font-serif: var(--font-editorial), "Source Serif 4", Georgia, serif;
 
   /* Radius — GatesNotes Scale: 4px / 8px / 16px */
   --radius-sm: 4px;

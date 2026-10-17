@@ -1,80 +1,52 @@
-import dynamic from "next/dynamic";
-import { Hero } from "@/components/home/Hero";
-import { WhatWeDo } from "@/components/home/WhatWeDo";
-import { StatsCounter } from "@/components/home/StatsCounter";
-import { FeaturedDivision } from "@/components/home/FeaturedDivision";
-import { PublicRecordTeaser } from "@/components/home/PublicRecordTeaser";
 import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { CitedStats } from "@/components/ui/CitedStats";
-import { getStatistics } from "@/lib/statistics";
-import { sanityClient } from "@/sanity/client";
-import type { SanityUpcomingEvent } from "@/components/home/UpcomingEvent";
-
-const ThinkTankPreview = dynamic(() =>
-  import("@/components/home/ThinkTankPreview").then((m) => m.ThinkTankPreview)
-);
-const UpcomingEvent = dynamic(() =>
-  import("@/components/home/UpcomingEvent").then((m) => m.UpcomingEvent)
-);
-const PodcastPreview = dynamic(() =>
-  import("@/components/home/PodcastPreview").then((m) => m.PodcastPreview)
-);
-const AfricaMapReveal = dynamic(() =>
-  import("@/components/home/AfricaMapReveal").then((m) => m.AfricaMapReveal)
-);
-const AfricaMap = dynamic(() =>
-  import("@/components/ui/AfricaMap").then((m) => m.AfricaMap)
-);
-const NewsletterSignup = dynamic(() =>
-  import("@/components/home/NewsletterSignup").then((m) => m.NewsletterSignup)
-);
-
-async function getUpcomingEvent(): Promise<SanityUpcomingEvent | null> {
-  try {
-    return await sanityClient.fetch(
-      `coalesce(
-        *[_type == "event" && isPast != true && isFeatured == true] | order(date asc)[0]{
-          _id, title, "slug": slug.current, date, location, capacity, tagline, price,
-          "thumbnailUrl": thumbnail.asset->url
-        },
-        *[_type == "event" && isPast != true] | order(date asc)[0]{
-          _id, title, "slug": slug.current, date, location, capacity, tagline, price,
-          "thumbnailUrl": thumbnail.asset->url
-        }
-      )`
-    );
-  } catch {
-    return null;
-  }
-}
+import { NewsletterSignup } from "@/components/home/NewsletterSignup";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { LeadStory } from "@/components/magazine/LeadStory";
+import { Briefing, type BriefingItem } from "@/components/magazine/Briefing";
+import { StorySection } from "@/components/magazine/StorySection";
+import { Diary } from "@/components/magazine/Diary";
+import { DivisionIndex } from "@/components/magazine/DivisionIndex";
+import { getMagazineContent } from "@/lib/content";
+import { getStatistics, formatStatistic } from "@/lib/statistics";
+import { getThreatWatch } from "@/lib/cisa";
 
 export default async function HomePage() {
-  const [upcomingEvent, homeStats] = await Promise.all([getUpcomingEvent(), getStatistics("home", 4)]);
+  const [content, homeStats, threats] = await Promise.all([
+    getMagazineContent(),
+    getStatistics("home", 6),
+    getThreatWatch(1, { cvss: false }),
+  ]);
+
+  const [lead, ...otherPosts] = content.posts;
+  const latest = content.latest.filter((s) => s.href !== lead?.href).slice(0, 5);
+
+  const briefing: BriefingItem[] = [
+    ...(threats
+      ? [{ value: String(threats.addedLast30Days), label: "Software flaws newly confirmed as exploited in the last 30 days", source: "CISA KEV catalogue", href: "/security" }]
+      : []),
+    // Cited Sanity figures; population is context rather than news, so it is left out here
+    ...homeStats
+      .filter((s) => !s._id.includes("population"))
+      .slice(0, threats ? 3 : 4)
+      .map((s) => ({ value: formatStatistic(s), label: `${s.label} (${s.period})`, source: s.sourceOrg, href: "/think-tank" })),
+  ];
 
   return (
     <PageTransition>
-      <Hero />
-      <StatsCounter />
-      <WhatWeDo />
-      <CitedStats
-        stats={homeStats}
-        eyebrow="Africa's Digital Reality"
-        title="The numbers behind our work"
-        background="#f0f1f4"
-      />
-      <FeaturedDivision />
-      <PublicRecordTeaser />
-      <ThinkTankPreview />
-      <UpcomingEvent event={upcomingEvent} />
-      <PodcastPreview />
-      <AfricaMapReveal>
-        <AfricaMap />
-      </AfricaMapReveal>
-      <section className="section-padding-sm overflow-hidden">
+      <SectionBar />
+      {lead && <LeadStory lead={lead} latest={latest} />}
+      <Briefing items={briefing} />
+      <StorySection title="Research" href="/think-tank" stories={content.reports} layout="feature" />
+      <StorySection title="Analysis" href="/blog" stories={otherPosts} background="paper" />
+      <Diary upcoming={content.upcomingEvents} past={content.pastEvents} />
+      <DivisionIndex />
+      <section className="section-padding-sm overflow-hidden border-t border-black/10">
         <TrustLogoStrip variant="light" />
       </section>
-      <NewsletterSignup />
+      <div id="newsletter">
+        <NewsletterSignup />
+      </div>
     </PageTransition>
   );
 }

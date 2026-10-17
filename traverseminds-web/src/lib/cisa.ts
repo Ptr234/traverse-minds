@@ -77,7 +77,7 @@ export type ThreatWatchData = {
 };
 
 /** Returns null if CISA is unreachable, so callers can hide the section instead of failing the build. */
-export async function getThreatWatch(limit = 6): Promise<ThreatWatchData | null> {
+export async function getThreatWatch(limit = 6, { cvss = true }: { cvss?: boolean } = {}): Promise<ThreatWatchData | null> {
   try {
     const res = await fetch(KEV_URL, { signal: AbortSignal.timeout(30000) });
     if (!res.ok) throw new Error(`CISA KEV: HTTP ${res.status}`);
@@ -92,7 +92,7 @@ export async function getThreatWatch(limit = 6): Promise<ThreatWatchData | null>
       total: catalog.vulnerabilities.length,
       addedLast30Days: sorted.filter((v) => v.dateAdded >= since).length,
       ransomwareLinked: catalog.vulnerabilities.filter((v) => v.knownRansomwareCampaignUse === "Known").length,
-      latest: await withCvss(
+      latest: await (cvss ? withCvss : async (x: ThreatWatchItem[]) => x)(
         sorted.slice(0, limit).map((v) => ({
           cveId: v.cveID,
           vendor: v.vendorProject,
