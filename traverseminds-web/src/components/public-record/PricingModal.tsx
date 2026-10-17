@@ -6,13 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export interface PricingPlan {
-  name: string;
-  price: string;
-  period: string;
-  features: string[];
-  featured?: boolean;
-}
+export type { PricingPlan } from "@/lib/plans";
+import type { PricingPlan } from "@/lib/plans";
 
 interface Props {
   plan: PricingPlan | null;

@@ -1,26 +1,35 @@
-export interface Env {
-  RESEND_API_KEY: string;
-}
+import { SITE_URL, type Env } from "./_lib";
+export type { Env } from "./_lib";
 
-export async function sendEmail(apiKey: string, payload: {
-  from: string;
+export const DEFAULT_FROM = "hello@traverseminds.com";
+export const DEFAULT_NOTIFY = "traversemindsug@gmail.com";
+
+export const sender = (env: Env, label = "Traverse Minds Africa") => `${label} <${env.EMAIL_FROM || DEFAULT_FROM}>`;
+export const notifyTo = (env: Env) => env.EMAIL_NOTIFY || DEFAULT_NOTIFY;
+
+export async function sendEmail(env: Env, payload: {
+  from?: string;
   to: string;
   replyTo?: string;
   subject: string;
   html: string;
+  /** Base64-encoded file contents */
+  attachments?: { filename: string; content: string }[];
 }) {
+  if (!env.RESEND_API_KEY) throw new Error("RESEND_API_KEY is not set");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: payload.from,
+      from: payload.from ?? sender(env),
       to: [payload.to],
       reply_to: payload.replyTo,
       subject: payload.subject,
       html: payload.html,
+      attachments: payload.attachments,
     }),
   });
   if (!res.ok) throw new Error(await res.text());
@@ -59,7 +68,7 @@ export function layout(title: string, body: string): string {
         <tr>
           <td style="padding:20px 40px;background:#f0f1f4;border-top:1px solid rgba(0,0,0,0.08);">
             <p style="margin:0;font-size:11px;color:#919499;text-align:center;letter-spacing:0.3px;line-height:1.6;">
-              Traverse Minds Africa &bull; <a href="https://traverseminds.com" style="color:#919499;text-decoration:none;">traverseminds.com</a>
+              Traverse Minds Africa &bull; <a href="${SITE_URL}" style="color:#919499;text-decoration:none;">traverseminds.ug</a>
             </p>
           </td>
         </tr>
@@ -96,11 +105,12 @@ export function ctaButton(label: string, href: string): string {
   </table>`;
 }
 
-export function signature(): string {
+export function signature(env: Env): string {
+  const from = env.EMAIL_FROM || DEFAULT_FROM;
   return `
   <p style="margin:28px 0 0;font-size:13px;color:#919499;line-height:1.7;border-top:1px solid rgba(0,0,0,0.06);padding-top:20px;">
     The Traverse Minds Africa Team<br>
-    <a href="mailto:hello@traverseminds.com" style="color:#ff4c00;text-decoration:none;">hello@traverseminds.com</a>
+    <a href="mailto:${from}" style="color:#ff4c00;text-decoration:none;">${from}</a>
   </p>`;
 }
 

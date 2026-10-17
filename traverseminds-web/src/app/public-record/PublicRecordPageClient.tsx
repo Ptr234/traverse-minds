@@ -16,7 +16,7 @@ import { OpenDataLandscape } from "@/components/public-record/OpenDataLandscape"
 import type { OpenDataLandscapeData } from "@/lib/hdx";
 import { CitedStats } from "@/components/ui/CitedStats";
 import type { CitedStatistic } from "@/lib/statistics";
-import type { PricingPlan } from "@/components/public-record/PricingModal";
+import { PRICING_PLANS, type PricingPlan } from "@/lib/plans";
 import { Faq, type FaqItem } from "@/components/seo/Faq";
 
 // Answers describe what exists today; update as jurisdictions and features launch.
@@ -81,18 +81,6 @@ const audiences = [
   },
 ];
 
-const pricingPlans = {
-  monthly: [
-    { name: "Individual", price: "UGX 50k", period: "/mo", features: ["1,000 searches/mo", "Basic AI summaries", "5 smart alerts", "Email support"] },
-    { name: "Professional", price: "UGX 150k", period: "/mo", featured: true, features: ["Unlimited searches", "Advanced AI summaries", "50 smart alerts", "Bulk export", "Priority support"] },
-    { name: "Enterprise", price: "Custom", period: "", features: ["Team access", "API access", "White-glove onboarding", "Custom record indexing", "Dedicated account manager"] },
-  ],
-  annual: [
-    { name: "Individual", price: "UGX 500k", period: "/yr", features: ["1,000 searches/mo", "Basic AI summaries", "5 smart alerts", "Email support"] },
-    { name: "Professional", price: "UGX 1.5M", period: "/yr", featured: true, features: ["Unlimited searches", "Advanced AI summaries", "50 smart alerts", "Bulk export", "Priority support"] },
-    { name: "Enterprise", price: "Custom", period: "", features: ["Team access", "API access", "White-glove onboarding", "Custom record indexing", "Dedicated account manager"] },
-  ],
-};
 
 export function PublicRecordPageClient({ openData, stats }: { openData: OpenDataLandscapeData | null; stats: CitedStatistic[] }) {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
@@ -101,7 +89,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
   const [searchQuery, setSearchQuery] = useState("");
   const [searchJurisdiction, setSearchJurisdiction] = useState("All Africa");
 
-  const plans = pricingPlans[billing];
+  const plans = PRICING_PLANS[billing];
 
   const handleSearch = (query: string, jurisdiction: string) => {
     setSearchQuery(query);

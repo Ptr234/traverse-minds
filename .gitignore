@@ -2,3 +2,4 @@
 # Local secrets
 .env
 .env.*
+!.env.example

@@ -1,0 +1,17 @@
+{
+  "name": "traverseminds-submissions-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stores website form submissions in Postgres. Called by the Cloudflare Pages Functions in ../functions.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "postgres": "3.4.5"
+  }
+}
