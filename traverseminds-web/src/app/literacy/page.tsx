@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { CitedStats } from "@/components/ui/CitedStats";
 import { getStatistics } from "@/lib/statistics";
-import { Hero } from "@/components/literacy/Hero";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { ProgrammeListing } from "@/components/literacy/ProgrammeListing";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Monitor, Layers, Building, ShieldCheck, Smartphone, FileText, AlertTriangle } from "lucide-react";
@@ -66,7 +67,13 @@ export default async function LiteracyPage() {
   return (
     <div className="flex flex-col">
       <PageTransition>
-        <Hero />
+        <SectionBar />
+        <PageHeader
+          crumbs={[{ name: "Home", href: "/" }, { name: "Literacy", href: "/literacy" }]}
+          kicker="Digital Literacy"
+          title="Digital safety for every Ugandan"
+          dek="Practical, language-accessible digital safety training for schools, small businesses, government agencies and NGOs across Uganda."
+        />
         <ProgrammeListing />
         <CitedStats stats={stats} eyebrow="Why It Matters" title="The skills gap, in numbers" background="#f0f1f4" />
 

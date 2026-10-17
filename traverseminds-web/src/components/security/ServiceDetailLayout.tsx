@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { 
   ScanEye, 
   ShieldCheck, 
@@ -18,7 +19,6 @@ import {
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
 
 const ICON_MAP: Record<string, LucideIcon> = {
   "Penetration Testing": ScanEye,
@@ -56,62 +56,34 @@ export function ServiceDetailLayout({
 
   return (
     <PageTransition>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center pt-20 overflow-hidden bg-primary">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover opacity-40"
-          priority
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-primary via-primary/80 to-transparent" />
-        
-        <div className="container-max relative z-10 py-20">
-          <div className="mb-8">
-            <Breadcrumbs
-              tone="dark"
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Security", href: "/security" },
-                // Service page slugs match their titles, e.g. "ISO 27001 Compliance" -> /security/iso-27001-compliance
-                { name: title, href: `/security/${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` },
-              ]}
-            />
-          </div>
-          
-          <div className="max-w-3xl">
-            <SectionReveal variant="fade-blur">
-              <div className="flex h-16 w-16 items-center justify-center bg-white/10 text-accent mb-6" style={{ borderRadius: 0 }}>
-                <Icon className="h-8 w-8" />
-              </div>
-            </SectionReveal>
-            
-            <TextReveal
-              as="h1"
-              variant="blur-in"
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6"
-            >
-              {title}
-            </TextReveal>
-            
-            <SectionReveal variant="fade-up" delay={0.1}>
-              <p className="text-xl text-white/70 leading-relaxed">
-                {description}
-              </p>
-            </SectionReveal>
-
-            <SectionReveal variant="fade-up" delay={0.2}>
-              <div className="mt-10">
-                <Button variant="primary" size="lg" href="#enquiry">
-                  Request a Consultation
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
+      {/* Magazine header + wide photo */}
+      <SectionBar />
+      <PageHeader
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Security", href: "/security" },
+          // Service page slugs match their titles, e.g. "ISO 27001 Compliance" -> /security/iso-27001-compliance
+          { name: title, href: `/security/${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` },
+        ]}
+        kicker="Traverse Security"
+        title={title}
+        dek={description}
+      >
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <Button variant="primary" size="lg" href="#enquiry">
+            Request a consultation
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+          <span className="inline-flex items-center gap-2 text-[14px] text-gn-400">
+            <Icon className="h-5 w-5 text-accent" aria-hidden /> Kampala-based team
+          </span>
         </div>
-      </section>
+      </PageHeader>
+      <figure className="container-max">
+        <div className="relative aspect-[21/9] overflow-hidden bg-gn-800">
+          <Image src={image} alt={title} fill priority className="object-cover" sizes="(max-width: 1280px) 100vw, 1240px" />
+        </div>
+      </figure>
 
       {/* Content Section */}
       <section className="py-24 bg-white">

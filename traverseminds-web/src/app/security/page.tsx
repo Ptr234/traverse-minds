@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { SecurityHero } from "@/components/security/Hero";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { ServiceCards } from "@/components/security/ServiceCards";
 import { EngagementProcess } from "@/components/security/EngagementProcess";
 import { ComplianceFrameworks } from "@/components/security/ComplianceFrameworks";
@@ -30,7 +31,18 @@ export default async function SecurityPage() {
   const [threatWatch, stats] = await Promise.all([getThreatWatch(), getStatistics("security", 4)]);
   return (
     <PageTransition>
-      <SecurityHero />
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Security", href: "/security" }]}
+        kicker="Traverse Security"
+        title="Cybersecurity for banks and government in Africa"
+        dek="Penetration testing, ISO 27001 compliance, Bank of Uganda audits, threat modelling, incident response and regulatory advisory, from a Kampala-based team."
+      >
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button variant="primary" href="#enquiry">Request a consultation</Button>
+          <Button variant="outline" href="#capability">Capability statement</Button>
+        </div>
+      </PageHeader>
       <ServiceCards />
 
       {/* Why Choose Us */}

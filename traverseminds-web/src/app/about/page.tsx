@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { MissionStatement } from "@/components/about/MissionStatement";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { CalendlyEmbed } from "@/components/about/CalendlyEmbed";
@@ -48,7 +49,13 @@ const africanCountries = [
 export default function AboutPage() {
   return (
     <PageTransition>
-      <MissionStatement />
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]}
+        kicker="Our mission"
+        title="A digitally secure Africa"
+        dek="Built for Africa, driven by evidence: technology serving the public interest, anchored in local laws and shaped by independent research."
+      />
 
       {/* The Model -- One Company Six Divisions */}
       <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
