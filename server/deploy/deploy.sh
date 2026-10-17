@@ -30,7 +30,8 @@ git archive --format=tar HEAD server | "$SSH" "$HOST" "
   rm -rf \"\$STAGE\"
   chmod_user=\$(id -u traverseminds >/dev/null 2>&1 && echo traverseminds || echo root)
   sudo chown -R \"\$chmod_user:\$chmod_user\" $SRC_DIR
-  sudo chmod +x $SRC_DIR/deploy/*.sh
+  # The folder is mode 750, so the glob must expand as root, not in this shell
+  sudo sh -c \"chmod +x $SRC_DIR/deploy/*.sh\"
 "
 
 # First run stops here: setup.sh creates the user, database, unit and nginx site
