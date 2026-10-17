@@ -4,6 +4,7 @@
 //   GET   /submissions          (ADMIN_TOKEN)   list for scripts: ?form=&status=&since=YYYY-MM-DD&limit=&format=csv
 //   GET   /admin                                admin dashboard (staff accounts, see src/cli.js)
 //   *     /admin/api/*                          dashboard JSON API (session cookie)
+//   *     /assistant/*                          website AI assistant (see src/assistant.js)
 //   GET   /health                               liveness + database check
 
 import { createServer } from "node:http";
@@ -12,6 +13,7 @@ import { extname } from "node:path";
 import { sql, migrate, STATUSES } from "./db.js";
 import { HttpError, send, readJson, bearerMatches, text, toCsv } from "./http.js";
 import { handleAdminApi } from "./admin-api.js";
+import { handleAssistant } from "./assistant.js";
 
 // HOST=127.0.0.1 on a shared server so only the local reverse proxy can reach us; 0.0.0.0 inside Docker
 const { INGEST_TOKEN, ADMIN_TOKEN, PORT = "8080", HOST = "0.0.0.0" } = process.env;
@@ -92,6 +94,9 @@ const server = createServer(async (req, res) => {
     if (url.pathname === "/submissions") {
       if (req.method === "POST") return await ingest(req, res);
       if (req.method === "GET") return await tokenList(req, res, url);
+    }
+    if (url.pathname.startsWith("/assistant/")) {
+      if (await handleAssistant(req, res, url)) return;
     }
     if (url.pathname.startsWith("/admin/api/")) {
       if (await handleAdminApi(req, res, url)) return;
