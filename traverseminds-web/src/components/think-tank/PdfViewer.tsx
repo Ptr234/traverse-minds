@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { FileText } from "lucide-react";
 import { PdfDownloadButton } from "@/components/ui/PdfDownloadButton";
 
@@ -10,16 +10,15 @@ interface PdfViewerProps {
   filename: string;
 }
 
-export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
-  const [isMobile, setIsMobile] = useState(false);
+const MOBILE = "(max-width: 768px)";
+const subscribeMobile = (onChange: () => void) => {
+  const mq = window.matchMedia(MOBILE);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+};
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
+  const isMobile = useSyncExternalStore(subscribeMobile, () => window.matchMedia(MOBILE).matches, () => false);
 
   if (isMobile) {
     return (

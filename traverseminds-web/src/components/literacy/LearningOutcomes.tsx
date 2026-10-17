@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Target, Zap, Users, Lightbulb, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { ProgrammeInquiryModal } from "./ProgrammeInquiryModal";
 
 interface Props {

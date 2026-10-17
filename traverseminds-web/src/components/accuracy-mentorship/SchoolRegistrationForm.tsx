@@ -210,7 +210,7 @@ export function SchoolRegistrationForm() {
           {...register("consent", { required: "Required" })}
         />
         <label className="text-sm text-brand-medium">
-          I agree to Traverse Minds Africa's{" "}
+          I agree to Traverse Minds Africa&apos;s{" "}
           <a
             href="/privacy"
             target="_blank"

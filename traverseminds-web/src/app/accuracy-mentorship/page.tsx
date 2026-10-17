@@ -64,10 +64,10 @@ export default function AccuracyMentorshipPage() {
                   Young People with Meaning
                 </h3>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  76% of Uganda's population is under 30. Right now, too many are
+                  76% of Uganda&apos;s population is under 30. Right now, too many are
                   moving through their most formative years without ever being asked
-                  serious questions about who they want to be or what they're
-                  building. Meaning isn't discovered—it's constructed, deliberately.
+                  serious questions about who they want to be or what they&apos;re
+                  building. Meaning isn&apos;t discovered—it&apos;s constructed, deliberately.
                 </p>
               </div>
             </RevealItem>
@@ -80,7 +80,7 @@ export default function AccuracyMentorshipPage() {
                 </h3>
                 <p className="text-white/70 text-sm leading-relaxed">
                   Among 18–30-year-olds, 41% are neither in employment, education,
-                  nor training. But it's not just jobs—it's readiness. Entitlement
+                  nor training. But it&apos;s not just jobs—it&apos;s readiness. Entitlement
                   grows where effort, consequence, and ownership are never installed.
                   This program corrects that by design.
                 </p>
@@ -121,7 +121,7 @@ export default function AccuracyMentorshipPage() {
               className="eyebrow"
               style={{ color: "#ff4c00", marginBottom: 16 }}
             >
-              WHAT YOU'LL GAIN
+              WHAT YOU&apos;LL GAIN
             </p>
 
             <TextReveal
@@ -338,7 +338,7 @@ export default function AccuracyMentorshipPage() {
             delay={0.2}
             className="text-xl text-white/70 mb-8 max-w-2xl mx-auto"
           >
-            Whether you're ready to commit to your own formation, support your school's students, or invest in this work, there's a role for you.
+            Whether you&apos;re ready to commit to your own formation, support your school&apos;s students, or invest in this work, there&apos;s a role for you.
           </TextReveal>
           <TextReveal
             as="p"
@@ -346,7 +346,7 @@ export default function AccuracyMentorshipPage() {
             delay={0.3}
             className="text-base text-white/50"
           >
-            Accuracy is the quiet discipline of getting it right when no one's watching.
+            Accuracy is the quiet discipline of getting it right when no one&apos;s watching.
           </TextReveal>
         </div>
       </section>

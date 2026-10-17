@@ -127,7 +127,7 @@ export function SponsorCTA() {
               Custom Sponsorship Options
             </h3>
             <p className="text-white/70 mb-6">
-              Have a unique way you'd like to support this work? We're open to creative partnerships and custom arrangements.
+              Have a unique way you&apos;d like to support this work? We&apos;re open to creative partnerships and custom arrangements.
             </p>
             <Button
               variant="outline-dark"
@@ -146,7 +146,7 @@ export function SponsorCTA() {
                 Sponsorship Inquiry Form
               </h3>
               <p style={{ color: "#515459" }}>
-                Tell us about your sponsorship interests and how you'd like to support the Accuracy Mentorship Program.
+                Tell us about your sponsorship interests and how you&apos;d like to support the Accuracy Mentorship Program.
               </p>
             </div>
             <SponsorshipForm />

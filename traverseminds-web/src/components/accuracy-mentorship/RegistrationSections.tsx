@@ -45,7 +45,7 @@ export function RegistrationSections() {
             className="text-lg"
             style={{ color: "#515459" }}
           >
-            Whether you're a young person ready to commit to your own growth or an institution wanting to support this work, we have a place for you.
+            Whether you&apos;re a young person ready to commit to your own growth or an institution wanting to support this work, we have a place for you.
           </TextReveal>
         </div>
 
@@ -131,7 +131,7 @@ export function RegistrationSections() {
                   Apply as a Student
                 </h3>
                 <p className="mb-8" style={{ color: "#515459" }}>
-                  Complete this form to apply for the Accuracy Mentorship Program. We're looking for young people ready to commit to genuine growth and transformation.
+                  Complete this form to apply for the Accuracy Mentorship Program. We&apos;re looking for young people ready to commit to genuine growth and transformation.
                 </p>
                 <StudentRegistrationForm />
               </div>
@@ -141,7 +141,7 @@ export function RegistrationSections() {
                   Register Your School
                 </h3>
                 <p className="mb-8" style={{ color: "#515459" }}>
-                  Schools and institutions can partner with us to bring the program to their students. Tell us about your interest and how you'd like to participate.
+                  Schools and institutions can partner with us to bring the program to their students. Tell us about your interest and how you&apos;d like to participate.
                 </p>
                 <SchoolRegistrationForm />
               </div>

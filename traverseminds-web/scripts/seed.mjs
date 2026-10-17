@@ -1,7 +1,7 @@
 // Traverse Minds Africa — Sanity seed script
 // Run: node scripts/seed.mjs
 import { createClient } from "@sanity/client";
-import { createReadStream, readFileSync } from "fs";
+import { createReadStream } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 

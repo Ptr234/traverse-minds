@@ -65,7 +65,7 @@ export function StudentRegistrationForm() {
           Registration Received!
         </h3>
         <p className="mt-2 max-w-md text-brand-medium">
-          Thank you for your interest. We'll review your application and contact you within 5 business days.
+          Thank you for your interest. We&apos;ll review your application and contact you within 5 business days.
         </p>
       </div>
     );
@@ -188,7 +188,7 @@ export function StudentRegistrationForm() {
 
       <div>
         <label className="mb-1.5 block text-sm font-medium text-brand-charcoal">
-          Tell us why you're interested in this program *
+          Tell us why you&apos;re interested in this program *
         </label>
         <textarea
           rows={4}
@@ -218,7 +218,7 @@ export function StudentRegistrationForm() {
           {...register("consent", { required: "Required" })}
         />
         <label className="text-sm text-brand-medium">
-          I agree to Traverse Minds Africa's{" "}
+          I agree to Traverse Minds Africa&apos;s{" "}
           <a
             href="/privacy"
             target="_blank"

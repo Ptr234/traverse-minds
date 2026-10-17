@@ -73,7 +73,7 @@ export function SponsorshipForm() {
             Thank you for your inquiry
           </p>
           <p className="text-sm text-green-700">
-            We'll be in touch shortly to discuss sponsorship opportunities.
+            We&apos;ll be in touch shortly to discuss sponsorship opportunities.
           </p>
         </div>
       </div>

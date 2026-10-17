@@ -43,7 +43,7 @@ export function AccuracyMentorshipHero() {
               </p>
 
               <p className="mt-4 text-base" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Accuracy is the quiet discipline of getting it right when no one's watching.
+                Accuracy is the quiet discipline of getting it right when no one&apos;s watching.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
