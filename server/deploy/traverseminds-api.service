@@ -1,0 +1,29 @@
+# /etc/systemd/system/traverseminds-api.service
+# Traverse Minds submissions API + admin dashboard (native, no Docker).
+[Unit]
+Description=Traverse Minds submissions API
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=traverseminds
+Group=traverseminds
+WorkingDirectory=/opt/traverseminds/server
+EnvironmentFile=/opt/traverseminds/server/.env.production
+ExecStart=/usr/bin/node src/index.js
+Restart=on-failure
+RestartSec=5
+
+# Hardening: the service only needs to read its own folder and talk to the local network
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+MemoryMax=300M
+
+[Install]
+WantedBy=multi-user.target

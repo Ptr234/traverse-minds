@@ -57,8 +57,18 @@ export function parseCookies(req) {
   );
 }
 
-/** Client IP as seen by Caddy (the only proxy in front of us). */
-export const clientIp = (req) => (req.headers["x-forwarded-for"]?.split(",")[0] ?? req.socket.remoteAddress ?? "").trim();
+/**
+ * Client IP for rate limiting. Behind nginx we read X-Real-IP, which nginx sets from the TCP peer.
+ * Otherwise the LAST X-Forwarded-For entry (appended by our own proxy, e.g. Caddy). The first entry is
+ * client-controlled and must never be trusted, or attackers could dodge the login rate limit.
+ */
+export function clientIp(req) {
+  const real = req.headers["x-real-ip"];
+  if (typeof real === "string" && real) return real.trim();
+  const xff = req.headers["x-forwarded-for"];
+  if (typeof xff === "string" && xff) return xff.split(",").pop().trim();
+  return req.socket.remoteAddress ?? "";
+}
 
 export const text = (v, max) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null);
 

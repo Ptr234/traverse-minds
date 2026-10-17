@@ -13,7 +13,8 @@ import { sql, migrate, STATUSES } from "./db.js";
 import { HttpError, send, readJson, bearerMatches, text, toCsv } from "./http.js";
 import { handleAdminApi } from "./admin-api.js";
 
-const { INGEST_TOKEN, ADMIN_TOKEN, PORT = "8080" } = process.env;
+// HOST=127.0.0.1 on a shared server so only the local reverse proxy can reach us; 0.0.0.0 inside Docker
+const { INGEST_TOKEN, ADMIN_TOKEN, PORT = "8080", HOST = "0.0.0.0" } = process.env;
 
 if (!INGEST_TOKEN || !ADMIN_TOKEN) {
   console.error("INGEST_TOKEN and ADMIN_TOKEN must be set");
@@ -107,7 +108,7 @@ const server = createServer(async (req, res) => {
 });
 
 await migrate();
-server.listen(Number(PORT), () => console.log(`Submissions service listening on :${PORT}`));
+server.listen(Number(PORT), HOST, () => console.log(`Submissions service listening on ${HOST}:${PORT}`));
 
 for (const signal of ["SIGTERM", "SIGINT"]) {
   process.on(signal, () => server.close(() => sql.end().then(() => process.exit(0))));

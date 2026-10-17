@@ -1,7 +1,10 @@
 # Automatic HTTPS for the submissions API. API_DOMAIN's DNS must point at this VPS.
 {$API_DOMAIN} {
 	encode gzip
-	reverse_proxy api:8080
+	reverse_proxy api:8080 {
+		# Overwrite any client-sent value so login rate limiting sees the real address
+		header_up X-Real-IP {remote_host}
+	}
 	header {
 		Strict-Transport-Security "max-age=31536000"
 		X-Content-Type-Options nosniff
