@@ -4,7 +4,7 @@ import { programmes } from "@/lib/programmes";
 
 export const dynamic = "force-static";
 
-const SITE_URL = "https://traverseminds.com";
+import { SITE_URL } from "@/lib/site";
 
 // trailingSlash is enabled in next.config.ts, so canonical URLs end in "/"
 const url = (path: string) => `${SITE_URL}${path === "/" ? "/" : `${path}/`}`;

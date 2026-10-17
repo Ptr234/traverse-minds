@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-const SITE_URL = "https://traverseminds.com";
+import { SITE_URL } from "@/lib/site";
 
 export type Crumb = { name: string; href: string };
 

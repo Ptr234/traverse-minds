@@ -1,117 +1,93 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { PostCard } from "@/components/blog/PostCard";
-import { DivisionFilter } from "@/components/blog/DivisionFilter";
-import { NewsletterSignup } from "@/components/home/NewsletterSignup";
-import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
-import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal } from "@/components/ui/SectionReveal";
+import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
+import type { Story } from "@/lib/content";
+import { divisionLabel } from "@/lib/divisions";
+import { StoryCard } from "@/components/magazine/primitives";
 
-const blogHeroImages = [
-  "/imagestouse/div-cybersecurity.jpeg",
-  "/imagestouse/div-think-tank.jpeg",
-  "/imagestouse/div-literacy.jpeg",
-  "/imagestouse/div-media.jpeg",
-];
+/** Analysis section front: division tabs + search, lead story, then the grid. */
+export function BlogPageClient({ posts }: { posts: Story[] }) {
+  const [division, setDivision] = useState("all");
+  const [query, setQuery] = useState("");
 
-interface Post {
-  title: string; slug: string; excerpt: string; division: string;
-  date: string; readTime: string; image: string;
-  author: { name: string; photo: string };
-}
+  // Only show tabs for divisions that actually have posts
+  const divisions = useMemo(() => [...new Set(posts.map((p) => p.kicker))], [posts]);
 
-export function BlogPageClient({ initialPosts }: { initialPosts: Post[] }) {
-  const [filter, setFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filtered = initialPosts.filter((p) => {
-    const matchesDivision = filter === "all" || p.division === filter;
-    const matchesSearch = searchQuery === "" ||
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesDivision && matchesSearch;
+  const filtered = posts.filter((p) => {
+    const q = query.trim().toLowerCase();
+    return (division === "all" || p.kicker === division) && (!q || `${p.title} ${p.dek ?? ""}`.toLowerCase().includes(q));
   });
+  const browsing = division === "all" && !query.trim();
+  const [lead, ...rest] = filtered;
+
+  const tab = (key: string, label: string) => (
+    <button
+      key={key}
+      type="button"
+      onClick={() => setDivision(key)}
+      aria-pressed={division === key}
+      className={`whitespace-nowrap border-b-2 px-1 pb-2 text-[14px] font-medium transition-colors ${
+        division === key ? "border-accent text-black" : "border-transparent text-gn-400 hover:text-black"
+      }`}
+    >
+      {label}
+    </button>
+  );
 
   return (
-    <PageTransition>
-      <section className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36">
-        <ImageSlideshow images={blogHeroImages} overlay="bg-primary/70" />
-        <div className="container-max relative z-10 px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}>
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Latest Insights</p>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05]"
-            >
-              News & <span style={{ color: "#ff4c00" }}>insights</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-              className="mt-6 max-w-lg text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}
-            >
-              Cybersecurity analysis, event recaps, policy explainers, and data-driven research from across our six divisions.
-            </motion.p>
+    <div className="pb-16">
+      <div className="container-max">
+        <div className="flex flex-col gap-4 border-y border-black/15 py-3 md:flex-row md:items-center md:justify-between">
+          <div className="-mx-1 flex gap-5 overflow-x-auto pt-2" role="group" aria-label="Filter by division">
+            {tab("all", "All")}
+            {divisions.map((d) => tab(d, divisionLabel(d)))}
           </div>
+          <label className="relative block md:w-72">
+            <span className="sr-only">Search analysis</span>
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gn-500" aria-hidden />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search analysis"
+              className="w-full border border-black/15 bg-white py-2 pl-9 pr-3 text-[14px] outline-none focus:border-accent"
+            />
+          </label>
         </div>
-      </section>
+      </div>
 
-      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <SectionReveal variant="fade-blur">
-            <div className="mb-6">
-              <div className="relative max-w-md">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#919499" }} />
-                <input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full border bg-white py-3 pl-11 pr-4 text-sm outline-none"
-                  style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
-                />
+      <div className="container-max pt-10">
+        {filtered.length === 0 ? (
+          <p className="py-16 text-center text-gn-400">No analysis matches that search.</p>
+        ) : browsing && lead ? (
+          <>
+            <div className="grid grid-cols-1 gap-x-10 gap-y-10 border-b border-black/15 pb-12 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <StoryCard story={lead} size="lg" priority />
+              </div>
+              <div className="flex flex-col gap-8 lg:col-span-4 lg:border-l lg:border-black/15 lg:pl-10">
+                {rest.slice(0, 2).map((p) => (
+                  <StoryCard key={p.href} story={p} size="sm" />
+                ))}
               </div>
             </div>
-          </SectionReveal>
-
-          <SectionReveal variant="slide-up" delay={0.05}>
-            <div className="mb-10">
-              <DivisionFilter active={filter} onChange={setFilter} />
-            </div>
-          </SectionReveal>
-
-          <SectionReveal variant="fade-up" delay={0.1}>
-            <motion.div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" layout>
-              {filtered.map((post) => (
-                <motion.div key={post.slug} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
-                  <PostCard {...post} />
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {filtered.length === 0 && (
-              <div className="border-2 border-dashed py-20 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-                <p className="text-lg font-semibold" style={{ color: "#000" }}>
-                  {initialPosts.length === 0 ? "Coming soon" : "No results found"}
-                </p>
-                <p className="mt-2 text-base max-w-md mx-auto" style={{ color: "#919499" }}>
-                  {initialPosts.length === 0
-                    ? "Our first articles are being written. Subscribe to be notified."
-                    : "Try a different filter or search term."}
-                </p>
+            {rest.length > 2 && (
+              <div className="grid grid-cols-1 gap-x-8 gap-y-12 pt-12 sm:grid-cols-2 lg:grid-cols-3">
+                {rest.slice(2).map((p) => (
+                  <StoryCard key={p.href} story={p} />
+                ))}
               </div>
             )}
-          </SectionReveal>
-        </div>
-      </section>
-
-      <NewsletterSignup />
-    </PageTransition>
+          </>
+        ) : (
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((p) => (
+              <StoryCard key={p.href} story={p} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
