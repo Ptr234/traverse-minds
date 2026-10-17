@@ -50,3 +50,5 @@ CREATE TABLE IF NOT EXISTS audit_log (
   created_at     TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_log (created_at DESC);
+-- Lead history and the first-response metric look up audit rows per submission
+CREATE INDEX IF NOT EXISTS idx_audit_submission ON audit_log (submission_id) WHERE submission_id IS NOT NULL;

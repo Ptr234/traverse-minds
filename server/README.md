@@ -59,13 +59,13 @@ Redeploy the site after saving. Submit the contact form once and check it appear
 
 ## Dashboard
 
-- **Overview:** new leads, 7/30-day totals, leads per day, breakdown by form, latest leads.
-- **Leads:** search everything, filter by form/status/date, CSV export of the current filter.
-- **Lead page:** all submitted fields, reply by email or WhatsApp, status (new → contacted → won/lost/spam), internal notes, change history.
+- **Overview:** new leads (with a warning when any wait more than 48 hours), 7-day total vs the week before, win rate, median time to first response, leads per day (click a day to open it), pipeline by status, breakdown by form, latest leads.
+- **Leads:** search everything (press `/` from any page), filter by form/status/date, newest or oldest first, select rows to change status in bulk, CSV export of the current filter (admins).
+- **Lead page:** all submitted fields, other submissions from the same email, reply by email or WhatsApp, copy contact details, one-click next status, internal notes (Ctrl+Enter saves), change history. If someone else saved the lead while you were editing, you're asked to reload instead of overwriting their changes.
 - **Delete data** (admins): permanently removes a person's submission for data-protection requests under Uganda's Data Protection and Privacy Act, 2019. The audit log keeps a record that a deletion happened, without the personal data.
-- **Users / Audit log** (admins).
+- **Users / Audit log** (admins). The audit log is paged and filterable by action.
 
-Roles: **viewer** can see and update leads; **admin** can also delete, manage users and see the audit log.
+Roles: **viewer** can see and update leads; **admin** can also export, delete, manage users and see the audit log.
 
 ## Security notes
 

@@ -9,6 +9,8 @@ import {
 
 const secure = process.env.COOKIE_SECURE !== "false";
 const PAGE_SIZE = 25;
+const AUDIT_PAGE_SIZE = 50;
+const BULK_MAX = 500;
 
 /** Shared WHERE clause for the lead list and CSV export. */
 function filters(url) {
@@ -46,22 +48,37 @@ async function login(req, res) {
 }
 
 async function stats() {
-  const [totals] = await sql`
+  const totalsQ = sql`
     SELECT
       count(*)::int AS total,
       count(*) FILTER (WHERE status = 'new')::int AS new,
+      count(*) FILTER (WHERE status = 'new' AND created_at < now() - interval '48 hours')::int AS stale,
       count(*) FILTER (WHERE created_at >= now() - interval '7 days')::int AS last7,
+      count(*) FILTER (WHERE created_at >= now() - interval '14 days' AND created_at < now() - interval '7 days')::int AS prev7,
       count(*) FILTER (WHERE created_at >= now() - interval '30 days')::int AS last30,
-      count(*) FILTER (WHERE status = 'won')::int AS won
+      count(*) FILTER (WHERE status = 'won')::int AS won,
+      count(*) FILTER (WHERE status = 'lost')::int AS lost
     FROM submissions WHERE status <> 'spam'`;
-  const byForm = await sql`
+  const byStatusQ = sql`SELECT status, count(*)::int AS count FROM submissions GROUP BY status`;
+  // Time from a lead arriving to the first time anyone changed its status, over the last 30 days
+  const responseQ = sql`
+    SELECT
+      (percentile_cont(0.5) WITHIN GROUP (ORDER BY extract(epoch FROM t.first_touch - s.created_at)) / 3600)::float AS median_hours,
+      count(*)::int AS sample
+    FROM submissions s
+    JOIN LATERAL (
+      SELECT min(a.created_at) AS first_touch FROM audit_log a
+      WHERE a.submission_id = s.id AND a.action = 'update_submission' AND a.detail ? 'status'
+    ) t ON t.first_touch IS NOT NULL
+    WHERE s.created_at >= now() - interval '30 days' AND s.status <> 'spam'`;
+  const byFormQ = sql`
     SELECT form,
       count(*)::int AS total,
       count(*) FILTER (WHERE status = 'new')::int AS new,
       count(*) FILTER (WHERE created_at >= now() - interval '30 days')::int AS last30
     FROM submissions WHERE status <> 'spam'
     GROUP BY form ORDER BY total DESC`;
-  const daily = await sql`
+  const dailyQ = sql`
     SELECT to_char(d, 'YYYY-MM-DD') AS day, coalesce(c.n, 0)::int AS count
     FROM generate_series(current_date - 29, current_date, interval '1 day') d
     LEFT JOIN (
@@ -69,34 +86,55 @@ async function stats() {
       WHERE status <> 'spam' AND created_at >= current_date - 29 GROUP BY 1
     ) c ON c.day = d::date
     ORDER BY d`;
-  const recent = await sql`
-    SELECT id, form, name, email, status, created_at FROM submissions
+  const recentQ = sql`
+    SELECT id, form, name, email, status, created_at,
+           (notes IS NOT NULL AND notes <> '') AS has_notes
+    FROM submissions
     WHERE status <> 'spam' ORDER BY created_at DESC LIMIT 8`;
-  return { totals, byForm, daily, recent };
+  const [[totals], byStatus, [response], byForm, daily, recent] = await Promise.all([totalsQ, byStatusQ, responseQ, byFormQ, dailyQ, recentQ]);
+  return { totals, byStatus, response, byForm, daily, recent };
+}
+
+/** Cheap count for the sidebar badge, so pages do not need the full stats query. */
+async function badge() {
+  const [row] = await sql`SELECT count(*)::int AS new FROM submissions WHERE status = 'new'`;
+  return row;
 }
 
 async function listSubmissions(url) {
   const page = Math.max(Number(url.searchParams.get("page")) || 1, 1);
   const where = filters(url);
-  const [{ count }] = await sql`SELECT count(*)::int AS count FROM submissions ${where}`;
-  const rows = await sql`
-    SELECT id, form, name, email, status, country, created_at, updated_at,
-           (notes IS NOT NULL AND notes <> '') AS has_notes
-    FROM submissions ${where}
-    ORDER BY created_at DESC
-    LIMIT ${PAGE_SIZE} OFFSET ${(page - 1) * PAGE_SIZE}`;
-  const forms = await sql`SELECT DISTINCT form FROM submissions ORDER BY form`;
+  const order = url.searchParams.get("sort") === "oldest" ? sql`created_at ASC` : sql`created_at DESC`;
+  const [[{ count }], rows, forms] = await Promise.all([
+    sql`SELECT count(*)::int AS count FROM submissions ${where}`,
+    sql`
+      SELECT id, form, name, email, status, country, created_at, updated_at,
+             (notes IS NOT NULL AND notes <> '') AS has_notes
+      FROM submissions ${where}
+      ORDER BY ${order}
+      LIMIT ${PAGE_SIZE} OFFSET ${(page - 1) * PAGE_SIZE}`,
+    sql`SELECT DISTINCT form FROM submissions ORDER BY form`,
+  ]);
   return { count, page, pageSize: PAGE_SIZE, rows, forms: forms.map((f) => f.form) };
 }
 
 async function getSubmission(id) {
   const [row] = await sql`SELECT * FROM submissions WHERE id = ${id}`;
   if (!row) throw new HttpError(404, "Not found");
-  const history = await sql`
-    SELECT a.action, a.detail, a.created_at, u.name AS user_name
-    FROM audit_log a LEFT JOIN admin_users u ON u.id = a.user_id
-    WHERE a.submission_id = ${id} ORDER BY a.created_at DESC LIMIT 50`;
-  return { ...row, history };
+  const [history, related] = await Promise.all([
+    sql`
+      SELECT a.action, a.detail, a.created_at, u.name AS user_name
+      FROM audit_log a LEFT JOIN admin_users u ON u.id = a.user_id
+      WHERE a.submission_id = ${id} ORDER BY a.created_at DESC LIMIT 50`,
+    // Everything else this person has sent us, so staff see the whole relationship in one place
+    row.email
+      ? sql`
+          SELECT id, form, status, created_at FROM submissions
+          WHERE lower(email) = lower(${row.email}) AND id <> ${id}
+          ORDER BY created_at DESC LIMIT 20`
+      : [],
+  ]);
+  return { ...row, history, related };
 }
 
 async function updateSubmission(req, user, id) {
@@ -105,21 +143,63 @@ async function updateSubmission(req, user, id) {
   const notes = typeof body.notes === "string" ? body.notes.slice(0, 5000) : undefined;
   if (status && !STATUSES.includes(status)) throw new HttpError(400, "Invalid status");
   if (!status && notes === undefined) throw new HttpError(400, "Nothing to update");
+  // Optional optimistic lock: the updated_at the editor loaded. Stops two staff silently overwriting each other's notes.
+  const expected = text(body.expectedUpdatedAt, 40);
+  if (expected && Number.isNaN(Date.parse(expected))) throw new HttpError(400, "Invalid expectedUpdatedAt");
 
-  const [before] = await sql`SELECT status FROM submissions WHERE id = ${id}`;
-  if (!before) throw new HttpError(404, "Not found");
-  const [row] = await sql`
-    UPDATE submissions SET
-      status = coalesce(${status}, status),
-      notes = ${notes === undefined ? sql`notes` : notes},
-      updated_at = now()
-    WHERE id = ${id}
-    RETURNING id, status, notes, updated_at`;
-  await audit(user.id, "update_submission", {
-    submissionId: id,
-    detail: { ...(status && status !== before.status ? { status: [before.status, status] } : {}), ...(notes !== undefined ? { notes: true } : {}) },
+  return sql.begin(async (tx) => {
+    const [before] = await tx`SELECT status, notes, updated_at FROM submissions WHERE id = ${id} FOR UPDATE`;
+    if (!before) throw new HttpError(404, "Not found");
+    // Compare at millisecond precision: that is what the browser was sent
+    if (expected && before.updated_at.getTime() !== new Date(expected).getTime()) {
+      throw new HttpError(409, "Someone else updated this lead while you were editing. Reload to see their changes.");
+    }
+    const statusChanged = Boolean(status) && status !== before.status;
+    const notesChanged = notes !== undefined && notes !== (before.notes ?? "");
+    if (!statusChanged && !notesChanged) {
+      return { id, status: before.status, notes: before.notes, updated_at: before.updated_at, unchanged: true };
+    }
+    const [row] = await tx`
+      UPDATE submissions SET
+        status = ${statusChanged ? status : before.status},
+        notes = ${notesChanged ? notes : before.notes},
+        updated_at = now()
+      WHERE id = ${id}
+      RETURNING id, status, notes, updated_at`;
+    await tx`
+      INSERT INTO audit_log (user_id, action, submission_id, detail)
+      VALUES (${user.id}, 'update_submission', ${id}, ${tx.json({
+        ...(statusChanged ? { status: [before.status, status] } : {}),
+        ...(notesChanged ? { notes: true } : {}),
+      })})`;
+    return row;
   });
-  return row;
+}
+
+async function bulkUpdate(req, user) {
+  const body = await readJson(req);
+  const status = text(body.status, 20);
+  if (!STATUSES.includes(status)) throw new HttpError(400, "Invalid status");
+  const ids = Array.isArray(body.ids) ? [...new Set(body.ids.map(Number).filter((n) => Number.isSafeInteger(n) && n > 0))] : [];
+  if (!ids.length) throw new HttpError(400, "No leads selected");
+  if (ids.length > BULK_MAX) throw new HttpError(400, `At most ${BULK_MAX} leads at a time`);
+
+  // One statement: lock the rows that actually change, update them, and write one audit row each
+  const changed = await sql`
+    WITH before AS (
+      SELECT id, status FROM submissions
+      WHERE id = ANY(${ids}::bigint[]) AND status <> ${status}
+      FOR UPDATE
+    ), upd AS (
+      UPDATE submissions s SET status = ${status}, updated_at = now()
+      FROM before b WHERE s.id = b.id
+      RETURNING s.id, b.status AS old
+    )
+    INSERT INTO audit_log (user_id, action, submission_id, detail)
+    SELECT ${user.id}, 'update_submission', id, jsonb_build_object('status', jsonb_build_array(old, ${status}::text), 'bulk', true)
+    FROM upd
+    RETURNING submission_id`;
+  return { updated: changed.length };
 }
 
 async function deleteSubmission(user, id) {
@@ -132,6 +212,7 @@ async function deleteSubmission(user, id) {
 }
 
 async function exportCsv(res, user, url) {
+  requireAdmin(user);
   const rows = await sql`
     SELECT id, created_at, form, status, name, email, country, notes, data
     FROM submissions ${filters(url)} ORDER BY created_at DESC LIMIT 20000`;
@@ -208,13 +289,25 @@ async function changeOwnPassword(req, user) {
   return { ok: true };
 }
 
-const auditLog = (user) => {
+async function auditLog(user, url) {
   requireAdmin(user);
-  return sql`
-    SELECT a.id, a.action, a.submission_id, a.detail, a.created_at, u.name AS user_name
-    FROM audit_log a LEFT JOIN admin_users u ON u.id = a.user_id
-    ORDER BY a.created_at DESC LIMIT 200`;
-};
+  const page = Math.max(Number(url.searchParams.get("page")) || 1, 1);
+  const action = text(url.searchParams.get("action"), 40);
+  const where = action ? sql`WHERE a.action = ${action}` : sql``;
+  const [[{ count }], rows, actions] = await Promise.all([
+    sql`SELECT count(*)::int AS count FROM audit_log a ${where}`,
+    sql`
+      SELECT a.id, a.action, a.submission_id, a.detail, a.created_at, u.name AS user_name, t.name AS target_name
+      FROM audit_log a
+      LEFT JOIN admin_users u ON u.id = a.user_id
+      LEFT JOIN admin_users t ON a.action = 'update_user' AND t.id = (a.detail->>'userId')::bigint
+      ${where}
+      ORDER BY a.created_at DESC
+      LIMIT ${AUDIT_PAGE_SIZE} OFFSET ${(page - 1) * AUDIT_PAGE_SIZE}`,
+    sql`SELECT DISTINCT action FROM audit_log ORDER BY action`,
+  ]);
+  return { count, page, pageSize: AUDIT_PAGE_SIZE, rows, actions: actions.map((a) => a.action) };
+}
 
 /** Routes /admin/api/*. Returns true if handled. */
 export async function handleAdminApi(req, res, url) {
@@ -238,11 +331,13 @@ export async function handleAdminApi(req, res, url) {
     "GET /me": () => user,
     "POST /password": () => changeOwnPassword(req, user),
     "GET /stats": () => stats(),
+    "GET /badge": () => badge(),
     "GET /submissions": () => listSubmissions(url),
+    "PATCH /submissions": () => bulkUpdate(req, user),
     "GET /export.csv": () => exportCsv(res, user, url),
     "GET /users": () => (requireAdmin(user), listUsers()),
     "POST /users": () => createUser(req, user),
-    "GET /audit": () => auditLog(user),
+    "GET /audit": () => auditLog(user, url),
     "GET /meta": () => ({ statuses: STATUSES, roles: ROLES }),
   };
   const key = `${req.method} ${idMatch ? `/${idMatch[1]}/:id` : path}`;

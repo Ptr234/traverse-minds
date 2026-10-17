@@ -52,6 +52,8 @@ export function checkRateLimit(req) {
 
 export function recordFailure(ip) {
   const now = Date.now();
+  // Sweep expired entries now and then so a flood of distinct IPs cannot grow the map forever
+  if (attempts.size > 5000) for (const [k, v] of attempts) if (v.until <= now) attempts.delete(k);
   const entry = attempts.get(ip);
   if (!entry || entry.until <= now) attempts.set(ip, { count: 1, until: now + WINDOW_MS });
   else entry.count += 1;
@@ -114,5 +116,11 @@ export function checkOrigin(req) {
   if (req.method === "GET" || req.method === "HEAD") return;
   const origin = req.headers.origin;
   const host = req.headers["x-forwarded-host"] ?? req.headers.host;
-  if (!origin || new URL(origin).host !== host) throw new HttpError(403, "Bad origin");
+  let originHost = null;
+  try {
+    originHost = origin ? new URL(origin).host : null;
+  } catch {
+    // "null" or a malformed Origin header: treat as foreign rather than crashing with a 500
+  }
+  if (!originHost || originHost !== host) throw new HttpError(403, "Bad origin");
 }
