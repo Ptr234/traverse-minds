@@ -6,14 +6,14 @@ const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "2
 const monthYear = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "Africa/Kampala" });
 
 /** Events as a magazine diary: big date numerals, title, place. Upcoming first, then recent. */
-export function Diary({ upcoming, past }: { upcoming: Story[]; past: Story[] }) {
-  const items = [...upcoming.map((e) => ({ e, upcoming: true })), ...past.slice(0, Math.max(0, 4 - upcoming.length)).map((e) => ({ e, upcoming: false }))];
+export function Diary({ upcoming, past, total = 4, title = "Diary" }: { upcoming: Story[]; past: Story[]; total?: number; title?: string }) {
+  const items = [...upcoming.map((e) => ({ e, upcoming: true })), ...past.slice(0, Math.max(0, total - upcoming.length)).map((e) => ({ e, upcoming: false }))];
   if (items.length === 0) return null;
 
   return (
     <section className="bg-white">
       <div className="container-max py-12">
-        <SectionHeader title="Diary" href="/events" linkLabel="All events" />
+        <SectionHeader title={title} href={title === "Diary" ? "/events" : undefined} linkLabel="All events" />
         <ul className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
           {items.map(({ e, upcoming }) => (
             <li key={e.href} className="border-b border-black/10">

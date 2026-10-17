@@ -1,40 +1,36 @@
 import type { Metadata } from "next";
-import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Calendar, MapPin, Users, Tag, ArrowLeft, Utensils } from "lucide-react";
+import { PortableText, type PortableTextBlock } from "next-sanity";
 import { sanityClient } from "@/sanity/client";
-import { PageTransition } from "@/components/ui/PageTransition";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
-import { Particles } from "@/components/ui/Particles";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
 import { CountdownTimer } from "@/components/events/CountdownTimer";
 import { RsvpForm } from "@/components/events/RsvpForm";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { Kicker, SectionHeader, StoryCard } from "@/components/magazine/primitives";
+import { ARTICLE_PROSE } from "@/components/magazine/Article";
+import { getMagazineContent } from "@/lib/content";
 
 interface EventDetail {
-  _id: string;
   title: string;
-  slug: string;
   type?: string;
   date: string;
   endDate?: string;
   location?: string;
-  description?: { _type: string; children?: { text: string }[] }[];
+  description?: PortableTextBlock[];
   thumbnailUrl?: string;
   capacity?: number;
   tagline?: string;
   price?: string;
   galleryUrls?: string[];
-  isFeatured?: boolean;
 }
 
 async function getEvent(slug: string): Promise<EventDetail | null> {
   try {
     return await sanityClient.fetch(
       `*[_type == "event" && slug.current == $slug][0]{
-        _id, title, "slug": slug.current, type, date, endDate, location,
-        description, capacity, tagline, price, isFeatured,
+        title, type, date, endDate, location, description, capacity, tagline, price,
         "thumbnailUrl": thumbnail.asset->url,
         "galleryUrls": galleryImages[].asset->url
       }`,
@@ -47,195 +43,149 @@ async function getEvent(slug: string): Promise<EventDetail | null> {
 
 export async function generateStaticParams() {
   try {
-    const slugs: { slug: string }[] = await sanityClient.fetch(
-      `*[_type == "event"]{ "slug": slug.current }`
-    );
+    const slugs: { slug: string }[] = await sanityClient.fetch(`*[_type == "event"]{ "slug": slug.current }`);
     return slugs.map((s) => ({ slug: s.slug }));
   } catch {
     return [];
   }
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const event = await getEvent(slug);
   if (!event) return { title: "Event Not Found" };
   return {
-    title: `${event.title} — Traverse Events`,
-    description: event.tagline || `${event.title} — a Traverse Minds Africa event.`,
+    title: `${event.title.trim()} — Traverse Events`,
+    description: event.tagline || `${event.title.trim()} — a Traverse Minds Africa event.`,
+    openGraph: event.thumbnailUrl ? { images: [event.thumbnailUrl] } : undefined,
   };
 }
 
-function plainText(blocks?: EventDetail["description"]): string {
-  if (!blocks) return "";
-  return blocks
-    .flatMap((b) => b.children?.map((c) => c.text) ?? [])
-    .join(" ");
-}
+const TZ = "Africa/Kampala";
 
-export default async function EventPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+// Static export: "past" is decided at build time and refreshed by each deploy; the countdown runs live in the browser
+const hasStarted = (iso: string) => new Date(iso).getTime() < Date.now();
+
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const event = await getEvent(slug);
+  const [event, { upcomingEvents, pastEvents }] = await Promise.all([getEvent(slug), getMagazineContent()]);
   if (!event) notFound();
 
-  const isPast = event.date.slice(0, 10) < new Date().toISOString().split("T")[0];
+  const href = `/events/${slug}`;
+  const title = event.title.trim();
+  const start = new Date(event.date);
+  const isPast = hasStarted(event.date);
+  const format = event.type ? event.type.charAt(0).toUpperCase() + event.type.slice(1) : undefined;
 
-  const details = [
-    { icon: Calendar, label: "Date", val: new Date(event.date).toLocaleDateString("en-UG", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) + (event.date.includes("T") ? `, ${new Date(event.date).toLocaleTimeString("en-UG", { hour: "2-digit", minute: "2-digit", timeZoneName: "short" })}` : "") },
-    event.location ? { icon: MapPin, label: "Venue", val: event.location } : null,
-    event.capacity ? { icon: Users, label: "Capacity", val: `${event.capacity} seats (curated)` } : null,
-    event.type ? { icon: Utensils, label: "Format", val: event.type } : null,
-    event.price ? { icon: Tag, label: "Price", val: event.price } : null,
-  ].filter(Boolean) as { icon: React.ElementType; label: string; val: string }[];
+  const facts = [
+    { label: "Date", value: start.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: TZ }) },
+    event.date.includes("T") ? { label: "Time", value: `${start.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: TZ })} EAT` } : null,
+    event.location ? { label: "Venue", value: event.location } : null,
+    format ? { label: "Format", value: format } : null,
+    event.capacity ? { label: "Capacity", value: `${event.capacity} seats, by invitation` } : null,
+    event.price ? { label: "Price", value: event.price } : null,
+  ].filter(Boolean) as { label: string; value: string }[];
 
-  const descText = plainText(event.description);
+  const others = [...upcomingEvents, ...pastEvents].filter((e) => e.href !== href);
 
   return (
-    <PageTransition>
-      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Events", href: "/events" }, { name: event.title, href: `/events/${slug}` }]} />
-      {/* Hero */}
-      <section className="relative min-h-[80vh] overflow-hidden">
-        <div className="absolute inset-0">
-          {event.thumbnailUrl ? (
-            <Image src={event.thumbnailUrl} alt="" fill className="object-cover" />
-          ) : (
-            <div className="absolute inset-0" style={{ background: "#0a0a0a" }} />
-          )}
-          <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/85 to-white/40" />
-          <div className="absolute inset-0 bg-linear-to-b from-light-surface/60 via-transparent to-light-surface/80" />
-        </div>
-        <Particles />
-        <div className="relative mx-auto flex min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl py-20 lg:py-28">
-            <SectionReveal variant="fade-up" delay={0}>
-              <div className="mb-6">
-                <Button variant="ghost" href="/events" className="inline-flex items-center gap-2 text-sm" style={{ color: "#515459" }}>
-                  <ArrowLeft className="h-4 w-4" /> Back to Events
-                </Button>
-              </div>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Traverse Events</p>
-            </SectionReveal>
-            <SectionReveal variant="fade-blur" delay={0.1}>
-              <h1 className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-brand-charcoal md:text-5xl lg:text-6xl">
-                {event.title}
-              </h1>
-            </SectionReveal>
-            {event.tagline && (
-              <SectionReveal variant="slide-up" delay={0.2}>
-                <p className="mt-6 max-w-lg text-lg leading-relaxed text-brand-medium">{event.tagline}</p>
-              </SectionReveal>
-            )}
-            <SectionReveal variant="scale-fade" delay={0.3}>
+    <>
+      <SectionBar />
+      <article>
+        <header className="container-max pt-8">
+          <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Events", href: "/events" }, { name: title, href }]} />
+          <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Kicker>{isPast ? "Past event" : "Upcoming event"}{format ? ` · ${format}` : ""}</Kicker>
+              <h1 className="mt-3 font-serif text-[36px] font-semibold leading-[1.08] tracking-[-0.01em] text-black md:text-[52px]">{title}</h1>
+              {event.tagline && <p className="mt-5 text-[21px] leading-relaxed text-gn-400">{event.tagline}</p>}
               <div className="mt-8">
                 {isPast ? (
-                  <p className="font-display text-base font-semibold uppercase tracking-widest" style={{ color: "#919499" }}>
-                    This event has concluded
-                  </p>
+                  <p className="border-l-4 border-gn-600 pl-4 text-[15px] font-medium text-gn-400">This event has concluded.</p>
                 ) : (
-                  <CountdownTimer targetDate={event.date} />
+                  <div className="flex flex-wrap items-center gap-6">
+                    <CountdownTimer targetDate={event.date} />
+                    <Button variant="primary" size="lg" href="#rsvp">Reserve your seat</Button>
+                  </div>
                 )}
               </div>
-              {!isPast && (
-                <div className="mt-8"><Button variant="primary" size="lg" href="#rsvp">Reserve Your Seat</Button></div>
-              )}
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Details */}
-      <section className="bg-light-bg px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <div>
-            <TextReveal as="h2" variant="blur-in" className="font-display text-2xl text-brand-green md:text-3xl">
-              About This Event
-            </TextReveal>
-            {descText && (
-              <SectionReveal variant="fade-up" delay={0.1}>
-                <p className="mt-4 leading-relaxed text-brand-medium">{descText}</p>
-              </SectionReveal>
-            )}
-            <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {details.map((d) => {
-                const Icon = d.icon;
-                return (
-                <RevealItem key={d.label} variant="slide-up">
-                  <div className="card-hover group flex items-start gap-3 rounded-xl border border-light-border bg-light-card p-4">
-                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                    <div>
-                      <p className="text-sm font-semibold text-brand-charcoal">{d.label}</p>
-                      <p className="text-sm text-brand-medium">{d.val}</p>
-                    </div>
+            {/* Fact box */}
+            <aside className="lg:col-span-5" aria-label="Event details">
+              <dl className="border-t-2 border-black">
+                {facts.map((f) => (
+                  <div key={f.label} className="grid grid-cols-[110px_1fr] gap-4 border-b border-black/10 py-3">
+                    <dt className="text-[12px] font-bold uppercase tracking-wider text-gn-500">{f.label}</dt>
+                    <dd className="text-[15px] text-black">{f.value}</dd>
                   </div>
-                </RevealItem>
-                );
-              })}
-            </SectionReveal>
+                ))}
+              </dl>
+            </aside>
           </div>
-          {event.thumbnailUrl && (
-            <SectionReveal variant="clip-left">
-              <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-                <Image src={event.thumbnailUrl} alt={event.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-              </div>
-            </SectionReveal>
-          )}
-        </div>
-      </section>
+        </header>
 
-      {/* Gallery */}
-      {event.galleryUrls && event.galleryUrls.length > 0 && (
-        <section className="bg-light-surface px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            <SectionReveal variant="fade-up">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Gallery</span>
-            </SectionReveal>
-            <TextReveal as="h2" variant="clip-up" className="mt-3 font-display text-2xl text-brand-green md:text-3xl">
-              Event Photos
-            </TextReveal>
-            <SectionReveal variant="fade-up" staggerChildren={0.06} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {event.thumbnailUrl && (
+          <figure className="container-max mt-10">
+            <div className="relative aspect-[16/9] overflow-hidden bg-gn-800">
+              <Image src={event.thumbnailUrl} alt={title} fill priority className="object-cover" sizes="(max-width: 1280px) 100vw, 1240px" />
+            </div>
+          </figure>
+        )}
+
+        {event.description?.length ? (
+          <div className="container-max py-12">
+            <div className="mx-auto max-w-[680px]">
+              <h2 className="border-t-2 border-black pt-3 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">About this event</h2>
+              <div className={`mt-6 ${ARTICLE_PROSE}`}>
+                <PortableText value={event.description} />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {event.galleryUrls && event.galleryUrls.length > 0 && (
+          <section className="container-max pb-12">
+            <SectionHeader title="Photos" />
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
               {event.galleryUrls.map((url, i) => (
-                <RevealItem key={url} variant="scale-fade">
-                  <div className="relative aspect-square overflow-hidden rounded-lg">
-                    <Image src={url} alt={`${event.title} photo ${i + 1}`} fill className="object-cover transition-transform duration-500 hover:scale-105" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
-                  </div>
-                </RevealItem>
+                <div key={url} className="relative aspect-square overflow-hidden bg-gn-800">
+                  <Image src={url} alt={`${title}, photo ${i + 1}`} fill className="object-cover transition-transform duration-500 hover:scale-[1.03]" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                </div>
               ))}
-            </SectionReveal>
-          </div>
-        </section>
-      )}
+            </div>
+          </section>
+        )}
 
-      {/* RSVP */}
-      {!isPast && (
-        <section id="rsvp" className="bg-light-bg px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="mx-auto max-w-xl text-center">
-            <SectionReveal variant="slide-up">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-amber">Register</span>
-            </SectionReveal>
-            <TextReveal as="h2" variant="fade-up" className="mt-3 font-display text-2xl text-brand-green md:text-3xl">
-              Reserve Your Seat
-            </TextReveal>
-            <SectionReveal variant="mask-wipe" delay={0.1}>
-              <p className="mt-3 text-brand-medium">
-                {event.capacity ? `Spaces limited to ${event.capacity} guests.` : "Spaces are limited."} We&apos;ll confirm within 48 hours.
-              </p>
-            </SectionReveal>
-            <SectionReveal variant="clip-inset" delay={0.2}>
-              <div className="mt-8 text-left">
-                <RsvpForm eventTitle={event.title} />
+        {!isPast && (
+          <section id="rsvp" className="border-t border-black/10 bg-gn-900">
+            <div className="container-max py-14">
+              <div className="mx-auto max-w-xl">
+                <SectionHeader title="Reserve your seat" />
+                <p className="text-[15px] leading-relaxed text-gn-400">
+                  {event.capacity ? `Spaces are limited to ${event.capacity} guests.` : "Spaces are limited."} We&apos;ll confirm within 48 hours.
+                </p>
+                <div className="mt-8">
+                  <RsvpForm eventTitle={title} />
+                </div>
               </div>
-            </SectionReveal>
+            </div>
+          </section>
+        )}
+      </article>
+
+      {others.length > 0 && (
+        <section className="border-t border-black/10 bg-white">
+          <div className="container-max py-12">
+            <SectionHeader title="More events" href="/events" />
+            <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {others.slice(0, 3).map((s) => (
+                <StoryCard key={s.href} story={s} />
+              ))}
+            </div>
           </div>
         </section>
       )}
-    </PageTransition>
+    </>
   );
 }

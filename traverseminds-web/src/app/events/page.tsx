@@ -1,72 +1,86 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Mic, Users } from "lucide-react";
-import { sanityClient } from "@/sanity/client";
-import { PageTransition } from "@/components/ui/PageTransition";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { EventsHero } from "@/components/events/EventsHero";
-import { EventsGrid } from "@/components/events/EventsGrid";
-import type { SanityEvent } from "@/components/events/EventsGrid";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
+import { Diary } from "@/components/magazine/Diary";
+import { StorySection } from "@/components/magazine/StorySection";
+import { SectionHeader } from "@/components/magazine/primitives";
+import { getMagazineContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Events — Traverse Minds Africa",
-  description: "Luncheons, conferences, hackathons, and workshops curated for Africa's cybersecurity decision-makers.",
+  description: "Luncheons, conferences, hackathons and workshops curated for Africa's cybersecurity decision-makers.",
 };
 
-
-async function getEvents(): Promise<SanityEvent[]> {
-  try {
-    return await sanityClient.fetch(
-      `*[_type == "event"] | order(date asc) {
-        _id, title, "slug": slug.current, type, date, location,
-        isFeatured, tagline, price, capacity,
-        "thumbnailUrl": thumbnail.asset->url
-      }`
-    );
-  } catch {
-    return [];
-  }
-}
+const TAKE_PART = [
+  {
+    title: "Speak at our events",
+    text: "Share your expertise with Africa's cybersecurity, policy and technology community at the Cyber Luncheon and our forums.",
+    img: "/imagestouse/eventslide/stud (2).jpg",
+    label: "Propose a talk",
+    href: "/contact?subject=speaking",
+  },
+  {
+    title: "Sponsor an event",
+    text: "Put your organisation in front of the banks, regulators and agencies shaping digital security in the region.",
+    img: "/imagestouse/div-events.jpeg",
+    label: "Sponsorship enquiry",
+    href: "/contact?subject=sponsorship",
+  },
+];
 
 export default async function EventsPage() {
-  const events = await getEvents();
+  const { upcomingEvents, pastEvents } = await getMagazineContent();
 
   return (
-    <PageTransition>
-      {/* Hero */}
-      <EventsHero />
+    <>
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Events", href: "/events" }]}
+        kicker="Traverse Events"
+        title="Events"
+        dek="Luncheons, conferences, hackathons and workshops curated for Africa's cybersecurity decision-makers."
+      />
 
-      {/* Events grid with filter — client component */}
-      <EventsGrid events={events} />
+      {upcomingEvents.length === 0 && (
+        <div className="container-max">
+          <p className="border-y border-black/15 py-4 text-[15px] text-gn-400">
+            No events are scheduled right now.{" "}
+            <Link href="/#newsletter" className="font-medium text-black underline underline-offset-4 hover:text-accent">Subscribe to the briefing</Link>{" "}
+            to hear about the next Cyber Luncheon first.
+          </p>
+        </div>
+      )}
 
-      {/* Sponsor / Speak */}
-      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <SectionReveal variant="fade-up" staggerChildren={0.12} className="container-max relative z-10 max-w-4xl mx-auto grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
-          {[
-            { icon: Mic, title: "Speak at Our Events", desc: "Share your expertise with Africa's cybersecurity community.", img: "/imagestouse/eventslide/stud (2).jpg" },
-            { icon: Users, title: "Sponsor an Event", desc: "Put your brand in front of top cybersecurity decision-makers.", img: "/imagestouse/div-events.jpeg" },
-          ].map((c) => (
-            <RevealItem key={c.title} variant="scale-fade">
-              <div className="group">
-                <div className="relative h-56 overflow-hidden">
-                  <Image src={c.img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+      <Diary
+        upcoming={upcomingEvents}
+        past={pastEvents}
+        total={upcomingEvents.length + 6}
+        title={upcomingEvents.length ? "Coming up & recent" : "Recent events"}
+      />
+      <StorySection title="From past events" stories={pastEvents} background="paper" />
+
+      <section className="bg-white">
+        <div className="container-max py-12">
+          <SectionHeader title="Take part" />
+          <div className="grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2">
+            {TAKE_PART.map((c) => (
+              <article key={c.title} className="group">
+                <div className="relative aspect-[16/9] overflow-hidden bg-gn-800">
+                  <Image src={c.img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
-                <div className="pt-5">
-                  <div className="flex items-center gap-3">
-                    <c.icon className="h-5 w-5 shrink-0 text-accent" />
-                    <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{c.title}</h3>
-                  </div>
-                  <p className="mt-2 text-sm" style={{ color: "#515459" }}>{c.desc}</p>
-                  <div className="mt-5">
-                    <Button variant="outline" size="sm" href="/contact">Enquire</Button>
-                  </div>
+                <h3 className="mt-5 font-serif text-[24px] font-semibold text-black">{c.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{c.text}</p>
+                <div className="mt-5">
+                  <Button variant="outline" size="sm" href={c.href}>{c.label}</Button>
                 </div>
-              </div>
-            </RevealItem>
-          ))}
-        </SectionReveal>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
-    </PageTransition>
+    </>
   );
 }
