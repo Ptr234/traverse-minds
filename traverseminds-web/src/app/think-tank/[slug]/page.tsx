@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
-import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Tag } from "lucide-react";
-import { PortableText } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import type { PortableTextBlock } from "next-sanity";
 import { sanityClient } from "@/sanity/client";
-import { PageTransition } from "@/components/ui/PageTransition";
-import { Button } from "@/components/ui/Button";
+import { getMagazineContent } from "@/lib/content";
+import { divisionLabel } from "@/lib/divisions";
+import { SITE_URL } from "@/lib/site";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { Article } from "@/components/magazine/Article";
 import { PdfViewer } from "@/components/think-tank/PdfViewer";
+
+const builder = imageUrlBuilder(sanityClient);
 
 interface Author {
   name: string;
@@ -18,38 +21,27 @@ interface Author {
 }
 
 interface Report {
-  _id: string;
   title: string;
-  slug: { current: string };
   abstract: string;
   publicationDate: string;
-  authors: Author[];
-  pdfUrl: string;
-  body?: unknown[];
-  topics: string[];
-  countryCoverage: string[];
+  authors?: Author[];
+  pdfUrl?: string;
+  body?: PortableTextBlock[];
+  topics?: string[];
+  countryCoverage?: string[];
+  featuredImage?: { asset?: unknown; alt?: string };
 }
-
-const TOPIC_LABELS: Record<string, string> = {
-  "data-protection": "Data Protection",
-  "ai-governance": "AI Governance",
-  "digital-id": "Digital ID",
-  "civic-tech": "Civic Tech",
-  "open-gov": "Open Government",
-  "cybersecurity": "Cybersecurity",
-};
 
 async function getReport(slug: string): Promise<Report | null> {
   try {
-    const query = `*[_type == "report" && slug.current == $slug][0] {
-      _id, title, slug, abstract, publicationDate,
-      "authors": authors[]->{name, role, bio, "photoUrl": photo.asset->url},
-      "pdfUrl": pdfFile.asset->url,
-      body,
-      topics,
-      countryCoverage
-    }`;
-    return await sanityClient.fetch(query, { slug });
+    return await sanityClient.fetch(
+      `*[_type == "report" && slug.current == $slug][0] {
+        title, abstract, publicationDate, body, topics, countryCoverage, featuredImage,
+        "authors": authors[]->{name, role, bio, "photoUrl": photo.asset->url},
+        "pdfUrl": pdfFile.asset->url
+      }`,
+      { slug }
+    );
   } catch {
     return null;
   }
@@ -57,169 +49,105 @@ async function getReport(slug: string): Promise<Report | null> {
 
 export async function generateStaticParams() {
   try {
-    const slugs: { slug: string }[] = await sanityClient.fetch(
-      `*[_type == "report"]{ "slug": slug.current }`
-    );
+    const slugs: { slug: string }[] = await sanityClient.fetch(`*[_type == "report"]{ "slug": slug.current }`);
     return slugs.map((s) => ({ slug: s.slug }));
   } catch {
     return [];
   }
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+// Some report titles were entered in capitals in the CMS
+const displayTitle = (t: string) =>
+  /^[^a-z]+$/.test(t.trim()) ? t.trim().toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()) : t.trim();
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const report = await getReport(slug);
   if (!report) return { title: "Report Not Found" };
   return {
-    title: `${report.title} | Think Tank — Traverse Minds Africa`,
-    description: report.abstract,
+    title: `${displayTitle(report.title)} | Think Tank — Traverse Minds Africa`,
+    description: report.abstract.split(/\n\n+/)[0],
+    openGraph: report.featuredImage?.asset
+      ? { images: [builder.image(report.featuredImage).width(1200).height(630).fit("crop").url()] }
+      : undefined,
   };
 }
 
-export default async function ReportPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ReportPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const report = await getReport(slug);
-
+  const [report, { reports }] = await Promise.all([getReport(slug), getMagazineContent()]);
   if (!report) notFound();
 
-  const pdfFilename = `${report.title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`;
+  const href = `/think-tank/${slug}`;
+  const title = displayTitle(report.title);
+  const [standfirst, ...abstractRest] = report.abstract.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
+  const lead = report.authors?.[0];
+  const pdfFilename = `${title.replace(/[^a-zA-Z0-9\s-]/g, "").trim().replace(/\s+/g, "-")}-Traverse-Minds.pdf`;
+  const countries = report.countryCoverage?.map((c) => c.charAt(0).toUpperCase() + c.slice(1)).join(", ");
 
   return (
-    <PageTransition>
-      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Think Tank", href: "/think-tank" }, { name: report.title, href: `/think-tank/${slug}` }]} />
-      {/* Header */}
-      <section style={{ background: "#0a0a0a", paddingTop: 120, paddingBottom: 64 }}>
-        <div className="container-max max-w-4xl px-6 lg:px-8">
-          <Link
-            href="/think-tank"
-            className="inline-flex items-center gap-2 text-sm mb-8"
-            style={{ color: "rgba(255,255,255,0.4)" }}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Think Tank
-          </Link>
-
-          {/* Topics */}
-          {report.topics?.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-5">
-              {report.topics.map((topic) => (
-                <span
-                  key={topic}
-                  className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-                  style={{ background: "#ff4c00", borderRadius: 999 }}
-                >
-                  {TOPIC_LABELS[topic] ?? topic}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-            {report.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-6 mt-6" style={{ color: "rgba(255,255,255,0.4)" }}>
-            {report.publicationDate && (
-              <span className="flex items-center gap-2 text-sm">
-                <Calendar className="h-4 w-4" />
-                {new Date(report.publicationDate).toLocaleDateString("en-UG", {
-                  year: "numeric", month: "long", day: "numeric",
-                })}
-              </span>
-            )}
-            {report.countryCoverage?.length > 0 && (
-              <span className="flex items-center gap-2 text-sm">
-                <Tag className="h-4 w-4" />
-                {report.countryCoverage.join(", ")}
-              </span>
-            )}
+    <>
+      <SectionBar />
+      <Article
+        data={{
+          crumbs: [
+            { name: "Home", href: "/" },
+            { name: "Think Tank", href: "/think-tank" },
+            { name: title, href },
+          ],
+          kicker: divisionLabel(report.topics?.[0]) || "Research",
+          title,
+          dek: standfirst,
+          author: lead ? { name: report.authors!.map((a) => a.name).join(", "), title: report.authors!.length === 1 ? lead.role : undefined, photo: report.authors!.length === 1 ? lead.photoUrl : null } : undefined,
+          date: report.publicationDate,
+          image: report.featuredImage?.asset ? builder.image(report.featuredImage).width(2200).fit("max").auto("format").url() : null,
+          imageCaption: report.featuredImage?.alt,
+          body: report.body,
+          bodyFallback: abstractRest,
+          meta: [
+            ...(countries ? [{ label: "Coverage", value: countries }] : []),
+            ...(report.topics?.length ? [{ label: "Topics", value: report.topics.map(divisionLabel).join(", ") }] : []),
+          ],
+          ctaKey: "commission",
+          url: `${SITE_URL}${href}/`,
+        }}
+        related={reports.filter((r) => r.href !== href)}
+        relatedTitle="More research"
+        relatedHref="/think-tank"
+      >
+        {report.pdfUrl && (
+          <div className="mt-12 border-t-2 border-black pt-3">
+            <p className="mb-4 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">The full report</p>
+            <PdfViewer pdfUrl={report.pdfUrl} title={title} filename={pdfFilename} />
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Content */}
-      <section style={{ background: "#ffffff", paddingTop: 56, paddingBottom: 80 }}>
-        <div className="container-max max-w-4xl px-6 lg:px-8">
-
-          {/* Abstract */}
-          <div className="mb-10 p-8" style={{ background: "#f0f1f4", borderRadius: 0, borderLeft: "4px solid #ff4c00" }}>
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#ff4c00" }}>Abstract</p>
-            <div className="flex flex-col gap-3">
-              {report.abstract.split(/\n\n+/).map((para, i) => (
-                <p key={i} className="text-base leading-relaxed" style={{ color: "#333" }}>
-                  {para.trim()}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Inline PDF Viewer */}
-          {report.pdfUrl && (
-            <PdfViewer
-              pdfUrl={report.pdfUrl}
-              title={report.title}
-              filename={pdfFilename}
-            />
-          )}
-
-          {/* Report Body */}
-          {report.body && report.body.length > 0 && (
-            <article className="mb-10 prose max-w-none prose-headings:font-display prose-headings:text-[#000] prose-p:text-[#333] prose-p:leading-relaxed prose-a:text-[#ff4c00] prose-a:no-underline hover:prose-a:underline prose-strong:text-black prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-blockquote:border-l-[#ff4c00] prose-blockquote:text-[#515459]">
-              <PortableText value={report.body as Parameters<typeof PortableText>[0]["value"]} />
-            </article>
-          )}
-
-          {/* Author cards */}
-          {report.authors?.length > 0 && (
-            <div className="mb-10">
-              <p className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "#919499" }}>
-                {report.authors.length === 1 ? "About the Author" : "About the Authors"}
-              </p>
-              <div className="flex flex-col gap-4">
-                {report.authors.map((author) => (
-                  <div
-                    key={author.name}
-                    className="flex items-start gap-4 p-5"
-                    style={{ background: "#f0f1f4", borderRadius: 0 }}
-                  >
-                    {author.photoUrl ? (
-                      <Image
-                        src={author.photoUrl}
-                        alt={author.name}
-                        width={56}
-                        height={56}
-                        className="rounded-full object-cover shrink-0"
-                        style={{ border: "2px solid rgba(0,0,0,0.08)" }}
-                      />
-                    ) : (
-                      <div className="h-14 w-14 rounded-full shrink-0 flex items-center justify-center text-lg font-bold text-white" style={{ background: "#ff4c00" }}>
-                        {author.name.charAt(0)}
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-semibold" style={{ color: "#000" }}>{author.name}</p>
-                      {author.role && <p className="text-sm mt-0.5" style={{ color: "#ff4c00" }}>{author.role}</p>}
-                      {author.bio && <p className="text-sm mt-2 leading-relaxed" style={{ color: "#515459" }}>{author.bio}</p>}
-                    </div>
+        {report.authors && report.authors.length > 0 && (
+          <section className="mt-12 border-t-2 border-black pt-3" aria-label="About the authors">
+            <p className="font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">
+              {report.authors.length === 1 ? "About the author" : "About the authors"}
+            </p>
+            <ul className="mt-4">
+              {report.authors.map((a) => (
+                <li key={a.name} className="flex gap-4 border-b border-black/10 py-5 last:border-b-0">
+                  {a.photoUrl ? (
+                    <Image src={a.photoUrl} alt="" width={56} height={56} className="h-14 w-14 shrink-0 rounded-full object-cover" />
+                  ) : (
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-white" aria-hidden>
+                      {a.name.charAt(0)}
+                    </span>
+                  )}
+                  <div>
+                    <p className="font-serif text-[18px] font-semibold text-black">{a.name}</p>
+                    {a.role && <p className="text-[13px] text-accent">{a.role}</p>}
+                    {a.bio && <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{a.bio}</p>}
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 32 }}>
-            <Button variant="outline" href="/think-tank">Back to Think Tank</Button>
-          </div>
-        </div>
-      </section>
-    </PageTransition>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </Article>
+    </>
   );
 }

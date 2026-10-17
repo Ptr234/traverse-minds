@@ -22,6 +22,7 @@ const CTA: Record<string, { title: string; text: string; label: string; href: st
   literacy: { title: "Train your team or school", text: "Practical cyber-safety and digital-skills programmes for schools, SMEs and public institutions.", label: "Explore programmes", href: "/literacy" },
   "public-record": { title: "Search Africa's public record", text: "Laws, judgments and gazettes in one searchable place. Early access is open to the waitlist.", label: "Join the waitlist", href: "/public-record#waitlist" },
   thinktank: { title: "Read the full research", text: "Independent analysis on data protection, digital rights and AI governance in Africa.", label: "Browse the Think Tank", href: "/think-tank" },
+  commission: { title: "Commission research like this", text: "Our researchers take on commissioned projects, gap analyses and impact assessments for governments, funders and companies.", label: "Enquire about research", href: "/contact?subject=research" },
 };
 
 export type ArticleData = {
@@ -38,6 +39,10 @@ export type ArticleData = {
   tags?: string[];
   ctaKey?: string;
   url: string;
+  /** Paragraphs to show when there is no rich body (e.g. a report abstract) */
+  bodyFallback?: string[];
+  /** Small facts shown under the byline, e.g. country coverage */
+  meta?: { label: string; value: string }[];
 };
 
 function ShareLinks({ url, title }: { url: string; title: string }) {
@@ -61,7 +66,20 @@ function ShareLinks({ url, title }: { url: string; title: string }) {
   );
 }
 
-export function Article({ data, related }: { data: ArticleData; related: Story[] }) {
+export function Article({
+  data,
+  related,
+  relatedTitle = "More analysis",
+  relatedHref = "/blog",
+  children,
+}: {
+  data: ArticleData;
+  related: Story[];
+  relatedTitle?: string;
+  relatedHref?: string;
+  /** Extra content after the body, e.g. a PDF viewer or author bios */
+  children?: React.ReactNode;
+}) {
   const cta = data.ctaKey ? CTA[data.ctaKey] : undefined;
   const date = new Date(data.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
@@ -90,6 +108,16 @@ export function Article({ data, related }: { data: ArticleData; related: Story[]
             </div>
             <ShareLinks url={data.url} title={data.title} />
           </div>
+          {data.meta && data.meta.length > 0 && (
+            <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-[13px]">
+              {data.meta.map((m) => (
+                <div key={m.label} className="flex gap-2">
+                  <dt className="font-bold uppercase tracking-wider text-gn-500">{m.label}</dt>
+                  <dd className="text-gn-300">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
         </div>
       </header>
 
@@ -108,9 +136,13 @@ export function Article({ data, related }: { data: ArticleData; related: Story[]
             <div className={ARTICLE_PROSE}>
               <PortableText value={data.body} />
             </div>
-          ) : (
-            data.dek && <p className="font-serif text-[19px] leading-[1.7] text-gn-200">{data.dek}</p>
-          )}
+          ) : data.bodyFallback?.length ? (
+            <div className={ARTICLE_PROSE}>
+              {data.bodyFallback.map((para, i) => <p key={i}>{para}</p>)}
+            </div>
+          ) : null}
+
+          {children}
 
           {data.tags && data.tags.length > 0 && (
             <ul className="mt-10 flex flex-wrap gap-2">
@@ -140,14 +172,14 @@ export function Article({ data, related }: { data: ArticleData; related: Story[]
       {related.length > 0 && (
         <section className="border-t border-black/10 bg-gn-900">
           <div className="container-max py-12">
-            <SectionHeader title="More analysis" href="/blog" />
+            <SectionHeader title={relatedTitle} href={relatedHref} />
             <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {related.slice(0, 3).map((s) => (
                 <StoryCard key={s.href} story={s} />
               ))}
             </div>
             <p className="mt-10">
-              <Link href="/blog" className="text-[14px] font-medium text-gn-300 hover:text-accent">← All analysis</Link>
+              <Link href={relatedHref} className="text-[14px] font-medium text-gn-300 hover:text-accent">← All {relatedTitle.replace(/^More /, "")}</Link>
             </p>
           </div>
         </section>

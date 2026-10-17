@@ -1,22 +1,22 @@
 import { Metadata } from "next";
-import { Hero } from "@/components/think-tank/Hero";
+import { ArrowRight } from "lucide-react";
 import { ResearchAreas } from "@/components/think-tank/ResearchAreas";
-import { Publications } from "@/components/think-tank/Publications";
-import { Button } from "@/components/ui/Button";
-import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
-import { ArrowRight, FileText, Filter } from "lucide-react";
 import { ReportDownloadForm } from "@/components/think-tank/ReportDownloadForm";
-import { sanityClient } from "@/sanity/client";
 import { DigitalSnapshot } from "@/components/think-tank/DigitalSnapshot";
-import { getDigitalSnapshot, getIndicatorTrend } from "@/lib/worldbank";
+import { Button } from "@/components/ui/Button";
 import { CitedStats } from "@/components/ui/CitedStats";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
+import { StorySection } from "@/components/magazine/StorySection";
+import { SectionHeader } from "@/components/magazine/primitives";
+import { sanityClient } from "@/sanity/client";
+import { getMagazineContent } from "@/lib/content";
+import { getDigitalSnapshot, getIndicatorTrend } from "@/lib/worldbank";
 import { getStatistics } from "@/lib/statistics";
 
 export const metadata: Metadata = {
   title: "Think Tank | Evidence-Driven Digital Policy Research in Africa",
-  description: "Bridging the gap between technology and policy. We provide independent research on data protection, AI governance, and digital rights.",
+  description: "Independent research on data protection, AI governance, digital rights and open government in Africa.",
 };
 
 const FALLBACK_REPORTS = [
@@ -29,12 +29,9 @@ const FALLBACK_REPORTS = [
 
 async function getDownloadableReports() {
   try {
-    const query = `*[_type == "report" && defined(pdfFile)] | order(publicationDate desc) {
-      "id": _id,
-      title,
-      "pdfUrl": pdfFile.asset->url
-    }`;
-    const results = await sanityClient.fetch(query);
+    const results = await sanityClient.fetch(`*[_type == "report" && defined(pdfFile)] | order(publicationDate desc) {
+      "id": _id, title, "pdfUrl": pdfFile.asset->url
+    }`);
     return results?.length > 0 ? results : FALLBACK_REPORTS;
   } catch {
     return FALLBACK_REPORTS;
@@ -42,110 +39,70 @@ async function getDownloadableReports() {
 }
 
 export default async function ThinkTankPage() {
-  const [reports, snapshot, internetTrend, stats] = await Promise.all([
+  const [downloadable, content, snapshot, internetTrend, stats] = await Promise.all([
     getDownloadableReports(),
+    getMagazineContent(),
     getDigitalSnapshot(),
     getIndicatorTrend("IT.NET.USER.ZS"),
     getStatistics("think-tank"),
   ]);
+
   return (
-    <div className="flex flex-col">
-      <PageTransition>
-      <Hero />
+    <>
+      <SectionBar />
+      <PageHeader
+        crumbs={[{ name: "Home", href: "/" }, { name: "Think Tank", href: "/think-tank" }]}
+        kicker="Research"
+        title="Think Tank"
+        dek="Independent, evidence-driven research on data protection, digital rights, AI governance and open government in Africa."
+      >
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button variant="primary" href="#commission">Commission research</Button>
+          <Button variant="outline" href="/think-tank/archive">Browse the archive</Button>
+        </div>
+      </PageHeader>
+
+      <StorySection title="Latest research" href="/think-tank/archive" stories={content.reports} layout="feature" />
       <ResearchAreas />
       {snapshot && <DigitalSnapshot data={snapshot} internetTrend={internetTrend} />}
       <CitedStats stats={stats} eyebrow="From Ugandan Sources" title="What national data tells us" background="#f0f1f4" />
-      <Publications />
 
-      {/* Evidence Briefs */}
-      <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10 text-center">
-          <SectionReveal variant="fade-up">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Evidence Briefs</p>
-          </SectionReveal>
-
-          <TextReveal variant="clip-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
-            Evidence Briefs
-          </TextReveal>
-
-          <SectionReveal variant="scale-fade" delay={0.15}>
-            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-              <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
-              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
-              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
-                Short-form rapid summaries of our key research findings. Coming soon.
-              </p>
+      {/* Reports by email */}
+      <section className="bg-primary text-white">
+        <div className="container-max grid grid-cols-1 items-center gap-10 py-14 lg:grid-cols-2">
+          <div>
+            <div className="border-t-2 border-white/80 pt-3">
+              <p className="font-display text-[13px] font-bold uppercase tracking-[0.16em]">Reports by email</p>
             </div>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* Gated Content */}
-      <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="flex flex-col items-center justify-between gap-12 lg:flex-row">
-            <SectionReveal variant="clip-left" className="max-w-2xl text-center lg:text-left">
-              <TextReveal variant="blur-in" className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-                Get the State of Digital Rights Report
-              </TextReveal>
-              <p className="mt-5 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Our annual comprehensive analysis of the digital policy landscape
-                across Uganda, Kenya, and Tanzania. Free for registered organisations.
-              </p>
-            </SectionReveal>
-
-            <SectionReveal variant="slide-up" delay={0.2} className="w-full max-w-sm">
-              <ReportDownloadForm reports={reports} />
-            </SectionReveal>
+            <h2 className="mt-5 font-serif text-[32px] font-semibold leading-tight">Get any Think Tank report in your inbox</h2>
+            <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-white/60">
+              Choose a report and we will email you the PDF. Free for organisations and researchers.
+            </p>
+          </div>
+          <div className="w-full max-w-sm lg:justify-self-end">
+            <ReportDownloadForm reports={downloadable} />
           </div>
         </div>
       </section>
 
-      {/* Commission Research */}
-      <section id="commission" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10 text-center">
-          <TextReveal variant="fade-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
-            Commission Research
-          </TextReveal>
-          <SectionReveal variant="fade-blur" delay={0.1}>
-            <p className="mt-5 mx-auto max-w-2xl text-base leading-relaxed" style={{ color: "#515459" }}>
-              Need deep-dive analysis on a specific digital policy or civic-tech topic?
-              Our researchers are available for commissioned projects, gap analyses,
-              and impact assessments.
+      {/* Commission research */}
+      <section id="commission" className="bg-white">
+        <div className="container-max py-14">
+          <SectionHeader title="Commission research" />
+          <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+            <p className="font-serif text-[24px] leading-snug text-black lg:col-span-8">
+              Need deep-dive analysis on a specific digital policy or civic-tech question? Our researchers take on
+              commissioned projects, gap analyses and impact assessments.
             </p>
-            <div className="mt-10">
+            <div className="lg:col-span-4 lg:justify-self-end">
               <Button variant="primary" size="lg" href="/contact?subject=research">
-                Enquire About Research Services
+                Enquire about research services
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-          </SectionReveal>
+          </div>
         </div>
       </section>
-
-      {/* Research Filter Placeholder */}
-      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10 text-center">
-          <SectionReveal variant="mask-wipe">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Archive</p>
-          </SectionReveal>
-
-          <TextReveal variant="slide-up" className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
-            Research Archive
-          </TextReveal>
-
-          <SectionReveal variant="clip-inset" delay={0.15}>
-            <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-              <Filter className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
-              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
-              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
-                Full research archive with topic, country, and year filtering -- coming with our first publications.
-              </p>
-            </div>
-          </SectionReveal>
-        </div>
-      </section>
-      </PageTransition>
-    </div>
+    </>
   );
 }
