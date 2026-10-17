@@ -75,7 +75,8 @@ fi
 
 log "Nightly backup at 02:30 (ERP's runs at 02:00)"
 CRON="30 2 * * * $SRC_DIR/deploy/backup.sh >> $APP_DIR/backups/backup.log 2>&1"
-( crontab -u "$APP_USER" -l 2>/dev/null | grep -v 'deploy/backup.sh' ; echo "$CRON" ) | crontab -u "$APP_USER" -
+# `|| true`: a first run has no crontab yet, and grep finding nothing must not abort the script
+{ crontab -u "$APP_USER" -l 2>/dev/null | grep -v 'deploy/backup.sh' || true; echo "$CRON"; } | crontab -u "$APP_USER" -
 
 log "Done"
 cat <<EOF
