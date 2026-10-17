@@ -32,9 +32,8 @@ export function Hero() {
       {/* Full-bleed image with GatesNotes gradient fade to bg */}
       <div className="absolute inset-0">
         <ImageSlideshow images={heroImages} overlay="bg-black/20" />
-        {/* Tech layer: blueprint grid and a slow scan line over the slideshow */}
+        {/* Tech layer: blueprint grid over the slideshow */}
         <div className="tech-grid-dark absolute inset-0" aria-hidden />
-        <div className="tech-scanline" aria-hidden />
         <div
           className="absolute inset-0"
           style={{

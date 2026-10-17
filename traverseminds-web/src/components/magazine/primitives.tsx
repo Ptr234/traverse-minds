@@ -48,7 +48,7 @@ const HEADLINE: Record<CardSize, string> = {
   sm: "text-[17px] leading-[1.25]",
 };
 
-/** Image on top, text below. Square image corners, serif headline; HUD brackets and a scan line on hover. */
+/** Image on top, text below. Square image corners, serif headline; HUD brackets on hover. */
 export function StoryCard({ story, size = "md", showDek = true, priority = false }: { story: Story; size?: CardSize; showDek?: boolean; priority?: boolean }) {
   return (
     <article className="group">
