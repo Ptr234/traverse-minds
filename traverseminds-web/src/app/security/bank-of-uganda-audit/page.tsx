@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { ServiceDetailLayout } from "@/components/security/ServiceDetailLayout";
+import { CitedStats } from "@/components/ui/CitedStats";
+import { getStatistics } from "@/lib/statistics";
 
 export const metadata: Metadata = {
   title: "Bank of Uganda Audit | Traverse Security",
@@ -39,6 +41,11 @@ const serviceData = {
   }
 };
 
-export default function BankOfUgandaAuditPage() {
-  return <ServiceDetailLayout {...serviceData} />;
+export default async function BankOfUgandaAuditPage() {
+  const stats = await getStatistics("bou-audit", 4);
+  return (
+    <ServiceDetailLayout {...serviceData}>
+      <CitedStats stats={stats} eyebrow="The Sector, In Numbers" title="What is at stake in Uganda's financial system" />
+    </ServiceDetailLayout>
+  );
 }

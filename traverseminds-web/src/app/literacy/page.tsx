@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { CitedStats } from "@/components/ui/CitedStats";
+import { getStatistics } from "@/lib/statistics";
 import { Hero } from "@/components/literacy/Hero";
 import { ProgrammeListing } from "@/components/literacy/ProgrammeListing";
 import { Button } from "@/components/ui/Button";
@@ -59,12 +61,14 @@ const learningOutcomes = [
   },
 ];
 
-export default function LiteracyPage() {
+export default async function LiteracyPage() {
+  const stats = await getStatistics("literacy", 4);
   return (
     <div className="flex flex-col">
       <PageTransition>
         <Hero />
         <ProgrammeListing />
+        <CitedStats stats={stats} eyebrow="Why It Matters" title="The skills gap, in numbers" background="#f0f1f4" />
 
         {/* Delivery Formats */}
         <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

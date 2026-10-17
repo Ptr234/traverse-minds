@@ -11,6 +11,8 @@ import { ReportDownloadForm } from "@/components/think-tank/ReportDownloadForm";
 import { sanityClient } from "@/sanity/client";
 import { DigitalSnapshot } from "@/components/think-tank/DigitalSnapshot";
 import { getDigitalSnapshot, getIndicatorTrend } from "@/lib/worldbank";
+import { CitedStats } from "@/components/ui/CitedStats";
+import { getStatistics } from "@/lib/statistics";
 
 export const metadata: Metadata = {
   title: "Think Tank | Evidence-Driven Digital Policy Research in Africa",
@@ -40,10 +42,11 @@ async function getDownloadableReports() {
 }
 
 export default async function ThinkTankPage() {
-  const [reports, snapshot, internetTrend] = await Promise.all([
+  const [reports, snapshot, internetTrend, stats] = await Promise.all([
     getDownloadableReports(),
     getDigitalSnapshot(),
     getIndicatorTrend("IT.NET.USER.ZS"),
+    getStatistics("think-tank"),
   ]);
   return (
     <div className="flex flex-col">
@@ -51,6 +54,7 @@ export default async function ThinkTankPage() {
       <Hero />
       <ResearchAreas />
       {snapshot && <DigitalSnapshot data={snapshot} internetTrend={internetTrend} />}
+      <CitedStats stats={stats} eyebrow="From Ugandan Sources" title="What national data tells us" background="#f0f1f4" />
       <Publications />
 
       {/* Evidence Briefs */}

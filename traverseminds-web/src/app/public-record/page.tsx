@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getOpenDataLandscape } from "@/lib/hdx";
+import { getStatistics } from "@/lib/statistics";
 import { PublicRecordPageClient } from "./PublicRecordPageClient";
 
 export const metadata: Metadata = {
@@ -9,6 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function PublicRecordPage() {
-  const openData = await getOpenDataLandscape();
-  return <PublicRecordPageClient openData={openData} />;
+  const [openData, stats] = await Promise.all([getOpenDataLandscape(), getStatistics("public-record", 4)]);
+  return <PublicRecordPageClient openData={openData} stats={stats} />;
 }

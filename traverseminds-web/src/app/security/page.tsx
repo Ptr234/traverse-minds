@@ -14,6 +14,8 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { ThreatWatch } from "@/components/security/ThreatWatch";
 import { getThreatWatch } from "@/lib/cisa";
+import { CitedStats } from "@/components/ui/CitedStats";
+import { getStatistics } from "@/lib/statistics";
 
 export const metadata: Metadata = {
   title: "Traverse Security -- Cybersecurity for Banks & Government",
@@ -25,7 +27,7 @@ const WHATSAPP_NUMBER = "+256775692334";
 const WHATSAPP_MESSAGE = "Hello Traverse Security, I'd like to enquire about your cybersecurity services.";
 
 export default async function SecurityPage() {
-  const threatWatch = await getThreatWatch();
+  const [threatWatch, stats] = await Promise.all([getThreatWatch(), getStatistics("security", 4)]);
   return (
     <PageTransition>
       <SecurityHero />
@@ -106,6 +108,7 @@ export default async function SecurityPage() {
       <EngagementProcess />
       <ComplianceFrameworks />
       {threatWatch && <ThreatWatch data={threatWatch} />}
+      <CitedStats stats={stats} eyebrow="Closer To Home" title="Cybercrime in Uganda" />
 
       {/* Self Assessment */}
       <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

@@ -14,6 +14,8 @@ import { Scale, Search, BookOpen, Building2, ShieldCheck } from "lucide-react";
 import { PricingModal } from "@/components/public-record/PricingModal";
 import { OpenDataLandscape } from "@/components/public-record/OpenDataLandscape";
 import type { OpenDataLandscapeData } from "@/lib/hdx";
+import { CitedStats } from "@/components/ui/CitedStats";
+import type { CitedStatistic } from "@/lib/statistics";
 import type { PricingPlan } from "@/components/public-record/PricingModal";
 
 const audiences = [
@@ -52,7 +54,7 @@ const pricingPlans = {
   ],
 };
 
-export function PublicRecordPageClient({ openData }: { openData: OpenDataLandscapeData | null }) {
+export function PublicRecordPageClient({ openData, stats }: { openData: OpenDataLandscapeData | null; stats: CitedStatistic[] }) {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
   const [activePlan, setActivePlan] = useState<PricingPlan | null>(null);
   const [isSearching, setIsSearching] = useState(false);
@@ -74,6 +76,7 @@ export function PublicRecordPageClient({ openData }: { openData: OpenDataLandsca
       <Features />
       <Coverage />
       {openData && <OpenDataLandscape data={openData} />}
+      <CitedStats stats={stats} eyebrow="Records In Uganda" title="The scale of the public record" background="#ffffff" />
 
       {/* Search Interface Modal-like Overlay */}
       {isSearching && (

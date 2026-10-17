@@ -8,6 +8,7 @@ import { report } from "./report";
 import { episode } from "./episode";
 import { programme } from "./programme";
 import { jobListing } from "./jobListing";
+import { statistic } from "./statistic";
 
 export const schemaTypes = [
   post,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   episode,
   programme,
   jobListing,
+  statistic,
 ];

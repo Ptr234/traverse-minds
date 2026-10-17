@@ -6,6 +6,8 @@ import { FeaturedDivision } from "@/components/home/FeaturedDivision";
 import { PublicRecordTeaser } from "@/components/home/PublicRecordTeaser";
 import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { PageTransition } from "@/components/ui/PageTransition";
+import { CitedStats } from "@/components/ui/CitedStats";
+import { getStatistics } from "@/lib/statistics";
 import { sanityClient } from "@/sanity/client";
 import type { SanityUpcomingEvent } from "@/components/home/UpcomingEvent";
 
@@ -48,13 +50,19 @@ async function getUpcomingEvent(): Promise<SanityUpcomingEvent | null> {
 }
 
 export default async function HomePage() {
-  const upcomingEvent = await getUpcomingEvent();
+  const [upcomingEvent, homeStats] = await Promise.all([getUpcomingEvent(), getStatistics("home", 4)]);
 
   return (
     <PageTransition>
       <Hero />
       <StatsCounter />
       <WhatWeDo />
+      <CitedStats
+        stats={homeStats}
+        eyebrow="Africa's Digital Reality"
+        title="The numbers behind our work"
+        background="#f0f1f4"
+      />
       <FeaturedDivision />
       <PublicRecordTeaser />
       <ThinkTankPreview />
