@@ -72,7 +72,7 @@ export default async function ThinkTankPage() {
         <div className="container-max grid grid-cols-1 items-center gap-10 py-14 lg:grid-cols-2">
           <div>
             <div className="border-t-2 border-white/80 pt-3">
-              <p className="font-display text-[13px] font-bold uppercase tracking-[0.16em]">Reports by email</p>
+              <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.14em]">Reports by email</p>
             </div>
             <h2 className="mt-5 font-serif text-[32px] font-semibold leading-tight">Get any Think Tank report in your inbox</h2>
             <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-white/60">

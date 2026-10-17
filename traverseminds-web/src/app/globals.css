@@ -451,6 +451,132 @@ a, button, [role="button"], summary, label[for] {
 }
 
 /* ═══════════════════════════════════════════════════
+   TECH EFFECTS — grid, scan line, HUD brackets, cursor, live dot
+   (all motion is switched off by the reduced-motion rule below)
+═══════════════════════════════════════════════════ */
+
+@keyframes tech-scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+@keyframes tech-sweep {
+  from { transform: translateY(-110%); }
+  to { transform: translateY(110%); }
+}
+@keyframes tech-blink {
+  50% { opacity: 0; }
+}
+@keyframes tech-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 76, 0, 0.6); }
+  100% { box-shadow: 0 0 0 8px rgba(255, 76, 0, 0); }
+}
+
+/* Fine blueprint grid, fading out towards the edges */
+.tech-grid,
+.tech-grid-dark {
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+}
+.tech-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+}
+.tech-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+/* A soft accent line that travels down its (overflow-hidden) container */
+.tech-scanline {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(255, 76, 0, 0.12) 85%, rgba(255, 76, 0, 0.45) 100%);
+  animation: tech-scan 7s linear infinite;
+}
+
+/* HUD corner brackets */
+.hud-frame {
+  --hud: var(--color-accent);
+  --hud-len: 16px;
+  background:
+    linear-gradient(var(--hud), var(--hud)) top left / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top left / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top right / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top right / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom left / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom left / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom right / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom right / 2px var(--hud-len) no-repeat;
+  pointer-events: none;
+}
+
+/* Story images: brackets close in and a scan line sweeps across on hover */
+.tech-card::before,
+.tech-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s, inset 0.3s;
+}
+.tech-card::before {
+  inset: 14px;
+  --hud: #fff;
+  --hud-len: 18px;
+  background:
+    linear-gradient(var(--hud), var(--hud)) top left / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top left / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top right / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) top right / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom left / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom left / 2px var(--hud-len) no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom right / var(--hud-len) 2px no-repeat,
+    linear-gradient(var(--hud), var(--hud)) bottom right / 2px var(--hud-len) no-repeat;
+}
+.tech-card::after {
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(255, 76, 0, 0.25) 50%, transparent 60%);
+}
+.group:hover .tech-card::before,
+.group:focus-visible .tech-card::before {
+  opacity: 1;
+  inset: 10px;
+}
+.group:hover .tech-card::after,
+.group:focus-visible .tech-card::after {
+  opacity: 1;
+  animation: tech-sweep 1.4s ease-in-out infinite;
+}
+
+/* Terminal cursor after a line of text */
+.tech-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.35em;
+  vertical-align: -0.12em;
+  background: var(--color-accent);
+  animation: tech-blink 1.1s steps(1) infinite;
+}
+
+/* Pulsing "live" indicator */
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  animation: tech-pulse 1.6s ease-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════
    REDUCE MOTION
 ═══════════════════════════════════════════════════ */
 

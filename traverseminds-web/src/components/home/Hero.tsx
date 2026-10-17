@@ -32,6 +32,9 @@ export function Hero() {
       {/* Full-bleed image with GatesNotes gradient fade to bg */}
       <div className="absolute inset-0">
         <ImageSlideshow images={heroImages} overlay="bg-black/20" />
+        {/* Tech layer: blueprint grid and a slow scan line over the slideshow */}
+        <div className="tech-grid-dark absolute inset-0" aria-hidden />
+        <div className="tech-scanline" aria-hidden />
         <div
           className="absolute inset-0"
           style={{
@@ -50,6 +53,7 @@ export function Hero() {
       >
         {/* GatesNotes: text overlay card with blur */}
         <div
+          className="relative"
           style={{
             maxWidth: 520,
             padding: "32px 24px",
@@ -58,7 +62,8 @@ export function Hero() {
             backdropFilter: "blur(10px)",
           }}
         >
-          <motion.p variants={fadeUp} className="eyebrow mb-4" style={{ color: "#515459" }}>
+          <span className="hud-frame absolute -inset-px" aria-hidden />
+          <motion.p variants={fadeUp} className="tech-cursor mb-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#515459" }}>
             Built for Africa &middot; Driven by Evidence
           </motion.p>
 

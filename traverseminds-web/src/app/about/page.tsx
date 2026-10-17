@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
+import { PartnersSection } from "@/components/magazine/PartnersSection";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { CalendlyEmbed } from "@/components/about/CalendlyEmbed";
-import { Check, Handshake } from "lucide-react";
+import { Check } from "lucide-react";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
@@ -166,30 +167,7 @@ export default function AboutPage() {
       <Timeline />
       <TeamGrid />
 
-      {/* Partners & Affiliations */}
-      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10 text-center">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Partners</p>
-
-          <TextReveal
-            as="h2"
-            variant="clip-up"
-            className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-          >
-            Partners & Affiliations
-          </TextReveal>
-
-          <SectionReveal variant="clip-inset" className="mt-10">
-            <div className="border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-              <Handshake className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
-              <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
-              <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
-                Partner logos will appear here as relationships are established.
-              </p>
-            </div>
-          </SectionReveal>
-        </div>
-      </section>
+      <PartnersSection background="paper" />
 
       {/* Legal / Registration */}
       <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

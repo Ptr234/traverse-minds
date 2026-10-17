@@ -68,7 +68,7 @@ export default async function EventsPage() {
           <div className="grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2">
             {TAKE_PART.map((c) => (
               <article key={c.title} className="group">
-                <div className="relative aspect-[16/9] overflow-hidden bg-gn-800">
+                <div className="tech-card relative aspect-[16/9] overflow-hidden bg-gn-800">
                   <Image src={c.img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
                 <h3 className="mt-5 font-serif text-[24px] font-semibold text-black">{c.title}</h3>

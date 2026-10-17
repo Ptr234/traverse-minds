@@ -12,7 +12,7 @@ export function LeadStory({ lead, latest }: { lead: Story; latest: Story[] }) {
         </div>
 
         <aside className="lg:col-span-4 lg:border-l lg:border-black/15 lg:pl-10" aria-labelledby="latest-heading">
-          <h2 id="latest-heading" className="border-t-2 border-black pt-3 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">
+          <h2 id="latest-heading" className="border-t-2 border-black pt-3 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">
             Latest
           </h2>
           <ol className="mt-2">

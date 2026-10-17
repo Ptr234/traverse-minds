@@ -117,14 +117,14 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       >
         {report.pdfUrl && (
           <div className="mt-12 border-t-2 border-black pt-3">
-            <p className="mb-4 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">The full report</p>
+            <p className="mb-4 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">The full report</p>
             <PdfViewer pdfUrl={report.pdfUrl} title={title} filename={pdfFilename} />
           </div>
         )}
 
         {report.authors && report.authors.length > 0 && (
           <section className="mt-12 border-t-2 border-black pt-3" aria-label="About the authors">
-            <p className="font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">
+            <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">
               {report.authors.length === 1 ? "About the author" : "About the authors"}
             </p>
             <ul className="mt-4">

@@ -1,13 +1,14 @@
 import { Hero } from "@/components/home/Hero";
-import { TrustLogoStrip } from "@/components/ui/TrustLogoStrip";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { NewsletterSignup } from "@/components/home/NewsletterSignup";
 import { SectionBar } from "@/components/magazine/SectionBar";
+import { ThreatTicker } from "@/components/magazine/ThreatTicker";
 import { LeadStory } from "@/components/magazine/LeadStory";
 import { Briefing, type BriefingItem } from "@/components/magazine/Briefing";
 import { StorySection } from "@/components/magazine/StorySection";
 import { Diary } from "@/components/magazine/Diary";
 import { DivisionIndex } from "@/components/magazine/DivisionIndex";
+import { PartnersSection } from "@/components/magazine/PartnersSection";
 import { getMagazineContent } from "@/lib/content";
 import { getStatistics, formatStatistic } from "@/lib/statistics";
 import { getThreatWatch } from "@/lib/cisa";
@@ -16,7 +17,7 @@ export default async function HomePage() {
   const [content, homeStats, threats] = await Promise.all([
     getMagazineContent(),
     getStatistics("home", 6),
-    getThreatWatch(1, { cvss: false }),
+    getThreatWatch(10, { cvss: false }),
   ]);
 
   const [lead, ...otherPosts] = content.posts;
@@ -37,15 +38,14 @@ export default async function HomePage() {
     <PageTransition>
       <Hero />
       <SectionBar belowHero />
+      {threats && <ThreatTicker items={threats.latest} />}
       {lead && <LeadStory lead={lead} latest={latest} />}
       <Briefing items={briefing} />
       <StorySection title="Research" href="/think-tank" stories={content.reports} layout="feature" />
       <StorySection title="Analysis" href="/blog" stories={otherPosts} background="paper" />
       <Diary upcoming={content.upcomingEvents} past={content.pastEvents} />
       <DivisionIndex />
-      <section className="section-padding-sm overflow-hidden border-t border-black/10">
-        <TrustLogoStrip variant="light" />
-      </section>
+      <PartnersSection />
       <div id="newsletter">
         <NewsletterSignup />
       </div>

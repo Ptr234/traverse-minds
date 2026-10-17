@@ -136,7 +136,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         {event.description?.length ? (
           <div className="container-max py-12">
             <div className="mx-auto max-w-[680px]">
-              <h2 className="border-t-2 border-black pt-3 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">About this event</h2>
+              <h2 className="border-t-2 border-black pt-3 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">About this event</h2>
               <div className={`mt-6 ${ARTICLE_PROSE}`}>
                 <PortableText value={event.description} />
               </div>

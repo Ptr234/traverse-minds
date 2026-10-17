@@ -7,7 +7,7 @@ import { formatStoryDate, type Story } from "@/lib/content";
 
 export function Kicker({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <p className={`text-[11px] font-bold uppercase tracking-[0.14em] text-accent ${className}`}>{children}</p>
+    <p className={`font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent ${className}`}>{children}</p>
   );
 }
 
@@ -25,7 +25,10 @@ export function Byline({ story, className = "" }: { story: Story; className?: st
 export function SectionHeader({ title, href, linkLabel = "See all" }: { title: string; href?: string; linkLabel?: string }) {
   return (
     <div className="mb-6 flex items-baseline justify-between border-t-2 border-black pt-3">
-      <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.16em] text-black">{title}</h2>
+      <h2 className="flex items-center gap-2 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">
+        <span className="h-2 w-2 bg-accent" aria-hidden />
+        {title}
+      </h2>
       {href && (
         <Link href={href} className="text-[13px] font-medium text-gn-400 hover:text-accent">
           {linkLabel} →
@@ -45,13 +48,13 @@ const HEADLINE: Record<CardSize, string> = {
   sm: "text-[17px] leading-[1.25]",
 };
 
-/** Image on top, text below. Square image corners, serif headline. */
+/** Image on top, text below. Square image corners, serif headline; HUD brackets and a scan line on hover. */
 export function StoryCard({ story, size = "md", showDek = true, priority = false }: { story: Story; size?: CardSize; showDek?: boolean; priority?: boolean }) {
   return (
     <article className="group">
       <Link href={story.href} className="block">
         {story.image && (
-          <div className={`relative overflow-hidden bg-gn-800 ${size === "lg" ? "aspect-[16/9]" : "aspect-[3/2]"}`}>
+          <div className={`tech-card relative overflow-hidden bg-gn-800 ${size === "lg" ? "aspect-[16/9]" : "aspect-[3/2]"}`}>
             <Image
               src={story.image}
               alt={story.imageAlt ?? ""}
