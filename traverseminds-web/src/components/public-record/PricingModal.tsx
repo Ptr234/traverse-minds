@@ -21,14 +21,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  useEffect(() => {
-    if (plan) {
-      setName("");
-      setEmail("");
-      setStatus("idle");
-      setErrorMsg("");
-    }
-  }, [plan]);
+  // Form state resets because the parent remounts this component (via `key`) for each plan
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {

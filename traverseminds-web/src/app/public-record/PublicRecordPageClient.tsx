@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Hero } from "@/components/public-record/Hero";
+import { RecordsHeader, LatestRecords, TopicIndex } from "@/components/public-record/RecordsFront";
+import { SectionBar } from "@/components/magazine/SectionBar";
 import { Features } from "@/components/public-record/Features";
 import { Coverage } from "@/components/public-record/Coverage";
 import { WaitlistForm } from "@/components/public-record/WaitlistForm";
@@ -87,7 +88,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
   const [activePlan, setActivePlan] = useState<PricingPlan | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchJurisdiction, setSearchJurisdiction] = useState("All Africa");
+  const [searchJurisdiction, setSearchJurisdiction] = useState("Uganda");
 
   const plans = PRICING_PLANS[billing];
 
@@ -100,7 +101,10 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
   return (
     <div className="flex flex-col">
       <PageTransition>
-      <Hero onSearch={handleSearch} />
+      <SectionBar />
+      <RecordsHeader onSearch={(q) => handleSearch(q, "Uganda")} />
+      <LatestRecords onSearchAll={() => handleSearch("", "Uganda")} />
+      <TopicIndex onSelect={(topic) => handleSearch(topic, "Uganda")} />
       <Features />
       <Coverage />
       {openData && <OpenDataLandscape data={openData} />}
@@ -276,6 +280,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
       <WaitlistForm />
 
       <PricingModal
+        key={activePlan ? `${activePlan.name}-${billing}` : "closed"}
         plan={activePlan}
         billing={billing}
         onClose={() => setActivePlan(null)}

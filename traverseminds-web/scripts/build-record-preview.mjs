@@ -15,18 +15,22 @@ const OUT = path.resolve(import.meta.dirname, "../src/data/public-record-preview
 const TOKEN = process.env.LAWS_AFRICA_TOKEN;
 
 // Topics people search public records for. Each runs once against legislation and once against judgments.
+// `must`: semantic search matches loosely (an exhumation case once matched "consent"), so a record is only
+// filed under a topic if its own title or text mentions the topic.
 const TOPICS = [
-  { topic: "Tax", query: "income tax assessment and penalties" },
-  { topic: "Land", query: "land registration certificate of title" },
-  { topic: "Elections", query: "electoral commission nomination of candidates election petition" },
-  { topic: "Data protection", query: "personal data protection privacy consent" },
-  { topic: "Companies", query: "company registration directors shareholders" },
-  { topic: "Procurement", query: "public procurement bidding award of contracts" },
-  { topic: "Employment", query: "termination of employment unfair dismissal" },
-  { topic: "Corruption", query: "corruption bribery abuse of office" },
-  { topic: "Cybercrime", query: "computer misuse unauthorised access electronic fraud" },
-  { topic: "Banking", query: "financial institutions mobile money payment systems" },
+  { topic: "Tax", query: "income tax assessment and penalties", must: /tax|revenue authority|URA/i },
+  { topic: "Land", query: "land registration certificate of title", must: /land|certificate of title|registrar of titles/i },
+  { topic: "Elections", query: "electoral commission nomination of candidates election petition", must: /elect|candidate|nominat|ballot/i },
+  { topic: "Data protection", query: "personal data protection privacy consent", must: /personal data|data protection|privacy|data subject/i },
+  { topic: "Companies", query: "company registration directors shareholders", must: /compan|director|shareholder/i },
+  { topic: "Procurement", query: "public procurement bidding award of contracts", must: /procure|bid|tender|PPDA/i },
+  { topic: "Employment", query: "termination of employment unfair dismissal", must: /employ|dismiss|labour/i },
+  { topic: "Corruption", query: "corruption bribery abuse of office", must: /corrupt|brib|abuse of office|embezzl/i },
+  { topic: "Cybercrime", query: "computer misuse unauthorised access electronic fraud", must: /computer|electronic|cyber|unauthori[sz]ed access/i },
+  { topic: "Banking", query: "financial institutions mobile money payment systems", must: /bank|financial institution|mobile money|payment|microfinance|money laundering/i },
 ];
+
+export const isOnTopic = (record, must) => must.test(`${record.title} ${record.subtitle} ${record.snippet}`);
 
 const tidy = (text = "", max = 320) => {
   const clean = text.replace(/\s+/g, " ").replace(/\s+([,.;:)’])/g, "$1").replace(/([(‘])\s+/g, "$1").trim();
@@ -58,7 +62,7 @@ if (!TOKEN) {
 }
 
 const records = new Map();
-for (const { topic, query } of TOPICS) {
+for (const { topic, query, must } of TOPICS) {
   const [laws, cases] = await Promise.all([
     retrieve("legislation-ug", { text: query, top_k: 5, filters: { principal: true, repealed: false } }),
     retrieve("judgments-ug", { text: query, top_k: 5 }),
@@ -69,7 +73,7 @@ for (const { topic, query } of TOPICS) {
     const url = m.portion_public_url ?? m.public_url;
     if (records.has(url)) continue;
     const sec = (m.portion_title ?? "").match(/^(\d+[A-Z]?)\.\s*(.+)$/);
-    records.set(url, {
+    const record = {
       id: url,
       type: "Legislation",
       jurisdiction: "Uganda",
@@ -80,14 +84,15 @@ for (const { topic, query } of TOPICS) {
       snippet: tidy(r.content?.text),
       url,
       source: "ULII",
-    });
+    };
+    if (isOnTopic(record, must)) records.set(url, record);
   }
 
   for (const r of cases) {
     const m = r.metadata;
     if (records.has(m.public_url)) continue;
     const { title, citation } = splitCase(m.title);
-    records.set(m.public_url, {
+    const record = {
       id: m.public_url,
       type: "Judgment",
       jurisdiction: "Uganda",
@@ -98,7 +103,8 @@ for (const { topic, query } of TOPICS) {
       snippet: tidy(m.blurb || r.content?.text, 280),
       url: m.public_url,
       source: "ULII",
-    });
+    };
+    if (isOnTopic(record, must)) records.set(m.public_url, record);
   }
   console.log(`${topic}: ${laws.length} legislation, ${cases.length} judgments`);
 }

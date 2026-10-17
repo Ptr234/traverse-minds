@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Loader2, CheckCircle, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { cn } from "@/lib/utils";
 
