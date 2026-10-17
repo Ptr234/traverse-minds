@@ -9,7 +9,7 @@ const FORM_LABELS = {
   contact: "Contact", newsletter: "Newsletter", rsvp: "Event RSVP", waitlist: "Public Record waitlist",
   "pricing-enquiry": "Pricing enquiry", "bulk-training-quote": "Bulk training quote", "report-download": "Report download",
   "mentorship-school": "Mentorship: school", "mentorship-student": "Mentorship: student", "mentorship-sponsor": "Mentorship: sponsor",
-  "careers-application": "Careers application",
+  "careers-application": "Careers application", "call-request": "Intro call request",
 };
 const formLabel = (f) => FORM_LABELS[f] ?? f;
 const isAdmin = () => state.user?.role === "admin";

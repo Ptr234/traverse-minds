@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/magazine/PageHeader";
 import { PartnersSection } from "@/components/magazine/PartnersSection";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
-import { CalendlyEmbed } from "@/components/about/CalendlyEmbed";
+import { ScheduleCall } from "@/components/about/ScheduleCall";
 import { Check } from "lucide-react";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -205,7 +205,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CalendlyEmbed />
+      <ScheduleCall />
     </PageTransition>
   );
 }
