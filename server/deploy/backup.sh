@@ -6,6 +6,7 @@ set -euo pipefail
 ENV_FILE=/opt/traverseminds/server/.env.production
 OUT_DIR=/opt/traverseminds/backups
 
+cd "$OUT_DIR"   # run from our own folder, whoever invokes us
 DATABASE_URL=$(grep '^DATABASE_URL=' "$ENV_FILE" | cut -d= -f2-)
 FILE="$OUT_DIR/traverseminds-$(date +%F).dump"
 
