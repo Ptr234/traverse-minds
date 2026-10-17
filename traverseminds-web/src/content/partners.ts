@@ -1,4 +1,4 @@
-// Organisations Traverse Minds Africa works with. Add a logo to public/logo/ and a line here.
+// Partners & Affiliations: seed source for Sanity "partner" documents and the offline fallback.
 export type Partner = { name: string; logo: string };
 
 export const PARTNERS: Partner[] = [

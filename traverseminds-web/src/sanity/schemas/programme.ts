@@ -14,7 +14,11 @@ export const programme = defineType({
     }),
     defineField({
       name: "audience", title: "Target Audience", type: "string",
+      description: "Drives the audience filter on the Literacy page.",
       options: { list: [
+        { title: "Students", value: "students" },
+        { title: "Businesses", value: "business" },
+        { title: "Teachers", value: "teachers" },
         { title: "Schools", value: "schools" },
         { title: "SMEs", value: "smes" },
         { title: "Government", value: "government" },
@@ -25,12 +29,7 @@ export const programme = defineType({
     }),
     defineField({
       name: "format", title: "Format", type: "string",
-      options: { list: [
-        { title: "In-Person", value: "in-person" },
-        { title: "Online", value: "online" },
-        { title: "Hybrid", value: "hybrid" },
-        { title: "On-Site", value: "on-site" },
-      ]},
+      description: 'e.g. "In-person Workshops", "Hybrid (Online + In-person)"',
       validation: (r) => r.required(),
     }),
     defineField({
@@ -40,10 +39,18 @@ export const programme = defineType({
         { title: "Intermediate", value: "intermediate" },
         { title: "Advanced", value: "advanced" },
       ]},
-      validation: (r) => r.required(),
     }),
     defineField({ name: "duration", title: "Duration", type: "string", description: 'e.g. "5 days", "3 months"' }),
-    defineField({ name: "description", title: "Description", type: "text", rows: 6, validation: (r) => r.required() }),
+    defineField({ name: "description", title: "Short description", type: "text", rows: 3, validation: (r) => r.required() }),
+    defineField({ name: "longDescription", title: "Full description", type: "text", rows: 6 }),
+    defineField({ name: "topics", title: "Topics covered", type: "array", of: [{ type: "string" }], options: { layout: "tags" } }),
+    defineField({ name: "learningOutcomes", title: "Learning outcomes", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "secondaryImage", title: "Secondary Image", type: "image", description: "Second photo on the programme page.",
+      options: { hotspot: true },
+      fields: [defineField({ name: "alt", title: "Alt Text", type: "string" })],
+    }),
+    defineField({ name: "sortOrder", title: "Sort Order", type: "number", description: "Lower numbers appear first.", initialValue: 99 }),
     defineField({ name: "isActive", title: "Active", type: "boolean", initialValue: true }),
     defineField({ name: "nextCohortDate", title: "Next Cohort Start Date", type: "date" }),
     defineField({ name: "maxEnrolments", title: "Max Enrolments", type: "number", validation: (r) => r.min(1).integer() }),

@@ -6,7 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionReveal } from "@/components/ui/SectionReveal";
-import { programmes } from "@/lib/programmes";
+import { getProgrammes } from "@/lib/cms";
 import { LearningOutcomes } from "@/components/literacy/LearningOutcomes";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
@@ -16,6 +16,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
+  const programmes = await getProgrammes();
   return programmes.map((p) => ({
     slug: p.slug,
   }));
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const programme = programmes.find((p) => p.slug === slug);
+  const programme = (await getProgrammes()).find((p) => p.slug === slug);
 
   if (!programme) return { title: "Programme Not Found" };
 
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProgrammePage({ params }: Props) {
   const { slug } = await params;
+  const programmes = await getProgrammes();
   const programme = programmes.find((p) => p.slug === slug);
 
   if (!programme) notFound();

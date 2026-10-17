@@ -8,6 +8,7 @@ import { Diary } from "@/components/magazine/Diary";
 import { StorySection } from "@/components/magazine/StorySection";
 import { SectionHeader } from "@/components/magazine/primitives";
 import { getMagazineContent } from "@/lib/content";
+import { getSiteSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Events — Traverse Minds Africa",
@@ -18,21 +19,21 @@ const TAKE_PART = [
   {
     title: "Speak at our events",
     text: "Share your expertise with Africa's cybersecurity, policy and technology community at the Cyber Luncheon and our forums.",
-    img: "/imagestouse/eventslide/stud (2).jpg",
+    img: "eventsSpeakImage" as const,
     label: "Propose a talk",
     href: "/contact?subject=speaking",
   },
   {
     title: "Sponsor an event",
     text: "Put your organisation in front of the banks, regulators and agencies shaping digital security in the region.",
-    img: "/imagestouse/div-events.jpeg",
+    img: "eventsSponsorImage" as const,
     label: "Sponsorship enquiry",
     href: "/contact?subject=sponsorship",
   },
 ];
 
 export default async function EventsPage() {
-  const { upcomingEvents, pastEvents } = await getMagazineContent();
+  const [{ upcomingEvents, pastEvents }, settings] = await Promise.all([getMagazineContent(), getSiteSettings()]);
 
   return (
     <>
@@ -69,7 +70,7 @@ export default async function EventsPage() {
             {TAKE_PART.map((c) => (
               <article key={c.title} className="group">
                 <div className="tech-card relative aspect-[16/9] overflow-hidden bg-gn-800">
-                  <Image src={c.img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image src={settings[c.img]} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
                 <h3 className="mt-5 font-serif text-[24px] font-semibold text-black">{c.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{c.text}</p>

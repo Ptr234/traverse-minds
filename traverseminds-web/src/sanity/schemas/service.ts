@@ -26,6 +26,42 @@ export const service = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+      description: "Card and page header image.",
+      options: { hotspot: true },
+      fields: [defineField({ name: "alt", title: "Alt Text", type: "string" })],
+    }),
+    defineField({
+      name: "overview",
+      title: "Overview",
+      type: "text",
+      rows: 5,
+      description: "Opening paragraph on the service page.",
+    }),
+    defineField({
+      name: "features",
+      title: "What's included",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "description", title: "Description", type: "text", rows: 2 }),
+          ],
+          preview: { select: { title: "title", subtitle: "description" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "benefits",
+      title: "Benefits",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
+    defineField({
       name: "fullDescription",
       title: "Full Description",
       type: "array",
@@ -61,6 +97,7 @@ export const service = defineType({
     select: {
       title: "title",
       subtitle: "shortDescription",
+      media: "image",
     },
   },
 });

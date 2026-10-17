@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
 import { PartnersSection } from "@/components/magazine/PartnersSection";
+import { getSiteSettings, getTeam } from "@/lib/cms";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { ScheduleCall } from "@/components/about/ScheduleCall";
@@ -47,7 +48,8 @@ const africanCountries = [
   { code: "ug", name: "Uganda" }, { code: "zm", name: "Zambia" }, { code: "zw", name: "Zimbabwe" }
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [settings, team] = await Promise.all([getSiteSettings(), getTeam()]);
   return (
     <PageTransition>
       <SectionBar />
@@ -67,7 +69,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 0 }}>
                   <Image
-                    src="/imagestouse/tec (2).jpg"
+                    src={settings.aboutImage}
                     alt="Traverse Minds team"
                     fill
                     className="object-cover"
@@ -164,8 +166,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Timeline />
-      <TeamGrid />
+      <Timeline background={settings.timelineImage} />
+      <TeamGrid teamMembers={team} />
 
       <PartnersSection background="paper" />
 

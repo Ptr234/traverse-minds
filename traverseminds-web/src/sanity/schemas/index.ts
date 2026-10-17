@@ -9,6 +9,9 @@ import { episode } from "./episode";
 import { programme } from "./programme";
 import { jobListing } from "./jobListing";
 import { statistic } from "./statistic";
+import { siteSettings } from "./siteSettings";
+import { partner } from "./partner";
+import { organisation } from "./organisation";
 
 export const schemaTypes = [
   post,
@@ -22,4 +25,7 @@ export const schemaTypes = [
   programme,
   jobListing,
   statistic,
+  siteSettings,
+  partner,
+  organisation,
 ];

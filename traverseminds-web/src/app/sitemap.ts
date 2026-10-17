@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { sanityClient } from "@/sanity/client";
-import { programmes } from "@/lib/programmes";
+import { getProgrammes } from "@/lib/cms";
 
 export const dynamic = "force-static";
 
@@ -52,10 +52,11 @@ async function fetchSlugs(type: string): Promise<SanityEntry[]> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, events, reports] = await Promise.all([
+  const [posts, events, reports, programmes] = await Promise.all([
     fetchSlugs("post"),
     fetchSlugs("event"),
     fetchSlugs("report"),
+    getProgrammes(),
   ]);
 
   const toEntries = (base: string, entries: SanityEntry[], priority: number): MetadataRoute.Sitemap =>

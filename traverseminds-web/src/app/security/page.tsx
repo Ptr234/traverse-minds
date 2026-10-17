@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
 import { ServiceCards } from "@/components/security/ServiceCards";
+import { getServices } from "@/lib/cms";
 import { EngagementProcess } from "@/components/security/EngagementProcess";
 import { ComplianceFrameworks } from "@/components/security/ComplianceFrameworks";
 import { SelfAssessment } from "@/components/security/SelfAssessment";
@@ -28,7 +29,7 @@ const WHATSAPP_NUMBER = "+256775692334";
 const WHATSAPP_MESSAGE = "Hello Traverse Security, I'd like to enquire about your cybersecurity services.";
 
 export default async function SecurityPage() {
-  const [threatWatch, stats] = await Promise.all([getThreatWatch(), getStatistics("security", 4)]);
+  const [threatWatch, stats, services] = await Promise.all([getThreatWatch(), getStatistics("security", 4), getServices()]);
   return (
     <PageTransition>
       <SectionBar />
@@ -43,7 +44,7 @@ export default async function SecurityPage() {
           <Button variant="outline" href="#capability">Capability statement</Button>
         </div>
       </PageHeader>
-      <ServiceCards />
+      <ServiceCards services={services} />
 
       {/* Why Choose Us */}
       <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">

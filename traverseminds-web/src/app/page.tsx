@@ -12,12 +12,14 @@ import { PartnersSection } from "@/components/magazine/PartnersSection";
 import { getMagazineContent } from "@/lib/content";
 import { getStatistics, formatStatistic } from "@/lib/statistics";
 import { getThreatWatch } from "@/lib/cisa";
+import { getSiteSettings } from "@/lib/cms";
 
 export default async function HomePage() {
-  const [content, homeStats, threats] = await Promise.all([
+  const [content, homeStats, threats, settings] = await Promise.all([
     getMagazineContent(),
     getStatistics("home", 6),
     getThreatWatch(10, { cvss: false }),
+    getSiteSettings(),
   ]);
 
   const [lead, ...otherPosts] = content.posts;
@@ -36,7 +38,7 @@ export default async function HomePage() {
 
   return (
     <PageTransition>
-      <Hero />
+      <Hero eyebrow={settings.heroEyebrow} headline={settings.heroHeadline} dek={settings.heroDek} slides={settings.heroSlides} />
       <SectionBar belowHero />
       {threats && <ThreatTicker items={threats.latest} />}
       {lead && <LeadStory lead={lead} latest={latest} />}

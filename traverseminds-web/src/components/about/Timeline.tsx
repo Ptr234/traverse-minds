@@ -32,13 +32,14 @@ const milestones = [
   },
 ];
 
-export function Timeline() {
+/** Company milestones; the background image is edited in Sanity (Site Settings). */
+export function Timeline({ background }: { background: string }) {
   return (
     <section className="relative section-padding overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop"
+          src={background}
           alt=""
           fill
           className="object-cover"

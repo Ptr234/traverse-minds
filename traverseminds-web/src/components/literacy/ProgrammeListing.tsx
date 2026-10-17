@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
-import { programmes } from "@/lib/programmes";
+import type { Programme } from "@/content/programmes";
 
 const filters = [
   { label: "All", value: "all" },
@@ -18,7 +18,8 @@ const filters = [
   { label: "Government", value: "government" },
 ];
 
-export function ProgrammeListing() {
+/** Programme cards with an audience filter; programmes are edited in Sanity. */
+export function ProgrammeListing({ programmes }: { programmes: Programme[] }) {
   const [filter, setFilter] = useState("all");
   const filtered = filter === "all" ? programmes : programmes.filter((p) => p.audience === filter);
 

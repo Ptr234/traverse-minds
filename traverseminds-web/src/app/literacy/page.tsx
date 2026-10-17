@@ -4,6 +4,7 @@ import { getStatistics } from "@/lib/statistics";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
 import { ProgrammeListing } from "@/components/literacy/ProgrammeListing";
+import { getProgrammes } from "@/lib/cms";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Monitor, Layers, Building, ShieldCheck, Smartphone, FileText, AlertTriangle } from "lucide-react";
 import { BulkTrainingQuoteButton } from "@/components/literacy/BulkTrainingQuoteButton";
@@ -63,7 +64,7 @@ const learningOutcomes = [
 ];
 
 export default async function LiteracyPage() {
-  const stats = await getStatistics("literacy", 4);
+  const [stats, programmes] = await Promise.all([getStatistics("literacy", 4), getProgrammes()]);
   return (
     <div className="flex flex-col">
       <PageTransition>
@@ -74,7 +75,7 @@ export default async function LiteracyPage() {
           title="Digital safety for every Ugandan"
           dek="Practical, language-accessible digital safety training for schools, small businesses, government agencies and NGOs across Uganda."
         />
-        <ProgrammeListing />
+        <ProgrammeListing programmes={programmes} />
         <CitedStats stats={stats} eyebrow="Why It Matters" title="The skills gap, in numbers" background="#f0f1f4" />
 
         {/* Delivery Formats */}

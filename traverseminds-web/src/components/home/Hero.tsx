@@ -5,13 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ImageSlideshow } from "@/components/ui/ImageSlideshow";
 
-const heroImages = [
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.07.webp",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.08.webp",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.09.webp",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.11.webp",
-  "/heroslideimages/WhatsApp%20Image%202026-06-09%20at%2011.09.14.webp",
-];
 
 const stagger = {
   hidden: {},
@@ -26,12 +19,15 @@ const fadeUp = {
   },
 };
 
-export function Hero() {
+type HeroProps = { eyebrow: string; headline: string; dek: string; slides: string[] };
+
+/** Home page hero; copy and slides are edited in Sanity (Site Settings). */
+export function Hero({ eyebrow, headline, dek, slides }: HeroProps) {
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "85vh" }}>
       {/* Full-bleed image with GatesNotes gradient fade to bg */}
       <div className="absolute inset-0">
-        <ImageSlideshow images={heroImages} overlay="bg-black/20" />
+        <ImageSlideshow images={slides} overlay="bg-black/20" />
         {/* Tech layer: blueprint grid over the slideshow */}
         <div className="tech-grid-dark absolute inset-0" aria-hidden />
         <div
@@ -63,7 +59,7 @@ export function Hero() {
         >
           <span className="hud-frame absolute -inset-px" aria-hidden />
           <motion.p variants={fadeUp} className="tech-cursor mb-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#515459" }}>
-            Built for Africa &middot; Driven by Evidence
+            {eyebrow}
           </motion.p>
 
           <motion.h1
@@ -71,16 +67,14 @@ export function Hero() {
             className="font-display font-bold"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: "100%", letterSpacing: "-1.12px", color: "#000" }}
           >
-            Securing the Digital Frontier of Africa.
+            {headline}
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             style={{ marginTop: 16, fontSize: 16, fontWeight: 400, lineHeight: "125%", color: "#313439" }}
           >
-            Africa&apos;s integrated civic-tech company. Six divisions working together
-            across cybersecurity, public records, events, digital literacy,
-            media, and policy research.
+            {dek}
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-3" style={{ marginTop: 24 }}>

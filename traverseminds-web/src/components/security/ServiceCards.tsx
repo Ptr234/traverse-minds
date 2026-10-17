@@ -24,16 +24,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "regulatory-advisory": Scale,
 };
 
-const services = [
-  { title: "Penetration Testing", slug: "penetration-testing", description: "Simulated attacks on your networks, applications, and infrastructure to identify vulnerabilities before real attackers do.", image: "/imagestouse/cyber.jpg" },
-  { title: "ISO 27001 Compliance", slug: "iso-27001-compliance", description: "End-to-end support for achieving and maintaining ISO 27001 certification -- gap analysis, documentation, and audit preparation.", image: "/imagestouse/vde.jpeg" },
-  { title: "Bank of Uganda Audit", slug: "bank-of-uganda-audit", description: "Cybersecurity assessments aligned with Bank of Uganda regulatory requirements for supervised financial institutions.", image: "/imagestouse/bfe.jpeg" },
-  { title: "Threat Modelling", slug: "threat-modelling", description: "Systematic identification of threats to your systems and data, with prioritised mitigation strategies.", image: "/imagestouse/div-cybersecurity.jpeg" },
-  { title: "Incident Response", slug: "incident-response", description: "Rapid containment, investigation, and recovery when a breach occurs. 24-hour response commitment.", image: "/imagestouse/tec.jpg" },
-  { title: "Regulatory Advisory", slug: "regulatory-advisory", description: "Expert guidance on Uganda PDPA 2019, NIST, and African data protection frameworks.", image: "/imagestouse/tra.jpeg" },
-];
 
-export function ServiceCards() {
+/** Service cards; the services and their images are edited in Sanity. */
+export function ServiceCards({ services }: { services: { title: string; slug: string; description: string; image: string }[] }) {
   return (
     <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">

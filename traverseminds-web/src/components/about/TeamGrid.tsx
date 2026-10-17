@@ -4,20 +4,11 @@ import { motion } from "framer-motion";
 import { TeamCard } from "./TeamCard";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import type { TeamContent } from "@/content/team";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-const teamMembers = [
-  {
-    name: "Masiika Christine Thembo",
-    title: "Founder & CEO",
-    division: "Leadership",
-    photo: `${basePath}/christine-masika.jpg`,
-    linkedIn: "https://linkedin.com/in/christinemasika",
-  },
-];
-
-export function TeamGrid() {
+/** Team members are edited in Sanity (Team Member) and passed in by the About page. */
+export function TeamGrid({ teamMembers }: { teamMembers: TeamContent[] }) {
   return (
     <section id="team" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
       <div className="container-max relative z-10">
