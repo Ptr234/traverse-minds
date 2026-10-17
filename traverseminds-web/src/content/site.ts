@@ -13,10 +13,12 @@ export const SITE_DEFAULTS = {
     "/heroslideimages/WhatsApp Image 2026-06-09 at 11.09.14.webp",
   ],
   aboutImage: "/imagestouse/tec (2).jpg",
+  securityImage: "/imagestouse/eventslide/stud (3).jpg",
   timelineImage: "/imagestouse/tec (1).jpg",
   eventsSpeakImage: "/imagestouse/eventslide/stud (2).jpg",
   eventsSponsorImage: "/imagestouse/div-events.jpeg",
   christinePortrait: "/christine.jpg",
+  christineProfileImage: "/christine-masika.jpg",
 };
 
 export type SiteSettings = typeof SITE_DEFAULTS;

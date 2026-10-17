@@ -33,10 +33,12 @@ export const siteSettings = defineType({
       validation: (r) => r.min(1),
     }),
     { ...img("aboutImage", "About page: story image"), group: "images" },
+    { ...img("securityImage", "Security page: “Why Traverse” image"), group: "images" },
     { ...img("timelineImage", "About page: timeline background", "Shown darkened behind the milestones."), group: "images" },
     { ...img("eventsSpeakImage", "Events page: “Speak at our events” image"), group: "images" },
     { ...img("eventsSponsorImage", "Events page: “Sponsor an event” image"), group: "images" },
-    { ...img("christinePortrait", "Meet Christine: portrait"), group: "images" },
+    { ...img("christinePortrait", "Meet Christine: hero portrait", "The large photo at the top of the page."), group: "images" },
+    { ...img("christineProfileImage", "Meet Christine: profile photo", "The second photo, beside the mission section."), group: "images" },
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },
 });

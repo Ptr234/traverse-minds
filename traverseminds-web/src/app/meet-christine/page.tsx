@@ -10,5 +10,5 @@ export const metadata: Metadata = {
 
 export default async function MeetChristinePage() {
   const [organisations, settings] = await Promise.all([getOrganisations(), getSiteSettings()]);
-  return <MeetChristine organisations={organisations} portrait={settings.christinePortrait} />;
+  return <MeetChristine organisations={organisations} portrait={settings.christinePortrait} profileImage={settings.christineProfileImage} />;
 }

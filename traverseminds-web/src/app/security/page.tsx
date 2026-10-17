@@ -3,7 +3,7 @@ import Image from "next/image";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
 import { ServiceCards } from "@/components/security/ServiceCards";
-import { getServices } from "@/lib/cms";
+import { getServices, getSiteSettings } from "@/lib/cms";
 import { EngagementProcess } from "@/components/security/EngagementProcess";
 import { ComplianceFrameworks } from "@/components/security/ComplianceFrameworks";
 import { SelfAssessment } from "@/components/security/SelfAssessment";
@@ -29,7 +29,7 @@ const WHATSAPP_NUMBER = "+256775692334";
 const WHATSAPP_MESSAGE = "Hello Traverse Security, I'd like to enquire about your cybersecurity services.";
 
 export default async function SecurityPage() {
-  const [threatWatch, stats, services] = await Promise.all([getThreatWatch(), getStatistics("security", 4), getServices()]);
+  const [threatWatch, stats, services, settings] = await Promise.all([getThreatWatch(), getStatistics("security", 4), getServices(), getSiteSettings()]);
   return (
     <PageTransition>
       <SectionBar />
@@ -103,9 +103,9 @@ export default async function SecurityPage() {
             </SectionReveal>
 
             <SectionReveal variant="clip-inset" delay={0.2}>
-              <div className="relative aspect-4/3 min-h-80 overflow-hidden" style={{ borderRadius: 0 }}>
+              <div className="relative hidden aspect-4/3 overflow-hidden lg:block" style={{ borderRadius: 0 }}>
                 <Image
-                  src="/imagestouse/eventslide/stud (3).jpg"
+                  src={settings.securityImage}
                   alt="Traverse Minds team"
                   fill
                   className="object-cover"

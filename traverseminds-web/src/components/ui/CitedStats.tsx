@@ -1,4 +1,4 @@
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { formatStatistic, type CitedStatistic } from "@/lib/statistics";
 
 type Props = {
@@ -14,50 +14,37 @@ export function CitedStats({ stats, eyebrow = "By The Numbers", title, intro, ba
   if (stats.length === 0) return null;
 
   return (
-    <section style={{ background, borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
-      <div className="container-max">
-        <SectionReveal variant="fade-up">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>{eyebrow}</p>
-          {title && (
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000", maxWidth: 760 }}>
-              {title}
-            </h2>
-          )}
-          {intro && <p style={{ marginTop: 12, fontSize: 16, color: "#515459", maxWidth: 680, lineHeight: 1.5 }}>{intro}</p>}
-        </SectionReveal>
+    <section style={{ background }}>
+      <div className="container-max py-14">
+        <SectionHeader title={eyebrow} />
+        {title && <h2 className="max-w-3xl font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight text-black">{title}</h2>}
+        {intro && <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-gn-400">{intro}</p>}
 
-        <SectionReveal variant="fade-up" staggerChildren={0.08} className="grid grid-cols-2 lg:grid-cols-4" style={{ marginTop: title || intro ? 16 : 0 }}>
+        <dl className={`grid grid-cols-2 border-t border-black/15 lg:grid-cols-4 ${title || intro ? "mt-8" : ""}`}>
           {stats.map((s, i) => (
-            <RevealItem key={s._id} variant="fade-up">
-              <div
-                className={`py-6 pr-4 lg:py-8 lg:pr-6 ${(i + 1) % 4 !== 0 && i < stats.length - 1 ? "lg:border-r" : ""}`}
-                style={{ borderColor: "rgba(0,0,0,0.1)" }}
-              >
-                <p className="font-display" style={{ fontSize: "clamp(1.75rem, 7vw, 3rem)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
-                  {formatStatistic(s)}
-                  <a
-                    href={`#cite-${s._id}`}
-                    aria-label={`Source ${i + 1}`}
-                    style={{ fontSize: 13, letterSpacing: 0, color: "#ff4c00", verticalAlign: "super", marginLeft: 4, fontFamily: "var(--font-body)" }}
-                  >
-                    {i + 1}
-                  </a>
-                </p>
-                <h3 className="text-sm sm:text-base" style={{ marginTop: 8, fontWeight: 500, color: "#212429", lineHeight: 1.3 }}>{s.label}</h3>
-                <p style={{ marginTop: 4, fontSize: 13, color: "#919499", lineHeight: 1.35 }}>
-                  {s.context ? `${s.context} · ` : ""}{s.period}
-                </p>
-              </div>
-            </RevealItem>
+            <div key={s._id} className="border-b border-black/15 py-5 pr-4 lg:border-r lg:px-6 lg:py-6 lg:last:border-r-0 lg:nth-[4n]:border-r-0 lg:nth-[4n+1]:pl-0">
+              <dt className="sr-only">{s.label}</dt>
+              <dd className="font-mono text-[clamp(26px,5vw,40px)] font-semibold leading-none text-black tabular-nums">
+                {formatStatistic(s)}
+                <a href={`#cite-${s._id}`} aria-label={`Source ${i + 1}`} className="ml-1 align-super font-mono text-[12px] font-normal text-accent">
+                  {i + 1}
+                </a>
+              </dd>
+              <dd className="mt-3 text-[15px] font-medium leading-snug text-gn-200">{s.label}</dd>
+              <dd className="mt-1 font-mono text-[11px] uppercase tracking-wide text-gn-500">
+                {s.context ? `${s.context} · ` : ""}
+                {s.period}
+              </dd>
+            </div>
           ))}
-        </SectionReveal>
+        </dl>
 
-        <ol style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid rgba(0,0,0,0.1)", listStyle: "none", display: "grid", gap: 6 }}>
+        <ol className="mt-5 grid gap-1.5">
           {stats.map((s, i) => (
-            <li key={s._id} id={`cite-${s._id}`} style={{ fontSize: 12, color: "#919499", lineHeight: 1.5 }}>
-              <span style={{ color: "#ff4c00", marginRight: 6 }}>{i + 1}</span>
+            <li key={s._id} id={`cite-${s._id}`} className="text-[12px] leading-relaxed text-gn-500">
+              <span className="mr-1.5 font-mono text-accent">{i + 1}</span>
               {s.sourceOrg !== "Other" ? `${s.sourceOrg}, ` : ""}
-              <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
+              <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">
                 {s.sourceTitle}
               </a>
               {s.sourcePage ? `, ${s.sourcePage}` : ""}.

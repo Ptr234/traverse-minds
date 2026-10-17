@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Linkedin } from "lucide-react";
+import { Kicker } from "@/components/magazine/primitives";
 
 interface TeamCardProps {
   name: string;
@@ -9,39 +10,35 @@ interface TeamCardProps {
   linkedIn?: string;
 }
 
+/** Portrait on top, name and role below (magazine card). */
 export function TeamCard({ name, title, division, photo, linkedIn }: TeamCardProps) {
   return (
-    <div className="group">
-      <div className="relative aspect-3/4 overflow-hidden">
+    <article className="group">
+      <div className="tech-card relative aspect-4/5 overflow-hidden bg-gn-800">
         <Image
           src={photo}
           alt={`${name}, ${title}`}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </div>
-
-      <div className="pt-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-bold text-primary">{name}</h3>
-          {linkedIn && (
-            <a
-              href={linkedIn}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-medium hover:text-accent transition-colors"
-              aria-label={`${name} on LinkedIn`}
-            >
-              <Linkedin className="h-4 w-4" />
-            </a>
-          )}
-        </div>
-        <p className="text-sm text-brand-medium/60">{title}</p>
-        <p className="mt-2 inline-block rounded-full bg-accent/10 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
-          {division}
-        </p>
+      {division && <Kicker className="mt-4">{division}</Kicker>}
+      <div className="mt-1.5 flex items-start justify-between gap-3">
+        <h3 className="font-serif text-[21px] font-semibold leading-tight text-black">{name}</h3>
+        {linkedIn && (
+          <a
+            href={linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 text-gn-400 transition-colors hover:text-accent"
+            aria-label={`${name} on LinkedIn`}
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+        )}
       </div>
-    </div>
+      <p className="mt-1 text-[15px] text-gn-400">{title}</p>
+    </article>
   );
 }

@@ -57,10 +57,12 @@ export async function getSiteSettings(): Promise<ResolvedSettings> {
     heroDek: text("heroDek"),
     heroSlides: slides.length ? slides : SITE_DEFAULTS.heroSlides.map(local),
     aboutImage: photo(doc?.aboutImage as ImageRef, 1400, SITE_DEFAULTS.aboutImage),
+    securityImage: photo(doc?.securityImage as ImageRef, 1400, SITE_DEFAULTS.securityImage),
     timelineImage: photo(doc?.timelineImage as ImageRef, 2000, SITE_DEFAULTS.timelineImage),
     eventsSpeakImage: photo(doc?.eventsSpeakImage as ImageRef, 1400, SITE_DEFAULTS.eventsSpeakImage),
     eventsSponsorImage: photo(doc?.eventsSponsorImage as ImageRef, 1400, SITE_DEFAULTS.eventsSponsorImage),
     christinePortrait: photo(doc?.christinePortrait as ImageRef, 1400, SITE_DEFAULTS.christinePortrait),
+    christineProfileImage: photo(doc?.christineProfileImage as ImageRef, 1000, SITE_DEFAULTS.christineProfileImage),
   };
 }
 
@@ -189,3 +191,19 @@ export const serviceLayoutProps = (s: ServiceContent) => ({
 
 /** Page metadata for a service page. */
 export const serviceMetadata = (s: ServiceContent) => ({ title: `${s.title} | Traverse Security`, description: s.description });
+
+// ── Careers ────────────────────────────────────────────────────────────────
+
+export type Job = { id: string; title: string; division: string; type: string; location: string; description: string; deadline: string };
+
+/** Active listings whose deadline has not passed at build time (the page re-checks in the browser). */
+export async function getJobs(): Promise<Job[]> {
+  const today = new Date().toISOString().slice(0, 10);
+  const docs = await query<Job[]>(
+    `*[_type == "jobListing" && isActive != false && deadline >= $today] | order(deadline asc){
+      "id": _id, title, division, type, location, description, deadline
+    }`,
+    { today }
+  );
+  return docs ?? [];
+}

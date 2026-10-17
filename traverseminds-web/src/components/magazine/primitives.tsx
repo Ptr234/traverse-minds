@@ -21,16 +21,26 @@ export function Byline({ story, className = "" }: { story: Story; className?: st
   return <p className={`text-[13px] text-gn-500 ${className}`}>{parts.join(" · ")}</p>;
 }
 
-/** Heavy rule + label, the standard magazine section opener. */
-export function SectionHeader({ title, href, linkLabel = "See all" }: { title: string; href?: string; linkLabel?: string }) {
+/** Heavy rule + label, the standard magazine section opener. `dark` is for sections on a dark background. */
+export function SectionHeader({
+  title,
+  href,
+  linkLabel = "See all",
+  dark = false,
+}: {
+  title: string;
+  href?: string;
+  linkLabel?: string;
+  dark?: boolean;
+}) {
   return (
-    <div className="mb-6 flex items-baseline justify-between border-t-2 border-black pt-3">
-      <h2 className="flex items-center gap-2 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] text-black">
+    <div className={`mb-6 flex items-baseline justify-between border-t-2 pt-3 ${dark ? "border-white/80" : "border-black"}`}>
+      <h2 className={`flex items-center gap-2 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] ${dark ? "text-white" : "text-black"}`}>
         <span className="h-2 w-2 bg-accent" aria-hidden />
         {title}
       </h2>
       {href && (
-        <Link href={href} className="text-[13px] font-medium text-gn-400 hover:text-accent">
+        <Link href={href} className={`text-[13px] font-medium hover:text-accent ${dark ? "text-white/60" : "text-gn-400"}`}>
           {linkLabel} →
         </Link>
       )}

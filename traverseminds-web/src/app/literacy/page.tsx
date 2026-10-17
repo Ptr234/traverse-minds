@@ -8,8 +8,7 @@ import { getProgrammes } from "@/lib/cms";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Monitor, Layers, Building, ShieldCheck, Smartphone, FileText, AlertTriangle } from "lucide-react";
 import { BulkTrainingQuoteButton } from "@/components/literacy/BulkTrainingQuoteButton";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
@@ -78,123 +77,86 @@ export default async function LiteracyPage() {
         <ProgrammeListing programmes={programmes} />
         <CitedStats stats={stats} eyebrow="Why It Matters" title="The skills gap, in numbers" background="#f0f1f4" />
 
-        {/* Delivery Formats */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="text-center mb-16">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Delivery</p>
-              <TextReveal
-                as="h2"
-                variant="clip-up"
-                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Delivery Formats
-              </TextReveal>
-              <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-                Choose the training format that works best for your team and schedule.
-              </p>
-            </div>
-
-            <SectionReveal variant="fade-up" staggerChildren={0.1}>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
-                {deliveryFormats.map((format) => (
-                  <RevealItem key={format.title} variant="scale-fade">
-                    <div className="group flex flex-col items-center text-center border bg-white p-8" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                      <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                        <format.icon className="h-6 w-6" style={{ color: "#000" }} />
-                      </div>
-                      <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{format.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed" style={{ color: "#515459" }}>{format.desc}</p>
-                    </div>
-                  </RevealItem>
-                ))}
+        {/* Delivery formats */}
+        <section className="bg-white">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Delivery" />
+            <div className="grid gap-10 lg:grid-cols-[1fr_2.4fr] lg:gap-14">
+              <div>
+                <h2 className="font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight text-black">Four ways to train.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">Choose the format that works best for your team and schedule.</p>
               </div>
-            </SectionReveal>
+              <ol className="grid border-t border-black/15 sm:grid-cols-2">
+                {deliveryFormats.map((format, i) => (
+                  <li key={format.title} className="border-b border-black/15 py-6 sm:pr-8 sm:odd:border-r sm:even:pl-8">
+                    <div className="flex items-center justify-between">
+                      <format.icon className="h-5 w-5 text-accent" aria-hidden />
+                      <span className="font-mono text-[12px] text-gn-500">{String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                    <h3 className="mt-4 font-serif text-[21px] font-semibold text-black">{format.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{format.desc}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </section>
 
-        {/* Learning Outcomes */}
-        <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="text-center mb-14">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Outcomes</p>
-              <TextReveal
-                as="h2"
-                variant="blur-in"
-                className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight"
-              >
-                Learning Outcomes
-              </TextReveal>
-              <p className="mt-3 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Every participant leaves with practical skills they can apply immediately.
-              </p>
-            </div>
-
-            <SectionReveal variant="fade-up" staggerChildren={0.1}>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
-                {learningOutcomes.map((outcome) => (
-                  <RevealItem key={outcome.title} variant="slide-up">
-                    <div className="border border-white/6 bg-white/3 p-7" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                      <div className="mb-4 flex h-12 w-12 items-center justify-center bg-white/6" style={{ borderRadius: 0 }}>
-                        <outcome.icon className="h-6 w-6 text-accent" />
-                      </div>
-                      <h3 className="font-display text-base font-bold text-white">{outcome.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{outcome.desc}</p>
-                    </div>
-                  </RevealItem>
-                ))}
-              </div>
-            </SectionReveal>
+        {/* Learning outcomes */}
+        <section className="relative overflow-hidden bg-bg-dark text-white">
+          <div className="tech-grid-dark absolute inset-0" aria-hidden />
+          <div className="container-max relative py-14 lg:py-20">
+            <SectionHeader title="Outcomes" dark />
+            <h2 className="max-w-2xl font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight">
+              Every participant leaves with skills they can use the same day.
+            </h2>
+            <ol className="mt-10 grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+              {learningOutcomes.map((outcome, i) => (
+                <li key={outcome.title} className="bg-bg-dark p-6 lg:p-7">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-10 w-10 items-center justify-center border border-white/15 text-accent">
+                      <outcome.icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <span className="font-mono text-[12px] text-white/35">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3 className="mt-6 font-serif text-[20px] font-semibold leading-snug">{outcome.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-white/60">{outcome.desc}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
-        {/* Organisation Booking */}
-        <section id="booking" style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="max-w-2xl">
-              <TextReveal
-                as="h2"
-                variant="fade-up"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Train your entire organisation
-              </TextReveal>
-              <p className="mt-5 text-base leading-relaxed" style={{ color: "#515459" }}>
-                Cybersecurity is a team effort. We provide tailored on-site
-                training for government departments and corporate teams,
-                focused on the specific threats relevant to your sector.
-              </p>
-              <SectionReveal variant="slide-up" delay={0.2}>
-                <div className="mt-10">
+        {/* Organisations and communities */}
+        <section id="booking" className="bg-bg-light">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Work with us" />
+            <div className="grid gap-px border border-black/10 bg-black/10 lg:grid-cols-2">
+              <div className="flex flex-col bg-white p-8 lg:p-10">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Organisations</p>
+                <h2 className="mt-3 font-serif text-[clamp(24px,2.6vw,32px)] font-semibold leading-tight text-black">Train your entire organisation.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  Cybersecurity is a team effort. We provide tailored on-site training for government departments and corporate teams,
+                  focused on the specific threats relevant to your sector.
+                </p>
+                <div className="mt-auto pt-8">
                   <BulkTrainingQuoteButton />
                 </div>
-              </SectionReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* Community Outreach */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10 text-center">
-            <TextReveal
-              as="h2"
-              variant="clip-up"
-              className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-            >
-              Community Outreach
-            </TextReveal>
-            <SectionReveal variant="fade-blur" delay={0.1}>
-              <p className="mt-5 mx-auto max-w-2xl text-base leading-relaxed" style={{ color: "#515459" }}>
-                As part of our civic mission, we run free digital safety workshops
-                in local languages for community groups and senior citizens.
-                Want us to visit your community?
-              </p>
-              <div className="mt-10">
-                <Button variant="outline" size="lg" href="/contact?subject=community-outreach">
-                  Invite Us to Your Community
-                </Button>
               </div>
-            </SectionReveal>
+              <div className="flex flex-col bg-white p-8 lg:p-10">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Communities</p>
+                <h2 className="mt-3 font-serif text-[clamp(24px,2.6vw,32px)] font-semibold leading-tight text-black">Free workshops in local languages.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  As part of our civic mission, we run free digital safety workshops in local languages for community groups and
+                  senior citizens. Want us to visit your community?
+                </p>
+                <div className="mt-auto pt-8">
+                  <Button variant="outline" size="lg" href="/contact?subject=community-outreach">
+                    Invite us to your community
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </PageTransition>

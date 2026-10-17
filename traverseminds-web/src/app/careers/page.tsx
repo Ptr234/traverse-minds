@@ -1,52 +1,29 @@
-"use client";
-
-import { useState } from "react";
-import { motion } from "framer-motion";
+import type { Metadata } from "next";
+import { ArrowRight, GraduationCap, Globe, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
-import { Briefcase, Users, Zap, Globe, ArrowRight, GraduationCap, Loader2, CheckCircle } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
+import { OpenRoles } from "@/components/careers/OpenRoles";
+import { ApplicationForm } from "@/components/careers/ApplicationForm";
+import { getJobs } from "@/lib/cms";
+
+export const metadata: Metadata = {
+  title: "Careers | Traverse Minds Africa",
+  description: "Join Traverse Minds Africa: open roles, internships and fellowships in cybersecurity, research, media and civic tech.",
+};
 
 const benefits = [
-  { icon: Globe, title: "Regional Impact", desc: "Work on projects that directly influence digital policy and security across Africa." },
-  { icon: Users, title: "Expert Culture", desc: "Collaborate with some of the region's leading cybersecurity experts and researchers." },
-  { icon: Zap, title: "Continuous Growth", desc: "Access to international certifications and specialized training programs." },
+  { icon: Globe, title: "Regional impact", desc: "Work on projects that directly influence digital policy and security across Africa." },
+  { icon: Users, title: "Expert culture", desc: "Collaborate with some of the region's leading cybersecurity experts and researchers." },
+  { icon: Zap, title: "Continuous growth", desc: "Access to international certifications and specialised training programmes." },
 ];
 
-const jobs: { title: string; team: string; location: string; type: string }[] = [];
+const earlyCareerTracks = ["Cybersecurity", "Data journalism", "Policy research", "Software engineering"];
 
-export default function CareersPage() {
-  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    coverLetter: "",
-  });
-
-  const handleApplicationSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus("loading");
-
-    try {
-      const form = e.currentTarget;
-      const data = new FormData(form);
-
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        body: data,
-      });
-
-      if (!res.ok) throw new Error("Failed to submit");
-      setFormStatus("success");
-      setFormData({ name: "", email: "", phone: "", coverLetter: "" });
-    } catch {
-      setFormStatus("error");
-    }
-  };
+export default async function CareersPage() {
+  const jobs = await getJobs();
 
   return (
     <main className="flex flex-col">
@@ -63,297 +40,91 @@ export default function CareersPage() {
           </div>
         </PageHeader>
 
-        {/* Benefits */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {benefits.map((benefit) => (
-                <RevealItem key={benefit.title} variant="scale-fade">
-                  <div
-                    className="group flex flex-col items-center text-center border bg-white p-8"
-                    style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}
-                  >
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                      <benefit.icon className="h-6 w-6" style={{ color: "#000" }} />
-                    </div>
-                    <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{benefit.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed" style={{ color: "#515459" }}>{benefit.desc}</p>
+        {/* Why join */}
+        <section className="bg-white">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Why Traverse" />
+            <ol className="grid border-t border-black/15 md:grid-cols-3">
+              {benefits.map((b, i) => (
+                <li key={b.title} className="border-b border-black/15 py-6 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                  <div className="flex items-center justify-between">
+                    <b.icon className="h-5 w-5 text-accent" aria-hidden />
+                    <span className="font-mono text-[12px] text-gn-500">{String(i + 1).padStart(2, "0")}</span>
                   </div>
-                </RevealItem>
+                  <h3 className="mt-4 font-serif text-[22px] font-semibold text-black">{b.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{b.desc}</p>
+                </li>
               ))}
-            </SectionReveal>
+            </ol>
           </div>
         </section>
 
-        {/* Openings */}
-        <section id="openings" style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10 max-w-4xl mx-auto">
-            <div className="text-center mb-14">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-              >
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Open Roles</p>
-              </motion.div>
-              <TextReveal
-                as="h2"
-                variant="blur-in"
-                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Current Openings
-              </TextReveal>
-              <SectionReveal variant="fade-up" delay={0.1}>
-                <p className="mt-3" style={{ color: "#515459" }}>
-                  We&apos;re growing. Send a speculative application to traversemindsug@gmail.com
-                </p>
-              </SectionReveal>
+        {/* Open roles (Sanity: Job Listing) */}
+        <section id="openings" className="bg-bg-light">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Open roles" />
+            <div className="grid gap-10 lg:grid-cols-[1fr_2.2fr] lg:gap-14">
+              <div>
+                <h2 className="font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight text-black">Current openings.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">We are growing. Roles are listed here as they open, with their closing dates.</p>
+              </div>
+              <OpenRoles jobs={jobs} />
             </div>
+          </div>
+        </section>
 
-            <SectionReveal variant="clip-inset">
-              {jobs.length > 0 ? (
-                <div className="space-y-4">
-                  {jobs.map((job) => (
-                    <div
-                      key={job.title}
-                      className="group relative overflow-hidden border bg-white p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                    >
-                      <div className="absolute inset-0 bg-linear-to-r from-accent/3 to-transparent opacity-0 group-hover:opacity-100" style={{ transition: "opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} />
-                      <div className="relative z-10">
-                        <h3 className="font-display text-lg font-bold" style={{ color: "#000", transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                          {job.title}
-                        </h3>
-                        <div className="mt-2 flex flex-wrap gap-4 text-sm" style={{ color: "#515459" }}>
-                          <span className="flex items-center gap-1.5">
-                            <Briefcase className="h-3.5 w-3.5 text-accent" /> {job.team}
-                          </span>
-                          <span className="flex items-center gap-1.5">
-                            <Globe className="h-3.5 w-3.5 text-accent" /> {job.location}
-                          </span>
-                          <span className="bg-primary/5 px-3 py-0.5 text-xs font-semibold" style={{ borderRadius: 999, color: "#515459" }}>
-                            {job.type}
-                          </span>
-                        </div>
-                      </div>
-                      <Button variant="outline" size="sm" className="relative z-10 shrink-0">
-                        Apply Now <ArrowRight className="h-3 w-3" />
-                      </Button>
-                    </div>
+        {/* Internships and fellowships */}
+        <section className="relative overflow-hidden bg-bg-dark text-white">
+          <div className="tech-grid-dark absolute inset-0" aria-hidden />
+          <div className="container-max relative py-14 lg:py-20">
+            <SectionHeader title="Early careers" dark />
+            <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
+              <div>
+                <h2 className="font-serif text-[clamp(28px,3.4vw,40px)] font-semibold leading-tight">Internships and fellowships.</h2>
+                <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-white/65">
+                  We offer structured internship and fellowship programmes for students and early-career professionals interested in
+                  civic tech, with hands-on experience across our divisions.
+                </p>
+                <div className="mt-8">
+                  <Button variant="primary" size="lg" href="?role=Internship%20or%20fellowship#apply">
+                    Express interest <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-white/45">
+                  <GraduationCap className="h-4 w-4 text-accent" aria-hidden /> Tracks
+                </p>
+                <ul className="mt-4 border-t border-white/15">
+                  {earlyCareerTracks.map((t, i) => (
+                    <li key={t} className="flex items-baseline gap-4 border-b border-white/15 py-3.5">
+                      <span className="font-mono text-[12px] text-white/35">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="font-serif text-[19px] font-semibold">{t}</span>
+                    </li>
                   ))}
-                </div>
-              ) : (
-                <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-                  <Briefcase className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
-                  <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>No current openings</h3>
-                  <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
-                    We don&apos;t have any open roles right now, but we&apos;re always interested in hearing from talented people.
-                    Send your CV to <a href="mailto:traversemindsug@gmail.com" className="text-accent underline underline-offset-2">traversemindsug@gmail.com</a>.
-                  </p>
-                </div>
-              )}
-            </SectionReveal>
-          </div>
-        </section>
-
-        {/* Internships & Fellowships */}
-        <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="mx-auto max-w-3xl text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-              >
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Early Careers</p>
-              </motion.div>
-
-              <TextReveal
-                as="h2"
-                variant="clip-up"
-                className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight"
-              >
-                Internships & Fellowships
-              </TextReveal>
-
-              <SectionReveal variant="scale-fade" delay={0.1}>
-                <div className="mt-8 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center bg-white/10" style={{ borderRadius: 0 }}>
-                    <GraduationCap className="h-8 w-8 text-accent" />
-                  </div>
-                </div>
-              </SectionReveal>
-
-              <SectionReveal variant="fade-blur" delay={0.2}>
-                <p className="mt-6 text-base leading-relaxed max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  We offer structured internship and fellowship programmes for students and early-career
-                  professionals interested in civic-tech. Gain hands-on experience across cybersecurity,
-                  data journalism, policy research, and software engineering.
-                </p>
-              </SectionReveal>
-
-              <SectionReveal variant="slide-up" delay={0.3}>
-                <div className="mt-10">
-                  <Button variant="primary" size="lg" href="#apply">
-                    Express Interest
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </SectionReveal>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Application Form */}
-        <section id="apply" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10 max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-              >
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Application</p>
-              </motion.div>
-
-              <TextReveal
-                as="h2"
-                variant="fade-up"
-                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Apply to Traverse Minds Africa
-              </TextReveal>
-              <SectionReveal variant="mask-wipe" delay={0.1}>
-                <p className="mt-3" style={{ color: "#515459" }}>
-                  Submit your application for open roles, internships, or fellowships.
+        {/* Application */}
+        <section id="apply" className="bg-white">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Apply" />
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
+              <div>
+                <h2 className="font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight text-black">Apply to Traverse Minds Africa.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  Submit your application for an open role, an internship or fellowship, or send a speculative application.
                 </p>
-              </SectionReveal>
+                <ul className="mt-6 space-y-2 font-mono text-[12px] uppercase tracking-wide text-gn-300">
+                  <li className="flex items-center gap-2.5"><span className="h-1.5 w-1.5 bg-accent" aria-hidden /> Reply within five working days</li>
+                  <li className="flex items-center gap-2.5"><span className="h-1.5 w-1.5 bg-accent" aria-hidden /> CV in PDF or Word</li>
+                </ul>
+              </div>
+              <ApplicationForm roles={jobs.map((j) => j.title)} />
             </div>
-
-            <SectionReveal variant="slide-up" delay={0.15}>
-              {formStatus === "success" ? (
-                <div className="border p-10 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}>
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald/10 text-emerald">
-                    <CheckCircle className="h-10 w-10" />
-                  </div>
-                  <h3 className="mt-6 font-display text-2xl font-bold" style={{ color: "#000" }}>Application Received</h3>
-                  <p className="mt-4" style={{ color: "#515459" }}>
-                    Thank you for your interest in Traverse Minds Africa. We&apos;ll review your application and get back to you within 5 business days.
-                  </p>
-                  <div className="mt-8">
-                    <Button variant="outline" onClick={() => setFormStatus("idle")}>
-                      Submit Another Application
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleApplicationSubmit}
-                  className="border p-8 md:p-10 space-y-6"
-                  style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
-                >
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold" style={{ color: "#000" }}>Full Name *</label>
-                      <input
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Jane Nakamya"
-                        className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                        style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold" style={{ color: "#000" }}>Email Address *</label>
-                      <input
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="jane@example.com"
-                        className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                        style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold" style={{ color: "#000" }}>Phone Number *</label>
-                    <input
-                      name="phone"
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+256 700 000 000"
-                      className="w-full border bg-white px-4 py-3 text-sm outline-none"
-                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold" style={{ color: "#000" }}>Cover Letter *</label>
-                    <textarea
-                      name="coverLetter"
-                      rows={5}
-                      required
-                      value={formData.coverLetter}
-                      onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
-                      placeholder="Tell us about yourself, your experience, and why you want to join Traverse Minds Africa..."
-                      className="w-full border bg-white px-4 py-3 text-sm outline-none resize-none"
-                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold" style={{ color: "#000" }}>Upload CV *</label>
-                    <input
-                      name="cv"
-                      type="file"
-                      required
-                      accept=".pdf,.doc,.docx"
-                      className="w-full min-h-11 border bg-white px-4 py-3 text-sm file:mr-4 file:border-0 file:bg-accent/10 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-accent cursor-pointer"
-                      style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000" }}
-                    />
-                    <p className="text-xs" style={{ color: "#919499" }}>Accepted formats: PDF, DOC, DOCX (max 5MB)</p>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="w-full justify-center"
-                    disabled={formStatus === "loading"}
-                  >
-                    {formStatus === "loading" ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        Submit Application
-                        <ArrowRight className="h-4 w-4" />
-                      </>
-                    )}
-                  </Button>
-
-                  {formStatus === "error" && (
-                    <p className="text-center text-sm font-medium text-red-500">
-                      Something went wrong. Please try again or email your application to traversemindsug@gmail.com
-                    </p>
-                  )}
-                </form>
-              )}
-            </SectionReveal>
           </div>
         </section>
       </PageTransition>

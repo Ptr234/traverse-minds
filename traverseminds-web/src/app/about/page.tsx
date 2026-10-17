@@ -7,10 +7,10 @@ import { getSiteSettings, getTeam } from "@/lib/cms";
 import { Timeline } from "@/components/about/Timeline";
 import { TeamGrid } from "@/components/about/TeamGrid";
 import { ScheduleCall } from "@/components/about/ScheduleCall";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 
 export const metadata: Metadata = {
   title: "About Traverse Minds Africa",
@@ -19,13 +19,21 @@ export const metadata: Metadata = {
 };
 
 const divisions = [
-  { name: "Traverse Security", desc: "Cybersecurity for banks and government" },
-  { name: "Traverse Events", desc: "Cyber Luncheon, conferences, workshops" },
-  { name: "Public Record Africa", desc: "AI-powered public document platform" },
-  { name: "Digital Literacy", desc: "Cyber safety for schools, SMEs, government" },
-  { name: "Traverse Media", desc: "Facts & Figures Podcast, data journalism" },
-  { name: "Think Tank", desc: "Data protection, AI governance, OGP research" },
+  { name: "Traverse Security", desc: "Cybersecurity for banks and government", href: "/security" },
+  { name: "Traverse Events", desc: "Cyber Luncheon, conferences, workshops", href: "/events" },
+  { name: "Public Record Africa", desc: "AI-powered public document platform", href: "/public-record" },
+  { name: "Digital Literacy", desc: "Cyber safety for schools, SMEs, government", href: "/literacy" },
+  { name: "Traverse Media", desc: "Facts & Figures Podcast, data journalism", href: "/media" },
+  { name: "Think Tank", desc: "Data protection, AI governance, OGP research", href: "/think-tank" },
 ];
+
+// Placeholder values are left out until the real details are supplied
+const companyDetails = [
+  { label: "Registered name", value: "Traverse Minds Africa" },
+  { label: "Registration no.", value: "[To be added]" },
+  { label: "Registered address", value: "Kampala, Uganda" },
+  { label: "Contact", value: "traversemindsug@gmail.com", href: "mailto:traversemindsug@gmail.com" },
+].filter((d) => !d.value.startsWith("["));
 
 const africanCountries = [
   { code: "dz", name: "Algeria" }, { code: "ao", name: "Angola" }, { code: "bj", name: "Benin" },
@@ -60,109 +68,84 @@ export default async function AboutPage() {
         dek="Built for Africa, driven by evidence: technology serving the public interest, anchored in local laws and shaped by independent research."
       />
 
-      {/* The Model -- One Company Six Divisions */}
-      <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            {/* Image */}
-            <SectionReveal variant="clip-inset">
-              <div className="relative">
-                <div className="relative aspect-square overflow-hidden" style={{ borderRadius: 0 }}>
-                  <Image
-                    src={settings.aboutImage}
-                    alt="Traverse Minds team"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-tr from-primary/70 via-primary/10 to-transparent" />
-                </div>
-                {/* Floating badge */}
-                <div className="absolute -bottom-5 -right-3 border border-white/10 bg-white p-5 md:-right-6" style={{ borderRadius: 0, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                  <p className="font-display text-4xl font-bold" style={{ color: "#ff4c00" }}>6</p>
-                  <p className="text-xs mt-0.5" style={{ color: "#515459" }}>
-                    Integrated<br />Divisions
-                  </p>
-                </div>
+      {/* The model: one company, six divisions */}
+      <section className="relative overflow-hidden bg-bg-dark text-white">
+        <div className="tech-grid-dark absolute inset-0" aria-hidden />
+        <div className="container-max relative py-14 lg:py-20">
+          <SectionHeader title="Our model" dark />
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+            <figure>
+              <div className="relative aspect-[4/3] overflow-hidden bg-white/5">
+                <Image src={settings.aboutImage} alt="The Traverse Minds team at work" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
               </div>
-            </SectionReveal>
+              <figcaption className="mt-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-white/45">
+                <span>Kampala, Uganda</span>
+                <span>06 divisions · 01 mission</span>
+              </figcaption>
+            </figure>
 
-            {/* Content */}
-            <SectionReveal variant="clip-right" delay={0.2}>
-              <div>
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our Model</p>
-
-                <TextReveal
-                  as="h2"
-                  variant="blur-in"
-                  className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight"
-                >
-                  One Company, Six Divisions
-                </TextReveal>
-
-                <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Traverse Minds Africa is one integrated organisation where every division
-                  strengthens the others. Security audits are informed by Think Tank
-                  research. Events build community for all divisions. Media amplifies
-                  research findings to a wider audience.
-                </p>
-
-                <SectionReveal variant="fade-up" staggerChildren={0.08} className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {divisions.map((d) => (
-                    <RevealItem key={d.name} variant="scale-fade">
-                      <div
-                        className="flex items-start gap-3 border border-white/6 bg-white/3 p-4"
-                        style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                      >
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                        <div>
-                          <p className="text-sm font-semibold text-white">{d.name}</p>
-                          <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>{d.desc}</p>
-                        </div>
-                      </div>
-                    </RevealItem>
-                  ))}
-                </SectionReveal>
-              </div>
-            </SectionReveal>
+            <div>
+              <h2 className="font-serif text-[clamp(28px,3.4vw,40px)] font-semibold leading-tight">One company, six divisions.</h2>
+              <p className="mt-4 text-[17px] leading-relaxed text-white/65">
+                Traverse Minds Africa is one integrated organisation where every division strengthens the others.
+                Security audits are informed by Think Tank research. Events build community for all divisions.
+                Media amplifies research findings to a wider audience.
+              </p>
+              <ol className="mt-8 border-t border-white/15">
+                {divisions.map((d, i) => (
+                  <li key={d.name} className="border-b border-white/15">
+                    <Link href={d.href} className="group flex items-baseline gap-4 py-3.5 transition-colors hover:bg-white/[0.04]">
+                      <span className="w-6 shrink-0 font-mono text-[12px] text-white/35">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="min-w-0 grow">
+                        <span className="block font-serif text-[19px] font-semibold leading-tight group-hover:text-accent">{d.name}</span>
+                        <span className="mt-0.5 block text-[14px] text-white/55">{d.desc}</span>
+                      </span>
+                      <ArrowRight className="h-4 w-4 shrink-0 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* African Country Flags */}
-      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10 text-center">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Regional Reach</p>
-
-          <TextReveal
-            as="h2"
-            variant="fade-up"
-            className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
-          >
-            Serving Africa
-          </TextReveal>
-          <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-            Our work spans across the African continent, building a safer digital future across the region.
-          </p>
-
-          <SectionReveal variant="fade-up" staggerChildren={0.02} className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
-            {africanCountries.map((country) => (
-              <RevealItem key={country.code} variant="scale-fade">
-                <div className="flex flex-col items-center gap-2 group">
-                  <div className="h-10 w-14 overflow-hidden border shadow-xs" style={{ borderRadius: 4, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <Image
-                      src={`https://flagcdn.com/w80/${country.code}.png`}
-                      alt={`${country.name} flag`}
-                      width={80}
-                      height={56}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#313439" }}>{country.name}</span>
+      {/* Regional reach */}
+      <section className="bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <SectionHeader title="Regional reach" />
+          <div className="grid gap-10 lg:grid-cols-[1fr_2.2fr] lg:gap-14">
+            <div>
+              <h2 className="font-serif text-[clamp(26px,3vw,36px)] font-semibold leading-tight text-black">Serving Africa.</h2>
+              <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                Our work spans the African continent, building a safer digital future across the region from our base in Kampala.
+              </p>
+              <dl className="mt-8 grid grid-cols-2 border-t border-black/15">
+                <div className="border-b border-r border-black/15 py-4 pr-4">
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">Countries</dt>
+                  <dd className="mt-1 font-mono text-[28px] font-semibold text-black">{africanCountries.length}</dd>
                 </div>
-              </RevealItem>
-            ))}
-          </SectionReveal>
+                <div className="border-b border-black/15 py-4 pl-4">
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">Headquarters</dt>
+                  <dd className="mt-1 font-serif text-[22px] font-semibold text-black">Kampala</dd>
+                </div>
+              </dl>
+            </div>
+            <ul className="grid grid-cols-2 gap-px border border-black/10 bg-black/10 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5" aria-label="Countries we serve">
+              {africanCountries.map((country) => (
+                <li key={country.code} className={`flex items-center gap-2.5 px-3 py-2.5 ${country.code === "ug" ? "bg-accent/10" : "bg-white"}`}>
+                  <Image
+                    src={`https://flagcdn.com/w40/${country.code}.png`}
+                    alt=""
+                    width={20}
+                    height={14}
+                    className="h-3.5 w-5 shrink-0 object-cover ring-1 ring-black/10"
+                  />
+                  <span className="truncate text-[12px] text-gn-200" title={country.name}>{country.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -171,39 +154,20 @@ export default async function AboutPage() {
 
       <PartnersSection background="paper" />
 
-      {/* Legal / Registration */}
-      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Legal</p>
-
-            <TextReveal
-              as="h2"
-              variant="fade-up"
-              className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
-            >
-              Company Details
-            </TextReveal>
-
-            <SectionReveal variant="fade-up" staggerChildren={0.1} className="mt-8 inline-grid grid-cols-1 gap-4 text-left sm:grid-cols-2">
-              {[
-                { label: "Registered Name", value: "Traverse Minds Africa" },
-                { label: "Registration No.", value: "[To be added]" },
-                { label: "Registered Address", value: "Kampala, Uganda" },
-                { label: "Contact", value: "traversemindsug@gmail.com" },
-              ].map((item) => (
-                <RevealItem key={item.label} variant="slide-up">
-                  <div
-                    className="border px-6 py-4"
-                    style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", background: "#f0f1f4" }}
-                  >
-                    <p className="text-xs" style={{ color: "#919499" }}>{item.label}</p>
-                    <p className="mt-1 text-sm font-semibold" style={{ color: "#000" }}>{item.value}</p>
-                  </div>
-                </RevealItem>
-              ))}
-            </SectionReveal>
-          </div>
+      {/* Company details */}
+      <section className="bg-white">
+        <div className="container-max py-14">
+          <SectionHeader title="Company details" />
+          <dl className="grid border-t border-black/15 sm:grid-cols-3">
+            {companyDetails.map((d) => (
+              <div key={d.label} className="border-b border-black/15 py-4 sm:pr-6">
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">{d.label}</dt>
+                <dd className="mt-1.5 text-[16px] font-semibold text-black">
+                  {d.href ? <a href={d.href} className="hover:text-accent">{d.value}</a> : d.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

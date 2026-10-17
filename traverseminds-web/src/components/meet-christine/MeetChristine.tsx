@@ -2,24 +2,20 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { 
-  Twitter, 
-  Linkedin, 
-  Mail, 
-  BookOpen, 
-  Award, 
-  CheckCircle2, 
-  Globe, 
-  ExternalLink, 
+import {
+  Linkedin,
+  Mail,
+  Award,
+  CheckCircle2,
+  Globe,
+  ExternalLink,
   ArrowRight,
-  Shield,
-  Zap,
-  Cpu,
-  Fingerprint
+  Fingerprint,
+  Loader2,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
 import type { OrganisationContent } from "@/content/organisations";
 
 const TABS = [
@@ -31,29 +27,24 @@ const TABS = [
   { id: "connect",      label: "Connect" },
 ];
 
-
 const COMPETENCIES = [
   { 
     title: "Digital Governance & Policy", 
-    icon: <Globe className="w-6 h-6" />,
     desc: "Architecting national cybersecurity strategies and data protection frameworks (GDPR, AU Convention) to foster secure digital economies.",
     items: ["National Strategy", "Regulatory Compliance", "PPP Development", "Multi-stakeholder Engagement"]
   },
   { 
     title: "National Security & Risk", 
-    icon: <Shield className="w-6 h-6" />,
     desc: "Critical Infrastructure Protection, threat intelligence analysis, and high-stakes security audits (ISO 27001, NIST, COBIT).",
     items: ["Incident Response", "Vulnerability Assessment", "Digital Forensics", "Business Continuity"]
   },
   { 
     title: "Capacity Building", 
-    icon: <Cpu className="w-6 h-6" />,
     desc: "Designing technical training and gender-inclusive STEM initiatives to strengthen institutional resilience and knowledge transfer.",
     items: ["Technical Training", "Mentorship Programs", "Institutional Strengthening", "STEM Advocacy"]
   },
   { 
     title: "Project Management & Leadership", 
-    icon: <Zap className="w-6 h-6" />,
     desc: "Leading multidisciplinary teams of 30+ staff in agile environments to deliver complex security and development projects.",
     items: ["Agile Management", "Budget Management", "Stakeholder Relations", "Change Management"]
   },
@@ -135,54 +126,54 @@ const EXPERIENCE = [
 
 // ── Components ──
 
-function OrgOverlay({ org, onClose }: { org: OrganisationContent, onClose: () => void }) {
+function OrgOverlay({ org, onClose }: { org: OrganisationContent; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-100 flex items-center justify-center p-6 bg-bg-dark/80 backdrop-blur-md"
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-black/70 p-5 backdrop-blur-sm"
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        role="dialog"
+        aria-modal="true"
+        aria-label={org.name}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white max-w-lg w-full overflow-hidden shadow-2xl relative"
+        className="relative w-full max-w-lg border-t-[3px] border-accent bg-white"
       >
-        <button 
-          onClick={onClose}
-          className="absolute top-6 right-6 text-gn-500 hover:text-accent transition-colors"
-        >
-          <Zap size={20} className="rotate-45" />
+        <button type="button" onClick={onClose} className="absolute right-4 top-4 p-1 text-gn-400 hover:text-black" aria-label="Close">
+          <X className="h-5 w-5" />
         </button>
-        
-        <div className="p-10">
-          <div className="relative h-16 w-32 mb-8">
+        <div className="p-8 sm:p-10">
+          <div className="relative h-14 w-36">
             {org.logo ? (
               <Image src={org.logo} alt={org.name} fill className="object-contain object-left" />
             ) : (
-              <p className="text-xl font-display font-bold text-gn-100">{org.name}</p>
+              <p className="font-serif text-xl font-semibold text-black">{org.name}</p>
             )}
           </div>
-          
-          <p className="text-accent text-[10px] font-bold tracking-[0.3em] uppercase mb-2">{org.role}</p>
-          <h3 className="text-2xl font-display font-bold text-gn-100 mb-6">{org.name}</h3>
-          
-          <p className="text-gn-400 leading-relaxed font-light mb-10">
-            {org.description}
-          </p>
-          
-          <div className="flex gap-4 pt-8 border-t border-border-light">
+          <p className="mt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">{org.role}</p>
+          <h3 className="mt-2 font-serif text-[26px] font-semibold leading-tight text-black">{org.name}</h3>
+          <p className="mt-4 text-[16px] leading-relaxed text-gn-400">{org.description}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-5 border-t border-black/10 pt-6">
             {org.website && (
-              <Button href={org.website} variant="primary" size="sm" className="px-6 rounded-none">
-                Visit Website <ExternalLink size={14} className="ml-2" />
-              </Button>
+              <a href={org.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black px-5 py-3 text-[13px] font-semibold text-white hover:bg-accent">
+                Visit website <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             )}
-            <Button onClick={onClose} variant="ghost" size="sm" className="px-6 rounded-none uppercase tracking-widest text-[10px]">
-              Close Details
-            </Button>
+            <button type="button" onClick={onClose} className="font-mono text-[12px] uppercase tracking-wider text-gn-400 hover:text-black">
+              Close
+            </button>
           </div>
         </div>
       </motion.div>
@@ -190,22 +181,23 @@ function OrgOverlay({ org, onClose }: { org: OrganisationContent, onClose: () =>
   );
 }
 
-function SectionLabel({ children, className }: { children: React.ReactNode; className?: string }) {
+/** Section opener used on this page: heavy rule + mono label with an accent square. */
+function SectionLabel({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <div className={cn("flex items-center gap-3 mb-6", className)}>
-      <div className="w-8 h-px bg-accent/40" />
-      <span className="eyebrow-accent">{children}</span>
-    </div>
+    <p
+      className={`flex items-center gap-2 border-t-2 pt-3 font-mono text-[13px] font-semibold uppercase tracking-[0.14em] ${
+        dark ? "border-white/80 text-white" : "border-black text-black"
+      }`}
+    >
+      <span className="h-2 w-2 bg-accent" aria-hidden />
+      {children}
+    </p>
   );
 }
 
-function SectionHeading({ children, light = false, className = "" }: { children: React.ReactNode; light?: boolean; className?: string }) {
+function SectionHeading({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <h2 className={cn(
-      "font-display text-[clamp(32px,5vw,56px)] font-bold leading-[1.05] tracking-tight mb-8",
-      light ? "text-white" : "text-gn-100",
-      className
-    )}>
+    <h2 className={`mt-6 font-serif text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] ${light ? "text-white" : "text-black"}`}>
       {children}
     </h2>
   );
@@ -213,54 +205,190 @@ function SectionHeading({ children, light = false, className = "" }: { children:
 
 function TabBar({ active, onChange }: { active: string; onChange: (id: string) => void }) {
   return (
-    <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border-light overflow-hidden">
-      <div className="mx-auto flex max-w-310 px-8 overflow-x-auto scrollbar-hide py-1">
-        {TABS.map(t => (
+    <nav aria-label="On this page" className="sticky top-[72px] z-40 border-b border-black/10 bg-white/95 backdrop-blur-md lg:top-20">
+      <div className="container-max flex overflow-x-auto">
+        {TABS.map((t, i) => (
           <button
             key={t.id}
+            type="button"
             onClick={() => onChange(t.id)}
-            className={cn(
-              "relative px-6 py-4 text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap",
-              active === t.id ? "text-accent" : "text-gn-500 hover:text-gn-200"
-            )}
+            aria-current={active === t.id ? "true" : undefined}
+            className={`relative flex shrink-0 items-baseline gap-2 whitespace-nowrap px-4 py-4 font-mono text-[12px] uppercase tracking-wider transition-colors first:pl-0 ${
+              active === t.id ? "text-black" : "text-gn-500 hover:text-black"
+            }`}
           >
+            <span className={active === t.id ? "text-accent" : "text-gn-600"}>{String(i + 1).padStart(2, "0")}</span>
             {t.label}
             {active === t.id && (
-              <motion.div 
-                layoutId="activeTab"
-                className="absolute bottom-0 left-6 right-6 h-0.5 bg-accent"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
+              <motion.span layoutId="activeTab" className="absolute inset-x-4 bottom-0 h-[3px] bg-accent" transition={{ type: "spring", stiffness: 380, damping: 30 }} />
             )}
           </button>
         ))}
       </div>
-    </div>
+    </nav>
   );
 }
 
-/** Meet Christine; organisations and the portrait are edited in Sanity and passed in by the page. */
-export function MeetChristine({ organisations, portrait }: { organisations: OrganisationContent[]; portrait: string }) {
+const PROFILE = [
+  { label: "Recognition", val: "Ascent Top 100 Career Women in Africa 2026" },
+  { label: "Leadership", val: "President, Women in Design UG" },
+  { label: "Community", val: "Founder, CyberLuncheon" },
+  { label: "Impact", val: "$2M+ asset recovery in forensics" },
+];
+
+const PILLARS = [
+  { title: "Strategic policy", desc: "Crafting national frameworks that align technology with public interest." },
+  { title: "Cyber protection", desc: "Hardening critical infrastructure against evolving global threats." },
+  { title: "Inclusive growth", desc: "Bridging the digital divide with gender-equitable STEM initiatives." },
+];
+
+const SPEAKING = [
+  { event: "(ISC)² Keynote", title: "Mentoring Women in Cybersecurity", detail: "Global audience of 2,000+ professionals." },
+  { event: "Africa Tech Summit", title: "Cybersecurity Challenges in Africa", detail: "Expert panelist on regional digital transformation." },
+  { event: "Bowmans & Citibank Fintech", title: "Digital Economy Transformation", detail: "Leveraging technology for financial inclusion." },
+  { event: "Kipya Cyber Security", title: "Blockchain in Digital Forensics", detail: "Exploring emerging investigative technologies." },
+];
+
+const AWARDS = [
+  {
+    year: "2026",
+    by: "Ascent Club Global",
+    title: "Top 100 Career Women in Africa",
+    citation: "“Power, Presence & Prestige”: recognised among Africa’s most influential women shaping the continent’s future.",
+    href: "https://ascentclubglobal.com/ascent-top-100/christine-masiika-thembo/",
+  },
+  {
+    year: "2020",
+    by: "African Women in Cybersecurity",
+    title: "Africa’s Top 50 Women in Cyber",
+    citation: "Recognised for demonstrated mastery in policy development, institutional strengthening, and multi-stakeholder partnerships.",
+    href: "",
+  },
+];
+
+const CREDENTIALS = [
+  {
+    title: "Education",
+    items: ["MA Policy Development & Analysis (UMI)", "PGD Security Management (UMI)", "B.IT (Hons) Security Technology (MMU)"],
+  },
+  {
+    title: "Certifications",
+    items: ["CHFI", "EnCase Forensics", "CIIP", "Digital Identity", "Cyber Essentials & IASME", "ISO 27001"],
+  },
+];
+
+const SUBJECTS = ["Strategic security consultation", "Speaking engagement", "Policy research collaboration", "Media inquiry", "Other"];
+
+const input = "mt-1.5 w-full border border-black/15 bg-white px-3.5 py-3 text-[15px] text-black outline-none focus:border-accent";
+const inputLabel = "font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300";
+
+/** "Work with Masiika": sends through the site's contact endpoint, which emails the team and the sender. */
+function InquiryForm() {
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, division: "general", howHeard: "Meet Christine page" }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      form.reset();
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "done") {
+    return (
+      <div className="border border-black/10 bg-white p-8" role="status">
+        <CheckCircle2 className="h-8 w-8 text-emerald" aria-hidden />
+        <p className="mt-4 font-serif text-[24px] font-semibold text-black">Thank you. Your message is on its way.</p>
+        <p className="mt-2 text-[15px] text-gn-400">We have emailed you a confirmation and will reply within one working day.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="grid gap-5 border border-black/10 bg-white p-6 sm:grid-cols-2 lg:p-8">
+      <p className="font-serif text-[22px] font-semibold text-black sm:col-span-2">Work with Masiika</p>
+      <input type="text" name="honeypot" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+      <label className="block">
+        <span className={inputLabel}>Full name *</span>
+        <input name="name" required minLength={2} maxLength={120} autoComplete="name" className={input} />
+      </label>
+      <label className="block">
+        <span className={inputLabel}>Email *</span>
+        <input name="email" type="email" required maxLength={200} autoComplete="email" className={input} />
+      </label>
+      <label className="block">
+        <span className={inputLabel}>Organisation</span>
+        <input name="organisation" maxLength={160} autoComplete="organization" className={input} />
+      </label>
+      <label className="block">
+        <span className={inputLabel}>Subject</span>
+        <select name="useCase" defaultValue={SUBJECTS[0]} className={input}>
+          {SUBJECTS.map((s) => (
+            <option key={s}>{s}</option>
+          ))}
+        </select>
+      </label>
+      <label className="block sm:col-span-2">
+        <span className={inputLabel}>Message *</span>
+        <textarea name="message" rows={4} required maxLength={5000} placeholder="Tell us about your project." className={`${input} resize-y`} />
+      </label>
+      <div className="sm:col-span-2">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 text-[14px] font-bold uppercase tracking-wider text-white hover:bg-accent-hover disabled:opacity-60"
+        >
+          {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
+          Send inquiry
+          {status === "sending" ? null : <ArrowRight className="h-4 w-4" aria-hidden />}
+        </button>
+      </div>
+      {status === "error" && (
+        <p className="border-l-2 border-accent pl-3 text-[14px] text-gn-300 sm:col-span-2" role="alert">
+          Something went wrong. Please try again, or email christinethembo@gmail.com.
+        </p>
+      )}
+    </form>
+  );
+}
+
+/** Meet Christine; organisations and both photos are edited in Sanity (Site Settings) and passed in by the page. */
+export function MeetChristine({
+  organisations,
+  portrait,
+  profileImage,
+}: {
+  organisations: OrganisationContent[];
+  portrait: string;
+  profileImage: string;
+}) {
   const [activeTab, setActiveTab] = useState("about");
   const [selectedOrg, setSelectedOrg] = useState<OrganisationContent | null>(null);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActiveTab(e.target.id); }),
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveTab(e.target.id); }),
       { rootMargin: "-20% 0px -70% 0px" }
     );
-    TABS.forEach(t => { const el = document.getElementById(t.id); if (el) obs.observe(el); });
+    TABS.forEach((t) => { const el = document.getElementById(t.id); if (el) obs.observe(el); });
     return () => obs.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="bg-white selection:bg-accent/20 selection:text-accent">
-      
       {/* ── HERO SECTION ── */}
       <section className="relative min-h-screen grid lg:grid-cols-[1fr_1fr] items-stretch overflow-hidden bg-bg-dark">
         {/* Left Side: Image */}
@@ -344,194 +472,137 @@ export function MeetChristine({ organisations, portrait }: { organisations: Orga
       <TabBar active={activeTab} onChange={scrollTo} />
 
       {/* ══ SECTION: ABOUT ══ */}
-      <section id="about" className="section-padding overflow-hidden relative">
-        {/* Background Watermark */}
-        <div className="absolute top-40 -left-20 pointer-events-none select-none opacity-[0.03] font-display text-[120px] sm:text-[180px] lg:text-[240px] font-bold leading-none -rotate-12 whitespace-nowrap">
-          RESILIENCE
-        </div>
+      <section id="about" className="scroll-mt-36 bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <SectionLabel>Mission &amp; vision</SectionLabel>
+          <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+            <div>
+              <SectionHeading>
+                Empowering Africa through <span className="text-accent">evidence-based</span> digital resilience.
+              </SectionHeading>
 
-        <div className="container-max grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-start relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <SectionLabel>Mission & Vision</SectionLabel>
-            <SectionHeading>
-              Empowering Africa through <span className="text-accent">evidence-based</span> digital resilience.
-            </SectionHeading>
-            
-            <div className="space-y-12 text-lg text-gn-400 font-light leading-relaxed">
-              <div className="relative pl-12">
-                <span className="absolute left-0 top-0 text-7xl font-display text-accent/20 leading-none select-none">&ldquo;</span>
-                <p className="text-2xl font-display text-gn-100 italic leading-snug">
-                  Digital transformation is not just about tools; it&rsquo;s about creating secure ecosystems where innovation thrives, governance is transparent, and no one is left behind.
-                </p>
-              </div>
+              <blockquote className="mt-8 border-l-[3px] border-accent pl-6 font-serif text-[clamp(20px,2.2vw,26px)] font-semibold leading-snug text-black">
+                &ldquo;Digital transformation is not just about tools; it&rsquo;s about creating secure ecosystems where innovation thrives,
+                governance is transparent, and no one is left behind.&rdquo;
+              </blockquote>
 
-              <div className="grid sm:grid-cols-3 gap-8 pt-4">
-                {[
-                  { title: "Strategic Policy", desc: "Crafting national frameworks that align technology with public interest." },
-                  { title: "Cyber Protection", desc: "Hardening critical infrastructure against evolving global threats." },
-                  { title: "Inclusive Growth", desc: "Bridging the digital divide with gender-equitable STEM initiatives." }
-                ].map((pillar, i) => (
-                  <div key={i} className="space-y-3">
-                    <p className="text-[10px] font-bold tracking-widest text-accent uppercase">Pillar {i + 1}</p>
-                    <h4 className="text-sm font-bold text-gn-100">{pillar.title}</h4>
-                    <p className="text-[13px] leading-relaxed text-gn-500">{pillar.desc}</p>
-                  </div>
+              <ol className="mt-10 grid border-t border-black/15 sm:grid-cols-3">
+                {PILLARS.map((pillar, i) => (
+                  <li key={pillar.title} className="border-b border-black/15 py-5 sm:border-r sm:px-5 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-accent">Pillar {String(i + 1).padStart(2, "0")}</p>
+                    <h3 className="mt-2 font-serif text-[19px] font-semibold text-black">{pillar.title}</h3>
+                    <p className="mt-1.5 text-[14px] leading-relaxed text-gn-400">{pillar.desc}</p>
+                  </li>
                 ))}
-              </div>
-              
-              <div className="space-y-6">
-                <p>
-                  Masiika Christine Thembo is a recognized authority in cyber resilience and national security frameworks. Her work at the <span className="text-gn-100 font-medium border-b border-accent/20">Uganda Investment Authority</span> and <span className="text-gn-100 font-medium border-b border-accent/20">NITA-U</span> has been instrumental in hardening national digital infrastructure and harmonizing cybersecurity policies across borders.
-                </p>
-                <p>
-                  Named among Africa&rsquo;s <span className="text-gn-100 font-medium">Top 50 Women in Cybersecurity</span>, Masiika brings a unique blend of deep technical mastery—from digital forensics to threat intelligence—and strategic policy insight. She is a tireless advocate for UN Sustainable Development Goals, specifically focusing on gender equality in STEM and decent economic growth.
-                </p>
-              </div>
-            </div>
+              </ol>
 
-            <div className="mt-12 sm:mt-16 flex items-center gap-6 sm:gap-8">
-              <div className="flex gap-3">
+              <div className="mt-8 space-y-5 text-[17px] leading-relaxed text-gn-300">
+                <p>
+                  Masiika Christine Thembo is a recognised authority in cyber resilience and national security frameworks. Her work at the{" "}
+                  <strong className="font-semibold text-black">Uganda Investment Authority</strong> and{" "}
+                  <strong className="font-semibold text-black">NITA-U</strong> has been instrumental in hardening national digital
+                  infrastructure and harmonising cybersecurity policies across borders.
+                </p>
+                <p>
+                  Named among Africa&rsquo;s <strong className="font-semibold text-black">Top 50 Women in Cybersecurity</strong>, Masiika
+                  brings a unique blend of deep technical mastery, from digital forensics to threat intelligence, and strategic policy insight.
+                  She is an advocate for the UN Sustainable Development Goals, especially gender equality in STEM and decent economic growth.
+                </p>
+              </div>
+
+              <div className="mt-8 flex items-center gap-3">
                 {[
-                  { Icon: Linkedin, href: "https://linkedin.com/in/christinemasika" },
-                  { Icon: Twitter, href: "#" },
-                  { Icon: Mail, href: "mailto:christinethembo@gmail.com" }
-                ].map(({ Icon, href }, i) => (
-                  <a key={i} href={href} className="w-12 h-12 flex items-center justify-center border border-border-light text-gn-400 hover:bg-accent hover:border-accent hover:text-white transition-all duration-300">
+                  { Icon: Linkedin, href: "https://linkedin.com/in/christinemasika", label: "LinkedIn" },
+                  { Icon: Mail, href: "mailto:christinethembo@gmail.com", label: "Email" },
+                ].map(({ Icon, href, label }) => (
+                  <a key={label} href={href} aria-label={label} className="flex h-11 w-11 items-center justify-center border border-black/15 text-gn-300 transition-colors hover:border-accent hover:bg-accent hover:text-white">
                     <Icon size={18} />
                   </a>
                 ))}
+                <span className="ml-2 font-mono text-[11px] uppercase tracking-wider text-gn-500">Professional profile</span>
               </div>
-              <div className="h-px flex-1 bg-border-light" />
-              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500">Professional Profile</p>
             </div>
-          </motion.div>
 
-          <div className="relative">
-            <div className="editorial-card-lg p-0 bg-bg-light overflow-hidden border-none shadow-2xl">
-              <div className="p-8 space-y-8">
-                <div>
-                  <p className="text-[10px] font-bold tracking-widest text-accent uppercase mb-4">Core Value Proposition</p>
-                  <p className="text-gn-100 text-lg font-display font-medium leading-relaxed italic">
-                    &ldquo;Building sustainable digital ecosystems that promote inclusive growth, gender equality, and good governance through evidence-based policy and robust technical mastery.&rdquo;
-                  </p>
-                </div>
-                
-                <div className="space-y-6 pt-8 border-t border-border-light">
-                  {[
-                    { label: "Recognition", val: "Ascent Top 100 Career Women in Africa 2026" },
-                    { label: "Leadership", val: "President, Women in Design UG" },
-                    { label: "Community", val: "Founder, CyberLuncheon" },
-                    { label: "Impact", val: "$2M+ Asset Recovery in Forensics" }
-                  ].map(stat => (
-                    <div key={stat.label} className="flex justify-between items-baseline gap-4">
-                      <p className="text-[10px] font-bold tracking-widest text-gn-500 uppercase">{stat.label}</p>
-                      <div className="h-px flex-1 bg-border-light border-dotted border-b" />
-                      <p className="text-sm font-medium text-gn-100">{stat.val}</p>
-                    </div>
-                  ))}
-                </div>
+            <aside>
+              <div className="relative aspect-4/5 overflow-hidden bg-gn-800">
+                <Image src={profileImage} alt="Masiika Christine Thembo" fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 40vw" />
               </div>
-              <div className="aspect-4/5 relative grayscale hover:grayscale-0 transition-all duration-700">
-                <Image src={portrait} alt="Masiika" fill className="object-cover object-[50%_15%]" />
-                <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
-              </div>
-            </div>
+              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Core value proposition</p>
+              <p className="mt-2 font-serif text-[19px] font-semibold leading-snug text-black">
+                &ldquo;Building sustainable digital ecosystems that promote inclusive growth, gender equality, and good governance through
+                evidence-based policy and robust technical mastery.&rdquo;
+              </p>
+              <dl className="mt-6 border-t border-black/15">
+                {PROFILE.map((stat) => (
+                  <div key={stat.label} className="grid grid-cols-[110px_1fr] gap-4 border-b border-black/15 py-3">
+                    <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">{stat.label}</dt>
+                    <dd className="text-[14px] font-medium text-black">{stat.val}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
           </div>
         </div>
       </section>
 
       {/* ══ SECTION: COMPETENCIES ══ */}
-      <section id="competencies" className="relative overflow-hidden bg-bg-dark py-20 text-white lg:py-28">
-        <div className="tech-grid-dark absolute inset-0" aria-hidden />
-
-        <div className="container-max relative z-10">
-          {/* Header: kicker and headline left, dek right */}
-          <div className="grid gap-8 border-t-2 border-white/80 pt-6 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-            <div>
-              <p className="flex items-center gap-2 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-accent">
-                <span className="h-2 w-2 bg-accent" aria-hidden />
-                Technical Authority
-              </p>
-              <h2 className="mt-5 font-serif text-[clamp(32px,4.6vw,54px)] font-semibold leading-[1.08]">
-                Expertise across the <span className="text-accent">digital security</span> spectrum.
-              </h2>
-            </div>
-            <p className="self-end text-[17px] leading-relaxed text-white/60 lg:pb-2">
-              Masiika&rsquo;s work spans granular digital forensics and incident response through to national
-              policy and regional governance frameworks.
+      <section id="competencies" className="scroll-mt-36 bg-bg-light">
+        <div className="container-max py-14 lg:py-20">
+          <SectionLabel>Expertise</SectionLabel>
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <SectionHeading>
+              Expertise across the <span className="text-accent">digital security</span> spectrum.
+            </SectionHeading>
+            <p className="text-[17px] leading-relaxed text-gn-400">
+              Masiika&rsquo;s work spans granular digital forensics and incident response through to national policy and regional
+              governance frameworks.
             </p>
           </div>
 
-          {/* Four competencies */}
-          <ol className="mt-14 grid gap-px border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-4">
+          {/* Four disciplines, read like a contents page */}
+          <ol className="mt-12 border-t-2 border-black">
             {COMPETENCIES.map((c, i) => (
-              <motion.li
-                key={c.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="group relative flex flex-col bg-bg-dark p-7 transition-colors duration-300 hover:bg-[#2a2d33] lg:p-8"
-              >
-                <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" aria-hidden />
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center border border-white/15 text-accent transition-colors group-hover:border-accent">
-                    {c.icon}
-                  </span>
-                  <span className="font-mono text-[12px] text-white/35">
-                    {String(i + 1).padStart(2, "0")} / {String(COMPETENCIES.length).padStart(2, "0")}
-                  </span>
+              <li key={c.title} className="grid grid-cols-[48px_1fr] gap-x-4 gap-y-5 border-b border-black/15 py-8 md:grid-cols-[96px_1fr] lg:grid-cols-[120px_1.3fr_1fr] lg:gap-10">
+                <span className="font-mono text-[28px] font-semibold leading-none text-accent md:text-[44px] lg:text-[56px]">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 className="font-serif text-[clamp(24px,2.4vw,30px)] font-semibold leading-tight text-black">{c.title}</h3>
+                  <p className="mt-3 text-[16px] leading-relaxed text-gn-400">{c.desc}</p>
                 </div>
-                <h3 className="mt-7 font-serif text-[22px] font-semibold leading-tight">{c.title}</h3>
-                <p className="mb-7 mt-3 text-[15px] leading-relaxed text-white/60">{c.desc}</p>
-                <ul className="mt-auto space-y-2.5 border-t border-white/10 pt-5 font-mono text-[12px] uppercase tracking-wide text-white/75">
-                  {c.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="mt-[5px] h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.li>
+                <div className="col-start-2 lg:col-start-auto">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-gn-500">Focus areas</p>
+                  <ul className="mt-2 border-t border-black/10">
+                    {c.items.map((item) => (
+                      <li key={item} className="border-b border-black/10 py-2 text-[15px] font-medium text-gn-200">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
             ))}
           </ol>
 
           {/* Toolkit and philosophy */}
-          <div className="mt-14 grid gap-px border border-white/10 bg-white/10 lg:grid-cols-[1.3fr_1fr]">
-            <div className="bg-black/40">
-              <div className="flex items-center justify-between border-b border-white/10 px-6 py-3">
-                <span className="font-mono text-[12px] text-white/50">~/masiika/toolkit</span>
-                <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-white/40">
-                  <span className="live-dot" aria-hidden /> In use
-                </span>
-              </div>
-              <div className="grid gap-8 p-6 sm:grid-cols-2 lg:p-8">
+          <div className="mt-14 grid bg-bg-dark text-white lg:grid-cols-[1.25fr_1fr]">
+            <div className="p-8 lg:p-10">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">Toolkit</p>
+              <div className="mt-5 grid gap-8 sm:grid-cols-2">
                 {TOOLKIT.map((group) => (
                   <div key={group.label}>
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">{group.label}</p>
-                    <ul className="mt-4 space-y-3 font-mono text-[14px] text-white/75">
+                    <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-accent">{group.label}</p>
+                    <ul className="mt-3 border-t border-white/15">
                       {group.items.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="text-white/30" aria-hidden>$</span>
-                          {item}
-                        </li>
+                        <li key={item} className="border-b border-white/15 py-2.5 font-mono text-[14px] text-white/80">{item}</li>
                       ))}
                     </ul>
                   </div>
                 ))}
               </div>
             </div>
-
-            <figure className="flex flex-col justify-center bg-bg-dark p-8 lg:p-12">
-              <blockquote className="border-l-[3px] border-accent pl-6 font-serif text-[clamp(22px,2.4vw,30px)] font-semibold leading-snug">
-                &ldquo;Technology is the engine of progress, but security is the bridge that makes the journey possible.&rdquo;
+            <figure className="flex flex-col justify-center border-t border-white/10 p-8 lg:border-l lg:border-t-0 lg:p-12">
+              <blockquote className="font-serif text-[clamp(22px,2.4vw,30px)] font-semibold leading-snug">
+                <span className="text-accent">&ldquo;</span>Technology is the engine of progress, but security is the bridge that makes the
+                journey possible.<span className="text-accent">&rdquo;</span>
               </blockquote>
-              <figcaption className="mt-6 pl-7 font-mono text-[11px] uppercase tracking-[0.14em] text-white/45">
+              <figcaption className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">
                 Masiika Christine Thembo · Strategic philosophy
               </figcaption>
             </figure>
@@ -540,313 +611,222 @@ export function MeetChristine({ organisations, portrait }: { organisations: Orga
       </section>
 
       {/* ══ SECTION: AFFILIATIONS ══ */}
-      <section id="affiliations" className="section-padding bg-bg-light border-b border-border-light">
-        <div className="container-max">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-10">
-            <div className="max-w-2xl">
-              <SectionLabel>Collaborations</SectionLabel>
-              <SectionHeading>Strategic Global <span className="text-accent">Network</span>.</SectionHeading>
-              <p className="text-lg text-gn-400 font-light max-w-xl">
-                Collaborating with leading public institutions and private enterprises to architect secure digital futures across Africa and beyond.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4">
-              {["National Strategy", "Critical Infrastructure", "Executive Advisory"].map(tag => (
-                <div key={tag} className="flex items-center gap-3">
-                  <CheckCircle2 size={16} className="text-accent" />
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-gn-100">{tag}</span>
-                </div>
-              ))}
-            </div>
+      <section id="affiliations" className="scroll-mt-36 bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <SectionLabel>Network</SectionLabel>
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <SectionHeading>
+              A strategic <span className="text-accent">network</span>.
+            </SectionHeading>
+            <p className="text-[16px] leading-relaxed text-gn-400">
+              Collaborating with leading public institutions and private enterprises to architect secure digital futures across Africa and
+              beyond. Select an organisation for details.
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-px bg-border-light border border-border-light">
-            {organisations.map((org, i) => (
-              <div
-                key={i}
-                onClick={() => setSelectedOrg(org)}
-                className="group relative bg-white aspect-square p-8 flex flex-col items-center justify-center text-center transition-all duration-500 hover:bg-white cursor-pointer"
-              >
-                <div className="relative w-full h-full transition-all duration-700 group-hover:scale-105">
-                  {org.logo ? (
-                    <Image src={org.logo} alt={org.name} fill className="object-contain" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-xs font-bold text-gn-500">{org.name}</span>
-                    </div>
-                  )}
-                </div>
-                <div className="absolute inset-x-0 bottom-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                  <p className="text-[8px] font-bold tracking-widest text-accent uppercase leading-tight px-4">{org.role}</p>
-                </div>
-              </div>
+          <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+            {organisations.map((org) => (
+              <li key={org.name}>
+                <button type="button" onClick={() => setSelectedOrg(org)} className="group block w-full text-left">
+                  <span className="relative block aspect-[3/2] border border-black/10 bg-white transition-colors group-hover:border-black/25">
+                    <span className="hud-frame absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden />
+                    {org.logo ? (
+                      <Image src={org.logo} alt="" fill className="object-contain p-6 grayscale transition duration-300 group-hover:grayscale-0" sizes="(max-width: 640px) 50vw, 25vw" />
+                    ) : null}
+                  </span>
+                  <span className="mt-3 block font-serif text-[17px] font-semibold leading-tight text-black group-hover:text-accent">{org.name}</span>
+                  <span className="mt-1 block font-mono text-[11px] uppercase leading-snug tracking-wide text-gn-500">{org.role}</span>
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* ══ SECTION: EXPERIENCE ══ */}
-      <section id="experience" className="section-padding bg-white">
-        <div className="container-max">
-          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:gap-20">
+      <section id="experience" className="scroll-mt-36 bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <SectionLabel>Journey</SectionLabel>
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
             <div>
-              <div className="sticky top-32">
-                <SectionLabel>The Journey</SectionLabel>
-                <SectionHeading>A Decade of <span className="text-accent">Impact</span>.</SectionHeading>
-                <p className="text-lg text-gn-400 font-light mb-12">
-                  Charting a path from technical forensics to national security strategy, Masiika has consistently delivered measurable results in high-stakes environments.
+              <div className="lg:sticky lg:top-40">
+                <SectionHeading>
+                  A decade of <span className="text-accent">impact</span>.
+                </SectionHeading>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  From technical forensics to national security strategy, Masiika has consistently delivered measurable results in
+                  high-stakes environments.
                 </p>
-                
-                <div className="space-y-6 pt-12 border-t border-border-light">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-bg-light flex items-center justify-center text-accent"><Award size={20} /></div>
+                <dl className="mt-8 border-t border-black/15">
+                  <div className="flex items-center gap-4 border-b border-black/15 py-4">
+                    <Award className="h-5 w-5 shrink-0 text-accent" aria-hidden />
                     <div>
-                      <p className="text-[10px] font-bold tracking-widest text-gn-500 uppercase">Key Milestone</p>
-                      <p className="text-sm font-medium text-gn-100">National Information Security Framework</p>
+                      <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">Key milestone</dt>
+                      <dd className="text-[15px] font-medium text-black">National Information Security Framework</dd>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-bg-light flex items-center justify-center text-accent"><Fingerprint size={20} /></div>
+                  <div className="flex items-center gap-4 border-b border-black/15 py-4">
+                    <Fingerprint className="h-5 w-5 shrink-0 text-accent" aria-hidden />
                     <div>
-                      <p className="text-[10px] font-bold tracking-widest text-gn-500 uppercase">Specialization</p>
-                      <p className="text-sm font-medium text-gn-100">Advanced Digital Forensics & Mobile</p>
+                      <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">Specialisation</dt>
+                      <dd className="text-[15px] font-medium text-black">Advanced digital and mobile forensics</dd>
                     </div>
                   </div>
-                </div>
+                </dl>
               </div>
             </div>
 
-            <div className="space-y-12">
-              {EXPERIENCE.map((exp, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="group relative pl-12 pb-12 border-l border-border-light last:pb-0"
-                >
-                  <div className="absolute left-0 top-0 w-3 h-3 bg-white border-2 border-accent rounded-full -translate-x-1/2 group-hover:bg-accent transition-colors" />
-                  
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 mb-6">
-                    <div>
-                      <h3 className="text-xl font-bold font-display text-gn-100 group-hover:text-accent transition-colors">{exp.role}</h3>
-                      <p className="text-sm font-medium text-gn-400 uppercase tracking-widest mt-1">{exp.company}</p>
-                    </div>
-                    <p className="text-[10px] font-bold tracking-widest text-accent uppercase bg-accent/5 px-3 py-1">{exp.period}</p>
+            <ol className="border-t border-black/15">
+              {EXPERIENCE.map((exp) => (
+                <li key={exp.company} className="grid gap-3 border-b border-black/15 py-8 md:grid-cols-[150px_1fr] md:gap-8">
+                  <p className="font-mono text-[12px] uppercase tracking-wide text-accent">{exp.period}</p>
+                  <div>
+                    <h3 className="font-serif text-[22px] font-semibold leading-tight text-black">{exp.role}</h3>
+                    <p className="mt-1 font-mono text-[12px] uppercase tracking-wide text-gn-400">{exp.company}</p>
+                    <p className="mt-3 text-[16px] leading-relaxed text-gn-400">{exp.desc}</p>
+                    <ul className="mt-4 space-y-2">
+                      {exp.impact.map((impact) => (
+                        <li key={impact} className="flex gap-3 text-[15px] leading-relaxed text-gn-200">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
+                          {impact}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  
-                  <p className="text-base text-gn-400 font-light leading-relaxed mb-8 max-w-2xl">
-                    {exp.desc}
-                  </p>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {exp.impact.map((impact, idx) => (
-                      <div key={idx} className="flex gap-4 p-5 bg-bg-light/50 border border-border-light hover:border-accent/20 hover:bg-white transition-all duration-300">
-                        <div className="w-1.5 h-1.5 bg-accent/40 rounded-full mt-2 shrink-0" />
-                        <p className="text-sm text-gn-200 leading-relaxed font-medium">{impact}</p>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
       {/* ══ SECTION: RECOGNITION ══ */}
-      <section id="recognition" className="section-padding bg-bg-dark text-white relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="grid lg:grid-cols-[1fr_500px] gap-12 lg:gap-20 items-center">
+      <section id="recognition" className="relative scroll-mt-36 overflow-hidden bg-bg-dark text-white">
+        <div className="tech-grid-dark absolute inset-0" aria-hidden />
+        <div className="container-max relative py-14 lg:py-20">
+          <SectionLabel dark>Recognition</SectionLabel>
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <SectionHeading light>
+              Thought leadership &amp; <span className="text-accent">recognition</span>.
+            </SectionHeading>
+            <p className="text-[17px] leading-relaxed text-white/60">
+              Awards, credentials and the stages where Masiika has shaped the conversation on cybersecurity in Africa.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
             <div>
-              <SectionLabel>Accolades</SectionLabel>
-              <SectionHeading light>Thought Leadership & <span className="text-accent">Recognition</span>.</SectionHeading>
-              
-              {/* 2026 Ascent Recognition — primary */}
-              <a
-                href="https://ascentclubglobal.com/ascent-top-100/christine-masiika-thembo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block editorial-card-dark bg-accent p-8 lg:p-12 mb-6 border-none text-white relative overflow-hidden group"
-              >
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -mr-32 -mt-32" />
-                <Award className="w-16 h-16 mb-8 text-white/40" />
-                <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60 mb-3">Ascent Club Global · 2026</p>
-                <h3 className="text-3xl font-display font-bold mb-4 uppercase tracking-tight">Top 100 Career Women in Africa</h3>
-                <p className="text-xl font-light leading-relaxed mb-8 text-white/90 italic">
-                  &ldquo;Power, Presence &amp; Prestige — recognised among Africa&rsquo;s most influential women shaping the continent&rsquo;s future.&rdquo;
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-px bg-white/40" />
-                    <p className="text-[10px] font-bold tracking-[0.3em] uppercase">View Profile</p>
-                  </div>
-                  <ArrowRight size={16} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                </div>
-              </a>
+              {/* Awards, newest first */}
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Awards</p>
+              <ol className="mt-3 border-t-2 border-white/80">
+                {AWARDS.map((award) => (
+                  <li key={award.title} className="grid gap-4 border-b border-white/15 py-7 sm:grid-cols-[100px_1fr]">
+                    <span className="font-mono text-[34px] font-semibold leading-none text-accent">{award.year}</span>
+                    <div>
+                      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">{award.by}</p>
+                      <h3 className="mt-2 font-serif text-[clamp(22px,2.4vw,28px)] font-semibold leading-tight">{award.title}</h3>
+                      <p className="mt-3 text-[16px] leading-relaxed text-white/65">{award.citation}</p>
+                      {award.href && (
+                        <a href={award.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block border-b border-accent pb-0.5 text-[14px] font-semibold hover:text-accent">
+                          View profile &rarr;
+                        </a>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
 
-              {/* Africa's Top 50 Women in Cyber 2020 */}
-              <div className="bg-white/5 border border-white/10 p-8 mb-12">
-                <Award className="w-8 h-8 mb-4 text-accent" />
-                <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 mb-2">African Women in Cybersecurity · 2020</p>
-                <h3 className="text-xl font-display font-bold mb-3">Africa&rsquo;s Top 50 Women in Cyber</h3>
-                <p className="text-sm font-light leading-relaxed text-white/60 italic">
-                  &ldquo;Recognized for demonstrated mastery in policy development, institutional strengthening, and multi-stakeholder partnerships.&rdquo;
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-8">
-                {[
-                  { icon: <BookOpen className="text-accent" />, title: "Education", detail: "MA Policy Development & Analysis (UMI) · PGD Security Management (UMI) · B.IT (Hons) Security Technology (MMU)" },
-                  { icon: <Shield className="text-accent" />, title: "Certifications", detail: "CHFI · EnCase Forensics · CIIP · Digital Identity · Cyber Essentials & IASME · ISO 27001" }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white/5 p-8 border border-white/10 hover:border-accent/40 transition-all duration-300">
-                    <div className="mb-6">{item.icon}</div>
-                    <h4 className="text-sm font-bold uppercase tracking-widest mb-3 text-white">{item.title}</h4>
-                    <p className="text-sm text-white/50 leading-relaxed font-light">{item.detail}</p>
+              {/* Credentials */}
+              <div className="mt-10 grid gap-10 sm:grid-cols-2">
+                {CREDENTIALS.map((group) => (
+                  <div key={group.title}>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">{group.title}</p>
+                    <ul className="mt-3 border-t border-white/15">
+                      {group.items.map((item) => (
+                        <li key={item} className="border-b border-white/15 py-2.5 text-[15px] text-white/80">{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-10">
-              <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-accent mb-8">Speaking & Media</p>
-              {[
-                { event: "(ISC)² Keynote", title: "Mentoring Women in Cybersecurity", detail: "Global audience of 2,000+ professionals." },
-                { event: "Africa Tech Summit", title: "Cybersecurity Challenges in Africa", detail: "Expert panelist on regional digital transformation." },
-                { event: "Bowmans & Citibank Fintech", title: "Digital Economy Transformation", detail: "Leveraging technology for financial inclusion." },
-                { event: "Kipya Cyber Security", title: "Blockchain in Digital Forensics", detail: "Exploring emerging investigative technologies." }
-              ].map((s, i) => (
-                <div key={i} className="group border-b border-white/5 pb-8 last:border-none">
-                  <p className="text-accent text-[9px] font-bold tracking-[0.2em] uppercase mb-2 opacity-60 group-hover:opacity-100 transition-opacity">{s.event}</p>
-                  <h4 className="text-xl font-display font-bold mb-2 group-hover:text-accent transition-colors">{s.title}</h4>
-                  <p className="text-sm text-white/40 font-light">{s.detail}</p>
-                </div>
-              ))}
-              
-              <div className="pt-12">
-                <Button variant="outline-dark" href="/media" className="w-full justify-between group">
-                  EXPLORE FULL MEDIA ARCHIVE
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={16} />
-                </Button>
-              </div>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Speaking &amp; media</p>
+              <ol className="mt-3 border-t-2 border-white/80">
+                {SPEAKING.map((talk, i) => (
+                  <li key={talk.title} className="grid grid-cols-[40px_1fr] border-b border-white/15 py-5">
+                    <span className="font-mono text-[13px] text-white/35">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-white/45">{talk.event}</p>
+                      <h4 className="mt-1.5 font-serif text-[20px] font-semibold leading-snug">{talk.title}</h4>
+                      <p className="mt-1 text-[14px] text-white/55">{talk.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <a href="/media" className="mt-6 inline-block border-b border-accent pb-0.5 text-[14px] font-semibold hover:text-accent">
+                Explore the media archive &rarr;
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══ SECTION: CONNECT ══ */}
-      <section id="connect" className="section-padding bg-white relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-32">
+      <section id="connect" className="scroll-mt-36 bg-bg-light">
+        <div className="container-max py-14 lg:py-20">
+          <SectionLabel>Contact</SectionLabel>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
             <div>
-              <SectionLabel>Contact</SectionLabel>
-              <SectionHeading>Let&rsquo;s start a <span className="text-accent">Conversation</span>.</SectionHeading>
-              <p className="text-lg sm:text-xl text-gn-400 font-light mb-12 sm:mb-16 leading-relaxed">
-                Available for national strategy development, security assessments, speaking engagements, or academic research collaborations.
+              <SectionHeading>
+                Let&rsquo;s start a <span className="text-accent">conversation</span>.
+              </SectionHeading>
+              <p className="mt-4 text-[17px] leading-relaxed text-gn-400">
+                Available for national strategy development, security assessments, speaking engagements, and academic research collaborations.
               </p>
-
-              <div className="space-y-10 sm:space-y-12">
-                <div className="flex items-start gap-5 sm:gap-8">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Mail size={24} /></div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Direct Email</p>
-                    <a href="mailto:christinethembo@gmail.com" className="text-lg sm:text-2xl font-display font-bold text-gn-100 hover:text-accent transition-colors wrap-break-word">
-                      christinethembo@gmail.com
-                    </a>
+              <dl className="mt-8 border-t border-black/15">
+                {[
+                  { Icon: Mail, label: "Direct email", value: "christinethembo@gmail.com", href: "mailto:christinethembo@gmail.com" },
+                  { Icon: Globe, label: "Based in", value: "Kampala, Uganda" },
+                  { Icon: Linkedin, label: "Network", value: "Founder, CyberLuncheon", href: "https://linkedin.com/in/christinemasika" },
+                ].map(({ Icon, label, value, href }) => (
+                  <div key={label} className="flex items-center gap-4 border-b border-black/15 py-4">
+                    <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden />
+                    <div className="min-w-0">
+                      <dt className="font-mono text-[11px] uppercase tracking-wider text-gn-500">{label}</dt>
+                      <dd className="break-words font-serif text-[19px] font-semibold text-black">
+                        {href ? <a href={href} className="hover:text-accent">{value}</a> : value}
+                      </dd>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-5 sm:gap-8">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Globe size={24} /></div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Base of Operations</p>
-                    <p className="text-xl sm:text-2xl font-display font-bold text-gn-100">Kampala, Uganda</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-5 sm:gap-8">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-bg-light flex items-center justify-center text-accent shrink-0"><Linkedin size={24} /></div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-gn-500 mb-2">Professional Network</p>
-                    <p className="text-xl sm:text-2xl font-display font-bold text-gn-100">CyberLuncheon Founder</p>
-                  </div>
-                </div>
-              </div>
+                ))}
+              </dl>
             </div>
-
-            <div className="editorial-card-lg p-6 sm:p-12 bg-bg-light border-none">
-              <h3 className="text-2xl font-display font-bold mb-8 sm:mb-10 text-gn-100">Work with Masiika</h3>
-              <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid sm:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-bold tracking-widest uppercase text-gn-500">Full Name</label>
-                    <input type="text" className="w-full bg-white border-b border-border-light p-4 text-gn-100 focus:border-accent outline-none transition-colors" placeholder="Jane Doe" />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-bold tracking-widest uppercase text-gn-500">Email Address</label>
-                    <input type="email" className="w-full bg-white border-b border-border-light p-4 text-gn-100 focus:border-accent outline-none transition-colors" placeholder="jane@example.com" />
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <label className="text-[10px] font-bold tracking-widest uppercase text-gn-500">Subject / Interest</label>
-                  <select className="w-full bg-white border-b border-border-light p-4 text-gn-100 focus:border-accent outline-none transition-colors appearance-none">
-                    <option>Strategic Security Consultation</option>
-                    <option>Speaking Engagement</option>
-                    <option>Policy Research Collaboration</option>
-                    <option>Media Inquiry</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div className="space-y-3">
-                  <label className="text-[10px] font-bold tracking-widest uppercase text-gn-500">Your Message</label>
-                  <textarea rows={4} className="w-full bg-white border-b border-border-light p-4 text-gn-100 focus:border-accent outline-none transition-colors resize-none" placeholder="Tell me about your project..."></textarea>
-                </div>
-                <Button variant="primary" size="xl" className="w-full bg-accent hover:bg-gn-100 border-none rounded-none uppercase tracking-widest py-6">
-                  Send Inquiry
-                </Button>
-              </form>
-            </div>
+            <InquiryForm />
           </div>
         </div>
-        
-        {/* Background Accent */}
-        <div className="absolute bottom-0 right-0 w-125 h-125 bg-accent/5 rounded-full blur-[120px] -mr-250 -mb-250" />
       </section>
 
       {/* ── FOOTER STRIP ── */}
-      <footer className="bg-bg-dark text-white py-20 px-8 relative overflow-hidden">
-        <div className="container-max relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
+      <div className="border-t border-white/10 bg-bg-dark text-white">
+        <div className="container-max flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-3xl font-display font-bold mb-4">Masiika Christine Thembo</p>
-            <p className="text-sm text-white/40 tracking-[0.3em] uppercase">Cyber Resilience · Sustainable Development · Global Governance</p>
+            <p className="font-serif text-[24px] font-semibold">Masiika Christine Thembo</p>
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-white/45">Cyber resilience · Sustainable development · Global governance</p>
           </div>
-          <div className="flex gap-12">
-            <div>
-              <p className="text-[10px] font-bold tracking-widest text-white/20 uppercase mb-4">Quick Navigation</p>
-              <div className="flex flex-col gap-2">
-                <a href="#about" className="text-xs text-white/60 hover:text-accent transition-colors">About</a>
-                <a href="#competencies" className="text-xs text-white/60 hover:text-accent transition-colors">Expertise</a>
-                <a href="#connect" className="text-xs text-white/60 hover:text-accent transition-colors">Contact</a>
-              </div>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold tracking-widest text-white/20 uppercase mb-4">Network</p>
-              <div className="flex flex-col gap-2">
-                <a href="https://linkedin.com/in/christinemasika" target="_blank" className="text-xs text-white/60 hover:text-accent transition-colors">LinkedIn</a>
-                <a href="#" className="text-xs text-white/60 hover:text-accent transition-colors">Twitter</a>
-              </div>
-            </div>
-          </div>
+          <nav aria-label="Profile sections" className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[12px] uppercase tracking-wider text-white/60">
+            {TABS.map((t) => (
+              <a key={t.id} href={`#${t.id}`} className="hover:text-accent">{t.label}</a>
+            ))}
+            <a href="https://linkedin.com/in/christinemasika" target="_blank" rel="noopener noreferrer" className="hover:text-accent">LinkedIn</a>
+          </nav>
         </div>
-        <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-      </footer>
+      </div>
 
       <AnimatePresence>
-        {selectedOrg && (
-          <OrgOverlay org={selectedOrg} onClose={() => setSelectedOrg(null)} />
-        )}
+        {selectedOrg && <OrgOverlay org={selectedOrg} onClose={() => setSelectedOrg(null)} />}
       </AnimatePresence>
-
     </div>
   );
 }

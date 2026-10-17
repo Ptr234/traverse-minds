@@ -84,10 +84,12 @@ async function buildDocuments() {
       SITE_DEFAULTS.heroSlides.map(async (p, i) => ({ ...(await image(p, `Traverse Minds Africa, photo ${i + 1}`)), _key: key(i) }))
     ),
     aboutImage: await image(SITE_DEFAULTS.aboutImage, "Traverse Minds team"),
+    securityImage: await image(SITE_DEFAULTS.securityImage, "Traverse Minds team at work"),
     timelineImage: await image(SITE_DEFAULTS.timelineImage),
     eventsSpeakImage: await image(SITE_DEFAULTS.eventsSpeakImage, "Speaker at a Traverse Minds event"),
     eventsSponsorImage: await image(SITE_DEFAULTS.eventsSponsorImage, "Traverse Minds event audience"),
     christinePortrait: await image(SITE_DEFAULTS.christinePortrait, "Masiika Christine Thembo"),
+    christineProfileImage: await image(SITE_DEFAULTS.christineProfileImage, "Masiika Christine Thembo"),
   });
 
   for (const [i, p] of PARTNERS.entries()) {
@@ -170,6 +172,10 @@ if (DRY) {
     else tx.createIfNotExists(doc);
   }
   if (existing.has("author-christine")) tx.patch("author-christine", (p) => p.setIfMissing({ photo: authorPhoto }));
+  // Fields added to Site Settings after its first seed are filled in only where still empty
+  const settings = docs.find((d) => d._id === "siteSettings");
+  const settingsFields = Object.fromEntries(Object.entries(settings).filter(([k]) => !k.startsWith("_")));
+  tx.patch("siteSettings", (p) => p.setIfMissing(settingsFields));
   for (const id of legacy) if (existing.has(id)) tx.patch(id, (p) => p.set({ isActive: false }));
   await tx.commit();
   console.log("Seeded. Review it in the Studio: https://traverseminds.sanity.studio");

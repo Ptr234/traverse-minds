@@ -1,137 +1,92 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { Mail, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 
-const gnEase = [0.215, 0.61, 0.355, 1] as const;
-
-interface NewsletterFormData {
-  email: string;
-}
-
+/** Weekly briefing sign-up; /api/newsletter stores the address and sends a welcome email. */
 export function NewsletterSignup() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<NewsletterFormData>();
-
-  const onSubmit = async (data: NewsletterFormData) => {
-    const res = await fetch("/api/newsletter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: data.email }),
-    });
-    if (!res.ok) throw new Error((await res.json()).error || "Failed");
-    setIsSubmitted(true);
-  };
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const email = String(new FormData(e.currentTarget).get("email") ?? "").trim();
+    setError("");
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || "We could not subscribe you. Please try again.");
+      setStatus("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "We could not subscribe you. Please try again.");
+      setStatus("idle");
+    }
+  }
 
   return (
-    <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56 }}>
-      <div style={{ maxWidth: 596, margin: "0 auto", padding: "0 24px 80px" }} className="text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, ease: gnEase }}
-        >
-          <Mail className="mx-auto mb-4" style={{ height: 24, width: 24, color: "#ff4c00" }} />
+    <section className="bg-bg-light" aria-labelledby="newsletter-heading">
+      <div className="container-max py-14 lg:py-20">
+        <SectionHeader title="The briefing, by email" />
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-14">
+          <div>
+            <h2 id="newsletter-heading" className="font-serif text-[clamp(26px,3.2vw,40px)] font-semibold leading-tight text-black">
+              Stay ahead of the threat landscape.
+            </h2>
+            <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-gn-400">
+              A weekly intelligence briefing on African cybersecurity trends, policy updates and event invitations.
+            </p>
+          </div>
 
-          <TextReveal
-            as="h2"
-            variant="fade-up"
-            staggerSpeed={0.03}
-            delay={0.1}
-            className="font-display"
-            style={{ fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.8px", color: "#000" }}
-          >
-            Stay ahead of the threat landscape.
-          </TextReveal>
-
-          <p style={{ marginTop: 16, fontSize: 16, color: "#515459", lineHeight: "125%", maxWidth: 480, margin: "16px auto 0" }}>
-            Get our weekly intelligence briefing on African cybersecurity
-            trends, policy updates, and exclusive event invitations.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: 0.1, ease: gnEase }}
-          style={{ marginTop: 40 }}
-        >
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center gap-4"
-              style={{ padding: 32, borderRadius: 0, background: "rgba(43,146,57,0.08)", border: "1px solid rgba(43,146,57,0.2)" }}
-            >
-              <div className="flex items-center justify-center" style={{ height: 48, width: 48, background: "#2b9239", borderRadius: 4 }}>
-                <CheckCircle2 className="h-6 w-6 text-white" />
+          {status === "done" ? (
+            <div className="flex items-start gap-3 border-l-[3px] border-emerald bg-white p-5" role="status">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald" aria-hidden />
+              <div>
+                <p className="font-serif text-[20px] font-semibold text-black">You&apos;re subscribed.</p>
+                <p className="mt-1 text-[15px] text-gn-400">A welcome email is on its way to your inbox.</p>
               </div>
-              <div className="text-center">
-                <h3 style={{ fontSize: 21, fontWeight: 500, color: "#000" }}>Subscription Confirmed</h3>
-                <p style={{ color: "#515459", marginTop: 4, fontSize: 16 }}>Check your inbox to verify your email address.</p>
-              </div>
-            </motion.div>
+            </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="relative" noValidate>
-              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-              <div className="flex flex-col gap-3 sm:flex-row">
+            <form onSubmit={onSubmit}>
+              <label htmlFor="newsletter-email" className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">
+                Work email
+              </label>
+              <div className="mt-1.5 flex flex-col gap-2 sm:flex-row">
                 <input
                   id="newsletter-email"
+                  name="email"
                   type="email"
+                  required
                   autoComplete="email"
-                  placeholder="Enter your professional email"
-                  aria-describedby={errors.email ? "newsletter-error" : undefined}
-                  aria-invalid={!!errors.email}
-                  className={cn("flex-1 px-4 outline-none", errors.email ? "border-red-400" : "")}
-                  style={{
-                    height: 48,
-                    fontSize: 16,
-                    fontWeight: 400,
-                    lineHeight: "125%",
-                    color: "#000",
-                    background: "#fff",
-                    border: errors.email ? "1px solid #d63a3a" : "1px solid rgba(81,84,89,0.16)",
-                    borderRadius: 4,
-                    transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)",
-                  }}
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Please enter a valid email address" },
-                  })}
+                  placeholder="you@organisation.com"
+                  aria-describedby={error ? "newsletter-error" : "newsletter-note"}
+                  aria-invalid={!!error}
+                  className="h-12 min-w-0 flex-1 border border-black/15 bg-white px-3.5 text-[16px] text-black outline-none focus:border-accent"
                 />
-                <Button type="submit" variant="primary" size="md" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Sending...</span>
-                  ) : (
-                    <span className="flex items-center gap-2">Subscribe <ArrowRight className="h-4 w-4" /></span>
-                  )}
-                </Button>
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="inline-flex h-12 items-center justify-center gap-2 bg-black px-6 text-[14px] font-bold uppercase tracking-wider text-white hover:bg-accent disabled:opacity-60"
+                >
+                  {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
+                  Subscribe
+                  {status === "sending" ? null : <ArrowRight className="h-4 w-4" aria-hidden />}
+                </button>
               </div>
-              {errors.email && (
-                <motion.p id="newsletter-error" role="alert" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-                  style={{ position: "absolute", left: 12, bottom: -24, fontSize: 14, color: "#d63a3a", fontWeight: 500 }}>
-                  {errors.email.message}
-                </motion.p>
+              {error ? (
+                <p id="newsletter-error" role="alert" className="mt-2 border-l-2 border-accent pl-3 text-[14px] text-gn-300">{error}</p>
+              ) : (
+                <p id="newsletter-note" className="mt-2 font-mono text-[11px] uppercase tracking-wide text-gn-500">
+                  No spam · Unsubscribe any time · Handled under Uganda&apos;s data protection law
+                </p>
               )}
             </form>
           )}
-
-          <p style={{ marginTop: 40, fontSize: 12, color: "#919499", letterSpacing: "0.6px", textTransform: "uppercase" as const, fontWeight: 700 }}>
-            Data protection compliant &bull; No spam &bull; Unsubscribe anytime
-          </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

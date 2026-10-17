@@ -68,7 +68,7 @@ export function TrendChart({ series, highlight, unit, suffix = "%" }: Props) {
   const fmt = (v: number) => `${v.toFixed(1)}${suffix}`;
 
   return (
-    <figure style={{ margin: 0 }}>
+    <figure style={{ margin: 0, minWidth: 0 }}>
       {/* Legend */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px", marginBottom: 12, fontSize: 13, color: "#515459" }}>
         {series.map((s) => (
@@ -79,7 +79,7 @@ export function TrendChart({ series, highlight, unit, suffix = "%" }: Props) {
         ))}
       </div>
 
-      <div ref={wrapRef} style={{ position: "relative" }}>
+      <div ref={wrapRef} style={{ position: "relative", width: "100%", minWidth: 0 }}>
         <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label={`${unit}, ${years[0]}–${years[years.length - 1]}`} style={{ display: "block", overflow: "visible" }}>
           {/* Recessive grid + y axis */}
           {yTicks.map((t) => (

@@ -46,7 +46,7 @@ export function EngagementProcess() {
               variant="slide-up"
             >
               <div className="group">
-                <div className="relative overflow-hidden h-56" style={{ borderRadius: 0 }}>
+                <div className="relative hidden h-56 overflow-hidden md:block" style={{ borderRadius: 0 }}>
                   <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
                 <div className="mt-5 flex items-start gap-4">
