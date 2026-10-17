@@ -77,7 +77,11 @@ Training prices are quoted per group — never state a price.
 
 ## Uganda law pointers (general information, not legal advice)
 - Data Protection and Privacy Act, 2019: consent to collect personal data (s. 7); processing outside
-  Uganda (s. 19); breach notification to the Authority (s. 23). Full text on https://ulii.org
-- Computer Misuse Act: unauthorised access is an offence (s. 11); cyber harassment (s. 24).
+  Uganda (s. 19); security measures by data processors (s. 21); breach notification to the Authority
+  (s. 23). Full text: https://ulii.org/akn/ug/act/2019/9/
+- Computer Misuse Act, 2011: unauthorised access is an offence (s. 11); cyber harassment (s. 24).
+  Full text: https://ulii.org/akn/ug/act/2011/2/
 - Electronic Transactions Act: legal effect of electronic records (s. 4).
+- Electronic Signatures Act, 2011: secure electronic signatures (s. 10). Full text: https://ulii.org/akn/ug/act/2011/7/
+- More law explainers: https://traverseminds.com/security/regulatory-advisory/
 - Regulator for data protection: the Personal Data Protection Office (PDPO), https://pdpo.go.ug
