@@ -51,6 +51,9 @@ export function Navbar() {
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [mobileDivisionsOpen, setMobileDivisionsOpen] = useState(false);
   const pathname = usePathname();
+  // URLs end in a slash (trailingSlash export); a section also counts as current on its subpages
+  const path = (pathname ?? "/").replace(/(.)\/$/, "$1");
+  const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
   const [prevPathname, setPrevPathname] = useState(pathname);
 
   if (pathname !== prevPathname) {
@@ -63,6 +66,8 @@ export function Navbar() {
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTriggerRef = useRef<HTMLButtonElement>(null);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // When the pointer opens the menu on hover, the click that usually follows must not close it again
+  const hoverOpenedAt = useRef(0);
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? "hidden" : "";
@@ -76,8 +81,18 @@ export function Navbar() {
         setIsMegaOpen(false);
       }
     }
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === "Escape" && megaRef.current) {
+        setIsMegaOpen(false);
+        megaTriggerRef.current?.focus();
+      }
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
   }, []);
 
   const openMega = useCallback(() => {
@@ -89,7 +104,7 @@ export function Navbar() {
     hoverTimeoutRef.current = setTimeout(() => setIsMegaOpen(false), 250);
   }, []);
 
-  const isDivisionActive = divisions.some((d) => pathname === d.href);
+  const isDivisionActive = divisions.some((d) => isCurrent(d.href));
 
   return (
     <>
@@ -131,13 +146,21 @@ export function Navbar() {
                   <div
                     key="divisions-trigger"
                     className="relative h-full"
-                    onMouseEnter={openMega}
+                    onMouseEnter={() => {
+                      if (!isMegaOpen) hoverOpenedAt.current = Date.now();
+                      openMega();
+                    }}
                     onMouseLeave={scheduleMegaClose}
                   >
                     <button
                       ref={megaTriggerRef}
-                      onClick={() => setIsMegaOpen((p) => !p)}
-                      className="flex items-center gap-1 h-full cursor-pointer px-6 group"
+                      onClick={() => {
+                        if (Date.now() - hoverOpenedAt.current < 600) return;
+                        setIsMegaOpen((p) => !p);
+                      }}
+                      aria-expanded={isMegaOpen}
+                      aria-controls="divisions-menu"
+                      className="flex items-center gap-1 h-full cursor-pointer px-6 group focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-accent"
                       style={{
                         fontSize: 16,
                         fontWeight: 400,
@@ -164,7 +187,7 @@ export function Navbar() {
                 );
               }
 
-              const isActive = pathname === link.href;
+              const isActive = isCurrent(link.href);
               return (
                 <Link
                   key={link.href}
@@ -246,101 +269,89 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* ======== Desktop Mega-Menu (Enhanced Card Design) ======== */}
+        {/* ======== Desktop Mega-Menu: dark glass to match the nav, magazine index inside ======== */}
         <AnimatePresence>
           {isMegaOpen && (
             <motion.div
               ref={megaRef}
-              initial={{ opacity: 0, y: -12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.98 }}
-              transition={{ duration: 0.4, ease }}
+              id="divisions-menu"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease }}
               className="hidden lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[1240px] px-6"
-              style={{
-                pointerEvents: "auto",
-                marginTop: 8,
-              }}
+              style={{ pointerEvents: "auto", paddingTop: 2 }}
               onMouseEnter={openMega}
               onMouseLeave={scheduleMegaClose}
             >
-              <div 
-                className="overflow-hidden bg-white border border-black/5 shadow-2xl"
-                style={{ borderRadius: 0 }}
+              <div
+                className="relative overflow-hidden text-white shadow-2xl"
+                style={{ background: "rgba(0, 0, 0, 0.88)", backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)" }}
               >
-                <div className="grid grid-cols-12 gap-0">
-                  {/* Left Sidebar Info */}
-                  <div className="col-span-3 bg-gn-900/30 p-12 border-r border-black/5">
-                    <p className="eyebrow-muted mb-6">Our Ecosystem</p>
-                    <h3 className="text-2xl font-medium leading-tight mb-4 tracking-tight text-primary">
-                      Integrated solutions for a <span className="text-accent">digital-first</span> Africa.
-                    </h3>
-                    <p className="text-gn-400 text-sm leading-relaxed mb-8">
-                      Six specialized divisions working in synergy to secure, inform, and empower the African region.
+                <div className="tech-grid-dark absolute inset-0" aria-hidden />
+                <div className="relative grid grid-cols-12">
+                  {/* Intro column */}
+                  <div className="col-span-4 border-r border-white/10 p-10">
+                    <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+                      <span className="h-2 w-2 bg-accent" aria-hidden />
+                      Our divisions
                     </p>
-                    <Link 
-                      href="/about" 
+                    <p className="mt-5 font-serif text-[26px] font-semibold leading-[1.2]">
+                      One company, working across Africa&apos;s digital frontier.
+                    </p>
+                    <p className="mt-4 text-[14px] leading-relaxed text-white/60">
+                      Security, open records, education, media and research, each feeding the others.
+                    </p>
+                    <Link
+                      href="/about"
                       onClick={() => setIsMegaOpen(false)}
-                      className="group inline-flex items-center gap-2 text-sm font-semibold text-gn-100 hover:text-accent transition-colors"
+                      className="group mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-white hover:text-accent"
                     >
-                      The Traverse Model
-                      <div className="w-5 h-px bg-gn-100 group-hover:bg-accent group-hover:w-8 transition-all duration-300" />
+                      The Traverse model
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
 
-                  {/* Main Divisions Grid */}
-                  <div className="col-span-9 p-12 bg-white">
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
-                      {divisions.map((div) => {
-                        const Icon = div.icon;
-                        const isActive = pathname === div.href;
-                        return (
+                  {/* Division index */}
+                  <ul className="col-span-8 grid grid-cols-2 gap-px bg-white/10">
+                    {divisions.map((div, i) => {
+                      const Icon = div.icon;
+                      const isActive = isCurrent(div.href);
+                      return (
+                        <li key={div.href} className={i === divisions.length - 1 && divisions.length % 2 ? "col-span-2" : ""}>
                           <Link
-                            key={div.href}
                             href={div.href}
                             onClick={() => setIsMegaOpen(false)}
-                            className="group flex flex-col items-start"
+                            aria-current={isActive ? "page" : undefined}
+                            className={`group relative flex h-full items-start gap-4 px-7 py-6 transition-colors hover:bg-[#151618] focus-visible:bg-[#151618] focus-visible:outline-none ${isActive ? "bg-[#151618]" : "bg-[#0b0b0c]"}`}
                           >
-                            <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-xl bg-gn-900 group-hover:bg-accent/10 transition-all duration-300 group-hover:scale-110">
-                              <Icon 
-                                className="transition-colors duration-300" 
-                                style={{ 
-                                  height: 22, 
-                                  width: 22, 
-                                  color: isActive ? "#ff4c00" : "#515459",
-                                }} 
-                              />
-                            </div>
-                            <div className="space-y-1.5">
-                              <div className="flex items-center gap-2">
-                                <span className="text-lg font-bold tracking-tight text-gn-100 group-hover:text-accent transition-colors">
-                                  {div.label}
-                                </span>
-                              </div>
-                              <span className="block text-sm text-gn-500 leading-snug group-hover:text-gn-400 transition-colors line-clamp-2">
-                                {div.description}
+                            <span className={`absolute inset-y-0 left-0 w-[3px] origin-top bg-accent transition-transform duration-300 ${isActive ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"}`} aria-hidden />
+                            <span className="pt-1 font-mono text-[12px] text-white/35">{String(i + 1).padStart(2, "0")}</span>
+                            <Icon className={`mt-0.5 h-5 w-5 shrink-0 ${isActive ? "text-accent" : "text-white/60 group-hover:text-accent"}`} aria-hidden />
+                            <span className="min-w-0 grow">
+                              <span className="flex items-center justify-between gap-3">
+                                <span className="font-serif text-[19px] font-semibold leading-tight">{div.label}</span>
+                                <ArrowRight className="h-4 w-4 shrink-0 -translate-x-1 text-accent opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden />
                               </span>
-                              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-accent mt-2 opacity-0 group-hover:opacity-100 transform translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
-                                {div.tagline} <ArrowRight className="w-3 h-3" />
-                              </span>
-                            </div>
+                              <span className="mt-1.5 block text-[14px] leading-snug text-white/55">{div.description}</span>
+                              <span className="mt-3 block font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">{div.tagline}</span>
+                            </span>
                           </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
-                
-                {/* Bottom Strip */}
-                <div className="bg-gn-900/50 border-t border-black/5 py-4 px-12">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gn-500 font-medium italic">
-                      Supporting Africa&apos;s digital transformation since 2024.
-                    </span>
-                    <div className="flex gap-8">
-                      <Link href="/careers" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Careers</Link>
-                      <Link href="/contact" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Consultancy</Link>
-                      <Link href="/privacy" className="text-[10px] font-bold uppercase tracking-widest text-gn-500 hover:text-accent transition-colors">Legal</Link>
-                    </div>
+
+                {/* Footer strip */}
+                <div className="relative flex items-center justify-between border-t border-white/10 px-10 py-4">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-white/40">Kampala · Supporting Africa&apos;s digital transformation since 2024</span>
+                  <div className="flex items-center gap-7">
+                    <Link href="/careers" onClick={() => setIsMegaOpen(false)} className="font-mono text-[11px] uppercase tracking-wider text-white/60 hover:text-white">Careers</Link>
+                    <Link href="/privacy" onClick={() => setIsMegaOpen(false)} className="font-mono text-[11px] uppercase tracking-wider text-white/60 hover:text-white">Legal</Link>
+                    <Link href="/contact" onClick={() => setIsMegaOpen(false)} className="inline-flex items-center gap-2 bg-accent px-4 py-2 text-[12px] font-bold uppercase tracking-wider text-white hover:bg-accent-hover">
+                      Launch inquiry <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -371,6 +382,7 @@ export function Navbar() {
                       <div key="mobile-divisions" className="border-b border-gn-700/50">
                         <button
                           onClick={() => setMobileDivisionsOpen(!mobileDivisionsOpen)}
+                          aria-expanded={mobileDivisionsOpen}
                           className="w-full flex items-center justify-between py-6 text-2xl font-medium tracking-tight"
                         >
                           {link.label}
@@ -385,26 +397,30 @@ export function Navbar() {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden bg-gn-900/30 rounded-lg mb-4"
+                              className="overflow-hidden"
                             >
-                              <div className="p-4 grid gap-6">
-                                {divisions.map((div) => (
-                                  <Link
-                                    key={div.href}
-                                    href={div.href}
-                                    onClick={() => setIsMobileOpen(false)}
-                                    className="flex items-center gap-4"
-                                  >
-                                    <div className="w-8 h-8 rounded bg-white flex items-center justify-center shadow-sm">
-                                      <div.icon size={16} className="text-gn-400" />
-                                    </div>
-                                    <div>
-                                      <p className="font-bold text-sm text-gn-100">{div.label}</p>
-                                      <p className="text-xs text-gn-500">{div.tagline}</p>
-                                    </div>
-                                  </Link>
-                                ))}
-                              </div>
+                              <ul className="mb-6 border-t-2 border-black">
+                                {divisions.map((div, i) => {
+                                  const isActive = isCurrent(div.href);
+                                  return (
+                                    <li key={div.href} className="border-b border-black/10">
+                                      <Link
+                                        href={div.href}
+                                        onClick={() => setIsMobileOpen(false)}
+                                        aria-current={isActive ? "page" : undefined}
+                                        className={`flex items-start gap-3 border-l-[3px] py-4 pl-3 ${isActive ? "border-accent" : "border-transparent"}`}
+                                      >
+                                        <span className="pt-0.5 font-mono text-[12px] text-gn-500">{String(i + 1).padStart(2, "0")}</span>
+                                        <span className="min-w-0 grow">
+                                          <span className={`block font-serif text-[18px] font-semibold leading-tight ${isActive ? "text-accent" : "text-black"}`}>{div.label}</span>
+                                          <span className="mt-1 block text-[14px] leading-snug text-gn-400">{div.description}</span>
+                                        </span>
+                                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-gn-500" aria-hidden />
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -412,7 +428,7 @@ export function Navbar() {
                     );
                   }
 
-                  const isActive = pathname === link.href;
+                  const isActive = isCurrent(link.href);
                   return (
                     <Link
                       key={link.label}
