@@ -3,10 +3,10 @@
 Stores every website form submission in Postgres and serves the staff admin dashboard.
 
 ```
-visitor ─▶ traverseminds.ug form ─▶ Cloudflare function (functions/api/*)
+visitor ─▶ traverseminds.com form ─▶ Cloudflare function (functions/api/*)
                                          │  1. POST /submissions  (INGEST token) ─▶ this service ─▶ Postgres
                                          │  2. emails via Resend
-staff ─▶ https://api.traverseminds.ug/admin ─▶ dashboard (staff accounts)
+staff ─▶ https://api.traverseminds.com/admin ─▶ dashboard (staff accounts)
 ```
 
 If this server is down, forms still email you; the submission just isn't stored.
@@ -23,7 +23,7 @@ If this server is down, forms still email you; the submission just isn't stored.
 ## First deployment on the VPS
 
 Needs Docker with the compose plugin, ports 80 and 443 open, and a DNS **A record** for the API domain
-(e.g. `api.traverseminds.ug`) pointing at the VPS.
+(e.g. `api.traverseminds.com`) pointing at the VPS.
 
 ```bash
 git clone https://github.com/Ptr234/traverse-minds.git
@@ -38,17 +38,17 @@ docker compose logs -f api        # should print "Submissions service listening 
 Create your admin account (the password is typed at a hidden prompt):
 
 ```bash
-docker compose exec api node src/cli.js create-user you@traverseminds.ug "Your Name" admin
+docker compose exec api node src/cli.js create-user you@traverseminds.com "Your Name" admin
 ```
 
-Then open `https://api.traverseminds.ug/admin` and sign in. Add the rest of the team from **Users**
+Then open `https://api.traverseminds.com/admin` and sign in. Add the rest of the team from **Users**
 in the dashboard (choose **viewer** for staff who only work leads).
 
 ## Connect the website (Cloudflare Pages → Settings → Variables and secrets)
 
 | Variable | Value |
 |---|---|
-| `SUBMISSIONS_API_URL` | `https://api.traverseminds.ug` |
+| `SUBMISSIONS_API_URL` | `https://api.traverseminds.com` |
 | `SUBMISSIONS_API_TOKEN` | the `INGEST_TOKEN` from `.env` (mark as secret) |
 | `EMAIL_FROM` | your Resend-verified sender, e.g. `hello@traverseminds.com` |
 | `EMAIL_NOTIFY` | inbox for new-lead notifications, e.g. `traversemindsug@gmail.com` |
@@ -81,7 +81,7 @@ Roles: **viewer** can see and update leads; **admin** can also delete, manage us
 docker compose ps                                      # health
 docker compose logs --tail=100 api                     # recent logs
 docker compose exec api node src/cli.js list-users
-docker compose exec api node src/cli.js reset-password someone@traverseminds.ug
+docker compose exec api node src/cli.js reset-password someone@traverseminds.com
 git pull && docker compose up -d --build api           # deploy an update
 ```
 

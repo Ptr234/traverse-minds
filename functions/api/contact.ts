@@ -59,7 +59,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           </p>
           <p style="margin:0;font-size:15px;color:#515459;line-height:1.75;">
             In the meantime, explore our work at
-            <a href="${SITE_URL}" style="color:#ff4c00;text-decoration:none;font-weight:600;">traverseminds.ug</a>.
+            <a href="${SITE_URL}" style="color:#ff4c00;text-decoration:none;font-weight:600;">traverseminds.com</a>.
           </p>
           ${ctaButton("Visit Our Website", SITE_URL)}
           ${signature(env)}

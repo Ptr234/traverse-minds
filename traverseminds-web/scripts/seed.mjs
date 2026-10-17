@@ -175,7 +175,7 @@ const posts = [
       block("What Public Record Africa Is Building"),
       block("Public Record Africa is an AI-powered platform that indexes, digitises, and makes searchable the public documents of East and Central Africa. Starting with Uganda, Kenya, Tanzania, Rwanda, and Burundi, we are building the infrastructure layer that researchers, journalists, legal professionals, and policymakers need."),
       block("Our initial focus is the Uganda Gazette — decades of public notices, company registrations, land declarations, and statutory instruments, now being indexed and made searchable for the first time."),
-      block("Private beta access is available now. Join the waitlist at traverseminds.ug/public-record."),
+      block("Private beta access is available now. Join the waitlist at traverseminds.com/public-record."),
     ],
     tags: ["public-records", "africa", "civic-tech", "transparency", "open-data"],
   },
@@ -196,7 +196,7 @@ const posts = [
       block("For SMEs, our two-week programme covers: securing business communications, protecting customer data, basic incident response, and PDPA compliance essentials."),
       block("Impact So Far"),
       block("In 2025, we trained over 2,400 learners across 18 institutions in Kampala, Wakiso, and Mbarara districts. 94% of participants reported increased confidence in recognising online threats after completing the programme."),
-      block("If your school or organisation is interested in our literacy programmes, visit traverseminds.ug/literacy or contact hello@traverseminds.ug."),
+      block("If your school or organisation is interested in our literacy programmes, visit traverseminds.com/literacy or contact hello@traverseminds.com."),
     ],
     tags: ["digital-literacy", "education", "uganda", "cyber-safety", "schools"],
   },
@@ -416,7 +416,7 @@ const jobs = [
     description: "We are looking for a Senior Security Analyst to join Traverse Security. You will lead penetration testing engagements, conduct vulnerability assessments for financial institutions and government clients, and support ISO 27001 and Bank of Uganda compliance audits.\n\nRequirements:\n- 4+ years of hands-on penetration testing experience\n- OSCP, CEH, or equivalent certification\n- Experience with African regulatory frameworks (Bank of Uganda, Uganda PDPA) is a strong advantage\n- Excellent written and verbal communication skills\n- Ability to produce clear, actionable security reports for non-technical audiences\n\nWhat we offer:\n- Competitive compensation\n- Exposure to high-profile clients across East Africa\n- Training and certification support\n- A mission-driven team building for the continent",
     deadline: "2026-07-31",
     isActive: true,
-    hiringManagerEmail: "hello@traverseminds.ug",
+    hiringManagerEmail: "hello@traverseminds.com",
   },
   {
     _id: "job-research-associate-thinktank",
@@ -427,7 +427,7 @@ const jobs = [
     description: "The Traverse Minds Think Tank is seeking a Research Associate to support our policy research programme on digital governance, data protection, and civic technology in Africa.\n\nResponsibilities:\n- Conduct primary and secondary research on digital policy topics\n- Draft policy briefs, reports, and working papers\n- Engage with government, civil society, and international partners\n- Support the organisation of the Think Tank Symposium and other convenings\n\nRequirements:\n- Master's degree in law, public policy, international relations, or related field\n- Strong research and writing skills demonstrated through published work or thesis\n- Understanding of African data protection frameworks\n- Fluency in English; French or Swahili is an advantage",
     deadline: "2026-07-15",
     isActive: true,
-    hiringManagerEmail: "hello@traverseminds.ug",
+    hiringManagerEmail: "hello@traverseminds.com",
   },
   {
     _id: "job-digital-literacy-trainer",
@@ -438,7 +438,7 @@ const jobs = [
     description: "Traverse Digital Literacy is hiring certified trainers to deliver our cyber safety curriculum to schools, SMEs, and government agencies across Uganda.\n\nResponsibilities:\n- Deliver 3–5 day training programmes at client sites\n- Adapt materials to the specific needs of each audience\n- Facilitate interactive sessions and hands-on exercises\n- Submit training reports and participant feedback\n\nRequirements:\n- Degree in education, IT, computer science, or related field\n- Prior experience in training delivery or facilitation\n- Basic cybersecurity knowledge (certification is an advantage)\n- Excellent interpersonal and presentation skills\n- Willingness to travel within Uganda",
     deadline: "2026-08-15",
     isActive: true,
-    hiringManagerEmail: "hello@traverseminds.ug",
+    hiringManagerEmail: "hello@traverseminds.com",
   },
 ];
 

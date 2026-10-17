@@ -1,4 +1,4 @@
--- Form submissions from traverseminds.ug. Applied automatically on API start (idempotent).
+-- Form submissions from traverseminds.com. Applied automatically on API start (idempotent).
 
 CREATE TABLE IF NOT EXISTS submissions (
   id          BIGSERIAL PRIMARY KEY,

@@ -81,8 +81,8 @@ CRON="30 2 * * * $SRC_DIR/deploy/backup.sh >> $APP_DIR/backups/backup.log 2>&1"
 log "Done"
 cat <<EOF
 Next:
-  1. DNS: A record api.traverseminds.ug -> this server's IP
-  2. sudo certbot --nginx -d api.traverseminds.ug
+  1. DNS: A record api.traverseminds.com -> this server's IP
+  2. sudo certbot --nginx -d api.traverseminds.com
   3. Start it: run deploy.sh again from your machine
   4. Create your admin:  sudo -u $APP_USER bash -c 'cd $SRC_DIR && set -a && . ./.env.production && node src/cli.js create-user you@example.com "Your Name" admin'
   5. Cloudflare SUBMISSIONS_API_TOKEN = INGEST_TOKEN from:  sudo grep INGEST_TOKEN $ENV_FILE

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description:
     "Africa's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
-  metadataBase: new URL("https://traverseminds.ug"),
+  metadataBase: new URL("https://traverseminds.com"),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

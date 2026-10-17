@@ -68,7 +68,7 @@ export function layout(title: string, body: string): string {
         <tr>
           <td style="padding:20px 40px;background:#f0f1f4;border-top:1px solid rgba(0,0,0,0.08);">
             <p style="margin:0;font-size:11px;color:#919499;text-align:center;letter-spacing:0.3px;line-height:1.6;">
-              Traverse Minds Africa &bull; <a href="${SITE_URL}" style="color:#919499;text-decoration:none;">traverseminds.ug</a>
+              Traverse Minds Africa &bull; <a href="${SITE_URL}" style="color:#919499;text-decoration:none;">traverseminds.com</a>
             </p>
           </td>
         </tr>

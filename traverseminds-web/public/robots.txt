@@ -1,5 +1,5 @@
 # robots.txt — Traverse Minds Africa
-# https://traverseminds.ug
+# https://traverseminds.com
 
 User-agent: *
 Allow: /
@@ -7,4 +7,4 @@ Allow: /
 Disallow: /api/
 Disallow: /studio/
 
-Sitemap: https://traverseminds.ug/sitemap.xml
+Sitemap: https://traverseminds.com/sitemap.xml

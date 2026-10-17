@@ -10,8 +10,8 @@ export function getOrganizationSchema(): WithContext<Organization> {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Traverse Minds Africa",
-    url: "https://traverseminds.ug",
-    logo: "https://traverseminds.ug/logo.png",
+    url: "https://traverseminds.com",
+    logo: "https://traverseminds.com/logo.png",
     description:
       "Africa's integrated civic-tech company: cybersecurity, public records intelligence, digital literacy, events, media, and policy research for Africa.",
     address: {
@@ -38,9 +38,9 @@ export function getLocalBusinessSchema(): WithContext<LocalBusiness> {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Traverse Minds Africa",
-    url: "https://traverseminds.ug",
-    logo: "https://traverseminds.ug/logo.png",
-    image: "https://traverseminds.ug/logo.png",
+    url: "https://traverseminds.com",
+    logo: "https://traverseminds.com/logo.png",
+    image: "https://traverseminds.com/logo.png",
     description:
       "Africa's integrated civic-tech company offering cybersecurity, public records intelligence, digital literacy, events, media, and policy research services.",
     address: {
@@ -100,7 +100,7 @@ export function getEventSchema(data: {
     organizer: {
       "@type": "Organization",
       name: "Traverse Minds Africa",
-      url: "https://traverseminds.ug",
+      url: "https://traverseminds.com",
     },
     ...(data.image && { image: data.image }),
     ...(data.url && { url: data.url }),
@@ -135,7 +135,7 @@ export function getArticleSchema(data: {
       name: "Traverse Minds Africa",
       logo: {
         "@type": "ImageObject",
-        url: "https://traverseminds.ug/logo.png",
+        url: "https://traverseminds.com/logo.png",
       },
     },
     url: data.url,

@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       <div className="mt-10 space-y-8 leading-relaxed text-brand-medium">
         <section>
           <h2 className="font-display text-xl text-brand-green">1. Who We Are</h2>
-          <p className="mt-3">Traverse Minds Africa (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a civic-tech company registered in Kampala, Uganda. We operate <strong className="text-brand-charcoal">traverseminds.ug</strong> and its associated services across six divisions.</p>
+          <p className="mt-3">Traverse Minds Africa (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a civic-tech company registered in Kampala, Uganda. We operate <strong className="text-brand-charcoal">traverseminds.com</strong> and its associated services across six divisions.</p>
         </section>
         <section>
           <h2 className="font-display text-xl text-brand-green">2. Legal Basis</h2>

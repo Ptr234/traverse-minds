@@ -2,7 +2,7 @@
 
 export interface Env {
   RESEND_API_KEY: string;
-  /** Submissions API on the VPS (server/), e.g. https://api.traverseminds.ug. When set, every submission is stored before any email is sent. */
+  /** Submissions API on the VPS (server/), e.g. https://api.traverseminds.com. When set, every submission is stored before any email is sent. */
   SUBMISSIONS_API_URL?: string;
   /** Shared secret for the submissions API (same value as INGEST_TOKEN on the server) */
   SUBMISSIONS_API_TOKEN?: string;
@@ -13,7 +13,7 @@ export interface Env {
   HUBSPOT_API_KEY?: string;
 }
 
-export const SITE_URL = "https://traverseminds.ug";
+export const SITE_URL = "https://traverseminds.com";
 
 const JSON_HEADERS = { "Content-Type": "application/json" };
 export const ok = () => new Response(JSON.stringify({ ok: true, success: true }), { status: 200, headers: JSON_HEADERS });
