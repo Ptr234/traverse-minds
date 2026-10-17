@@ -1,3 +1,4 @@
+import { PHONE_E164 } from "@/lib/contact";
 import type { WithContext, Organization, LocalBusiness, Event, Article } from "schema-dts";
 
 /* -------------------------------------------------------------------------- */
@@ -53,7 +54,7 @@ export function getLocalBusinessSchema(): WithContext<LocalBusiness> {
       latitude: 0.3476,
       longitude: 32.5825,
     },
-    telephone: "+256-XXX-XXXXXX",
+    telephone: PHONE_E164,
     email: "traversemindsug@gmail.com",
     sameAs: [
       "https://www.linkedin.com/company/traverseminds",

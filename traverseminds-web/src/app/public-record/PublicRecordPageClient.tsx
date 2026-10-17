@@ -17,6 +17,46 @@ import type { OpenDataLandscapeData } from "@/lib/hdx";
 import { CitedStats } from "@/components/ui/CitedStats";
 import type { CitedStatistic } from "@/lib/statistics";
 import type { PricingPlan } from "@/components/public-record/PricingModal";
+import { Faq, type FaqItem } from "@/components/seo/Faq";
+
+// Answers describe what exists today; update as jurisdictions and features launch.
+const FAQ: FaqItem[] = [
+  {
+    question: "What is Public Record Africa?",
+    answer:
+      "An AI search, summary and monitoring layer over public records from African governments: legislation, court judgments, gazettes and regulatory notices. Every record links back to its official source.",
+  },
+  {
+    question: "Can I use it today?",
+    answer:
+      "Public Record is in preview. You can search a sample of real Ugandan laws and court judgments on this page now. Full search, summaries and alerts open to the waitlist first.",
+  },
+  {
+    question: "Which countries are covered?",
+    answer:
+      "The preview covers Uganda. Kenya, Tanzania, Rwanda, Burundi, Nigeria and South Africa are on the roadmap, and we add jurisdictions in order of waitlist demand, so tell us which ones you need when you join.",
+  },
+  {
+    question: "Where does the data come from?",
+    answer:
+      "Only publicly accessible sources: government registries, court systems and regulators. The preview uses Ugandan legislation and judgments from the Laws.Africa platform, with full texts on ULII (the Uganda Legal Information Institute).",
+  },
+  {
+    question: "Do you charge for public information?",
+    answer:
+      "No. We never sell or restrict access to public data that is already freely available. Paid plans pay for the search, summarisation and monitoring we build on top of it.",
+  },
+  {
+    question: "Will I get alerts when new records match my interests?",
+    answer:
+      "Yes, monitoring is part of full access: save keywords, organisations or topics and get notified when new matching records are added. Join the waitlist to be among the first to use it.",
+  },
+  {
+    question: "How do you handle my personal data?",
+    answer:
+      "We use your waitlist details only to contact you about Public Record access, in line with our Privacy Policy and Uganda's Data Protection and Privacy Act, 2019.",
+  },
+];
 
 const audiences = [
   {
@@ -244,6 +284,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
         </div>
       </section>
 
+      <Faq items={FAQ} eyebrow="Questions" title="Public Record, explained" />
       <WaitlistForm />
 
       <PricingModal

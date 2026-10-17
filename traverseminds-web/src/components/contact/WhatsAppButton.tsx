@@ -1,13 +1,12 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { whatsappUrl } from "@/lib/contact";
 
-// TODO: Replace with real WhatsApp number before going live
-const WHATSAPP_NUMBER = "256700000000";
 const WHATSAPP_MESSAGE = "Hello Traverse Minds Africa, I'd like to enquire about your services.";
 
 export function WhatsAppButton() {
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const url = whatsappUrl(WHATSAPP_MESSAGE);
 
   return (
     <a

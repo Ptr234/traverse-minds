@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -40,6 +41,7 @@ export default async function ProgrammePage({ params }: Props) {
 
   return (
     <PageTransition>
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Literacy", href: "/literacy" }, { name: programme.title, href: `/literacy/${slug}` }]} />
       <div className="flex flex-col">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex items-center pt-24 pb-16 overflow-hidden">

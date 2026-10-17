@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Calendar, MapPin, Users, Tag, ArrowLeft, Utensils } from "lucide-react";
@@ -99,6 +100,7 @@ export default async function EventPage({
 
   return (
     <PageTransition>
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Events", href: "/events" }, { name: event.title, href: `/events/${slug}` }]} />
       {/* Hero */}
       <section className="relative min-h-[80vh] overflow-hidden">
         <div className="absolute inset-0">

@@ -127,8 +127,8 @@ export function Hero({ onSearch }: HeroProps) {
             </div>
             
             <div className="mt-4 flex flex-wrap gap-4 px-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-white/40">Trending:</span>
-              {["Tax Law 2024", "Land Registry Uganda", "Electoral Commission"].map((tag) => (
+              <span className="text-xs font-bold uppercase tracking-widest text-white/40">Try:</span>
+              {["Income tax", "Land title", "Election petition", "Data protection"].map((tag) => (
                 <button 
                   key={tag} 
                   onClick={() => onSearch(tag, "Uganda")}

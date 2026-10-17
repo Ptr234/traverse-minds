@@ -4,6 +4,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 
 import { CookieBanner } from "@/components/ui/CookieBanner";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { StructuredData } from "@/components/seo/StructuredData";
 import "./globals.css";
@@ -58,6 +59,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
 
+        <FloatingWhatsApp />
         <CookieBanner />
       </body>
     </html>

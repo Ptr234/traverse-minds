@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { 
   ScanEye, 
   ShieldCheck, 
@@ -9,7 +9,7 @@ import {
   AlertTriangle, 
   Siren, 
   Scale,
-  ArrowLeft, 
+
   ArrowRight, 
   MessageCircle, 
   Check,
@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -68,13 +68,17 @@ export function ServiceDetailLayout({
         <div className="absolute inset-0 bg-linear-to-t from-primary via-primary/80 to-transparent" />
         
         <div className="container-max relative z-10 py-20">
-          <Link 
-            href="/security" 
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 group"
-          >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Security Services
-          </Link>
+          <div className="mb-8">
+            <Breadcrumbs
+              tone="dark"
+              items={[
+                { name: "Home", href: "/" },
+                { name: "Security", href: "/security" },
+                // Service page slugs match their titles, e.g. "ISO 27001 Compliance" -> /security/iso-27001-compliance
+                { name: title, href: `/security/${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` },
+              ]}
+            />
+          </div>
           
           <div className="max-w-3xl">
             <SectionReveal variant="fade-blur">
@@ -181,7 +185,7 @@ export function ServiceDetailLayout({
           <SectionReveal variant="fade-blur">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-black">Start Your Security Journey</h2>
             <p className="text-black/60 max-w-2xl mx-auto mb-10">
-              Get in touch for a confidential discussion about your organisation's security requirements.
+              Get in touch for a confidential discussion about your organisation&apos;s security requirements.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="primary" size="lg" href="/contact">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -93,6 +94,7 @@ export default async function ReportPage({
 
   return (
     <PageTransition>
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Think Tank", href: "/think-tank" }, { name: report.title, href: `/think-tank/` }]} />
       {/* Header */}
       <section style={{ background: "#0a0a0a", paddingTop: 120, paddingBottom: 64 }}>
         <div className="container-max max-w-4xl px-6 lg:px-8">
