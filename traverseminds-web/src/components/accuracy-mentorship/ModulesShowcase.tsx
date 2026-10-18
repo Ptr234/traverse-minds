@@ -83,7 +83,7 @@ export function ModulesShowcase() {
           <TextReveal
             as="h2"
             variant="blur-in"
-            className="font-display text-4xl md:text-5xl font-bold text-brand-charcoal mb-6"
+            className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-brand-charcoal mb-6"
           >
             The Ten Modules
           </TextReveal>
