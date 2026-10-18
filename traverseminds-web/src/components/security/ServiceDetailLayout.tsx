@@ -13,12 +13,11 @@ import {
 
   ArrowRight, 
   MessageCircle, 
-  Check,
   LucideIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { SectionReveal } from "@/components/ui/SectionReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 
 const ICON_MAP: Record<string, LucideIcon> = {
   "Penetration Testing": ScanEye,
@@ -30,6 +29,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 };
 
 interface ServiceDetailLayoutProps {
+  slug: string;
   title: string;
   description: string;
   image: string;
@@ -45,6 +45,7 @@ interface ServiceDetailLayoutProps {
 const WHATSAPP_NUMBER = "+256775692334";
 
 export function ServiceDetailLayout({
+  slug,
   title,
   description,
   image,
@@ -62,8 +63,7 @@ export function ServiceDetailLayout({
         crumbs={[
           { name: "Home", href: "/" },
           { name: "Security", href: "/security" },
-          // Service page slugs match their titles, e.g. "ISO 27001 Compliance" -> /security/iso-27001-compliance
-          { name: title, href: `/security/${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` },
+          { name: title, href: `/security/${slug}` },
         ]}
         kicker="Traverse Security"
         title={title}
@@ -85,89 +85,83 @@ export function ServiceDetailLayout({
         </div>
       </figure>
 
-      {/* Content Section */}
-      <section className="py-24 bg-white">
-        <div className="container-max">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      {/* Overview, capabilities and why Traverse */}
+      <section className="bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <SectionReveal variant="fade-up">
-                <h2 className="font-display text-3xl font-bold mb-6 text-black">Overview</h2>
-                <div className="prose prose-lg max-w-none text-black/70">
-                  <p>{content.overview}</p>
-                </div>
-              </SectionReveal>
+              <SectionHeader title="Overview" />
+              <p className="font-serif text-[clamp(19px,1.8vw,22px)] leading-relaxed text-gn-200">{content.overview}</p>
 
-              <div className="mt-16">
-                <h2 className="font-display text-3xl font-bold mb-8 text-black">Key Capabilities</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {content.features.map((feature, idx) => (
-                    <SectionReveal key={feature.title} variant="fade-up" delay={idx * 0.1}>
-                      <div className="p-6 border border-black/5 bg-black/2" style={{ borderRadius: 0 }}>
-                        <h3 className="font-display text-lg font-bold mb-3 text-black">{feature.title}</h3>
-                        <p className="text-sm text-black/60 leading-relaxed">{feature.description}</p>
-                      </div>
-                    </SectionReveal>
+              <div className="mt-14">
+                <SectionHeader title="Key capabilities" />
+                <ol className="grid sm:grid-cols-2">
+                  {content.features.map((feature, i) => (
+                    <li key={feature.title} className="border-b border-black/15 py-6 sm:pr-8 sm:odd:border-r sm:even:pl-8">
+                      <span className="font-mono text-[12px] font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
+                      <h3 className="mt-2 font-serif text-[21px] font-semibold leading-snug text-black">{feature.title}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{feature.description}</p>
+                    </li>
                   ))}
-                </div>
+                </ol>
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <div className="sticky top-24">
-                <SectionReveal variant="clip-inset">
-                  <div className="bg-primary p-8 md:p-10 text-white" style={{ borderRadius: 0 }}>
-                    <h3 className="font-display text-2xl font-bold mb-6">Why Traverse?</h3>
-                    <ul className="space-y-4">
-                      {content.benefits.map((benefit) => (
-                        <li key={benefit} className="flex items-start gap-3">
-                          <Check className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                          <span className="text-white/80">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <div className="mt-10 pt-10 border-t border-white/10">
-                      <p className="text-sm text-white/50 mb-6">
-                        Ready to secure your infrastructure? Speak with our security experts today.
-                      </p>
-                      <a
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-3 bg-[#25D366] px-6 py-4 text-base font-semibold text-white transition-transform active:scale-[0.98]"
-                        style={{ borderRadius: 0 }}
-                      >
-                        <MessageCircle className="h-5 w-5" />
-                        Chat on WhatsApp
-                      </a>
-                    </div>
-                  </div>
-                </SectionReveal>
+            <aside className="lg:col-span-5">
+              <div className="relative overflow-hidden bg-bg-dark p-8 text-white lg:sticky lg:top-28 lg:p-10">
+                <div className="tech-grid-dark absolute inset-0" aria-hidden />
+                <div className="relative">
+                  <p className="flex items-center gap-2 font-mono text-[12px] font-semibold uppercase tracking-[0.14em]">
+                    <span className="h-2 w-2 bg-accent" aria-hidden /> Why Traverse
+                  </p>
+                  <ol className="mt-5 border-t border-white/20">
+                    {content.benefits.map((benefit, i) => (
+                      <li key={benefit} className="grid grid-cols-[32px_1fr] border-b border-white/15 py-3.5">
+                        <span className="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="text-[15px] leading-relaxed text-white/80">{benefit}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="mt-8 text-[15px] text-white/60">Ready to secure your infrastructure? Speak with our security team today.</p>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 flex items-center justify-center gap-3 border border-white/25 px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:border-[#25D366]"
+                  >
+                    <MessageCircle className="h-5 w-5 text-[#25D366]" aria-hidden />
+                    Chat on WhatsApp
+                  </a>
+                </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
       {children}
 
-      {/* CTA Section */}
-      <section id="enquiry" className="py-24 bg-[#f0f1f4]">
-        <div className="container-max text-center">
-          <SectionReveal variant="fade-blur">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-black">Start Your Security Journey</h2>
-            <p className="text-black/60 max-w-2xl mx-auto mb-10">
-              Get in touch for a confidential discussion about your organisation&apos;s security requirements.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      {/* Enquiry */}
+      <section id="enquiry" className="scroll-mt-24 bg-bg-light">
+        <div className="container-max py-14 lg:py-20">
+          <SectionHeader title="Start a conversation" />
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <div>
+              <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">Start your security journey.</h2>
+              <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-gn-400">
+                Get in touch for a confidential discussion about your organisation&apos;s {title.toLowerCase()} needs.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:justify-end">
               <Button variant="primary" size="lg" href="/contact">
-                Contact Us
+                Contact us
+                <ArrowRight className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}>
-                Speak to an Expert
+                Speak to an expert
               </Button>
             </div>
-          </SectionReveal>
+          </div>
         </div>
       </section>
     </PageTransition>

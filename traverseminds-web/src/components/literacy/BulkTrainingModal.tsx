@@ -228,7 +228,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           style={{ borderRadius: 0 }}
                           {...register("name", { required: "Required", minLength: { value: 2, message: "Required" } })}
                         />
-                        {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
+                        {errors.name && <p className="mt-1 text-xs text-red-700">{errors.name.message}</p>}
                       </div>
                       <div>
                         <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#000" }}>Organisation *</label>
@@ -240,7 +240,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           style={{ borderRadius: 0 }}
                           {...register("organisation", { required: "Required" })}
                         />
-                        {errors.organisation && <p className="mt-1 text-xs text-red-500">{errors.organisation.message}</p>}
+                        {errors.organisation && <p className="mt-1 text-xs text-red-700">{errors.organisation.message}</p>}
                       </div>
                     </div>
 
@@ -259,7 +259,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                             pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" },
                           })}
                         />
-                        {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
+                        {errors.email && <p className="mt-1 text-xs text-red-700">{errors.email.message}</p>}
                       </div>
                       <div>
                         <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#515459" }}>
@@ -288,7 +288,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           <option value="">Select size...</option>
                           {teamSizes.map((s) => <option key={s} value={s}>{s} participants</option>)}
                         </select>
-                        {errors.teamSize && <p className="mt-1 text-xs text-red-500">{errors.teamSize.message}</p>}
+                        {errors.teamSize && <p className="mt-1 text-xs text-red-700">{errors.teamSize.message}</p>}
                       </div>
                       <div>
                         <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#000" }}>Sector *</label>
@@ -300,7 +300,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           <option value="">Select sector...</option>
                           {sectors.map((s) => <option key={s} value={s}>{s}</option>)}
                         </select>
-                        {errors.sector && <p className="mt-1 text-xs text-red-500">{errors.sector.message}</p>}
+                        {errors.sector && <p className="mt-1 text-xs text-red-700">{errors.sector.message}</p>}
                       </div>
                     </div>
 
@@ -325,7 +325,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                           </label>
                         ))}
                       </div>
-                      {errors.deliveryFormat && <p className="mt-1 text-xs text-red-500">{errors.deliveryFormat.message}</p>}
+                      {errors.deliveryFormat && <p className="mt-1 text-xs text-red-700">{errors.deliveryFormat.message}</p>}
                     </div>
 
                     {/* Timeline */}
@@ -352,7 +352,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         style={{ borderRadius: 0 }}
                         {...register("message", { required: "Required", minLength: { value: 10, message: "Please add more detail" } })}
                       />
-                      {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
+                      {errors.message && <p className="mt-1 text-xs text-red-700">{errors.message.message}</p>}
                     </div>
 
                     {/* Consent */}
@@ -369,7 +369,7 @@ export function BulkTrainingModal({ open, onClose }: Props) {
                         and the processing of my details for this quote request. *
                       </label>
                     </div>
-                    {errors.consent && <p className="text-xs text-red-500">{errors.consent.message}</p>}
+                    {errors.consent && <p className="text-xs text-red-700">{errors.consent.message}</p>}
 
                     {serverErr && (
                       <div className="border border-red-200 bg-red-50 p-3 text-sm text-red-600" style={{ borderRadius: 0 }}>

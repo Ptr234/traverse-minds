@@ -1,68 +1,35 @@
-"use client";
-
-import Image from "next/image";
-import { Search, ClipboardCheck, FileText, Wrench } from "lucide-react";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 
 const steps = [
-  { icon: Search, step: "01", title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session.", image: "/imagestouse/eventslide/stud (3).jpg" },
-  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit — penetration tests, compliance reviews, or threat assessments.", image: "/imagestouse/div-cybersecurity.jpeg" },
-  { icon: FileText, step: "03", title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps.", image: "/imagestouse/tec.jpg" },
-  { icon: Wrench, step: "04", title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly.", image: "/imagestouse/tec (1).jpg" },
+  { title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session." },
+  { title: "Assessment", description: "Our team conducts the agreed testing or audit: penetration tests, compliance reviews, or threat assessments." },
+  { title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps." },
+  { title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly." },
 ];
 
+/** How an engagement runs, as a four-step timeline. */
 export function EngagementProcess() {
   return (
-    <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-      <div className="container-max relative z-10">
-        <div className="text-center mb-16">
-          <SectionReveal variant="fade-blur">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>How We Work</p>
-          </SectionReveal>
-          <TextReveal
-            as="h2"
-            variant="slide-up"
-            className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-          >
-            Our four-step engagement process
-          </TextReveal>
-          <SectionReveal variant="fade-up" delay={0.15}>
-            <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-              A clear, structured approach — no surprises, no ambiguity.
-            </p>
-          </SectionReveal>
+    <section className="bg-bg-light">
+      <div className="container-max py-14 lg:py-20">
+        <SectionHeader title="How we work" />
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+          <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">
+            Our four-step engagement process.
+          </h2>
+          <p className="text-[17px] leading-relaxed text-gn-400">A clear, structured approach: no surprises, no ambiguity.</p>
         </div>
 
-        <SectionReveal
-          variant="fade-up"
-          staggerChildren={0.12}
-          className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2"
-          margin="-40px"
-        >
-          {steps.map((item) => (
-            <RevealItem
-              key={item.step}
-              variant="slide-up"
-            >
-              <div className="group">
-                <div className="relative hidden h-56 overflow-hidden md:block" style={{ borderRadius: 0 }}>
-                  <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
-                </div>
-                <div className="mt-5 flex items-start gap-4">
-                  <span className="font-display text-2xl font-bold text-accent leading-none">{item.step}</span>
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <item.icon className="h-5 w-5 shrink-0 text-accent" />
-                      <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{item.title}</h3>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            </RevealItem>
+        <ol className="mt-12 grid gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <li key={s.title} className="relative border-t-2 border-black pt-6 md:pr-8">
+              <span className="absolute -top-[7px] left-0 h-3 w-3 bg-accent" aria-hidden />
+              <span className="font-mono text-[40px] font-semibold leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 font-serif text-[23px] font-semibold text-black">{s.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{s.description}</p>
+            </li>
           ))}
-        </SectionReveal>
+        </ol>
       </div>
     </section>
   );

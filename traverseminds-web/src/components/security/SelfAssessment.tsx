@@ -116,9 +116,9 @@ export function SelfAssessment() {
                   {answeredCount}/{questions.length}
                 </span>
               </div>
-              <div className="h-1.5 w-full rounded-full bg-white/6 overflow-hidden">
+              <div className="h-1.5 w-full bg-white/6 overflow-hidden">
                 <motion.div
-                  className="h-full rounded-full bg-accent"
+                  className="h-full bg-accent"
                   animate={{ width: `${(answeredCount / questions.length) * 100}%` }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 />
@@ -162,7 +162,7 @@ export function SelfAssessment() {
                           ? "bg-emerald/20 text-emerald border border-emerald/30"
                           : "bg-white/5 text-white/40 border border-white/8"
                       )}
-                      style={{ borderRadius: 999, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     >
                       <CheckCircle2 className="h-4 w-4" />
                       Yes
@@ -176,7 +176,7 @@ export function SelfAssessment() {
                           ? "bg-red-500/20 text-red-400 border border-red-500/30"
                           : "bg-white/5 text-white/40 border border-white/8"
                       )}
-                      style={{ borderRadius: 999, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
+                      style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                     >
                       <XCircle className="h-4 w-4" />
                       No

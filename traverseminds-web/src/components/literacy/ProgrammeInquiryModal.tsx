@@ -213,7 +213,7 @@ export function ProgrammeInquiryModal({ open, onClose, programmeTitle, audience 
                       </div>
 
                       {serverErr && (
-                        <p className="text-xs text-red-500 bg-red-50 p-3 rounded-lg border border-red-100">{serverErr}</p>
+                        <p className="text-xs text-red-700 bg-red-50 p-3 rounded-lg border border-red-100">{serverErr}</p>
                       )}
 
                       <div className="pt-4">

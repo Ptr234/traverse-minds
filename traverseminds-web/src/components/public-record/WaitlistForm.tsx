@@ -130,7 +130,7 @@ export function WaitlistForm() {
                     className={inputClasses(!!errors.name)}
                     placeholder="Jane Doe"
                   />
-                  {errors.name && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.name.message}</p>}
+                  {errors.name && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.name.message}</p>}
                 </div>
 
                 <div className="space-y-1">
@@ -141,7 +141,7 @@ export function WaitlistForm() {
                     className={inputClasses(!!errors.email)}
                     placeholder="jane@organization.com"
                   />
-                  {errors.email && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.email.message}</p>}
+                  {errors.email && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.email.message}</p>}
                 </div>
               </div>
 
@@ -165,7 +165,7 @@ export function WaitlistForm() {
                     <option value="">Select role...</option>
                     {personas.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
                   </select>
-                  {errors.persona && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.persona.message}</p>}
+                  {errors.persona && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.persona.message}</p>}
                 </div>
               </div>
 
@@ -195,7 +195,7 @@ export function WaitlistForm() {
                     </label>
                   ))}
                 </div>
-                {errors.countryInterest && <p className="text-[10px] text-red-500 font-bold mt-1 uppercase">{errors.countryInterest.message}</p>}
+                {errors.countryInterest && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.countryInterest.message}</p>}
               </div>
 
               <div className="pt-4">
@@ -220,7 +220,7 @@ export function WaitlistForm() {
               </div>
 
               {status === "error" && (
-                <p className="text-center text-xs font-bold text-red-500 uppercase tracking-wider">
+                <p className="text-center text-xs font-bold text-red-700 uppercase tracking-wider">
                   Submission failed. Please try again.
                 </p>
               )}

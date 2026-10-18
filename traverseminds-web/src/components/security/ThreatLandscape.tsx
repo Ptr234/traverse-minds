@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import attack from "@/data/attack-sector-threats.json";
 
@@ -16,14 +17,14 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
   ];
 
   return (
-    <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
-      <div className="container-max">
+    <section className="bg-white">
+      <div className="container-max py-14 lg:py-20">
         <SectionReveal variant="fade-up">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Threat Landscape</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000", maxWidth: 760 }}>
+          <SectionHeader title="Threat landscape" />
+          <h2 className="max-w-3xl font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">
             Who targets banks and government, and how they get in
           </h2>
-          <p style={{ marginTop: 12, fontSize: 16, color: "#515459", maxWidth: 680, lineHeight: 1.5 }}>
+          <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-gn-400">
             Good threat models start from real adversaries. These figures come from MITRE ATT&amp;CK, the
             global knowledge base of documented attacker groups and the techniques they use.
           </p>
@@ -33,7 +34,7 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
           {stats.map((stat, i) => (
             <RevealItem key={stat.label} variant="fade-up">
               <div className={`py-6 pr-3 sm:pr-6 lg:py-8 ${i < stats.length - 1 ? "border-r" : ""}`} style={{ borderColor: "rgba(0,0,0,0.1)" }}>
-                <p className="font-display" style={{ fontSize: "clamp(2rem, 8vw, 3rem)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
+                <p className="font-mono text-[clamp(30px,5vw,44px)] font-semibold leading-none text-black tabular-nums">
                   {stat.value}
                 </p>
                 <h3 className="text-sm sm:text-base" style={{ marginTop: 8, fontWeight: 500, color: "#212429", lineHeight: 1.3 }}>{stat.label}</h3>

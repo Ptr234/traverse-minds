@@ -203,7 +203,7 @@ export function ContactForm() {
         </label>
       </div>
 
-      {err && <p className="text-xs font-bold text-red-500 uppercase tracking-widest">{err}</p>}
+      {err && <p className="text-xs font-bold text-red-700 uppercase tracking-widest">{err}</p>}
 
       <Button
         type="submit"

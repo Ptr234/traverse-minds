@@ -100,7 +100,7 @@ export function SponsorshipForm() {
             {...register("name", { required: "Name is required" })}
           />
           {errors.name && (
-            <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>
+            <p className="text-xs text-red-700 mt-1">{errors.name.message}</p>
           )}
         </div>
 
@@ -121,7 +121,7 @@ export function SponsorshipForm() {
             })}
           />
           {errors.email && (
-            <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+            <p className="text-xs text-red-700 mt-1">{errors.email.message}</p>
           )}
         </div>
       </div>
@@ -152,7 +152,7 @@ export function SponsorshipForm() {
             })}
           />
           {errors.organization && (
-            <p className="text-xs text-red-500 mt-1">
+            <p className="text-xs text-red-700 mt-1">
               {errors.organization.message}
             </p>
           )}

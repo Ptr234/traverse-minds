@@ -183,6 +183,7 @@ export async function getTeam(): Promise<TeamContent[]> {
 
 /** Props for ServiceDetailLayout. */
 export const serviceLayoutProps = (s: ServiceContent) => ({
+  slug: s.slug,
   title: s.title,
   description: s.description,
   image: s.image,

@@ -1,122 +1,87 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { FileDown, CheckCircle2, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 
-interface DownloadFormData {
-  email: string;
-  name: string;
-  organisation: string;
-}
+const input = "h-12 w-full border border-white/20 bg-white/5 px-3.5 text-[15px] text-white placeholder:text-white/40 outline-none focus:border-accent";
 
-const inputCls = (err: boolean) =>
-  cn(
-    "h-12 w-full border bg-white px-4 text-sm outline-none",
-    err ? "border-red-400" : ""
-  );
-
+/**
+ * Capability statement request. There is no public PDF, so the request goes to the team through
+ * /api/contact (which emails the team and confirms to the requester) and the team replies with it.
+ */
 export function CapabilityDownload() {
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [serverError, setServerError] = useState("");
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<DownloadFormData>();
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
 
-  const onSubmit = async (data: DownloadFormData) => {
-    setServerError("");
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    setError("");
+    setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, division: "security", serviceType: "Capability Statement Download", message: "Requested capability statement PDF." }),
+        body: JSON.stringify({ ...data, division: "security", useCase: "Capability statement request", message: "Please send me the Traverse Security capability statement." }),
       });
-      if (!res.ok) throw new Error((await res.json()).error || "Something went wrong");
-      setIsUnlocked(true);
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || "We could not send your request.");
+      form.reset();
+      setStatus("done");
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Failed.");
+      setError(err instanceof Error ? err.message : "We could not send your request.");
+      setStatus("idle");
     }
-  };
+  }
 
   return (
-    <section id="capability" style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-      <div className="container-max relative z-10">
-        <SectionReveal variant="clip-inset">
-          <div className="border border-white/6 bg-surface-dark-elevated p-8 md:p-12" style={{ borderRadius: 0 }}>
-            <div className="flex flex-col items-start gap-10 md:flex-row md:items-center">
-              <div className="flex-1">
-                <SectionReveal variant="fade-up" delay={0.1}>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
-                    <FileDown className="h-6 w-6 text-accent" />
-                  </div>
-                </SectionReveal>
-                <TextReveal
-                  as="h2"
-                  variant="fade-up"
-                  delay={0.15}
-                  className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight"
-                >
-                  Capability Statement
-                </TextReveal>
-                <SectionReveal variant="fade-up" delay={0.25}>
-                  <p className="mt-3 max-w-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                    Download our detailed capability statement covering team credentials, service methodology, and compliance certifications.
-                  </p>
-                </SectionReveal>
-                <SectionReveal variant="fade-up" delay={0.35}>
-                  <ul className="mt-5 space-y-2.5">
-                    {[
-                      "Team credentials and certifications",
-                      "Service methodology overview",
-                      "Compliance framework coverage",
-                      "Engagement models and pricing",
-                    ].map((t) => (
-                      <li key={t} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-                        <CheckCircle2 className="h-4 w-4 text-emerald shrink-0" />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </SectionReveal>
-              </div>
-
-              <SectionReveal variant="slide-up" delay={0.3} className="w-full md:w-80">
-                {isUnlocked ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center border border-emerald/20 bg-emerald/10 p-8 text-center"
-                    style={{ borderRadius: 0 }}
-                  >
-                    <CheckCircle2 className="h-10 w-10 text-emerald" />
-                    <p className="mt-3 font-semibold text-white">Download ready</p>
-                    <Button variant="primary" size="lg" className="mt-5 w-full" href="/traverse-minds-capability-statement.pdf">
-                      Download PDF
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border border-white/6 bg-white/3 p-6" style={{ borderRadius: 0 }} noValidate>
-                    <p className="text-sm font-medium text-white/60">Enter your details to download:</p>
-                    <input type="text" placeholder="Full Name" autoComplete="name" className={inputCls(!!errors.name)} style={{ borderRadius: 0, borderColor: errors.name ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("name", { required: "Required" })} />
-                    <input type="email" placeholder="Work Email" autoComplete="email" className={inputCls(!!errors.email)} style={{ borderRadius: 0, borderColor: errors.email ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("email", { required: "Required", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid" } })} />
-                    <input type="text" placeholder="Organisation" autoComplete="organization" className={inputCls(!!errors.organisation)} style={{ borderRadius: 0, borderColor: errors.organisation ? undefined : "rgba(255,255,255,0.1)", color: "#000", transition: "border-color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }} {...register("organisation", { required: "Required" })} />
-                    {serverError && <p className="text-sm text-red-400">{serverError}</p>}
-                    <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? "Processing..." : "Unlock Download"}
-                    </Button>
-                    <p className="text-[11px] text-white/20 text-center">
-                      Your data is handled per our <a href="/privacy" className="underline hover:text-accent">Privacy Policy</a>.
-                    </p>
-                  </form>
-                )}
-              </SectionReveal>
-            </div>
+    <section id="capability" className="relative overflow-hidden bg-bg-dark text-white">
+      <div className="tech-grid-dark absolute inset-0" aria-hidden />
+      <div className="container-max relative py-14 lg:py-20">
+        <SectionHeader title="Capability statement" dark />
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+          <div>
+            <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1]">Request our capability statement.</h2>
+            <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/65">
+              An overview of our security services, methodology, the frameworks we work with, and how engagements are structured, for
+              procurement and due-diligence teams. We email it to you within one working day.
+            </p>
           </div>
-        </SectionReveal>
+
+          {status === "done" ? (
+            <div className="flex items-start gap-3 border-l-[3px] border-emerald bg-white/5 p-6" role="status">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald" aria-hidden />
+              <div>
+                <p className="font-serif text-[21px] font-semibold">Request received.</p>
+                <p className="mt-1 text-[15px] text-white/65">We have emailed you a confirmation and will send the capability statement within one working day.</p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="grid gap-3">
+              <input type="text" name="honeypot" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+              <label className="sr-only" htmlFor="cap-name">Full name</label>
+              <input id="cap-name" name="name" required minLength={2} maxLength={120} autoComplete="name" placeholder="Full name" className={input} />
+              <label className="sr-only" htmlFor="cap-email">Work email</label>
+              <input id="cap-email" name="email" type="email" required autoComplete="email" placeholder="Work email" className={input} />
+              <label className="sr-only" htmlFor="cap-org">Organisation</label>
+              <input id="cap-org" name="organisation" required maxLength={160} autoComplete="organization" placeholder="Organisation" className={input} />
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="mt-1 inline-flex h-12 items-center justify-center gap-2 bg-accent px-6 text-[14px] font-bold uppercase tracking-wider text-white disabled:opacity-60"
+              >
+                {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
+                Request the statement
+                {status === "sending" ? null : <ArrowRight className="h-4 w-4" aria-hidden />}
+              </button>
+              {error && <p className="border-l-2 border-accent pl-3 text-[14px] text-white/70" role="alert">{error}</p>}
+              <p className="text-[12px] text-white/50">
+                Handled under our <a href="/privacy" className="underline hover:text-accent">privacy policy</a>.
+              </p>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );

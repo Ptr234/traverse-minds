@@ -1,4 +1,5 @@
 import { ArrowUpRight, Scale } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import type { CaseSummary, LegislationAnswer } from "@/lib/lawsafrica";
 
@@ -23,14 +24,14 @@ export function LegalReference({
   if (!answers?.length && !cases?.length) return null;
 
   return (
-    <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
-      <div className="container-max">
+    <section className="bg-white">
+      <div className="container-max py-14 lg:py-20">
         <SectionReveal variant="fade-up">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>{eyebrow}</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000", maxWidth: 760 }}>
+          <SectionHeader title={eyebrow} />
+          <h2 className="max-w-3xl font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">
             {title}
           </h2>
-          <p style={{ marginTop: 12, fontSize: 16, color: "#515459", maxWidth: 680, lineHeight: 1.5 }}>{intro}</p>
+          <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-gn-400">{intro}</p>
         </SectionReveal>
 
         {answers && answers.length > 0 && (
