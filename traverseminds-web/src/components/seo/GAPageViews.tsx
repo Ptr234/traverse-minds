@@ -1,13 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-/** Sends one GA4 page_view per route, including in-app navigations that don't reload the page. */
+/**
+ * Sends one GA4 page_view per in-app navigation. The first page is counted by gtag's config call
+ * when GA loads, so the initial render is skipped to avoid counting it twice.
+ */
 export function GAPageViews() {
   const pathname = usePathname();
+  const first = useRef(true);
 
   useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
     const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
     // Wait a tick so document.title reflects the new page
     const t = setTimeout(() => {
