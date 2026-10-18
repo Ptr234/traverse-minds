@@ -144,7 +144,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                   >
                     {plan.featured && (
                       <span
-                        className="mb-3 inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white"
+                        className="mb-3 inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white"
                         style={{ background: "#ff4c00", borderRadius: 999 }}
                       >
                         Most Popular
@@ -222,7 +222,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                       )}
                     </Button>
 
-                    <p className="text-center text-[10px]" style={{ color: "rgba(0,0,0,0.3)" }}>
+                    <p className="text-center text-[12px] text-gn-500">
                       No payment required now &middot; Secure &middot; Uganda PDPA 2019 compliant
                     </p>
                   </form>

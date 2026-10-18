@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/magazine/primitives";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { formatValue, type IndicatorData, type TrendSeries } from "@/lib/worldbank";
 import { TrendChart } from "./TrendChart";
@@ -68,14 +69,14 @@ export function DigitalSnapshot({ data, internetTrend }: { data: IndicatorData[]
   const years = [...new Set(data.flatMap((d) => d.values.map((v) => v.year)))].sort();
 
   return (
-    <section style={{ background: "#fff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
-      <div className="container-max">
+    <section className="bg-white">
+      <div className="container-max py-14 lg:py-20">
         <SectionReveal variant="fade-up">
-          <p className="eyebrow" style={{ color: ACCENT, marginBottom: 16 }}>Data Snapshot</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000", maxWidth: 760 }}>
+          <SectionHeader title="Data snapshot" />
+          <h2 className="max-w-3xl font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">
             Uganda&rsquo;s digital gap, in numbers
           </h2>
-          <p style={{ marginTop: 12, fontSize: 16, color: "#515459", maxWidth: 680, lineHeight: 1.5 }}>
+          <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-gn-400">
             Most Ugandans own a phone, but far fewer are online. That gap between connection and
             capability is where digital literacy and cyber safety matter most.
           </p>
@@ -90,7 +91,7 @@ export function DigitalSnapshot({ data, internetTrend }: { data: IndicatorData[]
                   className={`py-5 pr-4 lg:py-8 lg:pr-6 ${i < headlines.length - 1 ? "lg:border-r" : ""}`}
                   style={{ borderColor: "rgba(0,0,0,0.1)" }}
                 >
-                  <p className="font-display" style={{ fontSize: "clamp(2rem, 8vw, 3rem)", fontWeight: 500, lineHeight: "125%", letterSpacing: "-1.44px", color: "#000" }}>
+                  <p className="font-mono text-[clamp(30px,5vw,44px)] font-semibold leading-none text-black tabular-nums">
                     {formatValue(v.value, d.decimals, d.suffix)}
                   </p>
                   <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 500, color: "#212429" }}>{d.label}</h3>

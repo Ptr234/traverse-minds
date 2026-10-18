@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Loader2, CheckCircle, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { cn } from "@/lib/utils";
 
@@ -38,8 +39,8 @@ const countries = [
 ];
 
 const inputClasses = (hasError?: boolean) => cn(
-  "h-12 w-full border-b bg-transparent px-0 text-base outline-none transition-all duration-300 placeholder:text-black/20 focus:border-accent",
-  hasError ? "border-red-500" : "border-black/10"
+  "h-12 w-full border bg-white px-3.5 text-[15px] text-black outline-none placeholder:text-gn-500 focus:border-accent",
+  hasError ? "border-red-700" : "border-black/15"
 );
 
 export function WaitlistForm() {
@@ -78,13 +79,13 @@ export function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <section className="py-24 bg-white">
-        <div className="container-max max-w-xl mx-auto px-6 text-center">
-          <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-emerald/10 text-emerald mb-8">
+      <section className="bg-bg-light">
+        <div className="container-max max-w-xl py-14 lg:py-20">
+          <div className="mb-6 inline-flex text-emerald">
             <CheckCircle className="h-10 w-10" />
           </div>
-          <h3 className="font-display text-3xl font-bold text-black mb-4">You&apos;re on the list</h3>
-          <p className="text-black/60 mb-10 leading-relaxed">
+          <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black mb-4">You&apos;re on the list</h3>
+          <p className="mb-8 text-[17px] leading-relaxed text-gn-400">
             Thank you for your interest. We&apos;ll reach out as soon as we open access for your cohort.
           </p>
           <Button
@@ -99,20 +100,21 @@ export function WaitlistForm() {
   }
 
   return (
-    <section id="waitlist" className="py-24 bg-[#fafbfc] border-t border-black/5">
-      <div className="container-max max-w-4xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+    <section id="waitlist" className="scroll-mt-24 bg-bg-light">
+      <div className="container-max py-14 lg:py-20">
+        <SectionHeader title="Early access" />
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-5 lg:gap-14">
           <div className="lg:col-span-2">
-            <TextReveal variant="blur-in" className="font-display text-4xl font-bold leading-tight text-black mb-6">
+            <TextReveal variant="blur-in" className="mb-5 font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">
               Get priority <span className="text-accent">early access</span>
             </TextReveal>
-            <p className="text-black/60 leading-relaxed mb-8">
+            <p className="mb-8 text-[17px] leading-relaxed text-gn-400">
               Join the private beta. We are onboarding users in small batches to ensure high data integrity and specialized support.
             </p>
             <div className="space-y-4">
               {["Cross-border search", "AI Case Summaries", "Real-time alerts"].map(item => (
-                <div key={item} className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-black/40">
-                  <div className="h-1 w-4 bg-accent" />
+                <div key={item} className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-wider text-gn-300">
+                  <div className="h-1.5 w-1.5 bg-accent" />
                   {item}
                 </div>
               ))}
@@ -120,34 +122,34 @@ export function WaitlistForm() {
           </div>
 
           <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-white p-8 md:p-12 shadow-2xl shadow-black/5 border border-black/5 rounded-2xl">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 border border-black/10 bg-white p-6 lg:p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Full Name</label>
+                  <label className="mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">Full Name</label>
                   <input
                     type="text"
                     {...register("name")}
                     className={inputClasses(!!errors.name)}
                     placeholder="Jane Doe"
                   />
-                  {errors.name && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.name.message}</p>}
+                  {errors.name && <p className="mt-1 text-[13px] text-red-700">{errors.name.message}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Work Email</label>
+                  <label className="mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">Work Email</label>
                   <input
                     type="email"
                     {...register("email")}
                     className={inputClasses(!!errors.email)}
                     placeholder="jane@organization.com"
                   />
-                  {errors.email && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.email.message}</p>}
+                  {errors.email && <p className="mt-1 text-[13px] text-red-700">{errors.email.message}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Organisation</label>
+                  <label className="mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">Organisation</label>
                   <input
                     type="text"
                     {...register("organisation")}
@@ -157,7 +159,7 @@ export function WaitlistForm() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Primary Role</label>
+                  <label className="mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">Primary Role</label>
                   <select
                     {...register("persona")}
                     className={inputClasses(!!errors.persona)}
@@ -165,18 +167,18 @@ export function WaitlistForm() {
                     <option value="">Select role...</option>
                     {personas.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
                   </select>
-                  {errors.persona && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.persona.message}</p>}
+                  {errors.persona && <p className="mt-1 text-[13px] text-red-700">{errors.persona.message}</p>}
                 </div>
               </div>
 
               <div className="space-y-4">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-black/40 block">Jurisdictions of Interest</label>
+                <label className="block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300">Jurisdictions of Interest</label>
                 <div className="flex flex-wrap gap-2">
                   {countries.map(c => (
                     <label 
                       key={c.value} 
                       className={cn(
-                        "group relative px-4 py-2 border transition-all cursor-pointer rounded-full text-xs font-bold",
+                        "group relative cursor-pointer border px-4 py-2 font-mono text-[12px] uppercase tracking-wide transition-colors",
                         "hover:border-accent hover:bg-accent/5"
                       )}
                       style={{ 
@@ -191,11 +193,11 @@ export function WaitlistForm() {
                         className="sr-only peer"
                       />
                       <span className="peer-checked:text-accent transition-colors">{c.label}</span>
-                      <div className="absolute inset-0 border border-accent opacity-0 peer-checked:opacity-100 rounded-full transition-opacity pointer-events-none" />
+                      <div className="pointer-events-none absolute inset-0 border-2 border-accent opacity-0 transition-opacity peer-checked:opacity-100" />
                     </label>
                   ))}
                 </div>
-                {errors.countryInterest && <p className="text-[10px] text-red-700 font-bold mt-1 uppercase">{errors.countryInterest.message}</p>}
+                {errors.countryInterest && <p className="mt-1 text-[13px] text-red-700">{errors.countryInterest.message}</p>}
               </div>
 
               <div className="pt-4">
@@ -214,8 +216,8 @@ export function WaitlistForm() {
                     </span>
                   )}
                 </Button>
-                <p className="mt-6 text-[10px] leading-relaxed text-black/30 text-center uppercase tracking-widest">
-                  Secure processing in accordance with Uganda PDPA 2019.
+                <p className="mt-4 text-[13px] leading-relaxed text-gn-400">
+                  Your details are used only to contact you about Public Record access, under Uganda&apos;s Data Protection and Privacy Act, 2019.
                 </p>
               </div>
 

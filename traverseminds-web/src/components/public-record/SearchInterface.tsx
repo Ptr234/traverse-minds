@@ -101,7 +101,7 @@ export function SearchInterface({ query, initialJurisdiction = "Uganda", onClose
         title={enabled ? undefined : "Coming soon"}
       >
         {j}
-        {!enabled && <span className="text-[10px] font-semibold uppercase tracking-wider">Soon</span>}
+        {!enabled && <span className="text-[11px] font-semibold uppercase tracking-wider">Soon</span>}
         {active && !compact && <ChevronRight className="h-3 w-3" />}
       </button>
     );
@@ -254,7 +254,7 @@ export function SearchInterface({ query, initialJurisdiction = "Uganda", onClose
                     transition={{ delay: idx * 0.04 }}
                     className="group border border-black/10 p-5 sm:p-6 hover:border-accent/40 transition-colors"
                   >
-                    <div className="flex flex-wrap items-center gap-3 mb-3 text-[10px] font-bold uppercase tracking-widest">
+                    <div className="flex flex-wrap items-center gap-3 mb-3 text-[11px] font-bold uppercase tracking-widest">
                       <span className="flex items-center gap-1.5 bg-accent/5 text-accent px-2 py-0.5">
                         {r.type === "Judgment" ? <Scale className="h-3 w-3" aria-hidden /> : <BookOpen className="h-3 w-3" aria-hidden />}
                         {r.type}

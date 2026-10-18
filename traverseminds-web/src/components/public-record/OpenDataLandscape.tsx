@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import type { OpenDataLandscapeData } from "@/lib/hdx";
 
@@ -9,11 +10,11 @@ export function OpenDataLandscape({ data }: { data: OpenDataLandscapeData }) {
   const max = Math.max(...data.publishers.map((p) => p.count));
 
   return (
-    <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
+    <section className="bg-bg-light py-14 lg:py-20">
       <div className="container-max">
         <SectionReveal variant="fade-up">
-          <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>The Problem, In Numbers</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000", maxWidth: 760 }}>
+          <SectionHeader title="The Problem, In Numbers" />
+          <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1]">
             Uganda&rsquo;s public data is everywhere, and nowhere
           </h2>
           <p style={{ marginTop: 12, fontSize: 16, color: "#515459", maxWidth: 680, lineHeight: 1.5 }}>

@@ -1,66 +1,35 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Search, FileText, Bell, Zap, Database, ShieldCheck } from "lucide-react";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 
 const features = [
-  { icon: Search, title: "Semantic Search", description: "Search documents by meaning and context, not just keywords. Find relevant case law or regulatory updates in seconds.", image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2070&auto=format&fit=crop" },
-  { icon: FileText, title: "AI Summarisation", description: "Get concise, accurate summaries of lengthy documents, policy briefs, and court judgements instantly.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop" },
-  { icon: Bell, title: "Smart Alerts", description: "Set up custom monitors for specific keywords, organisations, or topics. Get notified when new records are indexed.", image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop" },
-  { icon: Zap, title: "Cross-Border Intel", description: "Compare regulations and public records across East Africa in one view, starting with Uganda and expanding to Kenya, Tanzania, Rwanda and Burundi.", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1974&auto=format&fit=crop" },
-  { icon: Database, title: "Growing Archive", description: "A growing archive of legislation and court judgments, starting with Uganda, with gazettes and Hansard to follow.", image: "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2030&auto=format&fit=crop" },
-  { icon: ShieldCheck, title: "Verified Sources", description: "Every document is linked to its official source, ensuring the highest level of evidentiary integrity.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" },
+  { title: "Semantic search", description: "Search documents by meaning and context, not just keywords, to find relevant case law or regulatory updates in seconds." },
+  { title: "AI summarisation", description: "Concise summaries of lengthy documents, policy briefs and court judgments." },
+  { title: "Smart alerts", description: "Monitor keywords, organisations or topics, and get notified when new matching records are added." },
+  { title: "Cross-border view", description: "Compare regulations and public records across East Africa, starting with Uganda and expanding to Kenya, Tanzania, Rwanda and Burundi." },
+  { title: "Growing archive", description: "Legislation and court judgments first, starting with Uganda, with gazettes and Hansard to follow." },
+  { title: "Verified sources", description: "Every document links back to its official source, so you can cite it with confidence." },
 ];
 
+/** What the platform does, as a numbered index. */
 export function Features() {
   return (
-    <section id="features" style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-      <div className="container-max relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-          >
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Platform</p>
-          </motion.div>
-          <TextReveal variant="clip-up" delay={0.05} className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>
-            Built to empower evidence-based action
-          </TextReveal>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-            className="mt-3 max-w-2xl mx-auto" style={{ color: "#515459" }}
-          >
-            Three pillars of intelligence to navigate Africa&apos;s public record landscape.
-          </motion.p>
+    <section className="bg-white">
+      <div className="container-max py-14 lg:py-20">
+        <SectionHeader title="Platform" />
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+          <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">Built to empower evidence-based action.</h2>
+          <p className="text-[17px] leading-relaxed text-gn-400">
+            Search, summaries and monitoring on top of public records, with the original source always one click away.
+          </p>
         </div>
-
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => (
-            <RevealItem
-              key={feature.title}
-              variant="scale-fade"
-            >
-              <div className="group">
-                <div className="relative overflow-hidden h-56" style={{ borderRadius: 0 }}>
-                  <Image src={feature.image} alt={feature.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                </div>
-                <div className="mt-5 flex items-center gap-3">
-                  <feature.icon className="h-5 w-5 shrink-0 text-accent" />
-                  <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{feature.title}</h3>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "#515459" }}>{feature.description}</p>
-              </div>
-            </RevealItem>
+        <ol className="mt-10 grid gap-px border-t-2 border-black bg-black/15 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => (
+            <li key={f.title} className="bg-white px-1 py-7 sm:px-7">
+              <span className="font-mono text-[28px] font-semibold leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 font-serif text-[21px] font-semibold text-black">{f.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-gn-400">{f.description}</p>
+            </li>
           ))}
-        </SectionReveal>
+        </ol>
       </div>
     </section>
   );

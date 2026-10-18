@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import { SectionHeader } from "@/components/magazine/primitives";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -15,11 +16,11 @@ export function Faq({ items, eyebrow = "FAQ", title = "Frequently asked question
   };
 
   return (
-    <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }}>
+    <section className="bg-white py-14 lg:py-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <div className="container-max">
-        <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>{eyebrow}</p>
-        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}>{title}</h2>
+        <SectionHeader title={eyebrow} />
+        <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1]">{title}</h2>
         <div style={{ marginTop: 32, borderTop: "1px solid rgba(0,0,0,0.1)", maxWidth: 860 }}>
           {items.map((item) => (
             <details key={item.question} className="group" style={{ borderBottom: "1px solid rgba(0,0,0,0.1)" }}>

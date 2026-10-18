@@ -1,101 +1,56 @@
 "use client";
 
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { AfricaMap } from "@/components/ui/AfricaMap";
 import type { CountryData } from "@/components/ui/AfricaMap";
 
-const coverageCountries: CountryData[] = [
-  { name: "Uganda",       data: "15,000+ records",  status: "active" },
-  { name: "Kenya",        data: "22,000+ records",  status: "active" },
-  { name: "Tanzania",     data: "12,000+ records",  status: "active" },
-  { name: "Rwanda",       data: "8,000+ records",   status: "active" },
-  { name: "Burundi",      data: "4,500+ records",   status: "active" },
-  { name: "Ethiopia",     data: "3,200+ records",   status: "active" },
-  { name: "Nigeria",      data: "Pipeline",         status: "pipeline" },
-  { name: "Ghana",        data: "Pipeline",         status: "pipeline" },
-  { name: "Senegal",      data: "Pipeline",         status: "pipeline" },
-  { name: "Ivory Coast",  data: "Pipeline",         status: "pipeline" },
-  { name: "South Africa", data: "Pipeline",         status: "pipeline" },
-  { name: "Zambia",       data: "Pipeline",         status: "pipeline" },
-  { name: "Botswana",     data: "Pipeline",         status: "pipeline" },
-  { name: "Namibia",      data: "Pipeline",         status: "pipeline" },
-  { name: "DRC",          data: "Pipeline",         status: "pipeline" },
-  { name: "Cameroon",     data: "Pipeline",         status: "pipeline" },
-  { name: "Gabon",        data: "Pipeline",         status: "pipeline" },
-];
+export type PreviewCounts = { total: number; legislation: number; judgments: number };
 
-const stats = [
-  { value: "65k+", label: "Indexed Records" },
-  { value: "6",    label: "Active Countries" },
-  { value: "17",   label: "Countries Total" },
-  { value: "24h",  label: "Update Cycle" },
-];
+// Matches the FAQ: Uganda is in preview; these are on the roadmap, added in order of waitlist demand
+const ROADMAP = ["Kenya", "Tanzania", "Rwanda", "Burundi", "Nigeria", "South Africa"];
 
-export function Coverage() {
+/** Where Public Record has data today and where it is going. Figures come from the preview dataset. */
+export function Coverage({ counts }: { counts: PreviewCounts }) {
+  const countries: CountryData[] = [
+    { name: "Uganda", data: `Preview: ${counts.legislation} laws, ${counts.judgments} judgments`, status: "active" },
+    ...ROADMAP.map((name) => ({ name, data: "On the roadmap", status: "pipeline" as const })),
+  ];
+
+  const stats = [
+    { value: String(counts.total), label: "Records searchable in the preview" },
+    { value: String(counts.legislation), label: "Ugandan laws" },
+    { value: String(counts.judgments), label: "Ugandan court judgments" },
+    { value: String(ROADMAP.length), label: "Countries on the roadmap" },
+  ];
+
   return (
-    <section
-      style={{ background: "#f0f1f4", paddingTop: 80, paddingBottom: 80 }}
-      className="relative overflow-hidden"
-    >
-      <div className="container-max relative z-10">
-        <div className="flex flex-col gap-12">
+    <section className="bg-bg-light">
+      <div className="container-max py-14 lg:py-20">
+        <SectionHeader title="Coverage" />
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+          <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">Starting with Uganda, built for the continent.</h2>
+          <p className="text-[17px] leading-relaxed text-gn-400">
+            The preview covers Ugandan legislation and court judgments. More countries follow in order of waitlist demand, with gazettes
+            and parliamentary records to come.
+          </p>
+        </div>
 
-          {/* Header */}
-          <div className="max-w-2xl">
-            <SectionReveal variant="clip-left">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Coverage</p>
-            </SectionReveal>
-            <TextReveal variant="fade-up" className="font-display text-3xl md:text-5xl font-bold tracking-tight" style={{ color: "#000" }}>
-              Unrivalled access across the continent
-            </TextReveal>
-            <SectionReveal variant="fade-up" delay={0.2}>
-              <p className="mt-5 text-lg leading-relaxed" style={{ color: "#515459" }}>
-                Building the most comprehensive digital archive of public records in Africa —
-                from official gazettes and court registries to parliament archives, continuously indexed.
-              </p>
-            </SectionReveal>
-          </div>
-
-          {/* Stats row */}
-          <SectionReveal variant="fade-up" staggerChildren={0.08} className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                className="bg-white p-5 text-center border"
-                style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-              >
-                <p className="font-display text-3xl font-bold" style={{ color: "#ff4c00" }}>{s.value}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "#6b6e73" }}>{s.label}</p>
-              </div>
-            ))}
-          </SectionReveal>
-
-          {/* Map + legend */}
-          <SectionReveal variant="clip-inset">
-            <div className="bg-white border overflow-hidden" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.08)", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
-              {/* Legend */}
-              <div className="flex flex-wrap items-center gap-6 px-6 py-4 border-b" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#000" }}>Coverage</span>
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full" style={{ background: "#ff4c00" }} />
-                  <span className="text-xs" style={{ color: "#515459" }}>Live — records indexed</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full" style={{ background: "#919499" }} />
-                  <span className="text-xs" style={{ color: "#515459" }}>Pipeline — coming soon</span>
-                </div>
-                <span className="ml-auto text-xs italic" style={{ color: "#c5c7cc" }}>Hover a marker for details</span>
-              </div>
-
-              {/* Map */}
-              <AfricaMap
-                countries={coverageCountries}
-                className="rounded-none! border-0! h-120"
-              />
+        <dl className="mt-10 grid grid-cols-2 border-t-2 border-black lg:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label} className="border-b border-black/15 py-5 pr-4 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0">
+              <dt className="sr-only">{s.label}</dt>
+              <dd className="font-mono text-[clamp(30px,4.5vw,44px)] font-semibold leading-none text-black tabular-nums">{s.value}</dd>
+              <dd className="mt-3 text-[15px] text-gn-300">{s.label}</dd>
             </div>
-          </SectionReveal>
+          ))}
+        </dl>
 
+        <div className="mt-10 border border-black/10 bg-white">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-black/10 px-5 py-3 font-mono text-[11px] uppercase tracking-wider text-gn-300">
+            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-accent" aria-hidden /> Preview: records searchable</span>
+            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-gn-500" aria-hidden /> On the roadmap</span>
+          </div>
+          <AfricaMap countries={countries} className="rounded-none! border-0! h-120" />
         </div>
       </div>
     </section>
