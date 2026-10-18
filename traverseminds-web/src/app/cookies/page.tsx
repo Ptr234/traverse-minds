@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -9,14 +11,13 @@ export default function CookiePolicyPage() {
   const lastUpdated = "March 17, 2026";
 
   return (
-    <main className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16">
-          <h1 className="font-display text-4xl font-bold tracking-tight text-brand-charcoal sm:text-5xl">Cookie Policy</h1>
-          <p className="mt-4 text-brand-medium">Last updated: {lastUpdated}</p>
-        </div>
+    <main className="bg-white">
+      <SectionBar />
+      <PageHeader crumbs={[{ name: "Home", href: "/" }, { name: "Cookie Policy", href: "/cookies" }]} kicker="Legal" title="Cookie Policy" dek={`Last updated ${lastUpdated}`} />
+      <div className="container-max py-14">
+        <div className="max-w-3xl">
 
-        <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:text-brand-green prose-a:text-brand-teal hover:prose-a:text-brand-amber">
+        <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-semibold prose-headings:text-black prose-a:text-accent-ink prose-p:text-gn-300 prose-li:text-gn-300">
           <p>
             At Traverse Minds Africa, we believe in being clear and open about how we collect 
             and use data related to you. In the spirit of transparency, this policy 
@@ -71,6 +72,7 @@ export default function CookiePolicyPage() {
             If you have any questions about our use of cookies, please contact 
             us at traversemindsug@gmail.com.
           </p>
+        </div>
         </div>
       </div>
     </main>

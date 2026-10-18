@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { StudentRegistrationForm } from "./StudentRegistrationForm";
 import { SchoolRegistrationForm } from "./SchoolRegistrationForm";
 import { TextReveal } from "@/components/ui/TextReveal";
@@ -11,23 +12,10 @@ export function RegistrationSections() {
   const [activeTab, setActiveTab] = useState<"student" | "school">("student");
 
   return (
-    <section
-      style={{
-        background: "#ffffff",
-        borderTop: "1px solid rgba(0,0,0,0.3)",
-        paddingTop: 56,
-        paddingBottom: 56,
-      }}
-      className="relative overflow-hidden"
-    >
+    <section className="relative overflow-hidden bg-white py-14 lg:py-20">
       <div className="container-max relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p
-            className="eyebrow"
-            style={{ color: "#ff4c00", marginBottom: 16 }}
-          >
-            GET STARTED
-          </p>
+        <div className="mb-10 max-w-3xl">
+          <SectionHeader title="Get started" />
 
           <TextReveal
             as="h2"
@@ -50,7 +38,7 @@ export function RegistrationSections() {
         </div>
 
         {/* Info Cards */}
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <SectionReveal variant="fade-up" staggerChildren={0.1} className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
           <RevealItem variant="scale-fade">
             <div className="bg-white p-8 border" style={{ borderColor: "rgba(0,0,0,0.1)", borderRadius: 0 }}>
               <div className="h-10 w-10 flex items-center justify-center mb-4" style={{ background: "#ff4c00", borderRadius: 4 }}>
@@ -93,7 +81,7 @@ export function RegistrationSections() {
         </SectionReveal>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="mb-10 flex flex-wrap gap-3">
           <button
             onClick={() => setActiveTab("student")}
             style={{
@@ -123,11 +111,11 @@ export function RegistrationSections() {
         </div>
 
         {/* Registration Forms */}
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl">
           <SectionReveal variant="fade-up">
             {activeTab === "student" ? (
               <div>
-                <h3 className="font-display text-2xl font-bold mb-2" style={{ color: "#000" }}>
+                <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-2">
                   Apply as a Student
                 </h3>
                 <p className="mb-8" style={{ color: "#515459" }}>
@@ -137,7 +125,7 @@ export function RegistrationSections() {
               </div>
             ) : (
               <div>
-                <h3 className="font-display text-2xl font-bold mb-2" style={{ color: "#000" }}>
+                <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-2">
                   Register Your School
                 </h3>
                 <p className="mb-8" style={{ color: "#515459" }}>

@@ -1,4 +1,5 @@
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { TextReveal } from "@/components/ui/TextReveal";
 
 const modules = [
@@ -76,13 +77,8 @@ export function ModulesShowcase() {
       className="relative overflow-hidden"
     >
       <div className="container-max relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p
-            className="eyebrow"
-            style={{ color: "#ff4c00", marginBottom: 16 }}
-          >
-            CURRICULUM FRAMEWORK
-          </p>
+        <div className="max-w-3xl mx-auto mb-10">
+          <SectionHeader title="Curriculum framework" />
 
           <TextReveal
             as="h2"
@@ -148,12 +144,12 @@ export function ModulesShowcase() {
           <TextReveal
             as="h3"
             variant="fade-up"
-            className="font-display text-2xl font-bold mb-3"
+            className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-3"
             style={{ color: "#000" }}
           >
             Two Tiers, Same Excellence
           </TextReveal>
-          <p className="max-w-2xl mx-auto mb-6" style={{ color: "#515459" }}>
+          <p className="max-w-2xl mb-6" style={{ color: "#515459" }}>
             <span className="font-semibold">Tier 1 (Foundation)</span> for ages 14–18 builds the core disciplines. <span className="font-semibold">Tier 2 (Execution)</span> for ages 19–25 deepens and applies these disciplines to real adult decisions and responsibilities. Graduates of Tier 1 advance to Tier 2 without repetition; new Tier 2 entrants receive a brief foundational orientation.
           </p>
         </div>

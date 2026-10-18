@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { SectionBar } from "@/components/magazine/SectionBar";
+import { PageHeader } from "@/components/magazine/PageHeader";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -9,14 +11,13 @@ export default function TermsPage() {
   const lastUpdated = "March 17, 2026";
 
   return (
-    <main className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16">
-          <h1 className="font-display text-4xl font-bold tracking-tight text-brand-charcoal sm:text-5xl">Terms of Service</h1>
-          <p className="mt-4 text-brand-medium">Last updated: {lastUpdated}</p>
-        </div>
+    <main className="bg-white">
+      <SectionBar />
+      <PageHeader crumbs={[{ name: "Home", href: "/" }, { name: "Terms of Service", href: "/terms" }]} kicker="Legal" title="Terms of Service" dek={`Last updated ${lastUpdated}`} />
+      <div className="container-max py-14">
+        <div className="max-w-3xl">
 
-        <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:text-brand-green prose-a:text-brand-teal hover:prose-a:text-brand-amber">
+        <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-semibold prose-headings:text-black prose-a:text-accent-ink prose-p:text-gn-300 prose-li:text-gn-300">
           <p>
             Welcome to Traverse Minds Africa. By accessing our website and using our services, 
             you agree to be bound by the following terms and conditions. Please read 
@@ -73,6 +74,7 @@ export default function TermsPage() {
             If you have any questions about these Terms, please contact us at 
             traversemindsug@gmail.com.
           </p>
+        </div>
         </div>
       </div>
     </main>

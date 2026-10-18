@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { Button } from "@/components/ui/Button";
 import { Heart } from "lucide-react";
 import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
@@ -40,27 +41,14 @@ export function SponsorCTA() {
   ];
 
   return (
-    <section
-      style={{
-        background: "#212429",
-        paddingTop: 56,
-        paddingBottom: 56,
-      }}
-      className="relative overflow-hidden"
-    >
+    <section className="relative overflow-hidden bg-bg-dark text-white py-14 lg:py-20">
       <div className="container-max relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p
-            className="eyebrow mb-4"
-            style={{ color: "#ff4c00", fontSize: 14, fontWeight: 600 }}
-          >
-            SUPPORT THE PROGRAM
-          </p>
-
+        <SectionHeader title="Support the programme" dark />
+        <div className="mb-10 max-w-3xl">
           <TextReveal
             as="h2"
             variant="blur-in"
-            className="font-display text-4xl md:text-5xl font-bold text-white mb-6"
+            className="mb-5 font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-white"
           >
             Sponsorship Levels
           </TextReveal>
@@ -69,7 +57,7 @@ export function SponsorCTA() {
             as="p"
             variant="fade-up"
             delay={0.2}
-            className="text-lg text-white/70 mb-8"
+            className="mb-8 text-[17px] leading-relaxed text-white/70"
           >
             Help us build a generation of young people who live with accuracy, intention, and integrity. Every sponsorship brings this vision closer to reality.
           </TextReveal>
@@ -85,7 +73,7 @@ export function SponsorCTA() {
                   transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)"
                 }}
               >
-                <h3 className="font-display text-2xl font-bold mb-6" style={{ color: "#000" }}>
+                <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-6">
                   {level.level}
                 </h3>
 
@@ -140,9 +128,9 @@ export function SponsorCTA() {
         )}
 
         {showForm && (
-          <div className="max-w-2xl mx-auto bg-white p-8" style={{ borderRadius: 0 }}>
+          <div className="max-w-2xl bg-white p-8" style={{ borderRadius: 0 }}>
             <div className="mb-6">
-              <h3 className="font-display text-2xl font-bold mb-2" style={{ color: "#000" }}>
+              <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-2">
                 Sponsorship Inquiry Form
               </h3>
               <p style={{ color: "#515459" }}>
