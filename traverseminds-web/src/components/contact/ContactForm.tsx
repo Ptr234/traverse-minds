@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { CheckCircle2, Loader2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 interface ContactFormData {
   name: string;
@@ -30,13 +28,7 @@ const divisionOptions = [
   { value: "general", label: "General Enquiry" },
 ];
 
-const budgetRangeOptions = [
-  "Below $5,000",
-  "$5,000 - $15,000",
-  "$15,000 - $50,000",
-  "$50,000 - $100,000",
-  "Above $100,000",
-];
+const budgetRangeOptions = ["Below $5,000", "$5,000 - $15,000", "$15,000 - $50,000", "$50,000 - $100,000", "Above $100,000"];
 
 const useCaseOptions = [
   { value: "journalist", label: "Journalist" },
@@ -46,23 +38,35 @@ const useCaseOptions = [
   { value: "other", label: "Other" },
 ];
 
-const inputClasses = (hasError?: boolean) => cn(
-  "h-12 w-full border-b bg-transparent px-0 text-base outline-none transition-all duration-300 placeholder:text-black/20 focus:border-accent",
-  hasError ? "border-red-500" : "border-black/10"
-);
+// Links elsewhere on the site open /contact?subject=..., which pre-selects the division and starts the message
+const SUBJECTS: Record<string, { division: string; message: string }> = {
+  speaking: { division: "events", message: "I'd like to propose a talk at a Traverse Minds event." },
+  sponsorship: { division: "events", message: "I'd like to discuss sponsoring a Traverse Minds event." },
+  "community-outreach": { division: "literacy", message: "I'd like to invite you to run a digital safety workshop for our community." },
+  "podcast-guest": { division: "media", message: "I'd like to pitch a topic for the Facts & Figures podcast." },
+  "media-kit": { division: "media", message: "Please send me the Traverse Minds media kit." },
+  interview: { division: "media", message: "I'd like to request an interview." },
+};
+
+const label = "mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-gn-300";
+const field = (hasError?: boolean) =>
+  `w-full border bg-white px-3.5 py-3 text-[15px] text-black outline-none focus:border-accent ${hasError ? "border-red-700" : "border-black/15"}`;
+const errorText = "mt-1 text-[13px] text-red-700";
 
 export function ContactForm() {
   const [done, setDone] = useState(false);
   const [err, setErr] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>();
-
+  const { register, handleSubmit, control, setValue, formState: { errors, isSubmitting } } = useForm<ContactFormData>();
   const selectedDivision = useWatch({ control, name: "division" });
+
+  useEffect(() => {
+    const subject = SUBJECTS[new URLSearchParams(window.location.search).get("subject") ?? ""];
+    if (subject) {
+      setValue("division", subject.division);
+      setValue("message", subject.message);
+    }
+  }, [setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     if (data.honeypot) return;
@@ -73,153 +77,117 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error((await res.json()).error || "Error");
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || "We could not send your message.");
       setDone(true);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : "Failed.");
+      setErr(e instanceof Error ? e.message : "We could not send your message.");
     }
   };
 
   if (done)
     return (
-      <div className="flex flex-col items-center py-16 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald/10 text-emerald mb-6">
-          <CheckCircle2 className="h-8 w-8" />
+      <div className="flex items-start gap-3 border-l-[3px] border-emerald bg-white p-6" role="status">
+        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald" aria-hidden />
+        <div>
+          <p className="font-serif text-[22px] font-semibold text-black">Message sent.</p>
+          <p className="mt-1 text-[15px] text-gn-400">We have emailed you a confirmation and will respond within one working day.</p>
         </div>
-        <h3 className="font-display text-2xl font-bold text-black mb-2">Message Sent</h3>
-        <p className="text-black/60">We will respond within 1 business day.</p>
       </div>
     );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10" noValidate>
-      <div className="absolute -left-full opacity-0 overflow-hidden h-0 w-0" aria-hidden>
+    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 sm:grid-cols-2" noValidate>
+      <div className="hidden" aria-hidden>
         <input tabIndex={-1} autoComplete="off" {...register("honeypot")} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
-        <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Full Name</label>
-          <input
-            type="text"
-            className={inputClasses(!!errors.name)}
-            placeholder="Jane Doe"
-            {...register("name", { required: "Name required" })}
-          />
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Organisation</label>
-          <input
-            type="text"
-            className={inputClasses(!!errors.organisation)}
-            placeholder="Company Name"
-            {...register("organisation", { required: "Organisation required" })}
-          />
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Email Address</label>
-          <input
-            type="email"
-            className={inputClasses(!!errors.email)}
-            placeholder="jane@organization.com"
-            {...register("email", { 
-              required: "Email required",
-              pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" }
-            })}
-          />
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Division</label>
-          <select
-            className={inputClasses(!!errors.division)}
-            {...register("division", { required: "Select division" })}
-          >
-            <option value="">Select division...</option>
-            {divisionOptions.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label htmlFor="c-name" className={label}>Full name *</label>
+        <input id="c-name" type="text" autoComplete="name" className={field(!!errors.name)} aria-invalid={!!errors.name}
+          {...register("name", { required: "Please tell us your name." })} />
+        {errors.name && <p className={errorText}>{errors.name.message}</p>}
+      </div>
+      <div>
+        <label htmlFor="c-org" className={label}>Organisation *</label>
+        <input id="c-org" type="text" autoComplete="organization" className={field(!!errors.organisation)} aria-invalid={!!errors.organisation}
+          {...register("organisation", { required: "Please tell us your organisation." })} />
+        {errors.organisation && <p className={errorText}>{errors.organisation.message}</p>}
+      </div>
+      <div>
+        <label htmlFor="c-email" className={label}>Email *</label>
+        <input id="c-email" type="email" autoComplete="email" className={field(!!errors.email)} aria-invalid={!!errors.email}
+          {...register("email", { required: "Please enter your email.", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Please enter a valid email." } })} />
+        {errors.email && <p className={errorText}>{errors.email.message}</p>}
+      </div>
+      <div>
+        <label htmlFor="c-division" className={label}>Division *</label>
+        <select id="c-division" className={field(!!errors.division)} aria-invalid={!!errors.division}
+          {...register("division", { required: "Please choose a division." })}>
+          <option value="">Select a division</option>
+          {divisionOptions.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+        {errors.division && <p className={errorText}>{errors.division.message}</p>}
       </div>
 
       {selectedDivision === "security" && (
-        <div className="space-y-1 animate-in fade-in slide-in-from-top-2 duration-300">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Budget Range</label>
-          <select
-            className={inputClasses(!!errors.budgetRange)}
-            {...register("budgetRange", { required: "Select budget" })}
-          >
-            <option value="">Select budget range...</option>
+        <div className="sm:col-span-2">
+          <label htmlFor="c-budget" className={label}>Budget range *</label>
+          <select id="c-budget" className={field(!!errors.budgetRange)} {...register("budgetRange", { required: "Please choose a budget range." })}>
+            <option value="">Select a budget range</option>
             {budgetRangeOptions.map((o) => (
               <option key={o} value={o}>{o}</option>
             ))}
           </select>
+          {errors.budgetRange && <p className={errorText}>{errors.budgetRange.message}</p>}
         </div>
       )}
 
       {selectedDivision === "public-record" && (
-        <div className="space-y-1 animate-in fade-in slide-in-from-top-2 duration-300">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Use Case</label>
-          <select
-            className={inputClasses(!!errors.useCase)}
-            {...register("useCase", { required: "Select use case" })}
-          >
-            <option value="">How will you use the data?</option>
+        <div className="sm:col-span-2">
+          <label htmlFor="c-usecase" className={label}>How will you use the data? *</label>
+          <select id="c-usecase" className={field(!!errors.useCase)} {...register("useCase", { required: "Please choose an option." })}>
+            <option value="">Select one</option>
             {useCaseOptions.map((o) => (
               <option key={o.value} value={o.value}>{o.label}</option>
             ))}
           </select>
+          {errors.useCase && <p className={errorText}>{errors.useCase.message}</p>}
         </div>
       )}
 
-      <div className="space-y-1">
-        <label className="text-[10px] font-bold uppercase tracking-widest text-black/40">Message</label>
-        <textarea
-          rows={1}
-          className={cn(inputClasses(!!errors.message), "h-auto py-3 resize-none min-h-[48px]")}
-          placeholder="Tell us about your needs..."
-          {...register("message", { required: "Message required" })}
-          onInput={(e) => {
-            const target = e.target as HTMLTextAreaElement;
-            target.style.height = "auto";
-            target.style.height = `${target.scrollHeight}px`;
-          }}
-        />
+      <div className="sm:col-span-2">
+        <label htmlFor="c-message" className={label}>Message *</label>
+        <textarea id="c-message" rows={5} className={`${field(!!errors.message)} resize-y`} placeholder="Tell us about your needs." aria-invalid={!!errors.message}
+          {...register("message", { required: "Please write a short message." })} />
+        {errors.message && <p className={errorText}>{errors.message.message}</p>}
       </div>
 
-      <div className="flex items-start gap-4">
-        <input
-          type="checkbox"
-          id="consent"
-          className="mt-1 h-4 w-4 rounded border-black/10 accent-accent"
-          {...register("consent", { required: true })}
-        />
-        <label htmlFor="consent" className="text-[10px] text-black/40 uppercase tracking-widest leading-relaxed">
-          I consent to processing of my data in accordance with the 
-          <a href="/privacy" className="text-accent font-bold hover:underline ml-1">Privacy Policy</a>.
-        </label>
-      </div>
-
-      {err && <p className="text-xs font-bold text-red-700 uppercase tracking-widest">{err}</p>}
-
-      <Button
-        type="submit"
-        variant="primary"
-        className="w-full group py-6 h-auto text-sm"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <Loader2 className="h-5 w-5 animate-spin" />
-        ) : (
-          <span className="flex items-center justify-center gap-2">
-            Send Enquiry
-            <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      <div className="sm:col-span-2">
+        <label htmlFor="c-consent" className="flex items-start gap-3 text-[14px] leading-relaxed text-gn-300">
+          <input id="c-consent" type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-accent" {...register("consent", { required: "Please confirm consent so we can reply." })} />
+          <span>
+            I consent to Traverse Minds Africa processing my data to respond to this enquiry, in line with the{" "}
+            <a href="/privacy" className="font-semibold text-accent hover:underline">privacy policy</a>.
           </span>
-        )}
-      </Button>
+        </label>
+        {errors.consent && <p className={errorText}>{errors.consent.message}</p>}
+      </div>
+
+      {err && <p className="border-l-2 border-red-700 pl-3 text-[14px] text-red-700 sm:col-span-2" role="alert">{err}</p>}
+
+      <div className="sm:col-span-2">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 text-[14px] font-bold uppercase tracking-wider text-white disabled:opacity-60"
+        >
+          {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
+          Send enquiry
+          {isSubmitting ? null : <ArrowRight className="h-4 w-4" aria-hidden />}
+        </button>
+      </div>
     </form>
   );
 }

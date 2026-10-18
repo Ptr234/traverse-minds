@@ -1,15 +1,18 @@
-
-"use client";
-
-import { Mail, MapPin, Clock, Newspaper } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppButton } from "@/components/contact/WhatsAppButton";
 import { AfricaMap } from "@/components/ui/AfricaMap";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
+import { SectionHeader } from "@/components/magazine/primitives";
+
+const EMAIL = "traversemindsug@gmail.com";
+
+const DETAILS = [
+  { label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, note: "For formal enquiries and proposals" },
+  { label: "Location", value: "Kampala, Uganda", note: "Serving all African countries" },
+  { label: "Response time", value: "Within one working day", note: "Urgent? Use WhatsApp" },
+];
 
 export default function ContactPage() {
   return (
@@ -22,164 +25,66 @@ export default function ContactPage() {
         dek="Whether you need a security assessment, want to attend an event, or have a research partnership in mind."
       />
 
-      {/* Form + Sidebar */}
-      <section style={{ background: "#f0f1f4", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-            <SectionReveal variant="fade-up" className="lg:col-span-2">
-              <div className="border bg-white p-8 pb-12 md:p-10" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                <h2 className="font-display text-2xl font-bold tracking-tight" style={{ color: "#000" }}>
-                  Send Us a Message
-                </h2>
-                <p className="mt-2" style={{ color: "#515459" }}>
-                  Fill out the form and we&apos;ll respond within 1 business day.
-                </p>
-                <div className="mt-8">
-                  <ContactForm />
+      {/* Form and details */}
+      <section className="bg-bg-light">
+        <div className="container-max py-14 lg:py-20">
+          <SectionHeader title="Send us a message" />
+          <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
+            <div className="border border-black/10 bg-white p-6 lg:p-8">
+              <ContactForm />
+            </div>
+            <aside>
+              <dl className="border-t-2 border-black">
+                {DETAILS.map((d) => (
+                  <div key={d.label} className="border-b border-black/15 py-5">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">{d.label}</dt>
+                    <dd className="mt-1.5 font-serif text-[20px] font-semibold text-black">
+                      {d.href ? <a href={d.href} className="break-words hover:text-accent">{d.value}</a> : d.value}
+                    </dd>
+                    <dd className="mt-0.5 text-[14px] text-gn-400">{d.note}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 border border-black/10 bg-white p-6">
+                <p className="font-serif text-[20px] font-semibold text-black">Prefer WhatsApp?</p>
+                <p className="mt-1 text-[14px] text-gn-400">The fastest way to reach us.</p>
+                <div className="mt-4">
+                  <WhatsAppButton />
                 </div>
               </div>
-            </SectionReveal>
-
-            <SectionReveal variant="fade-up" staggerChildren={0.1}>
-              <div className="space-y-5">
-                {/* WhatsApp Card */}
-                <RevealItem variant="slide-up">
-                  <div className="group overflow-hidden border bg-white" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <div className="p-6">
-                      <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>Prefer WhatsApp?</h3>
-                      <p className="mt-2 text-sm" style={{ color: "#515459" }}>
-                        The fastest way to reach us in Africa.
-                      </p>
-                      <div className="mt-4">
-                        <WhatsAppButton />
-                      </div>
-                    </div>
-                  </div>
-                </RevealItem>
-
-                {/* Email Card */}
-                <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
-                        <Mail className="h-5 w-5 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold" style={{ color: "#000" }}>Email</h3>
-                        <a
-                          href="mailto:traversemindsug@gmail.com"
-                          className="mt-0.5 block text-sm text-accent font-medium underline underline-offset-2"
-                          style={{ transition: "color 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                        >
-                          traversemindsug@gmail.com
-                        </a>
-                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>For formal enquiries and proposals</p>
-                      </div>
-                    </div>
-                  </div>
-                </RevealItem>
-
-                {/* Location Card */}
-                <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
-                        <MapPin className="h-5 w-5 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold" style={{ color: "#000" }}>Location</h3>
-                        <p className="mt-0.5 text-sm font-medium" style={{ color: "#313439" }}>Kampala, Uganda</p>
-                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>Serving all African countries</p>
-                      </div>
-                    </div>
-                  </div>
-                </RevealItem>
-
-                {/* Response Time Card */}
-                <RevealItem variant="slide-up">
-                  <div className="group border bg-white p-5" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-emerald/10" style={{ borderRadius: 0 }}>
-                        <Clock className="h-5 w-5 text-emerald" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold" style={{ color: "#000" }}>Response Time</h3>
-                        <p className="mt-0.5 text-sm text-emerald font-medium">Within 1 business day</p>
-                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>Urgent? Use WhatsApp</p>
-                      </div>
-                    </div>
-                  </div>
-                </RevealItem>
-              </div>
-            </SectionReveal>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* African Coverage Map */}
-      <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max">
-          <div className="text-center mb-10">
-            <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Coverage</p>
-            <TextReveal
-              as="h2"
-              variant="fade-up"
-              className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-            >
-              Serving Africa
-            </TextReveal>
-            <p className="mt-3 max-w-lg mx-auto" style={{ color: "#515459" }}>
-              Headquartered in Kampala, operating across all African countries.
-            </p>
+      {/* Coverage */}
+      <section className="bg-white">
+        <div className="container-max py-14 lg:py-20">
+          <SectionHeader title="Coverage" />
+          <div className="mb-8 grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">Serving Africa.</h2>
+            <p className="text-[17px] leading-relaxed text-gn-400">Headquartered in Kampala, working with organisations across the continent.</p>
           </div>
-          <SectionReveal variant="clip-inset">
-            <AfricaMap />
-          </SectionReveal>
+          <AfricaMap />
         </div>
       </section>
 
-      {/* Press & Media Enquiries */}
-      <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-        <div className="container-max relative z-10">
-          <div className="mx-auto max-w-2xl">
-            <SectionReveal variant="scale-fade">
-              <div className="border bg-white p-8 md:p-12 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Press</p>
-
-                <TextReveal
-                  as="h2"
-                  variant="blur-in"
-                  className="font-display text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#000" }}
-                >
-                  Press & Media Enquiries
-                </TextReveal>
-
-                <div className="mt-6 flex justify-center">
-                  <div className="flex h-14 w-14 items-center justify-center bg-accent/10" style={{ borderRadius: 0 }}>
-                    <Newspaper className="h-7 w-7 text-accent" />
-                  </div>
-                </div>
-
-                <p className="mt-5 text-base leading-relaxed max-w-lg mx-auto" style={{ color: "#515459" }}>
-                  For press enquiries, interview requests, or expert commentary:
-                </p>
-
-                <div className="mt-6">
-                  <a
-                    href="mailto:traversemindsug@gmail.com"
-                    className="inline-flex items-center gap-2 border border-accent/20 bg-accent/5 px-6 py-3.5 text-base font-semibold text-accent"
-                    style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                  >
-                    <Mail className="h-4 w-4" />
-                    traversemindsug@gmail.com
-                  </a>
-                </div>
-              </div>
-            </SectionReveal>
+      {/* Press */}
+      <section className="relative overflow-hidden bg-bg-dark text-white">
+        <div className="tech-grid-dark absolute inset-0" aria-hidden />
+        <div className="container-max relative py-14 lg:py-20">
+          <SectionHeader title="Press" dark />
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <div>
+              <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1]">Press and media enquiries.</h2>
+              <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/65">For press enquiries, interview requests or expert commentary, email us directly.</p>
+            </div>
+            <a href={`mailto:${EMAIL}`} className="inline-block self-start break-words border-b border-accent pb-1 font-serif text-[22px] font-semibold hover:text-accent lg:justify-self-end">
+              {EMAIL}
+            </a>
           </div>
         </div>
       </section>
     </PageTransition>
   );
 }
-

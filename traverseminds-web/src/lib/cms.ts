@@ -58,6 +58,7 @@ export async function getSiteSettings(): Promise<ResolvedSettings> {
     heroSlides: slides.length ? slides : SITE_DEFAULTS.heroSlides.map(local),
     aboutImage: photo(doc?.aboutImage as ImageRef, 1400, SITE_DEFAULTS.aboutImage),
     securityImage: photo(doc?.securityImage as ImageRef, 1400, SITE_DEFAULTS.securityImage),
+    mediaImage: photo(doc?.mediaImage as ImageRef, 1400, SITE_DEFAULTS.mediaImage),
     timelineImage: photo(doc?.timelineImage as ImageRef, 2000, SITE_DEFAULTS.timelineImage),
     eventsSpeakImage: photo(doc?.eventsSpeakImage as ImageRef, 1400, SITE_DEFAULTS.eventsSpeakImage),
     eventsSponsorImage: photo(doc?.eventsSponsorImage as ImageRef, 1400, SITE_DEFAULTS.eventsSponsorImage),

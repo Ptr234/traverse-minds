@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-
+import { ArrowRight } from "lucide-react";
 import { SectionBar } from "@/components/magazine/SectionBar";
 import { PageHeader } from "@/components/magazine/PageHeader";
+import { SectionHeader } from "@/components/magazine/primitives";
 import { Button } from "@/components/ui/Button";
-import { Newspaper, MessageSquare, Download, ArrowRight, Mic, Rss } from "lucide-react";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
-import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
+import { getSiteSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Traverse Media and the Facts & Figures Podcast",
   description: "Facts & Figures — Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
 };
 
-const podcastPlatforms = [
-  { name: "Spotify", href: "#", color: "bg-[#1DB954]" },
-  { name: "Apple Podcasts", href: "#", color: "bg-[#9933CC]" },
-  { name: "Google Podcasts", href: "#", color: "bg-[#4285F4]" },
-  { name: "RSS Feed", href: "#", color: "bg-[#EE802F]" },
+const FORMATS = [
+  { title: "Data journalism", desc: "Turning public record datasets into investigative stories and policy explainers." },
+  { title: "Podcast and video", desc: "Long-form conversations with Africa's cybersecurity leaders, policy-makers and civic-tech practitioners." },
 ];
 
-export default function MediaPage() {
+const KIT = ["Official logo suite (SVG, PNG)", "Leadership bios and headshots", "Division overview one-pagers", "Brand guidelines and colour palette"];
+
+export default async function MediaPage() {
+  const settings = await getSiteSettings();
   return (
     <main className="flex flex-col">
       <PageTransition>
@@ -33,179 +33,110 @@ export default function MediaPage() {
           dek="Unpacking the data, laws and technology shaping Africa."
         />
 
-        {/* Media Philosophy */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
-              <SectionReveal variant="clip-inset" className="order-2 lg:order-1">
-                <div className="relative aspect-4/5 overflow-hidden" style={{ borderRadius: 0, boxShadow: "0 4px 8px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05)" }}>
-                  <Image
-                    src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=2070&auto=format&fit=crop"
-                    alt="Newsroom and digital media"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
+        {/* Mission */}
+        <section className="bg-white">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Our mission" />
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+              <figure>
+                <div className="relative aspect-[4/3] overflow-hidden bg-gn-800">
+                  <Image src={settings.mediaImage} alt="Traverse Media at work" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 45vw" />
                 </div>
-              </SectionReveal>
-              <SectionReveal variant="clip-right" delay={0.2} className="order-1 lg:order-2">
-                <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Our Mission</p>
-
-                <TextReveal
-                  as="h2"
-                  variant="blur-in"
-                  className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]" style={{ color: "#000" }}
-                >
-                  The Facts & Figures Podcast
-                </TextReveal>
-
-                <p className="mt-6 text-base leading-relaxed" style={{ color: "#515459" }}>
-                  Traverse Media bridges the gap between complex research and everyday understanding.
-                  Our flagship podcast, Facts &amp; Figures, translates Think Tank findings and
-                  Public Record Africa data into accessible stories for African citizens.
+              </figure>
+              <div>
+                <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] text-black">The Facts &amp; Figures podcast.</h2>
+                <p className="mt-4 text-[17px] leading-relaxed text-gn-400">
+                  Traverse Media bridges the gap between complex research and everyday understanding. Our flagship podcast, Facts &amp;
+                  Figures, translates Think Tank findings and Public Record Africa data into accessible stories for African citizens.
                 </p>
-
-                <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                  {[
-                    { icon: Newspaper, title: "Data Journalism", desc: "Turning public record datasets into impactful investigative stories and policy explainers." },
-                    { icon: MessageSquare, title: "Podcast & Video", desc: "Long-form conversations with Africa's cybersecurity leaders, policy-makers, and civic-tech practitioners." },
-                  ].map((item) => (
-                    <div key={item.title} className="group flex flex-col gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center bg-primary/5" style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}>
-                        <item.icon className="h-5 w-5" style={{ color: "#000" }} />
+                <ol className="mt-8 border-t-2 border-black">
+                  {FORMATS.map((f, i) => (
+                    <li key={f.title} className="grid grid-cols-[48px_1fr] border-b border-black/15 py-5">
+                      <span className="font-mono text-[24px] font-semibold leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h3 className="font-serif text-[21px] font-semibold text-black">{f.title}</h3>
+                        <p className="mt-1.5 text-[15px] leading-relaxed text-gn-400">{f.desc}</p>
                       </div>
-                      <h3 className="font-display text-base font-bold" style={{ color: "#000" }}>{item.title}</h3>
-                      <p className="text-sm" style={{ color: "#515459" }}>{item.desc}</p>
-                    </div>
+                    </li>
                   ))}
-                </div>
-
-                <div className="mt-10">
+                </ol>
+                <div className="mt-8">
                   <Button variant="primary" size="lg" href="/blog">
-                    Read Our Latest Stories
+                    Read our latest stories
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
-              </SectionReveal>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Subscribe to the Podcast */}
-        <section style={{ background: "#f0f1f4", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Subscribe</p>
+        {/* Podcast and guests */}
+        <section className="bg-bg-light">
+          <div className="container-max py-14 lg:py-20">
+            <SectionHeader title="Listen and take part" />
+            <div className="grid gap-px border border-black/10 bg-black/10 lg:grid-cols-2">
+              <div className="flex flex-col bg-white p-8 lg:p-10">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Coming soon</p>
+                <h2 className="mt-3 font-serif text-[clamp(24px,2.6vw,32px)] font-semibold leading-tight text-black">The podcast is launching soon.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  Facts &amp; Figures will be available on the major podcast platforms. Subscribe to our briefing and we will tell you when the
+                  first episode is out.
+                </p>
+                <div className="mt-auto pt-8">
+                  <Button variant="primary" size="lg" href="/#newsletter">
+                    Get notified
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div className="flex flex-col bg-white p-8 lg:p-10">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Be a guest</p>
+                <h2 className="mt-3 font-serif text-[clamp(24px,2.6vw,32px)] font-semibold leading-tight text-black">Appear on Facts &amp; Figures.</h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-gn-400">
+                  Pitch a topic or apply to be a guest. We feature cybersecurity leaders, policy experts and civic-tech practitioners from
+                  across Africa.
+                </p>
+                <div className="mt-auto pt-8">
+                  <Button variant="outline" size="lg" href="/contact?subject=podcast-guest">
+                    Pitch a topic
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-              <TextReveal
-                as="h2"
-                variant="fade-up"
-                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Subscribe to the Podcast
-              </TextReveal>
-              <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-                Never miss an episode of Facts &amp; Figures. Subscribe on your preferred platform.
-              </p>
-
-              <SectionReveal variant="fade-up" staggerChildren={0.1}>
-                <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 max-w-md sm:max-w-lg mx-auto">
-                  {podcastPlatforms.map((platform) => (
-                    <RevealItem key={platform.name} variant="scale-fade">
-                      <a
-                        href={platform.href}
-                        className={`inline-flex w-full items-center justify-center gap-2.5 px-6 py-3.5 min-h-11 text-sm font-semibold text-white active:scale-[0.98] ${platform.color}`}
-                        style={{ borderRadius: 0, transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
-                      >
-                        {platform.name === "RSS Feed" ? (
-                          <Rss className="h-4 w-4" />
-                        ) : (
-                          <Mic className="h-4 w-4" />
-                        )}
-                        {platform.name}
-                      </a>
-                    </RevealItem>
+        {/* Media kit */}
+        <section className="relative overflow-hidden bg-bg-dark text-white">
+          <div className="tech-grid-dark absolute inset-0" aria-hidden />
+          <div className="container-max relative py-14 lg:py-20">
+            <SectionHeader title="Press" dark />
+            <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
+              <div>
+                <h2 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1]">Media kit and resources.</h2>
+                <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/65">
+                  Official logos, leadership bios and division overviews for press coverage and partnership enquiries. Request the kit and we
+                  will send it to you.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button variant="primary" size="lg" href="/contact?subject=media-kit">
+                    Request the media kit
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline-dark" size="lg" href="/contact?subject=interview">
+                    Request an interview
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">The kit includes</p>
+                <ul className="mt-3 border-t border-white/20">
+                  {KIT.map((item) => (
+                    <li key={item} className="border-b border-white/15 py-3 text-[15px] text-white/80">{item}</li>
                   ))}
-                </div>
-              </SectionReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* Be a Guest CTA */}
-        <section style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.3)", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="eyebrow" style={{ color: "#ff4c00", marginBottom: 16 }}>Be a Guest</p>
-
-              <TextReveal
-                as="h2"
-                variant="slide-up"
-                className="font-display text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#000" }}
-              >
-                Appear on Facts & Figures
-              </TextReveal>
-              <SectionReveal variant="fade-blur" delay={0.1}>
-                <p className="mt-4 max-w-xl mx-auto leading-relaxed" style={{ color: "#515459" }}>
-                  Pitch a topic or apply to be a guest on Facts &amp; Figures. We feature cybersecurity leaders,
-                  policy experts, and civic-tech practitioners from across Africa.
-                </p>
-
-                <div className="mt-10">
-                  <Button variant="primary" size="lg" href="/contact">
-                    Pitch a Topic
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </SectionReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* Media Kit */}
-        <section style={{ background: "#212429", paddingTop: 56, paddingBottom: 56 }} className="relative overflow-hidden">
-          <div className="container-max relative z-10">
-            <div className="flex flex-col items-center justify-between gap-12 lg:flex-row">
-              <SectionReveal variant="clip-left" className="max-w-2xl text-center lg:text-left">
-                <TextReveal
-                  as="h2"
-                  variant="clip-up"
-                  className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight"
-                >
-                  Media kit & resources
-                </TextReveal>
-                <p className="mt-5 text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Access official logos, leadership bios, and division overviews
-                  for press coverage and partnership enquiries.
-                </p>
-                <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-                  <Button variant="primary" size="lg">
-                    <Download className="h-4 w-4" /> Download Full Kit
-                  </Button>
-                  <Button variant="outline-dark" size="lg" href="/contact">
-                    Request Interview
-                  </Button>
-                </div>
-              </SectionReveal>
-
-              <SectionReveal variant="slide-up" delay={0.2}>
-                <div className="w-full max-w-sm border border-white/6 bg-surface-dark-elevated p-7" style={{ borderRadius: 0 }}>
-                  <h3 className="font-display text-lg font-bold text-white mb-5">Press Kit Includes</h3>
-                  <div className="space-y-5">
-                    {[
-                      "Official company logo suite (SVG, PNG)",
-                      "Leadership bios and headshots",
-                      "Division overview one-pagers",
-                      "Brand guidelines and colour palette",
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 border-b border-white/6 pb-4 last:border-0 last:pb-0">
-                        <div className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                        <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </SectionReveal>
+                </ul>
+              </div>
             </div>
           </div>
         </section>

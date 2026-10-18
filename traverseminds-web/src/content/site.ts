@@ -14,6 +14,7 @@ export const SITE_DEFAULTS = {
   ],
   aboutImage: "/imagestouse/tec (2).jpg",
   securityImage: "/imagestouse/eventslide/stud (3).jpg",
+  mediaImage: "/imagestouse/div-media.jpeg",
   timelineImage: "/imagestouse/tec (1).jpg",
   eventsSpeakImage: "/imagestouse/eventslide/stud (2).jpg",
   eventsSponsorImage: "/imagestouse/div-events.jpeg",

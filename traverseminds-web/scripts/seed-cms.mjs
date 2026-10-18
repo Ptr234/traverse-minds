@@ -85,6 +85,7 @@ async function buildDocuments() {
     ),
     aboutImage: await image(SITE_DEFAULTS.aboutImage, "Traverse Minds team"),
     securityImage: await image(SITE_DEFAULTS.securityImage, "Traverse Minds team at work"),
+    mediaImage: await image(SITE_DEFAULTS.mediaImage, "Traverse Media at work"),
     timelineImage: await image(SITE_DEFAULTS.timelineImage),
     eventsSpeakImage: await image(SITE_DEFAULTS.eventsSpeakImage, "Speaker at a Traverse Minds event"),
     eventsSponsorImage: await image(SITE_DEFAULTS.eventsSponsorImage, "Traverse Minds event audience"),

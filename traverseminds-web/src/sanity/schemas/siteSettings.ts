@@ -34,6 +34,7 @@ export const siteSettings = defineType({
     }),
     { ...img("aboutImage", "About page: story image"), group: "images" },
     { ...img("securityImage", "Security page: “Why Traverse” image"), group: "images" },
+    { ...img("mediaImage", "Media page: mission image"), group: "images" },
     { ...img("timelineImage", "About page: timeline background", "Shown darkened behind the milestones."), group: "images" },
     { ...img("eventsSpeakImage", "Events page: “Speak at our events” image"), group: "images" },
     { ...img("eventsSponsorImage", "Events page: “Sponsor an event” image"), group: "images" },
