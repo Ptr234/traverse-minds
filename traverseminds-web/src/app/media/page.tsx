@@ -10,8 +10,8 @@ import { TextReveal } from "@/components/ui/TextReveal";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 export const metadata: Metadata = {
-  title: "Traverse Media & Facts & Figures Podcast | Traverse Minds Africa",
-  description: "Facts & Figures -- Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
+  title: "Traverse Media and the Facts & Figures Podcast",
+  description: "Facts & Figures — Africa's civic-tech podcast. Data journalism, policy explainers, and independent reporting driven by evidence.",
 };
 
 const podcastPlatforms = [

@@ -64,7 +64,7 @@ export function PostCard({ title, slug, excerpt, division, date, readTime, image
             </div>
             <span className="text-xs" style={{ color: "#515459" }}>{author.name}</span>
           </div>
-          <div className="flex items-center gap-3 text-xs" style={{ color: "#919499" }}>
+          <div className="flex items-center gap-3 text-xs" style={{ color: "#6b6e73" }}>
             <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{date}</span>
             <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{readTime}</span>
           </div>

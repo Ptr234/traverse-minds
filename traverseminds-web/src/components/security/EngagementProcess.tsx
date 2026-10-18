@@ -7,7 +7,7 @@ import { TextReveal } from "@/components/ui/TextReveal";
 
 const steps = [
   { icon: Search, step: "01", title: "Discovery", description: "We learn your systems, regulatory obligations, and risk appetite through a structured briefing session.", image: "/imagestouse/eventslide/stud (3).jpg" },
-  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit -- penetration tests, compliance reviews, or threat assessments.", image: "/imagestouse/div-cybersecurity.jpeg" },
+  { icon: ClipboardCheck, step: "02", title: "Assessment", description: "Our team conducts the agreed testing or audit — penetration tests, compliance reviews, or threat assessments.", image: "/imagestouse/div-cybersecurity.jpeg" },
   { icon: FileText, step: "03", title: "Report", description: "You receive a detailed report with findings, risk ratings, evidence, and actionable remediation steps.", image: "/imagestouse/tec.jpg" },
   { icon: Wrench, step: "04", title: "Remediation", description: "We support your team through fixing identified issues and verify each remediation has been implemented correctly.", image: "/imagestouse/tec (1).jpg" },
 ];
@@ -29,7 +29,7 @@ export function EngagementProcess() {
           </TextReveal>
           <SectionReveal variant="fade-up" delay={0.15}>
             <p className="mt-3 max-w-xl mx-auto" style={{ color: "#515459" }}>
-              A clear, structured approach -- no surprises, no ambiguity.
+              A clear, structured approach — no surprises, no ambiguity.
             </p>
           </SectionReveal>
         </div>

@@ -33,7 +33,7 @@ export function SectionBar({ belowHero = false }: { belowHero?: boolean }) {
           </p>
           <nav aria-label="Sections" className="-mx-1 flex max-w-full gap-1 overflow-x-auto text-[13px] font-medium">
             {DIVISIONS.map((d) => (
-              <Link key={d.key} href={d.href} className="whitespace-nowrap px-2 py-1 text-gn-200 hover:text-accent">
+              <Link key={d.key} href={d.href} className="whitespace-nowrap px-2 py-2.5 text-gn-200 hover:text-accent md:py-1">
                 {d.label}
               </Link>
             ))}

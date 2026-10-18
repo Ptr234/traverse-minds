@@ -50,7 +50,7 @@ export function ThinkTankPreview() {
               <div>
                 <div className="flex items-center justify-between" style={{ marginBottom: 24 }}>
                   <span className="eyebrow" style={{ color: "#ff4c00" }}>{reports[0].tag}</span>
-                  <span className="flex items-center gap-1.5" style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#919499" }}>
+                  <span className="flex items-center gap-1.5" style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#6b6e73" }}>
                     <Clock className="h-3 w-3" /> Coming soon
                   </span>
                 </div>
@@ -75,7 +75,7 @@ export function ThinkTankPreview() {
                 <div>
                   <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
                     <span className="eyebrow" style={{ color: "#ff4c00" }}>{report.tag}</span>
-                    <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#919499" }}>Soon</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase" as const, color: "#6b6e73" }}>Soon</span>
                   </div>
                   <span style={{ fontSize: 12, color: "#c1c4c9", fontFamily: "var(--font-mono)" }}>Report {report.number}</span>
                   <h3 className="font-display" style={{ marginTop: 8, fontSize: 21, fontWeight: 500, lineHeight: "125%", letterSpacing: "-0.21px", color: "#000" }}>

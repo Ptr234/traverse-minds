@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/magazine/PageHeader";
 import { BlogPageClient } from "./BlogPageClient";
 
 export const metadata: Metadata = {
-  title: "Analysis — Traverse Minds Africa",
+  title: "Analysis",
   description: "Cybersecurity analysis, policy explainers, and data-driven research from across our six divisions.",
 };
 

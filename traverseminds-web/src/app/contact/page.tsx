@@ -73,7 +73,7 @@ export default function ContactPage() {
                         >
                           traversemindsug@gmail.com
                         </a>
-                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>For formal enquiries and proposals</p>
+                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>For formal enquiries and proposals</p>
                       </div>
                     </div>
                   </div>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold" style={{ color: "#000" }}>Location</h3>
                         <p className="mt-0.5 text-sm font-medium" style={{ color: "#313439" }}>Kampala, Uganda</p>
-                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Serving all African countries</p>
+                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>Serving all African countries</p>
                       </div>
                     </div>
                   </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold" style={{ color: "#000" }}>Response Time</h3>
                         <p className="mt-0.5 text-sm text-emerald font-medium">Within 1 business day</p>
-                        <p className="mt-1 text-xs" style={{ color: "#919499" }}>Urgent? Use WhatsApp</p>
+                        <p className="mt-1 text-xs" style={{ color: "#6b6e73" }}>Urgent? Use WhatsApp</p>
                       </div>
                     </div>
                   </div>

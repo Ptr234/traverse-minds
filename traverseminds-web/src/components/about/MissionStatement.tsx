@@ -43,7 +43,7 @@ export function MissionStatement() {
             transition={{ duration: 0.35, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
           >
             Built for Africa &middot; Driven by Evidence. Technology serving the
-            public interest -- anchored in local laws, shaped by independent research.
+            public interest — anchored in local laws, shaped by independent research.
           </motion.p>
         </div>
       </div>

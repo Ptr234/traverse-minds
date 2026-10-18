@@ -13,7 +13,7 @@ import { PageTransition } from "@/components/ui/PageTransition";
 import { SectionHeader } from "@/components/magazine/primitives";
 
 export const metadata: Metadata = {
-  title: "About Traverse Minds Africa",
+  title: "About",
   description:
     "Africa's integrated civic-tech company. Learn about our mission, team, and six interconnected divisions serving Africa.",
 };

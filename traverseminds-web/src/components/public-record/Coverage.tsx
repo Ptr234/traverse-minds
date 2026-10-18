@@ -66,7 +66,7 @@ export function Coverage() {
                 style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
               >
                 <p className="font-display text-3xl font-bold" style={{ color: "#ff4c00" }}>{s.value}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "#919499" }}>{s.label}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "#6b6e73" }}>{s.label}</p>
               </div>
             ))}
           </SectionReveal>

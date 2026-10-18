@@ -51,7 +51,7 @@ export function StatsCounter() {
                   <AnimatedNumber value={stat.value} />
                 </p>
                 <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 500, color: "#212429" }}>{stat.label}</h3>
-                <p style={{ marginTop: 4, fontSize: 14, color: "#919499", lineHeight: "125%" }}>{stat.description}</p>
+                <p style={{ marginTop: 4, fontSize: 14, color: "#6b6e73", lineHeight: "125%" }}>{stat.description}</p>
               </div>
             </RevealItem>
           ))}

@@ -11,7 +11,7 @@ import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Research Archive | Think Tank — Traverse Minds Africa",
+  title: "Research Archive | Think Tank",
   description: "Full archive of Traverse Minds Think Tank research reports, policy briefs, and publications on Africa's digital economy.",
 };
 
@@ -94,15 +94,14 @@ export default async function ArchivePage() {
                           {report.topics.slice(0, 2).map((topic) => (
                             <span
                               key={topic}
-                              className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-                              style={{ borderRadius: 999 }}
+                              className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent"
                             >
                               {TOPIC_LABELS[topic] ?? topic}
                             </span>
                           ))}
                         </div>
                       )}
-                      <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
+                      <div className="flex items-center gap-4 text-xs" style={{ color: "#6b6e73" }}>
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
                           {report.publicationDate ? new Date(report.publicationDate).toLocaleDateString("en-UG", { year: "numeric", month: "short", day: "numeric" }) : "—"}
@@ -125,8 +124,7 @@ export default async function ArchivePage() {
                       <div className="mt-auto pt-5 flex items-center justify-between" style={{ borderTop: "1px solid rgba(0,0,0,0.1)" }}>
                         <Link
                           href={`/think-tank/${report.slug.current}`}
-                          className="text-sm font-semibold"
-                          style={{ color: "#ff4c00" }}
+                          className="text-sm font-semibold text-accent hover:underline"
                         >
                           Read Online
                         </Link>
@@ -147,7 +145,7 @@ export default async function ArchivePage() {
             <div className="py-24 text-center border-2 border-dashed" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
               <FileText className="mx-auto h-12 w-12 mb-4" style={{ color: "#d1d1d1" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>No publications yet</p>
-              <p className="mt-2 max-w-sm mx-auto text-sm" style={{ color: "#919499" }}>
+              <p className="mt-2 max-w-sm mx-auto text-sm" style={{ color: "#6b6e73" }}>
                 Reports will appear here as they are published. Check back soon.
               </p>
               <div className="mt-8">

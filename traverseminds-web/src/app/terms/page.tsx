@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Traverse Minds Africa",
+  title: "Terms of Service",
   description: "Read our terms and conditions for using Traverse Minds Africa services and platforms.",
 };
 

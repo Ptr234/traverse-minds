@@ -50,7 +50,7 @@ export function Hero({ onSearch }: HeroProps) {
             delay={0.3}
             className="font-display text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight"
           >
-            Africa&apos;s government records -- <span className="text-accent">intelligently</span> searchable
+            Africa&apos;s government records — <span className="text-accent">intelligently</span> searchable
           </TextReveal>
 
           <motion.p

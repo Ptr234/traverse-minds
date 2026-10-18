@@ -28,7 +28,7 @@ export function Faq({ items, eyebrow = "FAQ", title = "Frequently asked question
                 style={{ padding: "20px 0", fontSize: 17, fontWeight: 500, color: "#000" }}
               >
                 {item.question}
-                <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" style={{ color: "#919499" }} aria-hidden />
+                <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" style={{ color: "#6b6e73" }} aria-hidden />
               </summary>
               <p style={{ paddingBottom: 20, fontSize: 15, color: "#515459", lineHeight: 1.6, maxWidth: 760 }}>{item.answer}</p>
             </details>

@@ -29,7 +29,7 @@ export function OpenDataLandscape({ data }: { data: OpenDataLandscapeData }) {
             <figure style={{ margin: 0 }}>
               <figcaption style={{ marginBottom: 16 }}>
                 <span style={{ display: "block", fontSize: 16, fontWeight: 500, color: "#212429" }}>Top publishers</span>
-                <span style={{ display: "block", fontSize: 13, color: "#919499" }}>Number of Uganda datasets</span>
+                <span style={{ display: "block", fontSize: 13, color: "#6b6e73" }}>Number of Uganda datasets</span>
               </figcaption>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
                 {data.publishers.map((p) => (
@@ -52,7 +52,7 @@ export function OpenDataLandscape({ data }: { data: OpenDataLandscapeData }) {
           <div>
             <SectionReveal variant="fade-up">
               <p style={{ fontSize: 16, fontWeight: 500, color: "#212429" }}>Recently updated</p>
-              <p style={{ fontSize: 13, color: "#919499", marginBottom: 16 }}>Each dataset keeps its own publisher&rsquo;s licence</p>
+              <p style={{ fontSize: 13, color: "#6b6e73", marginBottom: 16 }}>Each dataset keeps its own publisher&rsquo;s licence</p>
             </SectionReveal>
             <SectionReveal variant="fade-up" staggerChildren={0.06} as="div">
               <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)" }}>
@@ -70,11 +70,11 @@ export function OpenDataLandscape({ data }: { data: OpenDataLandscapeData }) {
                           <span className="group-hover:text-accent transition-colors" style={{ display: "block", fontSize: 14, fontWeight: 500, color: "#000", lineHeight: 1.4 }}>
                             {d.title}
                           </span>
-                          <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "#919499" }}>
+                          <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "#6b6e73" }}>
                             {d.publisher} · {d.licence} · {formatDate(d.updated)}
                           </span>
                         </span>
-                        <ExternalLink className="h-3.5 w-3.5 shrink-0" style={{ color: "#919499", marginTop: 3 }} aria-hidden />
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0" style={{ color: "#6b6e73", marginTop: 3 }} aria-hidden />
                       </a>
                     </li>
                   </RevealItem>
@@ -84,7 +84,7 @@ export function OpenDataLandscape({ data }: { data: OpenDataLandscapeData }) {
           </div>
         </div>
 
-        <p style={{ marginTop: 32, fontSize: 13, color: "#919499", lineHeight: 1.5 }}>
+        <p style={{ marginTop: 32, fontSize: 13, color: "#6b6e73", lineHeight: 1.5 }}>
           Source:{" "}
           <a href="https://data.humdata.org/group/uga" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
             Humanitarian Data Exchange (OCHA)

@@ -64,7 +64,7 @@ export function LegalReference({
           <div style={{ marginTop: 48 }}>
             <SectionReveal variant="fade-up">
               <h3 style={{ fontSize: 20, fontWeight: 500, color: "#000" }}>What the courts have said</h3>
-              <p style={{ fontSize: 14, color: "#919499", marginBottom: 16 }}>Recent Ugandan decisions on privacy, data, and computer crime</p>
+              <p style={{ fontSize: 14, color: "#6b6e73", marginBottom: 16 }}>Recent Ugandan decisions on privacy, data, and computer crime</p>
             </SectionReveal>
             <SectionReveal variant="fade-up" staggerChildren={0.06} as="div">
               <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)" }}>
@@ -77,12 +77,12 @@ export function LegalReference({
                           <span className="group-hover:text-accent transition-colors" style={{ display: "block", fontSize: 15, fontWeight: 500, color: "#000", lineHeight: 1.4 }}>
                             {c.title}
                           </span>
-                          <span style={{ display: "block", marginTop: 2, fontSize: 12, color: "#919499" }}>
+                          <span style={{ display: "block", marginTop: 2, fontSize: 12, color: "#6b6e73" }}>
                             {[c.court, formatDate(c.date)].filter(Boolean).join(" · ")}
                           </span>
                           <span style={{ display: "block", marginTop: 6, fontSize: 14, color: "#515459", lineHeight: 1.5 }}>{c.summary}</span>
                         </span>
-                        <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "#919499", marginTop: 2 }} aria-hidden />
+                        <ArrowUpRight className="h-4 w-4 shrink-0" style={{ color: "#6b6e73", marginTop: 2 }} aria-hidden />
                       </a>
                     </li>
                   </RevealItem>
@@ -92,7 +92,7 @@ export function LegalReference({
           </div>
         )}
 
-        <p style={{ marginTop: 32, fontSize: 12, color: "#919499", lineHeight: 1.6, maxWidth: 860 }}>
+        <p style={{ marginTop: 32, fontSize: 12, color: "#6b6e73", lineHeight: 1.6, maxWidth: 860 }}>
           Source: Uganda legislation and judgments via the{" "}
           <a href="https://laws.africa" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Laws.Africa</a>{" "}
           Legal Knowledge Platform, with full texts on{" "}

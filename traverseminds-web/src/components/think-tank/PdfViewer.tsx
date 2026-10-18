@@ -23,12 +23,12 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
   if (isMobile) {
     return (
       <div className="mb-10">
-        <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
+        <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#6b6e73" }}>Read the Report</p>
         <div
           className="flex flex-col items-center text-center gap-4 p-8"
           style={{ borderRadius: 0, border: "1px solid rgba(0,0,0,0.12)", background: "#f0f1f4" }}
         >
-          <FileText className="h-12 w-12" style={{ color: "#919499" }} />
+          <FileText className="h-12 w-12" style={{ color: "#6b6e73" }} />
           <p className="text-sm" style={{ color: "#515459" }}>
             Inline PDF viewing is not supported on mobile. Download the report to read it.
           </p>
@@ -40,7 +40,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
 
   return (
     <div className="mb-10">
-      <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#919499" }}>Read the Report</p>
+      <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#6b6e73" }}>Read the Report</p>
       <div style={{ borderRadius: 0, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)" }}>
         <iframe
           src={pdfUrl}
@@ -50,7 +50,7 @@ export function PdfViewer({ pdfUrl, title, filename }: PdfViewerProps) {
         />
       </div>
       <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <p className="text-sm" style={{ color: "#919499" }}>
+        <p className="text-sm" style={{ color: "#6b6e73" }}>
           PDF not displaying? Try the download below.
         </p>
         <PdfDownloadButton pdfUrl={pdfUrl} filename={filename} variant="prominent" />

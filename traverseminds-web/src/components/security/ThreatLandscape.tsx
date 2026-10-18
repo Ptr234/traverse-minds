@@ -37,7 +37,7 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
                   {stat.value}
                 </p>
                 <h3 className="text-sm sm:text-base" style={{ marginTop: 8, fontWeight: 500, color: "#212429", lineHeight: 1.3 }}>{stat.label}</h3>
-                <p className="hidden sm:block" style={{ marginTop: 4, fontSize: 14, color: "#919499", lineHeight: "125%" }}>{stat.description}</p>
+                <p className="hidden sm:block" style={{ marginTop: 4, fontSize: 14, color: "#6b6e73", lineHeight: "125%" }}>{stat.description}</p>
               </div>
             </RevealItem>
           ))}
@@ -49,7 +49,7 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
             <figure style={{ margin: 0 }}>
               <figcaption style={{ marginBottom: 16 }}>
                 <span style={{ display: "block", fontSize: 18, fontWeight: 500, color: "#000" }}>Most-used attack techniques</span>
-                <span style={{ display: "block", fontSize: 13, color: "#919499" }}>
+                <span style={{ display: "block", fontSize: 13, color: "#6b6e73" }}>
                   Number of the {totals.sectorGroups} groups known to use each technique
                 </span>
               </figcaption>
@@ -59,14 +59,14 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="group" style={{ fontSize: 15, fontWeight: 500, color: "#000" }}>
                         <span className="group-hover:text-accent transition-colors">{t.name}</span>{" "}
-                        <span style={{ fontSize: 12, fontWeight: 400, color: "#919499" }}>{t.id}</span>
+                        <span style={{ fontSize: 12, fontWeight: 400, color: "#6b6e73" }}>{t.id}</span>
                       </a>
                       <span style={{ fontSize: 14, color: "#212429", fontVariantNumeric: "tabular-nums", flexShrink: 0 }}>{t.groupCount}</span>
                     </div>
                     <div style={{ marginTop: 6, height: 6, background: "#e1e4e9" }} aria-hidden>
                       <div style={{ height: "100%", width: `${(t.groupCount / totals.sectorGroups) * 100}%`, background: "#212429" }} />
                     </div>
-                    <p style={{ marginTop: 6, fontSize: 12, color: "#919499" }}>{t.tactics.join(" · ")}</p>
+                    <p style={{ marginTop: 6, fontSize: 12, color: "#6b6e73" }}>{t.tactics.join(" · ")}</p>
                   </li>
                 ))}
               </ol>
@@ -76,22 +76,22 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
           {/* Groups active in Africa */}
           <SectionReveal variant="fade-up" delay={0.1}>
             <p style={{ fontSize: 18, fontWeight: 500, color: "#000" }}>Groups documented in Africa</p>
-            <p style={{ fontSize: 13, color: "#919499", marginBottom: 16 }}>Targeting finance or government</p>
+            <p style={{ fontSize: 13, color: "#6b6e73", marginBottom: 16 }}>Targeting finance or government</p>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)" }}>
               {africaGroups.map((g) => (
                 <li key={g.id} style={{ padding: "14px 0", borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
                   <a href={g.url} target="_blank" rel="noopener noreferrer" className="group" style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
                     <span>
                       <span className="group-hover:text-accent transition-colors" style={{ fontSize: 15, fontWeight: 500, color: "#000" }}>{g.name}</span>{" "}
-                      <span style={{ fontSize: 12, color: "#919499" }}>{g.id}</span>
+                      <span style={{ fontSize: 12, color: "#6b6e73" }}>{g.id}</span>
                       <span style={{ display: "block", marginTop: 4, fontSize: 13, color: "#515459", lineHeight: 1.5 }}>
                         {g.summary}
                       </span>
-                      <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "#919499" }}>
+                      <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "#6b6e73" }}>
                         {g.sectors.map((s) => (s === "financial" ? "Financial" : "Government")).join(" · ")} · {g.techniqueCount} known techniques
                       </span>
                     </span>
-                    <ExternalLink className="h-3.5 w-3.5 shrink-0" style={{ color: "#919499", marginTop: 4 }} aria-hidden />
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0" style={{ color: "#6b6e73", marginTop: 4 }} aria-hidden />
                   </a>
                 </li>
               ))}
@@ -99,7 +99,7 @@ export function ThreatLandscape({ techniqueLimit = 8 }: { techniqueLimit?: numbe
           </SectionReveal>
         </div>
 
-        <p style={{ marginTop: 32, fontSize: 12, color: "#919499", lineHeight: 1.6, maxWidth: 860 }}>
+        <p style={{ marginTop: 32, fontSize: 12, color: "#6b6e73", lineHeight: 1.6, maxWidth: 860 }}>
           Source:{" "}
           <a href="https://attack.mitre.org" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
             MITRE ATT&amp;CK®

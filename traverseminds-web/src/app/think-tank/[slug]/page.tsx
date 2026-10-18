@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const report = await getReport(slug);
   if (!report) return { title: "Report Not Found" };
   return {
-    title: `${displayTitle(report.title)} | Think Tank — Traverse Minds Africa`,
+    title: `${displayTitle(report.title)} | Think Tank`,
     description: report.abstract.split(/\n\n+/)[0],
     openGraph: report.featuredImage?.asset
       ? { images: [builder.image(report.featuredImage).width(1200).height(630).fit("crop").url()] }

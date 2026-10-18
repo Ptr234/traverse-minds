@@ -20,7 +20,7 @@ import { CitedStats } from "@/components/ui/CitedStats";
 import { getStatistics } from "@/lib/statistics";
 
 export const metadata: Metadata = {
-  title: "Traverse Security -- Cybersecurity for Banks & Government",
+  title: "Traverse Security | Cybersecurity for Banks & Government",
   description:
     "Cybersecurity services for African institutions. Penetration testing, ISO 27001, Bank of Uganda audits, threat modelling, incident response, and regulatory advisory.",
 };
@@ -76,10 +76,10 @@ export default async function SecurityPage() {
                 <SectionReveal variant="fade-up" staggerChildren={0.1} as="div">
                   <ul className="mt-8 space-y-4">
                     {[
-                      "Local expertise -- we understand Bank of Uganda requirements and Uganda PDPA firsthand",
-                      "On-the-ground response -- our team is based in Kampala, not flying in from overseas",
-                      "Integrated intelligence -- our Think Tank research feeds directly into assessments",
-                      "Confidentiality-first -- strict NDAs and international ethical standards",
+                      "Local expertise — we understand Bank of Uganda requirements and Uganda PDPA firsthand",
+                      "On-the-ground response — our team is based in Kampala, not flying in from overseas",
+                      "Integrated intelligence — our Think Tank research feeds directly into assessments",
+                      "Confidentiality-first — strict NDAs and international ethical standards",
                     ].map((point) => (
                       <RevealItem key={point} variant="slide-up">
                         <li className="flex items-start gap-3">
@@ -165,7 +165,7 @@ export default async function SecurityPage() {
 
           <SectionReveal variant="scale-fade" delay={0.15}>
             <div className="mt-10 border-2 border-dashed py-16 max-w-2xl mx-auto" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-              <Award className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
+              <Award className="mx-auto h-10 w-10 mb-4" style={{ color: "#6b6e73" }} />
               <p className="text-lg font-semibold" style={{ color: "#000" }}>Coming Soon</p>
               <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
                 Certifications will be displayed here as they are obtained.

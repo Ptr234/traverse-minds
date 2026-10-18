@@ -103,7 +103,7 @@ export function EnquiryForm() {
               {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
             </div>
             <div>
-              <label htmlFor="phone" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Phone <span style={{ color: "#919499" }}>(optional)</span></label>
+              <label htmlFor="phone" className="mb-1.5 block text-sm font-medium" style={{ color: "#000" }}>Phone <span style={{ color: "#6b6e73" }}>(optional)</span></label>
               <input id="phone" type="tel" autoComplete="tel" placeholder="+256 700 000 000" className={inputClasses(false)}
                 style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)", color: "#000", transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)" }}
                 {...register("phone")} />

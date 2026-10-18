@@ -176,7 +176,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
             </p>
 
             <p className="mt-4 text-sm max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.35)" }}>
-              All data indexed by Public Record Africa is sourced from publicly accessible government registries, court systems, and regulatory bodies. We add value through search, summarisation, and monitoring -- not through data restriction.
+              All data indexed by Public Record Africa is sourced from publicly accessible government registries, court systems, and regulatory bodies. We add value through search, summarisation, and monitoring — not through data restriction.
             </p>
           </SectionReveal>
         </div>
@@ -250,7 +250,7 @@ export function PublicRecordPageClient({ openData, stats }: { openData: OpenData
                   <h3 className="font-display text-lg font-bold" style={{ color: "#000" }}>{plan.name}</h3>
                   <div className="mt-4 flex items-baseline gap-1">
                     <span className="font-display text-3xl font-bold text-accent">{plan.price}</span>
-                    <span className="text-sm" style={{ color: "#919499" }}>{plan.period}</span>
+                    <span className="text-sm" style={{ color: "#6b6e73" }}>{plan.period}</span>
                   </div>
                   <ul className="mt-8 space-y-3">
                     {plan.features.map((f) => (

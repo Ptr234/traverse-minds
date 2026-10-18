@@ -46,7 +46,7 @@ export function ThreatWatch({ data }: { data: ThreatWatchData }) {
                   {stat.value.toLocaleString("en-GB")}
                 </p>
                 <h3 className="text-sm sm:text-base" style={{ marginTop: 8, fontWeight: 500, color: "#212429", lineHeight: 1.3 }}>{stat.label}</h3>
-                <p className="hidden sm:block" style={{ marginTop: 4, fontSize: 14, color: "#919499", lineHeight: "125%" }}>{stat.description}</p>
+                <p className="hidden sm:block" style={{ marginTop: 4, fontSize: 14, color: "#6b6e73", lineHeight: "125%" }}>{stat.description}</p>
               </div>
             </RevealItem>
           ))}
@@ -64,7 +64,7 @@ export function ThreatWatch({ data }: { data: ThreatWatchData }) {
               <RevealItem key={item.cveId} variant="fade-up">
                 <li style={{ padding: "20px 0", borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
                   <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "4px 16px" }}>
-                    <span className="basis-full sm:basis-auto sm:min-w-24" style={{ fontSize: 13, color: "#919499", fontVariantNumeric: "tabular-nums" }}>
+                    <span className="basis-full sm:basis-auto sm:min-w-24" style={{ fontSize: 13, color: "#6b6e73", fontVariantNumeric: "tabular-nums" }}>
                       {formatDate(item.dateAdded)}
                     </span>
                     <span style={{ fontSize: 16, fontWeight: 500, color: "#000" }}>
@@ -117,7 +117,7 @@ export function ThreatWatch({ data }: { data: ThreatWatchData }) {
 
         <SectionReveal variant="fade-up" delay={0.1}>
           <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
-            <p style={{ fontSize: 13, color: "#919499", lineHeight: 1.5, maxWidth: 560 }}>
+            <p style={{ fontSize: 13, color: "#6b6e73", lineHeight: 1.5, maxWidth: 560 }}>
               Source:{" "}
               <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
                 CISA Known Exploited Vulnerabilities Catalog

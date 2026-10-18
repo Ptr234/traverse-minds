@@ -10,7 +10,7 @@ import { ApplicationForm } from "@/components/careers/ApplicationForm";
 import { getJobs } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "Careers | Traverse Minds Africa",
+  title: "Careers",
   description: "Join Traverse Minds Africa: open roles, internships and fellowships in cybersecurity, research, media and civic tech.",
 };
 

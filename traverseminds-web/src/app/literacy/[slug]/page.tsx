@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!programme) return { title: "Programme Not Found" };
 
   return {
-    title: `${programme.title} | Digital Literacy | Traverse Minds`,
+    title: `${programme.title} | Digital Literacy`,
     description: programme.description,
   };
 }

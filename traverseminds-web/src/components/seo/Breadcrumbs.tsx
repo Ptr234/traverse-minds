@@ -23,7 +23,7 @@ export function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
 
 /** Visible breadcrumb trail plus its structured data. `tone="dark"` for use on dark heroes. */
 export function Breadcrumbs({ items, tone = "light" }: { items: Crumb[]; tone?: "light" | "dark" }) {
-  const muted = tone === "dark" ? "rgba(255,255,255,0.55)" : "#919499";
+  const muted = tone === "dark" ? "rgba(255,255,255,0.55)" : "#6b6e73";
   const current = tone === "dark" ? "#ffffff" : "#212429";
   return (
     <>

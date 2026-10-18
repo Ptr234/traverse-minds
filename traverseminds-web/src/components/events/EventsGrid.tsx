@@ -122,7 +122,7 @@ function EventCard({ ev }: { ev: SanityEvent }) {
           {ev.tagline && (
             <p className="mt-3" style={{ color: "#515459" }}>{ev.tagline}</p>
           )}
-          <div className="mt-4 flex flex-wrap gap-4 text-sm" style={{ color: "#919499" }}>
+          <div className="mt-4 flex flex-wrap gap-4 text-sm" style={{ color: "#6b6e73" }}>
             <span className="flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
               {new Date(ev.date).toLocaleDateString("en-UG", { day: "numeric", month: "long", year: "numeric" })}
@@ -247,7 +247,7 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
           {past.length === 0 ? (
             <SectionReveal variant="scale-fade" delay={0.15}>
               <div className="border-2 border-dashed py-16 max-w-2xl mx-auto text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-                <Clock className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
+                <Clock className="mx-auto h-10 w-10 mb-4" style={{ color: "#6b6e73" }} />
                 <p className="text-lg font-semibold" style={{ color: "#000" }}>No past events yet</p>
                 <p className="mt-2 max-w-md mx-auto" style={{ color: "#515459" }}>
                   Stay tuned for recaps and highlights after each event.
@@ -268,7 +268,7 @@ export function EventsGrid({ events }: { events: SanityEvent[] }) {
                     <div className="pt-4">
                       <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#ff4c00" }}>{ev.type}</span>
                       <h3 className="mt-1 font-semibold" style={{ color: "#000" }}>{ev.title}</h3>
-                      <p className="mt-2 text-sm flex items-center gap-1.5" style={{ color: "#919499" }}>
+                      <p className="mt-2 text-sm flex items-center gap-1.5" style={{ color: "#6b6e73" }}>
                         <Calendar className="h-3.5 w-3.5" />
                         {new Date(ev.date).toLocaleDateString("en-UG", { day: "numeric", month: "long", year: "numeric" })}
                       </p>

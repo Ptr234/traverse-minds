@@ -18,7 +18,7 @@ function ComparisonBars({ indicator }: { indicator: IndicatorData }) {
     <figure style={{ margin: 0 }}>
       <figcaption style={{ marginBottom: 16 }}>
         <span style={{ display: "block", fontSize: 16, fontWeight: 500, color: "#212429" }}>{indicator.label}</span>
-        <span style={{ display: "block", fontSize: 13, color: "#919499" }}>{indicator.unit}</span>
+        <span style={{ display: "block", fontSize: 13, color: "#6b6e73" }}>{indicator.unit}</span>
       </figcaption>
       <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
         {sorted.map((v) => {
@@ -48,7 +48,7 @@ function ComparisonBars({ indicator }: { indicator: IndicatorData }) {
               <span style={{ fontSize: 14, fontVariantNumeric: "tabular-nums", color: "#212429", minWidth: 48, textAlign: "right" }}>
                 {formatValue(v.value, indicator.decimals, indicator.suffix)}
                 {v.year !== latestYear ? (
-                  <span style={{ fontSize: 11, color: "#919499" }}> ’{v.year.slice(2)}</span>
+                  <span style={{ fontSize: 11, color: "#6b6e73" }}> ’{v.year.slice(2)}</span>
                 ) : null}
               </span>
             </li>
@@ -94,7 +94,7 @@ export function DigitalSnapshot({ data, internetTrend }: { data: IndicatorData[]
                     {formatValue(v.value, d.decimals, d.suffix)}
                   </p>
                   <h3 style={{ marginTop: 8, fontSize: 16, fontWeight: 500, color: "#212429" }}>{d.label}</h3>
-                  <p style={{ marginTop: 4, fontSize: 14, color: "#919499", lineHeight: "125%" }}>
+                  <p style={{ marginTop: 4, fontSize: 14, color: "#6b6e73", lineHeight: "125%" }}>
                     {d.unit}, {v.year}
                   </p>
                 </div>
@@ -117,12 +117,12 @@ export function DigitalSnapshot({ data, internetTrend }: { data: IndicatorData[]
               <h3 style={{ marginBottom: 4, fontSize: 20, fontWeight: 500, color: "#000" }}>
                 Internet use since 2000
               </h3>
-              <p style={{ marginBottom: 20, fontSize: 14, color: "#919499" }}>Individuals using the internet, % of population</p>
+              <p style={{ marginBottom: 20, fontSize: 14, color: "#6b6e73" }}>Individuals using the internet, % of population</p>
               <TrendChart series={internetTrend} highlight="UGA" unit="Individuals using the internet, % of population" />
             </div>
           )}
 
-          <p style={{ marginTop: 32, fontSize: 13, color: "#919499", lineHeight: 1.5 }}>
+          <p style={{ marginTop: 32, fontSize: 13, color: "#6b6e73", lineHeight: 1.5 }}>
             Source:{" "}
             <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
               World Bank Open Data

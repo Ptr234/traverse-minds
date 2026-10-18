@@ -154,7 +154,7 @@ export function PricingModal({ plan, billing, onClose }: Props) {
                       <span className="font-display text-3xl font-bold" style={{ color: "#ff4c00" }}>
                         {plan.price}
                       </span>
-                      <span className="text-sm" style={{ color: "#919499" }}>{plan.period}</span>
+                      <span className="text-sm" style={{ color: "#6b6e73" }}>{plan.period}</span>
                     </div>
                     <h2 className="mt-1 font-display text-xl font-bold" style={{ color: "#000" }}>
                       {plan.name === "Enterprise" ? "Enterprise Plan" : `${plan.name} Plan`}

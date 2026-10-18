@@ -48,7 +48,7 @@ export const SERVICES: ServiceContent[] = [
     "slug": "iso-27001-compliance",
     "sortOrder": 2,
     "title": "ISO 27001 Compliance",
-    "description": "End-to-end support for achieving and maintaining ISO 27001 certification -- gap analysis, documentation, and audit preparation.",
+    "description": "End-to-end support for achieving and maintaining ISO 27001 certification — gap analysis, documentation, and audit preparation.",
     "image": "/imagestouse/vde.jpeg",
     "overview": "ISO 27001 is the international standard for information security management systems (ISMS). We provide comprehensive guidance to help your organisation implement the necessary controls, documentation, and processes to achieve and maintain this prestigious certification.",
     "features": [
@@ -134,7 +134,7 @@ export const SERVICES: ServiceContent[] = [
       }
     ],
     "benefits": [
-      "Secure by design -- identify flaws before code is written",
+      "Secure by design — identify flaws before code is written",
       "Cost-effective security by focusing on high-risk areas",
       "Better communication between security and development teams",
       "Informed decision-making for security investments"

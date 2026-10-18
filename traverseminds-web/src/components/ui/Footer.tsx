@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Linkedin, Twitter, Music, Rss } from "lucide-react";
+import { Linkedin, Twitter, Rss } from "lucide-react";
 
 const sectionLinks = [
   { label: "Divisions", href: "/security" },
@@ -19,7 +19,6 @@ const legalLinks = [
 const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/traverseminds" },
   { icon: Twitter, label: "X / Twitter", href: "https://x.com/traverseminds" },
-  { icon: Music, label: "Spotify", href: "#" },
   { icon: Rss, label: "RSS", href: "/blog/rss.xml" },
 ];
 
@@ -88,7 +87,7 @@ export function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-[#919499] hover:text-white transition-colors duration-350"
+                className="text-gn-500 hover:text-white transition-colors duration-350"
                 style={{
                   fontSize: 14,
                   fontWeight: 400,
@@ -101,7 +100,7 @@ export function Footer() {
               </Link>
             ))}
           </div>
-          <p style={{ fontSize: 14, color: "#919499" }}>
+          <p style={{ fontSize: 14, color: "#6b6e73" }}>
             &copy; {new Date().getFullYear()} Traverse Minds Africa
           </p>
         </div>
@@ -114,7 +113,7 @@ export function Footer() {
             <span className="text-xs font-black tracking-tighter text-white">TM</span>
           </div>
         </div>
-        <p style={{ fontSize: 14, color: "#919499", letterSpacing: "0.6px", textTransform: "uppercase" as const, fontWeight: 700 }}>
+        <p style={{ fontSize: 14, color: "#6b6e73", letterSpacing: "0.6px", textTransform: "uppercase" as const, fontWeight: 700 }}>
           Built for Africa. Driven by Evidence.
         </p>
       </div>

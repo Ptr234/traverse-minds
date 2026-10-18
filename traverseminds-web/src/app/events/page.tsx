@@ -11,7 +11,7 @@ import { getMagazineContent } from "@/lib/content";
 import { getSiteSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "Events — Traverse Minds Africa",
+  title: "Events",
   description: "Luncheons, conferences, hackathons and workshops curated for Africa's cybersecurity decision-makers.",
 };
 

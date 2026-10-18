@@ -82,15 +82,14 @@ export async function Publications() {
                       {report.topics.slice(0, 2).map((topic) => (
                         <span
                           key={topic}
-                          className="bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-                          style={{ borderRadius: 999 }}
+                          className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent"
                         >
                           {topic.replace("-", " ")}
                         </span>
                       ))}
                     </div>
                   )}
-                  <div className="flex items-center gap-4 text-xs" style={{ color: "#919499" }}>
+                  <div className="flex items-center gap-4 text-xs" style={{ color: "#6b6e73" }}>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       {report.publicationDate
@@ -137,8 +136,8 @@ export async function Publications() {
           ) : (
             <RevealItem variant="fade-blur" className="col-span-full">
               <div className="border-2 border-dashed py-16 text-center" style={{ borderRadius: 0, borderColor: "rgba(0,0,0,0.1)" }}>
-                <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#919499" }} />
-                <p style={{ color: "#919499" }}>No reports published yet. Check back soon.</p>
+                <FileText className="mx-auto h-10 w-10 mb-4" style={{ color: "#6b6e73" }} />
+                <p style={{ color: "#6b6e73" }}>No reports published yet. Check back soon.</p>
               </div>
             </RevealItem>
           )}

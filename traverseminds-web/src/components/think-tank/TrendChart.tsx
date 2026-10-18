@@ -85,11 +85,11 @@ export function TrendChart({ series, highlight, unit, suffix = "%" }: Props) {
           {yTicks.map((t) => (
             <g key={t}>
               <line x1={M.left} x2={W - M.right} y1={y(t)} y2={y(t)} stroke="#e1e4e9" strokeWidth={1} />
-              <text x={M.left - 8} y={y(t)} dy="0.32em" textAnchor="end" fontSize={11} fill="#919499">{t}{suffix}</text>
+              <text x={M.left - 8} y={y(t)} dy="0.32em" textAnchor="end" fontSize={11} fill="#6b6e73">{t}{suffix}</text>
             </g>
           ))}
           {xTicks.map((yr) => (
-            <text key={yr} x={x(yr)} y={H - 8} textAnchor="middle" fontSize={11} fill="#919499">{yr}</text>
+            <text key={yr} x={x(yr)} y={H - 8} textAnchor="middle" fontSize={11} fill="#6b6e73">{yr}</text>
           ))}
 
           {/* Lines */}

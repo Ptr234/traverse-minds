@@ -3,7 +3,7 @@ import { MeetChristine } from "@/components/meet-christine/MeetChristine";
 import { getOrganisations, getSiteSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "Meet Christine | Masiika Christine Thembo, Founder of Traverse Minds Africa",
+  title: "Meet Christine: Masiika Christine Thembo, Founder",
   description:
     "Cybersecurity and digital governance leader Masiika Christine Thembo: national security frameworks, digital forensics, and capacity building across Africa.",
 };

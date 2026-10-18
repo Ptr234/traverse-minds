@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Traverse Minds Africa",
+  title: "Cookie Policy",
   description: "Learn about how we use cookies to improve your experience on Traverse Minds Africa platforms.",
 };
 
