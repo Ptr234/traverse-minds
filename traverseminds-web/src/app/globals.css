@@ -569,6 +569,14 @@ a, button, [role="button"], summary, label[for] {
   background-color: #b33500;
 }
 
+/* The default (dark grey) primary button disappears on dark sections; use the accessible orange there */
+:is(.bg-bg-dark, .bg-primary) .bg-\[\#313439\] {
+  background-color: var(--color-accent-strong);
+}
+:is(.bg-bg-dark, .bg-primary) .bg-\[\#313439\]:hover {
+  background-color: #b33500;
+}
+
 /* ═══════════════════════════════════════════════════
    REDUCE MOTION
 ═══════════════════════════════════════════════════ */

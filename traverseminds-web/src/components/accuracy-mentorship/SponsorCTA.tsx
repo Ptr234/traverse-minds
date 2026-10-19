@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { SectionHeader } from "@/components/magazine/primitives";
 import { Button } from "@/components/ui/Button";
-import { Heart } from "lucide-react";
-import { SectionReveal, RevealItem } from "@/components/ui/SectionReveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { SponsorshipForm } from "./SponsorshipForm";
 
@@ -63,77 +61,49 @@ export function SponsorCTA() {
           </TextReveal>
         </div>
 
-        <SectionReveal variant="fade-up" staggerChildren={0.1} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {sponsorshipLevels.map((level) => (
-            <RevealItem key={level.level} variant="scale-fade">
-              <div
-                className="bg-white p-8"
-                style={{
-                  borderRadius: 0,
-                  transition: "all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1)"
-                }}
-              >
-                <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-6">
-                  {level.level}
-                </h3>
-
-                <ul className="space-y-3 mb-8">
-                  {level.benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <div
-                        className="h-4 w-4 mt-0.5 shrink-0 flex items-center justify-center text-xs font-bold text-white"
-                        style={{ background: "#ff4c00", borderRadius: 2 }}
-                      >
-                        +
-                      </div>
-                      <span className="text-sm" style={{ color: "#515459" }}>
-                        {benefit}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  variant="primary"
-                  size="md"
-                  className="w-full"
-                  onClick={() => setShowForm(true)}
-                >
-                  Become a Sponsor
+        <ol className="mb-12 grid gap-px border-t-2 border-white/80 bg-white/15 md:grid-cols-3">
+          {sponsorshipLevels.map((level, i) => (
+            <li key={level.level} className="flex flex-col bg-bg-dark px-1 py-8 md:px-7">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">Tier {String(i + 1).padStart(2, "0")}</p>
+              <h3 className="mt-2 font-serif text-[30px] font-semibold leading-tight text-white">{level.level}</h3>
+              <ul className="mt-5 flex-1 space-y-2.5 border-t border-white/15 pt-5">
+                {level.benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3 text-[15px] text-white/80">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <Button variant="primary" size="md" className="w-full" onClick={() => setShowForm(true)}>
+                  Become a sponsor
                 </Button>
               </div>
-            </RevealItem>
+            </li>
           ))}
-        </SectionReveal>
+        </ol>
 
         {!showForm && (
-          <div className="border p-8 text-center" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", borderRadius: 0 }}>
-            <div className="h-8 w-8 flex items-center justify-center mx-auto mb-4" style={{ background: "#ff4c00", borderRadius: 4 }}>
-              <Heart className="h-5 w-5 text-white" />
+          <div className="flex flex-wrap items-center justify-between gap-6 border border-white/15 p-7">
+            <div className="max-w-2xl">
+              <h3 className="font-serif text-[22px] font-semibold text-white">Custom sponsorship options</h3>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-white/70">
+                Have a unique way you&apos;d like to support this work? We&apos;re open to creative partnerships and custom arrangements.
+              </p>
             </div>
-            <h3 className="font-display text-xl font-bold text-white mb-3">
-              Custom Sponsorship Options
-            </h3>
-            <p className="text-white/70 mb-6">
-              Have a unique way you&apos;d like to support this work? We&apos;re open to creative partnerships and custom arrangements.
-            </p>
-            <Button
-              variant="outline-dark"
-              size="md"
-              onClick={() => setShowForm(true)}
-            >
-              Get in Touch
+            <Button variant="outline-dark" size="md" onClick={() => setShowForm(true)}>
+              Get in touch
             </Button>
           </div>
         )}
 
         {showForm && (
-          <div className="max-w-2xl bg-white p-8" style={{ borderRadius: 0 }}>
+          <div className="max-w-2xl bg-white p-6 text-black lg:p-8">
             <div className="mb-6">
-              <h3 className="font-serif text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.1] mb-2">
-                Sponsorship Inquiry Form
+              <h3 className="mb-2 font-serif text-[clamp(24px,2.8vw,32px)] font-semibold leading-tight text-black">
+                Sponsorship enquiry
               </h3>
-              <p style={{ color: "#515459" }}>
+              <p className="text-[15px] leading-relaxed text-gn-400">
                 Tell us about your sponsorship interests and how you&apos;d like to support the Accuracy Mentorship Program.
               </p>
             </div>
