@@ -512,7 +512,7 @@ export function MeetChristine({
 
               <div className="mt-8 flex items-center gap-3">
                 {[
-                  { Icon: Linkedin, href: "https://linkedin.com/in/christinemasika", label: "LinkedIn" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/masiika-christine-thembo-a4166456/", label: "LinkedIn" },
                   { Icon: Mail, href: "mailto:christinethembo@gmail.com", label: "Email" },
                 ].map(({ Icon, href, label }) => (
                   <a key={label} href={href} aria-label={label} className="flex h-11 w-11 items-center justify-center border border-black/15 text-gn-300 transition-colors hover:border-accent hover:bg-accent hover:text-white">
@@ -789,7 +789,7 @@ export function MeetChristine({
                 {[
                   { Icon: Mail, label: "Direct email", value: "christinethembo@gmail.com", href: "mailto:christinethembo@gmail.com" },
                   { Icon: Globe, label: "Based in", value: "Kampala, Uganda" },
-                  { Icon: Linkedin, label: "Network", value: "Founder, CyberLuncheon", href: "https://linkedin.com/in/christinemasika" },
+                  { Icon: Linkedin, label: "Network", value: "Founder, CyberLuncheon", href: "https://www.linkedin.com/in/masiika-christine-thembo-a4166456/" },
                 ].map(({ Icon, label, value, href }) => (
                   <div key={label} className="flex items-center gap-4 border-b border-black/15 py-4">
                     <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden />
@@ -819,7 +819,7 @@ export function MeetChristine({
             {TABS.map((t) => (
               <a key={t.id} href={`#${t.id}`} className="hover:text-accent">{t.label}</a>
             ))}
-            <a href="https://linkedin.com/in/christinemasika" target="_blank" rel="noopener noreferrer" className="hover:text-accent">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/masiika-christine-thembo-a4166456/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">LinkedIn</a>
           </nav>
         </div>
       </div>

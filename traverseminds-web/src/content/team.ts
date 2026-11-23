@@ -7,6 +7,6 @@ export const TEAM: TeamContent[] = [
     title: "Founder & CEO",
     division: "Leadership",
     photo: "/christine-masika.jpg",
-    linkedIn: "https://linkedin.com/in/christinemasika",
+    linkedIn: "https://www.linkedin.com/in/masiika-christine-thembo-a4166456/",
   },
 ];
