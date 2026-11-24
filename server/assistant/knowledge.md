@@ -8,7 +8,7 @@ If something is not covered here, say you don't know and point to the contact op
   intelligence, digital literacy, events, media and policy research for Africa.
 - Website: https://traverseminds.com
 - Contact: the form at https://traverseminds.com/contact/ , WhatsApp +256 775 692 334
-  (https://wa.me/256775692334), email hello@traverseminds.com
+  (https://wa.me/256775692334), email traversemindsug@gmail.com
 - Founder & CEO: Masiika Christine Thembo (profile: https://traverseminds.com/meet-christine/)
 
 ## Divisions
