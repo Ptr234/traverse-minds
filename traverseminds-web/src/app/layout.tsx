@@ -32,6 +32,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_UG",
     siteName: "Traverse Minds Africa",
+    images: [
+      {
+        url: "/icons/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "Traverse Minds Africa blue logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/icons/icon-512.png"],
   },
   robots: {
     index: true,
