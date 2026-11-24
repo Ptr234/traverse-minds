@@ -172,20 +172,20 @@ export function AssistantWidget() {
           aria-haspopup="dialog"
         >
           <Sparkles className="h-4 w-4 text-accent" aria-hidden />
-          Ask Traverse AI
+          Ask Traverse Assistant
         </button>
       )}
 
       {open && (
         <div
           role="dialog"
-          aria-label="Traverse AI assistant"
+          aria-label="Traverse Assistant"
           className="fixed inset-0 z-[110] flex flex-col bg-white sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[600px] sm:max-h-[calc(100vh-40px)] sm:w-[400px] sm:border sm:border-black/15 sm:shadow-2xl"
         >
           <header className="flex items-start justify-between gap-3 border-b-2 border-black px-5 py-4">
             <div>
               <p className="flex items-center gap-2 font-serif text-[19px] font-semibold text-black">
-                <Sparkles className="h-4 w-4 text-accent" aria-hidden /> Traverse AI
+                <Sparkles className="h-4 w-4 text-accent" aria-hidden /> Traverse Assistant
               </p>
               <p className="mt-0.5 text-[12px] text-gn-500">Answers from our website. It can make mistakes.</p>
             </div>
@@ -224,7 +224,7 @@ export function AssistantWidget() {
                   {m.content ? (
                     <Linkified text={m.content} />
                   ) : (
-                    <span className="inline-flex items-center gap-1 py-1.5" role="status" aria-label="Traverse AI is typing">
+                    <span className="inline-flex items-center gap-1 py-1.5" role="status" aria-label="Traverse Assistant is typing">
                       {[0, 150, 300].map((delay) => (
                         <span
                           key={delay}
